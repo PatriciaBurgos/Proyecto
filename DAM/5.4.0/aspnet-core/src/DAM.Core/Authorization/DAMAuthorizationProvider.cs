@@ -12,6 +12,7 @@ namespace DAM.Authorization
             context.CreatePermission(PermissionNames.Pages_Roles, L("Roles"));
             context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
             context.CreatePermission(PermissionNames.Pages_Aplicaciones, L("Aplicaciones"));
+            context.CreatePermission(PermissionNames.Pages_Usuarios, L("Usuarios"));
         }
 
         private static ILocalizableString L(string name)
