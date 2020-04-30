@@ -10,6 +10,7 @@ namespace DAM.Usuarios.Dto
 		public UsuarioMapProfile()
 		{
 			CreateMap<Usuario, UsuarioDto>().ReverseMap();
+			CreateMap<Usuario, UsuarioAplicacionDto>().ReverseMap();
 		}
 	}
 }

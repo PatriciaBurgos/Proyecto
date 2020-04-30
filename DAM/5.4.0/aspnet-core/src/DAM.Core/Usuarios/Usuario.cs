@@ -1,4 +1,5 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using DAM.Aplicaciones;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,5 +22,10 @@ namespace DAM.Usuarios
         public string Correo { get; set; }
         public string Cualidades { get; set; }
         public string RutaFoto { get; set; }
+
+        //[ForeignKey("Aplicacion")]
+        
+        public int AplicacionId { get; set; }
+        public Aplicacion Aplicacion { get; set; }
     }
 }

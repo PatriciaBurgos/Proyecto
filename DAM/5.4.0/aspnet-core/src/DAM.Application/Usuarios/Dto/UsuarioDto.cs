@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
+using DAM.Aplicaciones;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,5 +19,7 @@ namespace DAM.Usuarios.Dto
         public string Apellido { get; set; }
         public DateTime? FechaNac { get; set; }
         public string Municipio { get; set; }
+
+        public int AplicacionId { get; set; }
     }
 }

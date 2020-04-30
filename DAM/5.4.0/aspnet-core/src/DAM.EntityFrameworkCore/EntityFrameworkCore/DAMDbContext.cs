@@ -5,6 +5,7 @@ using DAM.Authorization.Users;
 using DAM.MultiTenancy;
 using DAM.Aplicaciones;
 using DAM.Usuarios;
+using DAM.Publicaciones;
 
 namespace DAM.EntityFrameworkCore
 {
@@ -16,7 +17,8 @@ namespace DAM.EntityFrameworkCore
             : base(options)
         {
         }
-        public DbSet<Aplicacion>Aplicacion {get;set;}  
+        public DbSet<Aplicacion>Aplicacion { get;set; }  
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Publicacion> Publicacion { get; set; }
     }
 }

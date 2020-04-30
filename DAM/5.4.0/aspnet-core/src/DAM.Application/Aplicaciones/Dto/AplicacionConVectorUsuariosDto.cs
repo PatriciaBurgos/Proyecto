@@ -1,15 +1,13 @@
-﻿using Abp.Domain.Entities.Auditing;
+﻿using Abp.Application.Services.Dto;
 using DAM.Usuarios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace DAM.Aplicaciones
+namespace DAM.Aplicaciones.Dto
 {
-	public class Aplicacion : FullAuditedEntity
+	public class AplicacionConVectorUsuariosDto : EntityDto
 	{
-		[Required]
 		public string Nombre { get; set; }
 
 		public ICollection<Usuario> Usuario { get; set; }

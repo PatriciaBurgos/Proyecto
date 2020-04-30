@@ -4,14 +4,16 @@ using DAM.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAM.Migrations
 {
     [DbContext(typeof(DAMDbContext))]
-    partial class DAMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200430104410_RelacionUsuario-Aplicacion")]
+    partial class RelacionUsuarioAplicacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1614,60 +1616,6 @@ namespace DAM.Migrations
                     b.ToTable("AbpTenants");
                 });
 
-            modelBuilder.Entity("DAM.Publicaciones.Publicacion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Categoria")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ciudad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double?>("HorarioFin")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("HorarioInicio")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Municipio")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Texto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Publicacion");
-                });
-
             modelBuilder.Entity("DAM.Usuarios.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -1958,7 +1906,7 @@ namespace DAM.Migrations
             modelBuilder.Entity("DAM.Usuarios.Usuario", b =>
                 {
                     b.HasOne("DAM.Aplicaciones.Aplicacion", "Aplicacion")
-                        .WithMany("Usuario")
+                        .WithMany()
                         .HasForeignKey("AplicacionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

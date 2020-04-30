@@ -10,6 +10,7 @@ namespace DAM.Aplicaciones.Dto
 		public AplicacionMapProfile()
 		{
 			CreateMap<Aplicacion, AplicacionDto>().ReverseMap();
+			CreateMap<Aplicacion, AplicacionConVectorUsuariosDto>().ReverseMap();
 		}
 	}
 }

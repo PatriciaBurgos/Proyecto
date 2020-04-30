@@ -4,6 +4,7 @@ using Abp.Authorization;
 using Abp.Domain.Repositories;
 using DAM.Aplicaciones.Dto;
 using DAM.Authorization;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,6 +25,13 @@ namespace DAM.Aplicaciones
 		{
 			var aplicaciones = await _aplicacionRepository.GetAllListAsync();
 			return new ListResultDto<AplicacionDto>(ObjectMapper.Map<List<AplicacionDto>>(aplicaciones));
+		}
+
+		public async Task<ListResultDto<AplicacionConVectorUsuariosDto>> GetVectorUsuarios()
+		{
+			var usuarios = await _aplicacionRepository.GetAllListAsync();
+				//.Include(a => a.Usuario).ToListAsync();
+			return new ListResultDto<AplicacionConVectorUsuariosDto>(ObjectMapper.Map<List<AplicacionConVectorUsuariosDto>>(usuarios));
 		}
 	}
 }
