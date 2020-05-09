@@ -11,5 +11,9 @@
         public const string Pages_Aplicaciones = "Pages.Aplicaciones";
 
         public const string Pages_Usuarios = "Pages.Usuarios";
+
+        public const string Pages_Anuncios = "Pages.Anuncios";
+
+        public const string Pages_Peticiones = "Pages.Peticiones";
     }
 }

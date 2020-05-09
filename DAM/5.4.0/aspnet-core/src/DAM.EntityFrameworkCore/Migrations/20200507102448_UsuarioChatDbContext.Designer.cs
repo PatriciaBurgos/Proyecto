@@ -4,14 +4,16 @@ using DAM.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAM.Migrations
 {
     [DbContext(typeof(DAMDbContext))]
-    partial class DAMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200507102448_UsuarioChatDbContext")]
+    partial class UsuarioChatDbContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1846,7 +1848,7 @@ namespace DAM.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("PublicacionId")
+                    b.Property<int>("PublicacionID")
                         .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
@@ -1854,7 +1856,7 @@ namespace DAM.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PublicacionId");
+                    b.HasIndex("PublicacionID");
 
                     b.HasIndex("UsuarioId");
 
@@ -2243,12 +2245,12 @@ namespace DAM.Migrations
                 {
                     b.HasOne("DAM.Publicaciones.Publicacion", "Publicacion")
                         .WithMany("PublicacionesGustadas")
-                        .HasForeignKey("PublicacionId")
+                        .HasForeignKey("PublicacionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DAM.Usuarios.Usuario", "Usuario")
-                        .WithMany("PublicacionesGustadas")
+                        .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2266,13 +2268,13 @@ namespace DAM.Migrations
             modelBuilder.Entity("DAM.UsuariosGustados.UsuarioGustado", b =>
                 {
                     b.HasOne("DAM.Usuarios.Usuario", "UsuarioSeguido")
-                        .WithMany("UsuariosSeguidos")
+                        .WithMany()
                         .HasForeignKey("UsuarioSeguidoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DAM.Usuarios.Usuario", "UsuarioSeguidor")
-                        .WithMany("UsuariosSeguidores")
+                        .WithMany()
                         .HasForeignKey("UsuarioSeguidorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

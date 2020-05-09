@@ -1,4 +1,5 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using DAM.Publicaciones;
 using DAM.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace DAM.Aplicaciones
 		[Required]
 		public string Nombre { get; set; }
 
-		public ICollection<Usuario> Usuario { get; set; }
+		public ICollection<Usuario> Usuarios { get; set; } 
+		public ICollection<Publicacion> Publicaciones { get; set; }
 	}
 }

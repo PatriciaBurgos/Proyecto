@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAM.Usuarios.Dto
 {
-	public class UsuarioDto : FullAuditedEntityDto
+	public class UsuarioDto : EntityDto
 	{
         [Required]
         public string NombreUsuario { get; set; }

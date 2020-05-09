@@ -4,14 +4,16 @@ using DAM.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAM.Migrations
 {
     [DbContext(typeof(DAMDbContext))]
-    partial class DAMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200505105212_PublicacionAtributosTerminados")]
+    partial class PublicacionAtributosTerminados
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1349,8 +1351,7 @@ namespace DAM.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PublicacionId")
-                        .IsUnique();
+                    b.HasIndex("PublicacionId");
 
                     b.ToTable("Anuncio");
                 });
@@ -1634,17 +1635,17 @@ namespace DAM.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsuarioDestinoId")
+                    b.Property<int>("UsuarioChatId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsuarioOrigenId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioDestinoId");
+                    b.HasIndex("UsuarioChatId");
 
-                    b.HasIndex("UsuarioOrigenId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Chat");
                 });
@@ -1748,8 +1749,7 @@ namespace DAM.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PublicacionId")
-                        .IsUnique();
+                    b.HasIndex("PublicacionId");
 
                     b.ToTable("Peticion");
                 });
@@ -1846,7 +1846,7 @@ namespace DAM.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("PublicacionId")
+                    b.Property<int>("PublicacionID")
                         .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
@@ -1854,7 +1854,7 @@ namespace DAM.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PublicacionId");
+                    b.HasIndex("PublicacionID");
 
                     b.HasIndex("UsuarioId");
 
@@ -1933,7 +1933,7 @@ namespace DAM.Migrations
                     b.ToTable("Usuario");
                 });
 
-            modelBuilder.Entity("DAM.UsuariosGustados.UsuarioGustado", b =>
+            modelBuilder.Entity("DAM.UsuariosSeguidos.UsuarioSeguido", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1961,19 +1961,19 @@ namespace DAM.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("UsuarioSeguidoId")
+                    b.Property<int>("SeguidorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsuarioSeguidorId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioSeguidoId");
+                    b.HasIndex("SeguidorId");
 
-                    b.HasIndex("UsuarioSeguidorId");
+                    b.HasIndex("UsuarioId");
 
-                    b.ToTable("UsuarioGustado");
+                    b.ToTable("UsuarioSeguido");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>
@@ -2145,8 +2145,8 @@ namespace DAM.Migrations
             modelBuilder.Entity("DAM.Anuncios.Anuncio", b =>
                 {
                     b.HasOne("DAM.Publicaciones.Publicacion", "Publicacion")
-                        .WithOne()
-                        .HasForeignKey("DAM.Anuncios.Anuncio", "PublicacionId")
+                        .WithMany("Anuncios")
+                        .HasForeignKey("PublicacionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2183,15 +2183,15 @@ namespace DAM.Migrations
 
             modelBuilder.Entity("DAM.Chats.Chat", b =>
                 {
-                    b.HasOne("DAM.Usuarios.Usuario", "UsuarioDestino")
-                        .WithMany("ChatsUsuarioDestino")
-                        .HasForeignKey("UsuarioDestinoId")
+                    b.HasOne("DAM.Usuarios.Usuario", "UsuarioChat")
+                        .WithMany()
+                        .HasForeignKey("UsuarioChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAM.Usuarios.Usuario", "UsuarioOrigen")
-                        .WithMany("ChatsUsuarioOrigen")
-                        .HasForeignKey("UsuarioOrigenId")
+                    b.HasOne("DAM.Usuarios.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2218,8 +2218,8 @@ namespace DAM.Migrations
             modelBuilder.Entity("DAM.Peticiones.Peticion", b =>
                 {
                     b.HasOne("DAM.Publicaciones.Publicacion", "Publicacion")
-                        .WithOne()
-                        .HasForeignKey("DAM.Peticiones.Peticion", "PublicacionId")
+                        .WithMany("Peticiones")
+                        .HasForeignKey("PublicacionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2233,7 +2233,7 @@ namespace DAM.Migrations
                         .IsRequired();
 
                     b.HasOne("DAM.Usuarios.Usuario", "Usuario")
-                        .WithMany("Publicaciones")
+                        .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2243,12 +2243,12 @@ namespace DAM.Migrations
                 {
                     b.HasOne("DAM.Publicaciones.Publicacion", "Publicacion")
                         .WithMany("PublicacionesGustadas")
-                        .HasForeignKey("PublicacionId")
+                        .HasForeignKey("PublicacionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DAM.Usuarios.Usuario", "Usuario")
-                        .WithMany("PublicacionesGustadas")
+                        .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2263,17 +2263,17 @@ namespace DAM.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DAM.UsuariosGustados.UsuarioGustado", b =>
+            modelBuilder.Entity("DAM.UsuariosSeguidos.UsuarioSeguido", b =>
                 {
-                    b.HasOne("DAM.Usuarios.Usuario", "UsuarioSeguido")
-                        .WithMany("UsuariosSeguidos")
-                        .HasForeignKey("UsuarioSeguidoId")
+                    b.HasOne("DAM.Usuarios.Usuario", "Seguidor")
+                        .WithMany()
+                        .HasForeignKey("SeguidorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAM.Usuarios.Usuario", "UsuarioSeguidor")
-                        .WithMany("UsuariosSeguidores")
-                        .HasForeignKey("UsuarioSeguidorId")
+                    b.HasOne("DAM.Usuarios.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
