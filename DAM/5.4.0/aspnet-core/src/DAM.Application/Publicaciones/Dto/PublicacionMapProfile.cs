@@ -9,8 +9,12 @@ namespace DAM.Publicaciones.Dto
 	{
 		public PublicacionMapProfile()
 		{
-			CreateMap<Publicacion, PublicacionDto>().ReverseMap();
+			CreateMap<Publicacion, PublicacionDto>()
+				.ForMember(p => p.NombreUsuario, opts => opts.MapFrom(p => p.Usuario.NombreUsuario));
+
 			CreateMap<Publicacion, PublicacionReducidaDto>().ReverseMap();
+
+			CreateMap<Publicacion, PublicacionCreateDto>().ReverseMap();
 		}
 	}
 }

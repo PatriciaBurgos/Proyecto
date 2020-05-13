@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAM.Aplicaciones.Dto
+namespace DAM.Usuarios.Dto
 {
-	public class AplicacionDto : EntityDto
+	public class UsuarioReducidoDto : EntityDto
 	{
-		public string Nombre { get; set; }
+		public string NombreUsuario { get; set; }
 	}
 }

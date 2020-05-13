@@ -34,7 +34,7 @@ namespace DAM.Usuarios
         public ICollection<Chat> ChatsUsuarioOrigen { get; set; } //lo que mando
         public ICollection<Chat> ChatsUsuarioDestino { get; set; } //lo que recibo
         public ICollection<Publicacion> Publicaciones { get; set; }
-        public ICollection<PublicacionGustada> PublicacionesGustadas { get; set; }
+        public ICollection<PublicacionGustada> PublicacionesGustadas { get; set; } 
         public ICollection<UsuarioGustado> UsuariosSeguidores { get; set; } //los me siguen
         public ICollection<UsuarioGustado> UsuariosSeguidos { get; set; } //los que sigo
     }

@@ -1,13 +1,12 @@
 ﻿using Abp.Application.Services.Dto;
-using DAM.Aplicaciones.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DAM.Publicaciones.Dto
 {
-	public class PublicacionDto : EntityDto
-	{        
+	public class PublicacionCreateDto : EntityDto
+	{
         public string Categoria { get; set; }
         public string Texto { get; set; }
         public double? HorarioInicio { get; set; }
@@ -16,11 +15,9 @@ namespace DAM.Publicaciones.Dto
         public string Ciudad { get; set; }
 
         public int AplicacionId { get; set; }
-        
-        public int UsuarioId { get; set; }
-        public string NombreUsuario { get; set; }
 
-        
-        //public ICollection<PublicacionGustadaDto> PublicacionesGustadas { get; set; }
+        public int UsuarioId { get; set; }
     }
 }
+
+

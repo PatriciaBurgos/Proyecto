@@ -27,22 +27,22 @@ namespace DAM.Aplicaciones
 			_userManager = userManager;
 		}
 
-		protected override async Task<AplicacionDto> UpdateAsync(AplicacionDto input)
-		{
-			CheckUpdatePermission();
-			var aplicacionActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+		//protected override async Task<AplicacionDto> UpdateAsync(AplicacionDto input)
+		//{
+		//	CheckUpdatePermission();
+		//	var aplicacionActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
 
-			var apl = _aplicacionRepository
-				.GetAll()
-				.Where(apl => apl.Id == input.Id)
-				.FirstOrDefaultAsync();
+		//	var apl = _aplicacionRepository
+		//		.GetAll()
+		//		.Where(apl => apl.Id == input.Id)
+		//		.FirstOrDefaultAsync();
 
-			apl = ObjectMapper.Map<Aplicacion>(input);
+		//	apl = ObjectMapper.Map<Aplicacion>(input);
 
-			await _aplicacionRepository.UpdateAsync(apl);
+		//	await _aplicacionRepository.UpdateAsync(apl);
 
-			return ObjectMapper.Map<AplicacionDto>(apl);
-		}
+		//	return ObjectMapper.Map<AplicacionDto>(apl);
+		//}
 
 		public async Task<ListResultDto<AplicacionDto>> GetNombreAplicacion()
 		{
@@ -61,9 +61,5 @@ namespace DAM.Aplicaciones
 			return new ListResultDto<AplicacionConVectorUsuariosPublicacionesDto>(ObjectMapper.Map<List<AplicacionConVectorUsuariosPublicacionesDto>>(usuariosPublicaciones));
 		}
 
-		//Metodo numero usuarios
-		//Metodo numero publicaciones
-
-		
 	}
 }

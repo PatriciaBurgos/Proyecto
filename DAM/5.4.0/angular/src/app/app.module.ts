@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +37,12 @@ import { CreateUserDialogComponent } from '@app/users/create-user/create-user-di
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
+// aplicaciones
+import { AplicacionesComponent } from '@app/aplicaciones/aplicaciones.component';
+import { AplicacionServiceProxy } from '@shared/service-proxies/service-proxies';
+//import { CreateAplicacionDialogComponent } from './aplicaciones/create-aplicacion/create-aplicacion-dialog.component';
+//import { EditAplicacionDialogComponent } from './aplicaciones/edit-aplicacion/edit-aplicacion-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +68,11 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     CreateUserDialogComponent,
     EditUserDialogComponent,
     ChangePasswordComponent,
-    ResetPasswordDialogComponent
+    ResetPasswordDialogComponent,
+    //aplicaciones
+    AplicacionesComponent,
+    //CreateAplicacionDialogComponent,
+    //EditAplicacionDialogComponent    
   ],
   imports: [
     CommonModule,
@@ -77,7 +87,7 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     SharedModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [AplicacionServiceProxy],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,
@@ -88,7 +98,10 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     // users
     CreateUserDialogComponent,
     EditUserDialogComponent,
-    ResetPasswordDialogComponent
+    ResetPasswordDialogComponent,
+    //aplicaciones
+    //CreateAplicacionDialogComponent,
+    //EditAplicacionDialogComponent
   ]
 })
 export class AppModule {}

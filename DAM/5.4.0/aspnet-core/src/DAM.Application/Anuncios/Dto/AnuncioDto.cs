@@ -7,9 +7,8 @@ using System.Text;
 namespace DAM.Anuncios.Dto
 {
 	public class AnuncioDto : EntityDto
-	{
-		public int PublicacionId { get; set; }
-		public PublicacionReducidaDto Publicacion { get; set; }
+	{		
+		public PublicacionDto Publicacion { get; set; }
 
 		public string Preferencias { get; set; }
 	}
