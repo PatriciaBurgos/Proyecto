@@ -17,7 +17,7 @@ using System.Linq;
 namespace DAM.Usuarios
 {
 	[AbpAuthorize(PermissionNames.Pages_Usuarios)]
-	public class UsuarioAppService : AsyncCrudAppService<Usuario, UsuarioDto, int, PagedUsuarioResultRequestDto, UsuarioDto, UsuarioDto>
+	public class UsuarioAppService : AsyncCrudAppService<Usuario, UsuarioDto, int, PagedUsuarioResultRequestDto, UsuarioCreateDto, UsuarioDto>
 	{
 		private readonly IRepository<Usuario> _usuarioRepository;
 		private readonly UserManager _userManager;
@@ -31,6 +31,8 @@ namespace DAM.Usuarios
 		{
 			var usuarios = await _usuarioRepository.GetAll()
 				.Include(u => u.Aplicacion)
+				.Include(u => u.Publicaciones)
+				//.ThenInclude(pu => pu.Id == Anuncios)
 				.ToListAsync();
 
 			return new ListResultDto<UsuarioDto>(ObjectMapper.Map<List<UsuarioDto>>(usuarios));
@@ -38,18 +40,20 @@ namespace DAM.Usuarios
 
 		public async Task<ListResultDto<UsuarioDto>> GetDatosUnUsuario(int id)
 		{
-			var usuarios = await _usuarioRepository.GetAll()
-				.Include(a => a.Aplicacion)
-				.Where(a => a.Id == id)
-				.ToListAsync();
+			var usuario = await _usuarioRepository.FirstOrDefaultAsync(id);
+			//	 .Include(a => a.Aplicacion)
+			//	.Where(u => u.Id == id)
+			//	.ToListAsync();
 
-			return new ListResultDto<UsuarioDto>(ObjectMapper.Map<List<UsuarioDto>>(usuarios));
+			return new ListResultDto<UsuarioDto>(ObjectMapper.Map<List<UsuarioDto>>(usuario));
 		}
 
 		public async Task<ListResultDto<UsuarioAplicacionDto>> GetUsuariosConIdAplicacion()
 		{
 			var usuarios = await _usuarioRepository.GetAll()
-				.Include(a => a.Aplicacion).ToListAsync();
+				.Include(a => a.Aplicacion)
+				.ToListAsync();
+
 			return new ListResultDto<UsuarioAplicacionDto>(ObjectMapper.Map<List<UsuarioAplicacionDto>>(usuarios));
 		}
 	}

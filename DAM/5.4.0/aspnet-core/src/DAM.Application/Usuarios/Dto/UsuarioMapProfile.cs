@@ -15,6 +15,9 @@ namespace DAM.Usuarios.Dto
 
 			CreateMap<Usuario, UsuarioReducidoDto>()
 				.ForMember(u => u.NombreUsuario, opts => opts.MapFrom(u => u.NombreUsuario));
+
+			CreateMap<Usuario, UsuarioCreateDto>().ReverseMap();
+				//.ForMember(u => u.AplicacionId, opts => opts.MapFrom(u => u.Aplicacion.Id));
 		}
 	}
 }

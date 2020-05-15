@@ -40,8 +40,8 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
 // aplicaciones
 import { AplicacionesComponent } from '@app/aplicaciones/aplicaciones.component';
 import { AplicacionServiceProxy } from '@shared/service-proxies/service-proxies';
-//import { CreateAplicacionDialogComponent } from './aplicaciones/create-aplicacion/create-aplicacion-dialog.component';
-//import { EditAplicacionDialogComponent } from './aplicaciones/edit-aplicacion/edit-aplicacion-dialog.component';
+import { CreateAplicacionDialogComponent } from './aplicaciones/create-aplicacion/create-aplicacion-dialog.component';
+import { EditAplicacionDialogComponent } from './aplicaciones/edit-aplicacion/edit-aplicacion-dialog.component';
 
 
 @NgModule({
@@ -71,8 +71,8 @@ import { AplicacionServiceProxy } from '@shared/service-proxies/service-proxies'
     ResetPasswordDialogComponent,
     //aplicaciones
     AplicacionesComponent,
-    //CreateAplicacionDialogComponent,
-    //EditAplicacionDialogComponent    
+    CreateAplicacionDialogComponent,
+    EditAplicacionDialogComponent    
   ],
   imports: [
     CommonModule,
@@ -100,8 +100,8 @@ import { AplicacionServiceProxy } from '@shared/service-proxies/service-proxies'
     EditUserDialogComponent,
     ResetPasswordDialogComponent,
     //aplicaciones
-    //CreateAplicacionDialogComponent,
-    //EditAplicacionDialogComponent
+    CreateAplicacionDialogComponent,
+    EditAplicacionDialogComponent
   ]
 })
 export class AppModule {}

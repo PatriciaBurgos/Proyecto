@@ -1,6 +1,4 @@
 ﻿using Abp.Application.Services.Dto;
-using DAM.Anuncios.Dto;
-using DAM.Aplicaciones;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,9 +6,15 @@ using System.Text;
 
 namespace DAM.Usuarios.Dto
 {
-	public class UsuarioDto : EntityDto //Todos los datos
-	{        
+	public class UsuarioCreateDto : EntityDto
+	{
+        [Required]
+        [MaxLength(30)]
         public string NombreUsuario { get; set; }
+        [Required]
+        [MinLength(4)]
+        public string Password { get; set; }
+        [Required]
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public DateTime? FechaNac { get; set; }
@@ -22,13 +26,5 @@ namespace DAM.Usuarios.Dto
 
         public int AplicacionId { get; set; }
 
-        public ICollection<AnuncioDto> AnunciosPublicados { get; set; }
-
-        //public ICollection<Chat> ChatsUsuarioOrigen { get; set; } //lo que mando
-        //public ICollection<Chat> ChatsUsuarioDestino { get; set; } //lo que recibo
-
-        //public ICollection<PublicacionGustada> PublicacionesGustadas { get; set; }
-        //public ICollection<UsuarioGustado> UsuariosSeguidores { get; set; } //los me siguen
-        //public ICollection<UsuarioGustado> UsuariosSeguidos { get; set; } //los que sigo
     }
 }

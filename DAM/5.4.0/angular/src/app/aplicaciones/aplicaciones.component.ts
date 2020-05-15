@@ -4,7 +4,7 @@ import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {PagedListingComponentBase,PagedRequestDto} from '@shared/paged-listing-component-base';
 import { MatDialog } from '@angular/material';
-//import { CreateaplicacionDialogComponent } from './create-aplicacion/create-aplicacion-dialog.component';
+import { CreateAplicacionDialogComponent } from './create-aplicacion/create-aplicacion-dialog.component';
 //import { EditaplicacionDialogComponent } from './edit-aplicacion/edit-aplicacion-dialog.component';
 
 class PagedRolesRequestDto extends PagedRequestDto {
@@ -64,7 +64,7 @@ export class AplicacionesComponent extends PagedListingComponentBase<AplicacionD
 
     delete(aplicacion: AplicacionDto): void {
         abp.message.confirm(
-            this.l('RoleDeleteWarningMessage', aplicacion.nombre),
+            this.l('AplicacionDeleteWarningMessage', aplicacion.nombre),
             undefined,
             (result: boolean) => {
                 if (result) {
@@ -91,20 +91,20 @@ export class AplicacionesComponent extends PagedListingComponentBase<AplicacionD
     }
 
     showCreateOrEditaplicacionDialog(id?: number): void {
-       /* let createOrEditaplicacionDialog;
+        let createOrEditaplicacionDialog;
         if (id === undefined || id <= 0) {
-            createOrEditaplicacionDialog = this._dialog.open(CreateaplicacionDialogComponent);
-        } else {
-            createOrEditaplicacionDialog = this._dialog.open(EditaplicacionDialogComponent, {
+            createOrEditaplicacionDialog = this._dialog.open(CreateAplicacionDialogComponent);
+        } /*else {
+            createOrEditaplicacionDialog = this._dialog.open(EditAplicacionDialogComponent, {
                 data: id
             });
-        }
+        }*/
 
         createOrEditaplicacionDialog.afterClosed().subscribe(result => {
             if (result) {
                 this.refresh();
             }
-        });*/
+        });
     }
 
 

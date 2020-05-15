@@ -9,10 +9,9 @@ namespace DAM.Usuarios.Dto
 {
 	public class UsuarioAplicacionDto : EntityDto
     {
-        [Required]
-        public string NombreUsuario { get; set; }
-        
         public int AplicacionId { get; set; }
         public string AplicacionNombre { get; set; }
+
+        public string NombreUsuario { get; set; }
     }
 }
