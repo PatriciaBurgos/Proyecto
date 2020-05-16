@@ -1,0 +1,13 @@
+﻿using Abp.Application.Services.Dto;
+using NuevoProyectoDAM.Users.Dto;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DAM.PublicacionesGustadas.Dto
+{
+	public class PublicacionGustadaDto : EntityDto
+	{
+		public UserNameDto Usuario { get; set; }
+	}
+}
