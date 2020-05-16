@@ -10,7 +10,7 @@ namespace DAM.Publicaciones.Dto
 		public PublicacionMapProfile()
 		{
 			CreateMap<Publicacion, PublicacionDto>()
-				.ForMember(p => p.NombreUsuario, opts => opts.MapFrom(p => p.Usuario.NombreUsuario));
+				.ForMember(p => p.NombreUsuario, opts => opts.MapFrom(p => p.Usuario.UserName));
 
 			CreateMap<Publicacion, PublicacionReducidaDto>().ReverseMap();
 

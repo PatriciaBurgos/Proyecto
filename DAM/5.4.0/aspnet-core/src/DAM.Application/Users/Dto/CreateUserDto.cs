@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using Abp.Auditing;
 using Abp.Authorization.Users;
@@ -43,5 +44,14 @@ namespace DAM.Users.Dto
                 RoleNames = new string[0];
             }
         }
+
+        public DateTime? BirthDate { get; set; }
+        [MaxLength(50)]
+        public String? Town { get; set; }
+        [MaxLength(50)]
+        public String City { get; set; }
+        [MaxLength(256)]
+        public String? Qualities { get; set; }
+        public String Photo { get; set; }
     }
 }

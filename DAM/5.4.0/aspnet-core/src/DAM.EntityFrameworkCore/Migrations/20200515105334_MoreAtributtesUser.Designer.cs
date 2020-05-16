@@ -4,14 +4,16 @@ using DAM.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAM.Migrations
 {
     [DbContext(typeof(DAMDbContext))]
-    partial class DAMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200515105334_MoreAtributtesUser")]
+    partial class MoreAtributtesUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1355,6 +1357,43 @@ namespace DAM.Migrations
                     b.ToTable("Anuncio");
                 });
 
+            modelBuilder.Entity("DAM.Aplicaciones.Aplicacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Aplicacion");
+                });
+
             modelBuilder.Entity("DAM.Authorization.Roles.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -1447,8 +1486,7 @@ namespace DAM.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -1531,12 +1569,8 @@ namespace DAM.Migrations
                         .HasColumnType("nvarchar(32)")
                         .HasMaxLength(32);
 
-                    b.Property<string>("Photo")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Qualities")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(128)")
@@ -1551,8 +1585,7 @@ namespace DAM.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Town")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -1618,20 +1651,14 @@ namespace DAM.Migrations
                     b.Property<int>("UsuarioDestinoId")
                         .HasColumnType("int");
 
-                    b.Property<long?>("UsuarioDestinoId1")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("UsuarioOrigenId")
                         .HasColumnType("int");
 
-                    b.Property<long?>("UsuarioOrigenId1")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioDestinoId1");
+                    b.HasIndex("UsuarioDestinoId");
 
-                    b.HasIndex("UsuarioOrigenId1");
+                    b.HasIndex("UsuarioOrigenId");
 
                     b.ToTable("Chat");
                 });
@@ -1748,6 +1775,9 @@ namespace DAM.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AplicacionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Categoria")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1793,12 +1823,11 @@ namespace DAM.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.Property<long?>("UsuarioId1")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId1");
+                    b.HasIndex("AplicacionId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Publicacion");
                 });
@@ -1837,16 +1866,85 @@ namespace DAM.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.Property<long?>("UsuarioId1")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PublicacionId");
 
-                    b.HasIndex("UsuarioId1");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("PublicacionGustada");
+                });
+
+            modelBuilder.Entity("DAM.Usuarios.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Apellido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AplicacionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ciudad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Correo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Cualidades")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaNac")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Municipio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreUsuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RutaFoto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AplicacionId");
+
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("DAM.UsuariosGustados.UsuarioGustado", b =>
@@ -1880,20 +1978,14 @@ namespace DAM.Migrations
                     b.Property<int>("UsuarioSeguidoId")
                         .HasColumnType("int");
 
-                    b.Property<long?>("UsuarioSeguidoId1")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("UsuarioSeguidorId")
                         .HasColumnType("int");
 
-                    b.Property<long?>("UsuarioSeguidorId1")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioSeguidoId1");
+                    b.HasIndex("UsuarioSeguidoId");
 
-                    b.HasIndex("UsuarioSeguidorId1");
+                    b.HasIndex("UsuarioSeguidorId");
 
                     b.ToTable("UsuarioGustado");
                 });
@@ -2105,13 +2197,17 @@ namespace DAM.Migrations
 
             modelBuilder.Entity("DAM.Chats.Chat", b =>
                 {
-                    b.HasOne("DAM.Authorization.Users.User", "UsuarioDestino")
+                    b.HasOne("DAM.Usuarios.Usuario", "UsuarioDestino")
                         .WithMany("ChatsUsuarioDestino")
-                        .HasForeignKey("UsuarioDestinoId1");
+                        .HasForeignKey("UsuarioDestinoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DAM.Authorization.Users.User", "UsuarioOrigen")
+                    b.HasOne("DAM.Usuarios.Usuario", "UsuarioOrigen")
                         .WithMany("ChatsUsuarioOrigen")
-                        .HasForeignKey("UsuarioOrigenId1");
+                        .HasForeignKey("UsuarioOrigenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DAM.MultiTenancy.Tenant", b =>
@@ -2144,9 +2240,17 @@ namespace DAM.Migrations
 
             modelBuilder.Entity("DAM.Publicaciones.Publicacion", b =>
                 {
-                    b.HasOne("DAM.Authorization.Users.User", "Usuario")
+                    b.HasOne("DAM.Aplicaciones.Aplicacion", "Aplicacion")
                         .WithMany("Publicaciones")
-                        .HasForeignKey("UsuarioId1");
+                        .HasForeignKey("AplicacionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAM.Usuarios.Usuario", "Usuario")
+                        .WithMany("Publicaciones")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DAM.PublicacionesGustadas.PublicacionGustada", b =>
@@ -2157,20 +2261,35 @@ namespace DAM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAM.Authorization.Users.User", "Usuario")
+                    b.HasOne("DAM.Usuarios.Usuario", "Usuario")
                         .WithMany("PublicacionesGustadas")
-                        .HasForeignKey("UsuarioId1");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DAM.Usuarios.Usuario", b =>
+                {
+                    b.HasOne("DAM.Aplicaciones.Aplicacion", "Aplicacion")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("AplicacionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DAM.UsuariosGustados.UsuarioGustado", b =>
                 {
-                    b.HasOne("DAM.Authorization.Users.User", "UsuarioSeguido")
+                    b.HasOne("DAM.Usuarios.Usuario", "UsuarioSeguido")
                         .WithMany("UsuariosSeguidos")
-                        .HasForeignKey("UsuarioSeguidoId1");
+                        .HasForeignKey("UsuarioSeguidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DAM.Authorization.Users.User", "UsuarioSeguidor")
+                    b.HasOne("DAM.Usuarios.Usuario", "UsuarioSeguidor")
                         .WithMany("UsuariosSeguidores")
-                        .HasForeignKey("UsuarioSeguidorId1");
+                        .HasForeignKey("UsuarioSeguidorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>

@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Entities.Auditing;
-using DAM.Usuarios;
+using DAM.Authorization.Users;
+//using DAM.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,9 +19,9 @@ namespace DAM.Chats
         
         [ForeignKey("UsuarioOrigenId")]
         public int UsuarioOrigenId { get; set; }
-        public Usuario UsuarioOrigen { get; set; }
+        public User UsuarioOrigen { get; set; }
         [ForeignKey("UsuarioDestinoId")]
         public int UsuarioDestinoId { get; set; }        
-        public Usuario UsuarioDestino { get; set; }
+        public User UsuarioDestino { get; set; }
     }
 }

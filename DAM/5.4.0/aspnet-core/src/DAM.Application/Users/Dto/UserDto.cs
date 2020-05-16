@@ -36,5 +36,14 @@ namespace DAM.Users.Dto
         public DateTime CreationTime { get; set; }
 
         public string[] RoleNames { get; set; }
+
+        public DateTime? BirthDate { get; set; }
+        [MaxLength(50)]
+        public String? Town { get; set; }
+        [MaxLength(50)]
+        public String City { get; set; }
+        [MaxLength(256)]
+        public String? Qualities { get; set; }
+        public String Photo { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DAM.Authorization.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,14 +10,14 @@ namespace DAM.Usuarios.Dto
 	{
 		public UsuarioMapProfile()
 		{
-			CreateMap<Usuario, UsuarioDto>().ReverseMap();
+			CreateMap<User, UsuarioDto>().ReverseMap();
 
-			CreateMap<Usuario, UsuarioAplicacionDto>().ReverseMap();
+			CreateMap<User, UsuarioAplicacionDto>().ReverseMap();
 
-			CreateMap<Usuario, UsuarioReducidoDto>()
-				.ForMember(u => u.NombreUsuario, opts => opts.MapFrom(u => u.NombreUsuario));
+			CreateMap<User, UsuarioReducidoDto>()
+				.ForMember(u => u.NombreUsuario, opts => opts.MapFrom(u => u.UserName));
 
-			CreateMap<Usuario, UsuarioCreateDto>().ReverseMap();
+			CreateMap<User, UsuarioCreateDto>().ReverseMap();
 				//.ForMember(u => u.AplicacionId, opts => opts.MapFrom(u => u.Aplicacion.Id));
 		}
 	}

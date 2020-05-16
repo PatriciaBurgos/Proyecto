@@ -14,8 +14,6 @@ namespace DAM.Publicaciones.Dto
         public string Municipio { get; set; }
         public string Ciudad { get; set; }
 
-        public int AplicacionId { get; set; }
-
         public int UsuarioId { get; set; }
     }
 }

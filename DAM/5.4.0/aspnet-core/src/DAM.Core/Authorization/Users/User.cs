@@ -1,13 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using Abp.Authorization.Users;
 using Abp.Extensions;
+//using DAM.Aplicaciones;
+using DAM.Chats;
+using DAM.Publicaciones;
+using DAM.PublicacionesGustadas;
+using DAM.UsuariosGustados;
 
 namespace DAM.Authorization.Users
 {
     public class User : AbpUser<User>
     {
         public const string DefaultPassword = "123qwe";
+
+        public DateTime BirthDate { get; set; }
+        [MaxLength(50)]
+        public String? Town { get; set; }
+        [MaxLength(50)]
+        public String City { get; set; }
+        [MaxLength(256)]
+        public String? Qualities { get; set; }
+        public String Photo { get; set; }
+
+        public ICollection<Chat> ChatsUsuarioOrigen { get; set; } //lo que mando
+        public ICollection<Chat> ChatsUsuarioDestino { get; set; } //lo que recibo
+        public ICollection<Publicacion> Publicaciones { get; set; }
+        public ICollection<PublicacionGustada> PublicacionesGustadas { get; set; }
+        public ICollection<UsuarioGustado> UsuariosSeguidores { get; set; } //los me siguen
+        public ICollection<UsuarioGustado> UsuariosSeguidos { get; set; } //los que sigo
 
         public static string CreateRandomPassword()
         {
@@ -24,6 +48,7 @@ namespace DAM.Authorization.Users
                 Surname = AdminUserName,
                 EmailAddress = emailAddress,
                 Roles = new List<UserRole>()
+                
             };
 
             user.SetNormalizedNames();

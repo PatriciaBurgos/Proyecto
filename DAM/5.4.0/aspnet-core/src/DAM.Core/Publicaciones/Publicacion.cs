@@ -1,9 +1,10 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using DAM.Anuncios;
-using DAM.Aplicaciones;
+//using DAM.Aplicaciones;
+using DAM.Authorization.Users;
 using DAM.Peticiones;
 using DAM.PublicacionesGustadas;
-using DAM.Usuarios;
+//using DAM.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,11 +25,8 @@ namespace DAM.Publicaciones
         public string Ciudad { get; set; }
 
         [Required]
-        public int AplicacionId { get; set; }
-        public Aplicacion Aplicacion { get; set; }
-        [Required]
         public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
+        public User Usuario { get; set; }
 
         public ICollection<PublicacionGustada> PublicacionesGustadas { get; set; }
 

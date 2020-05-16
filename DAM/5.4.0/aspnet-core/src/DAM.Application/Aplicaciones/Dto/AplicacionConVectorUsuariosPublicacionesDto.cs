@@ -14,7 +14,5 @@ namespace DAM.Aplicaciones.Dto
 
 		public ICollection<UsuarioDto> Usuarios { get; set; }
 		public int NumUsuarios { get; set; }
-		public ICollection<PublicacionDto> Publicaciones { get; set; }
-		public int NumPublicaciones { get; set; }
 	}
 }
