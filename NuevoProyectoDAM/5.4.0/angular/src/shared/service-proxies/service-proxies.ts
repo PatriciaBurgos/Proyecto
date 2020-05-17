@@ -5398,6 +5398,11 @@ export class UserDto implements IUserDto {
     lastLoginTime: moment.Moment | undefined;
     creationTime: moment.Moment;
     roleNames: string[] | undefined;
+    birthDate: moment.Moment | undefined;
+    town: string | undefined;
+    city: string | undefined;
+    qualities: string | undefined;
+    photo: string | undefined;
     id: number;
 
     constructor(data?: IUserDto) {
@@ -5424,6 +5429,11 @@ export class UserDto implements IUserDto {
                 for (let item of _data["roleNames"])
                     this.roleNames.push(item);
             }
+            this.birthDate = _data["birthDate"] ? moment(_data["birthDate"].toString()) : <any>undefined;
+            this.town = _data["town"];
+            this.city = _data["city"];
+            this.qualities = _data["qualities"];
+            this.photo = _data["photo"];
             this.id = _data["id"];
         }
     }
@@ -5450,6 +5460,11 @@ export class UserDto implements IUserDto {
             for (let item of this.roleNames)
                 data["roleNames"].push(item);
         }
+        data["birthDate"] = this.birthDate ? this.birthDate.toISOString() : <any>undefined;
+        data["town"] = this.town;
+        data["city"] = this.city;
+        data["qualities"] = this.qualities;
+        data["photo"] = this.photo;
         data["id"] = this.id;
         return data; 
     }
@@ -5472,6 +5487,11 @@ export interface IUserDto {
     lastLoginTime: moment.Moment | undefined;
     creationTime: moment.Moment;
     roleNames: string[] | undefined;
+    birthDate: moment.Moment | undefined;
+    town: string | undefined;
+    city: string | undefined;
+    qualities: string | undefined;
+    photo: string | undefined;
     id: number;
 }
 

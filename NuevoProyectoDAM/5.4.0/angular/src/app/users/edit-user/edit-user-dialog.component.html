@@ -27,6 +27,26 @@
                 maxlength="32"
               />
             </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                name="Town"
+                [placeholder]="'Town' | localize"
+                [(ngModel)]="user.town"
+                required
+                maxlength="32"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                name="BirthDate"
+                [placeholder]="'BirthDate' | localize"
+                [(ngModel)]="user.birthDate"
+                required
+                maxlength="32"
+              />
+            </mat-form-field>
             <div class="checkbox-wrapper">
               <mat-checkbox name="IsActive" [(ngModel)]="user.isActive">
                 {{ "IsActive" | localize }}
@@ -52,6 +72,26 @@
                 name="Surname"
                 [placeholder]="'Surname' | localize"
                 [(ngModel)]="user.surname"
+                required
+                maxlength="32"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                name="City"
+                [placeholder]="'City' | localize"
+                [(ngModel)]="user.city"
+                required
+                maxlength="32"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                name="Qualities"
+                [placeholder]="'Qualities' | localize"
+                [(ngModel)]="user.qualities"
                 required
                 maxlength="32"
               />

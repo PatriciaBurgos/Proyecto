@@ -37,6 +37,11 @@ import { CreateUserDialogComponent } from '@app/users/create-user/create-user-di
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
+// anuncios
+import { AnunciosComponent } from '@app/anuncios/anuncios.component';
+import { CreateAnuncioDialogComponent } from '@app/anuncios/create-anuncios/create-anuncio-dialog.component';
+import { EditAnuncioDialogComponent } from '@app/anuncios/edit-anuncios/edit-anuncio-dialog.component';
+import { AnuncioServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @NgModule({
   declarations: [
@@ -62,7 +67,11 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     CreateUserDialogComponent,
     EditUserDialogComponent,
     ChangePasswordComponent,
-    ResetPasswordDialogComponent
+    ResetPasswordDialogComponent,
+    // anuncios
+    AnunciosComponent,
+    CreateAnuncioDialogComponent,
+    EditAnuncioDialogComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +86,7 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     SharedModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [AnuncioServiceProxy],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,
@@ -88,7 +97,10 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     // users
     CreateUserDialogComponent,
     EditUserDialogComponent,
-    ResetPasswordDialogComponent
+    ResetPasswordDialogComponent,
+    // anuncios
+    CreateAnuncioDialogComponent,
+    EditAnuncioDialogComponent,
   ]
 })
 export class AppModule {}
