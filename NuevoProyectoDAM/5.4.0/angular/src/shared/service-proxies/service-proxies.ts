@@ -152,6 +152,62 @@ export class AnuncioServiceProxy {
     }
 
     /**
+     * @param body (optional) 
+     * @return Success
+     */
+    create(body: AnuncioCreateDto | undefined): Observable<AnuncioDto> {
+        let url_ = this.baseUrl + "/api/services/app/Anuncio/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(<any>response_);
+                } catch (e) {
+                    return <Observable<AnuncioDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AnuncioDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<AnuncioDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AnuncioDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AnuncioDto>(<any>null);
+    }
+
+    /**
      * @return Success
      */
     getPublicacionesAnuncios(): Observable<AnuncioDtoListResultDto> {
@@ -256,6 +312,62 @@ export class AnuncioServiceProxy {
             }));
         }
         return _observableOf<AnuncioGustaAUsuariosDtoListResultDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getAnunciosUnUsuario(id: number | undefined): Observable<AnuncioDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Anuncio/GetAnunciosUnUsuario?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAnunciosUnUsuario(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAnunciosUnUsuario(<any>response_);
+                } catch (e) {
+                    return <Observable<AnuncioDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AnuncioDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAnunciosUnUsuario(response: HttpResponseBase): Observable<AnuncioDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AnuncioDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AnuncioDtoListResultDto>(<any>null);
     }
 
     /**
@@ -546,62 +658,6 @@ export class AnuncioServiceProxy {
             }));
         }
         return _observableOf<AnuncioDtoPagedResultDto>(<any>null);
-    }
-
-    /**
-     * @param body (optional) 
-     * @return Success
-     */
-    create(body: AnuncioCreateDto | undefined): Observable<AnuncioDto> {
-        let url_ = this.baseUrl + "/api/services/app/Anuncio/Create";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCreate(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processCreate(<any>response_);
-                } catch (e) {
-                    return <Observable<AnuncioDto>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<AnuncioDto>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processCreate(response: HttpResponseBase): Observable<AnuncioDto> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = AnuncioDto.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<AnuncioDto>(<any>null);
     }
 
     /**
@@ -2930,6 +2986,69 @@ export class UserServiceProxy {
     }
 }
 
+@Injectable()
+export class UsuarioLogadoServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @return Success
+     */
+    getUsuarioLogado(): Observable<UserDto> {
+        let url_ = this.baseUrl + "/api/services/app/UsuarioLogado/GetUsuarioLogado";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetUsuarioLogado(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetUsuarioLogado(<any>response_);
+                } catch (e) {
+                    return <Observable<UserDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<UserDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetUsuarioLogado(response: HttpResponseBase): Observable<UserDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UserDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<UserDto>(<any>null);
+    }
+}
+
 export class IsTenantAvailableInput implements IIsTenantAvailableInput {
     tenancyName: string | undefined;
 
@@ -3132,18 +3251,16 @@ export interface IRegisterOutput {
     canLogin: boolean;
 }
 
-export class PublicacionDto implements IPublicacionDto {
-    categoria: string | undefined;
-    texto: string | undefined;
-    horarioInicio: number | undefined;
-    horarioFin: number | undefined;
-    municipio: string | undefined;
-    ciudad: string | undefined;
-    usuarioId: number;
-    nombreUsuario: string | undefined;
-    id: number;
+export class AnuncioCreateDto implements IAnuncioCreateDto {
+    publicacionCategoria: string | undefined;
+    publicacionTexto: string | undefined;
+    publicacionHorarioInicio: number | undefined;
+    publicacionHorarioFin: number | undefined;
+    publicacionMunicipio: string | undefined;
+    publicacionCiudad: string | undefined;
+    preferencias: string | undefined;
 
-    constructor(data?: IPublicacionDto) {
+    constructor(data?: IAnuncioCreateDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -3154,61 +3271,61 @@ export class PublicacionDto implements IPublicacionDto {
 
     init(_data?: any) {
         if (_data) {
-            this.categoria = _data["categoria"];
-            this.texto = _data["texto"];
-            this.horarioInicio = _data["horarioInicio"];
-            this.horarioFin = _data["horarioFin"];
-            this.municipio = _data["municipio"];
-            this.ciudad = _data["ciudad"];
-            this.usuarioId = _data["usuarioId"];
-            this.nombreUsuario = _data["nombreUsuario"];
-            this.id = _data["id"];
+            this.publicacionCategoria = _data["publicacionCategoria"];
+            this.publicacionTexto = _data["publicacionTexto"];
+            this.publicacionHorarioInicio = _data["publicacionHorarioInicio"];
+            this.publicacionHorarioFin = _data["publicacionHorarioFin"];
+            this.publicacionMunicipio = _data["publicacionMunicipio"];
+            this.publicacionCiudad = _data["publicacionCiudad"];
+            this.preferencias = _data["preferencias"];
         }
     }
 
-    static fromJS(data: any): PublicacionDto {
+    static fromJS(data: any): AnuncioCreateDto {
         data = typeof data === 'object' ? data : {};
-        let result = new PublicacionDto();
+        let result = new AnuncioCreateDto();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["categoria"] = this.categoria;
-        data["texto"] = this.texto;
-        data["horarioInicio"] = this.horarioInicio;
-        data["horarioFin"] = this.horarioFin;
-        data["municipio"] = this.municipio;
-        data["ciudad"] = this.ciudad;
-        data["usuarioId"] = this.usuarioId;
-        data["nombreUsuario"] = this.nombreUsuario;
-        data["id"] = this.id;
+        data["publicacionCategoria"] = this.publicacionCategoria;
+        data["publicacionTexto"] = this.publicacionTexto;
+        data["publicacionHorarioInicio"] = this.publicacionHorarioInicio;
+        data["publicacionHorarioFin"] = this.publicacionHorarioFin;
+        data["publicacionMunicipio"] = this.publicacionMunicipio;
+        data["publicacionCiudad"] = this.publicacionCiudad;
+        data["preferencias"] = this.preferencias;
         return data; 
     }
 
-    clone(): PublicacionDto {
+    clone(): AnuncioCreateDto {
         const json = this.toJSON();
-        let result = new PublicacionDto();
+        let result = new AnuncioCreateDto();
         result.init(json);
         return result;
     }
 }
 
-export interface IPublicacionDto {
-    categoria: string | undefined;
-    texto: string | undefined;
-    horarioInicio: number | undefined;
-    horarioFin: number | undefined;
-    municipio: string | undefined;
-    ciudad: string | undefined;
-    usuarioId: number;
-    nombreUsuario: string | undefined;
-    id: number;
+export interface IAnuncioCreateDto {
+    publicacionCategoria: string | undefined;
+    publicacionTexto: string | undefined;
+    publicacionHorarioInicio: number | undefined;
+    publicacionHorarioFin: number | undefined;
+    publicacionMunicipio: string | undefined;
+    publicacionCiudad: string | undefined;
+    preferencias: string | undefined;
 }
 
 export class AnuncioDto implements IAnuncioDto {
-    publicacion: PublicacionDto;
+    publicacionCategoria: string | undefined;
+    publicacionTexto: string | undefined;
+    publicacionHorarioInicio: number | undefined;
+    publicacionHorarioFin: number | undefined;
+    publicacionMunicipio: string | undefined;
+    publicacionCiudad: string | undefined;
+    publicacionNombreUsuario: string | undefined;
     preferencias: string | undefined;
     id: number;
 
@@ -3223,7 +3340,13 @@ export class AnuncioDto implements IAnuncioDto {
 
     init(_data?: any) {
         if (_data) {
-            this.publicacion = _data["publicacion"] ? PublicacionDto.fromJS(_data["publicacion"]) : <any>undefined;
+            this.publicacionCategoria = _data["publicacionCategoria"];
+            this.publicacionTexto = _data["publicacionTexto"];
+            this.publicacionHorarioInicio = _data["publicacionHorarioInicio"];
+            this.publicacionHorarioFin = _data["publicacionHorarioFin"];
+            this.publicacionMunicipio = _data["publicacionMunicipio"];
+            this.publicacionCiudad = _data["publicacionCiudad"];
+            this.publicacionNombreUsuario = _data["publicacionNombreUsuario"];
             this.preferencias = _data["preferencias"];
             this.id = _data["id"];
         }
@@ -3238,7 +3361,13 @@ export class AnuncioDto implements IAnuncioDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["publicacion"] = this.publicacion ? this.publicacion.toJSON() : <any>undefined;
+        data["publicacionCategoria"] = this.publicacionCategoria;
+        data["publicacionTexto"] = this.publicacionTexto;
+        data["publicacionHorarioInicio"] = this.publicacionHorarioInicio;
+        data["publicacionHorarioFin"] = this.publicacionHorarioFin;
+        data["publicacionMunicipio"] = this.publicacionMunicipio;
+        data["publicacionCiudad"] = this.publicacionCiudad;
+        data["publicacionNombreUsuario"] = this.publicacionNombreUsuario;
         data["preferencias"] = this.preferencias;
         data["id"] = this.id;
         return data; 
@@ -3253,7 +3382,13 @@ export class AnuncioDto implements IAnuncioDto {
 }
 
 export interface IAnuncioDto {
-    publicacion: PublicacionDto;
+    publicacionCategoria: string | undefined;
+    publicacionTexto: string | undefined;
+    publicacionHorarioInicio: number | undefined;
+    publicacionHorarioFin: number | undefined;
+    publicacionMunicipio: string | undefined;
+    publicacionCiudad: string | undefined;
+    publicacionNombreUsuario: string | undefined;
     preferencias: string | undefined;
     id: number;
 }
@@ -3568,128 +3703,6 @@ export interface IAnuncioDtoPagedResultDto {
     items: AnuncioDto[] | undefined;
 }
 
-export class PublicacionCreateDto implements IPublicacionCreateDto {
-    categoria: string | undefined;
-    texto: string | undefined;
-    horarioInicio: number | undefined;
-    horarioFin: number | undefined;
-    municipio: string | undefined;
-    ciudad: string | undefined;
-    usuarioId: number;
-    id: number;
-
-    constructor(data?: IPublicacionCreateDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.categoria = _data["categoria"];
-            this.texto = _data["texto"];
-            this.horarioInicio = _data["horarioInicio"];
-            this.horarioFin = _data["horarioFin"];
-            this.municipio = _data["municipio"];
-            this.ciudad = _data["ciudad"];
-            this.usuarioId = _data["usuarioId"];
-            this.id = _data["id"];
-        }
-    }
-
-    static fromJS(data: any): PublicacionCreateDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PublicacionCreateDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["categoria"] = this.categoria;
-        data["texto"] = this.texto;
-        data["horarioInicio"] = this.horarioInicio;
-        data["horarioFin"] = this.horarioFin;
-        data["municipio"] = this.municipio;
-        data["ciudad"] = this.ciudad;
-        data["usuarioId"] = this.usuarioId;
-        data["id"] = this.id;
-        return data; 
-    }
-
-    clone(): PublicacionCreateDto {
-        const json = this.toJSON();
-        let result = new PublicacionCreateDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IPublicacionCreateDto {
-    categoria: string | undefined;
-    texto: string | undefined;
-    horarioInicio: number | undefined;
-    horarioFin: number | undefined;
-    municipio: string | undefined;
-    ciudad: string | undefined;
-    usuarioId: number;
-    id: number;
-}
-
-export class AnuncioCreateDto implements IAnuncioCreateDto {
-    publicacion: PublicacionCreateDto;
-    preferencias: string | undefined;
-    id: number;
-
-    constructor(data?: IAnuncioCreateDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.publicacion = _data["publicacion"] ? PublicacionCreateDto.fromJS(_data["publicacion"]) : <any>undefined;
-            this.preferencias = _data["preferencias"];
-            this.id = _data["id"];
-        }
-    }
-
-    static fromJS(data: any): AnuncioCreateDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new AnuncioCreateDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["publicacion"] = this.publicacion ? this.publicacion.toJSON() : <any>undefined;
-        data["preferencias"] = this.preferencias;
-        data["id"] = this.id;
-        return data; 
-    }
-
-    clone(): AnuncioCreateDto {
-        const json = this.toJSON();
-        let result = new AnuncioCreateDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IAnuncioCreateDto {
-    publicacion: PublicacionCreateDto;
-    preferencias: string | undefined;
-    id: number;
-}
-
 export class ChangeUiThemeInput implements IChangeUiThemeInput {
     theme: string | undefined;
 
@@ -3731,6 +3744,81 @@ export class ChangeUiThemeInput implements IChangeUiThemeInput {
 
 export interface IChangeUiThemeInput {
     theme: string | undefined;
+}
+
+export class PublicacionDto implements IPublicacionDto {
+    categoria: string | undefined;
+    texto: string | undefined;
+    horarioInicio: number | undefined;
+    horarioFin: number | undefined;
+    municipio: string | undefined;
+    ciudad: string | undefined;
+    usuarioId: number;
+    nombreUsuario: string | undefined;
+    id: number;
+
+    constructor(data?: IPublicacionDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.categoria = _data["categoria"];
+            this.texto = _data["texto"];
+            this.horarioInicio = _data["horarioInicio"];
+            this.horarioFin = _data["horarioFin"];
+            this.municipio = _data["municipio"];
+            this.ciudad = _data["ciudad"];
+            this.usuarioId = _data["usuarioId"];
+            this.nombreUsuario = _data["nombreUsuario"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): PublicacionDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PublicacionDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["categoria"] = this.categoria;
+        data["texto"] = this.texto;
+        data["horarioInicio"] = this.horarioInicio;
+        data["horarioFin"] = this.horarioFin;
+        data["municipio"] = this.municipio;
+        data["ciudad"] = this.ciudad;
+        data["usuarioId"] = this.usuarioId;
+        data["nombreUsuario"] = this.nombreUsuario;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone(): PublicacionDto {
+        const json = this.toJSON();
+        let result = new PublicacionDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPublicacionDto {
+    categoria: string | undefined;
+    texto: string | undefined;
+    horarioInicio: number | undefined;
+    horarioFin: number | undefined;
+    municipio: string | undefined;
+    ciudad: string | undefined;
+    usuarioId: number;
+    nombreUsuario: string | undefined;
+    id: number;
 }
 
 export class PeticionDto implements IPeticionDto {
@@ -3998,6 +4086,77 @@ export class PeticionDtoPagedResultDto implements IPeticionDtoPagedResultDto {
 export interface IPeticionDtoPagedResultDto {
     totalCount: number;
     items: PeticionDto[] | undefined;
+}
+
+export class PublicacionCreateDto implements IPublicacionCreateDto {
+    categoria: string | undefined;
+    texto: string | undefined;
+    horarioInicio: number | undefined;
+    horarioFin: number | undefined;
+    municipio: string | undefined;
+    ciudad: string | undefined;
+    usuarioId: number;
+    id: number;
+
+    constructor(data?: IPublicacionCreateDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.categoria = _data["categoria"];
+            this.texto = _data["texto"];
+            this.horarioInicio = _data["horarioInicio"];
+            this.horarioFin = _data["horarioFin"];
+            this.municipio = _data["municipio"];
+            this.ciudad = _data["ciudad"];
+            this.usuarioId = _data["usuarioId"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): PublicacionCreateDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PublicacionCreateDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["categoria"] = this.categoria;
+        data["texto"] = this.texto;
+        data["horarioInicio"] = this.horarioInicio;
+        data["horarioFin"] = this.horarioFin;
+        data["municipio"] = this.municipio;
+        data["ciudad"] = this.ciudad;
+        data["usuarioId"] = this.usuarioId;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone(): PublicacionCreateDto {
+        const json = this.toJSON();
+        let result = new PublicacionCreateDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPublicacionCreateDto {
+    categoria: string | undefined;
+    texto: string | undefined;
+    horarioInicio: number | undefined;
+    horarioFin: number | undefined;
+    municipio: string | undefined;
+    ciudad: string | undefined;
+    usuarioId: number;
+    id: number;
 }
 
 export class PeticionCreateDto implements IPeticionCreateDto {

@@ -7,9 +7,14 @@ using System.Text;
 
 namespace DAM.Anuncios.Dto
 {
-	public class AnuncioCreateDto : EntityDto
+	public class AnuncioCreateDto 
 	{
-        public PublicacionCreateDto Publicacion { get; set; }
+        public string PublicacionCategoria { get; set; }
+        public string PublicacionTexto { get; set; }
+        public double? PublicacionHorarioInicio { get; set; }
+        public double? PublicacionHorarioFin { get; set; }
+        public string PublicacionMunicipio { get; set; }
+        public string PublicacionCiudad { get; set; }
 
         public string Preferencias { get; set; }
     }

@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.Runtime.Session;
 using DAM.Anuncios.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ using System.Threading.Tasks;
 namespace DAM.Anuncios
 {
 	[AbpAuthorize(PermissionNames.Pages_Anuncios)]
-	public class AnuncioAppService : AsyncCrudAppService<Anuncio, AnuncioDto, int, PagedAnuncioResultRequestDto, AnuncioCreateDto, AnuncioDto>
+	public class AnuncioAppService :  AsyncCrudAppService<Anuncio, AnuncioDto, int, PagedAnuncioResultRequestDto, AnuncioCreateDto, AnuncioDto>
 	{
 		private readonly IRepository<Anuncio> _anuncioRepository;
 		private readonly UserManager _userManager;
@@ -28,11 +29,27 @@ namespace DAM.Anuncios
 			_userManager = userManager;
 		}
 
-		public async Task<ListResultDto<AnuncioDto>> GetPublicacionesAnuncios()
+		public override async Task<AnuncioDto> CreateAsync(AnuncioCreateDto input)
+		{
+			CheckUpdatePermission();
+
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var anuncio = ObjectMapper.Map<Anuncio>(input);
+
+			anuncio.Publicacion.UsuarioId = usuarioActual.Id;
+
+			await _anuncioRepository.InsertAsync(anuncio);
+			await CurrentUnitOfWork.SaveChangesAsync();
+
+			return ObjectMapper.Map<AnuncioDto>(anuncio);
+		}
+
+			public async Task<ListResultDto<AnuncioDto>> GetPublicacionesAnuncios()
 		{
 			var anuncios = await _anuncioRepository.GetAll()
 				.Include(a => a.Publicacion)
-				.ThenInclude(p => p.Usuario)
+				.Include(p => p.Publicacion.Usuario)
 				.ToListAsync();
 
 			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anuncios));

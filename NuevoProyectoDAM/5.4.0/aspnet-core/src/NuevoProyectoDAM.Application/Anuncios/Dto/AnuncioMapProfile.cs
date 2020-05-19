@@ -9,7 +9,9 @@ namespace DAM.Anuncios.Dto
 	{
 		public AnuncioMapProfile()
 		{
-			CreateMap<Anuncio, AnuncioDto>().ForMember(an => an.Publicacion, opts => opts.MapFrom(p => p.Publicacion));
+			CreateMap<Anuncio, AnuncioDto>()
+				.ForMember(a => a.PublicacionNombreUsuario, opts => opts.MapFrom(a => a.Publicacion.Usuario.UserName))
+				.ReverseMap();
 
 			CreateMap<Anuncio, AnuncioCreateDto>().ReverseMap();
 

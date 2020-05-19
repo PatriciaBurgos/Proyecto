@@ -28,20 +28,22 @@ import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
 import { EditTenantDialogComponent } from './tenants/edit-tenant/edit-tenant-dialog.component';
 // roles
-import { RolesComponent } from '@app/roles/roles.component';
-import { CreateRoleDialogComponent } from './roles/create-role/create-role-dialog.component';
-import { EditRoleDialogComponent } from './roles/edit-role/edit-role-dialog.component';
+import { RolesComponent } from '@app/components/roles/roles.component';
+import { CreateRoleDialogComponent } from './components/roles/create-role/create-role-dialog.component';
+import { EditRoleDialogComponent } from './components/roles/edit-role/edit-role-dialog.component';
 // users
-import { UsersComponent } from '@app/users/users.component';
-import { CreateUserDialogComponent } from '@app/users/create-user/create-user-dialog.component';
-import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
-import { ChangePasswordComponent } from './users/change-password/change-password.component';
-import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
+import { UsersComponent } from '@app/components/users/users.component';
+import { CreateUserDialogComponent } from '@app/components/users/create-user/create-user-dialog.component';
+import { EditUserDialogComponent } from '@app/components/users/edit-user/edit-user-dialog.component';
+import { ChangePasswordComponent } from './components/users/change-password/change-password.component';
+import { ResetPasswordDialogComponent } from './components/users/reset-password/reset-password.component';
 // anuncios
-import { AnunciosComponent } from '@app/anuncios/anuncios.component';
-import { CreateAnuncioDialogComponent } from '@app/anuncios/create-anuncios/create-anuncio-dialog.component';
-import { EditAnuncioDialogComponent } from '@app/anuncios/edit-anuncios/edit-anuncio-dialog.component';
-import { AnuncioServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AnunciosComponent } from '@app/components/anuncios/anuncios.component';
+import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
+import { EditAnuncioDialogComponent } from '@app/components/anuncios/edit-anuncios/edit-anuncio-dialog.component';
+import { AnuncioServiceProxy, UsuarioLogadoServiceProxy } from '@shared/service-proxies/service-proxies';
+// perfil 
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { AnuncioServiceProxy } from '@shared/service-proxies/service-proxies';
     // anuncios
     AnunciosComponent,
     CreateAnuncioDialogComponent,
-    EditAnuncioDialogComponent
+    EditAnuncioDialogComponent,
+    // perfil
+    PerfilComponent
   ],
   imports: [
     CommonModule,
@@ -86,7 +90,7 @@ import { AnuncioServiceProxy } from '@shared/service-proxies/service-proxies';
     SharedModule,
     NgxPaginationModule
   ],
-  providers: [AnuncioServiceProxy],
+  providers: [AnuncioServiceProxy, UsuarioLogadoServiceProxy],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,
