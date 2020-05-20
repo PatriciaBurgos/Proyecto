@@ -45,7 +45,7 @@ namespace DAM.Anuncios
 			return ObjectMapper.Map<AnuncioDto>(anuncio);
 		}
 
-			public async Task<ListResultDto<AnuncioDto>> GetPublicacionesAnuncios()
+		public async Task<ListResultDto<AnuncioDto>> GetPublicacionesAnuncios()
 		{
 			var anuncios = await _anuncioRepository.GetAll()
 				.Include(a => a.Publicacion)

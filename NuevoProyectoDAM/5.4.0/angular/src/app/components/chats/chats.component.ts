@@ -1,19 +1,18 @@
 import { Component,  Injector, OnInit } from '@angular/core';
-import { AnuncioServiceProxy, AnuncioDto, AuthenticateResultModel, AnuncioDtoPagedResultDto } from 'shared/service-proxies/service-proxies';
+import { ChatServiceProxy, ChatDto, MostrarChatReducidoDto, AuthenticateResultModel, ChatDtoPagedResultDto } from 'shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing-component-base';
 import { MatDialog } from '@angular/material';
-import { CreateAnuncioDialogComponent } from './create-anuncios/create-anuncio-dialog.component';
-import { EditAnuncioDialogComponent } from './edit-anuncios/edit-anuncio-dialog.component';
+import { CreateChatDialogComponent } from './create-chats/create-chat-dialog.component';
 
-class PagedAnuncioRequestDto extends PagedRequestDto {
+class PagedChatRequestDto extends PagedRequestDto {
     filter: string;
 }
 
 @Component({
-  //selector: 'app-anuncio',
-    templateUrl: './anuncios.component.html',
+  //selector: 'app-chat',
+    templateUrl: './chats.component.html',
     animations: [appModuleAnimation()],
     styles: [
         `
@@ -25,36 +24,36 @@ class PagedAnuncioRequestDto extends PagedRequestDto {
 })
 
 
-export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
+export class ChatsComponent extends PagedListingComponentBase<MostrarChatReducidoDto> {
 
-    anuncios: AnuncioDto[] = [];
+    chats: MostrarChatReducidoDto[] = [];
     
     filterText = '';
     constructor(
         injector: Injector,
-        private _anuncioservice: AnuncioServiceProxy,
+        private _chatservice: ChatServiceProxy,
         private _dialog: MatDialog
     ) {
         super(injector);
     }
 
     list(
-        request: PagedAnuncioRequestDto,
+        request: PagedChatRequestDto,
         pageNumber: number,
         finishedCallback: Function
     ): void {
 
         request.filter = this.filterText;
 
-        this._anuncioservice
-            .getPublicacionesAnuncios()
+        this._chatservice
+            .getUsuariosConLosQueHabla()
             .pipe(
                 finalize(() => {
                     finishedCallback();
                 })
             )
             .subscribe(result  => {
-                this.anuncios = result.items;
+                this.chats = result.items;
                 
             });
 
@@ -64,14 +63,14 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
     //        this.anuncios = result.items);
     }
 
-    delete(anuncio: AnuncioDto): void {
+    delete(chat: ChatDto): void {
         abp.message.confirm(
-            this.l('AnuncioDeleteWarningMessage', anuncio.id),
+            this.l('ChatDeleteWarningMessage', chat.id),
             undefined,
             (result: boolean) => {
                 if (result) {
-                    this._anuncioservice
-                        .delete(anuncio.id)
+                    this._chatservice
+                        .delete(chat.id)
                         .pipe(
                             finalize(() => {
                                 abp.notify.success(this.l('SuccessfullyDeleted'));
@@ -84,25 +83,18 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
         );
     }
 
-    createAnuncio(): void {
-        this.showCreateOrEditAnuncioDialog();
+    createChat(): void {
+        this.showCreateChatDialog();
     }
 
-    editAnuncio(anuncio: AnuncioDto): void {
-        this.showCreateOrEditAnuncioDialog(anuncio.id);
-    }
+    
 
-    showCreateOrEditAnuncioDialog(id?: number): void {
-        let createOrEditAnuncioDialog;
-        if (id === undefined || id <= 0) {
-            createOrEditAnuncioDialog = this._dialog.open(CreateAnuncioDialogComponent);
-        } else {
-            createOrEditAnuncioDialog = this._dialog.open(EditAnuncioDialogComponent, {
-                data: id
-            });
-        }
+    showCreateChatDialog(id?: number): void {
+        let createChatDialog;
+        createChatDialog = this._dialog.open(CreateChatDialogComponent);
+         
         
-        createOrEditAnuncioDialog.afterClosed().subscribe(result => {
+        createChatDialog.afterClosed().subscribe(result => {
             if (result) {
                 this.refresh();
             }

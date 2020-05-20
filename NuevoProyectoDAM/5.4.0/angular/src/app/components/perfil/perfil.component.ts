@@ -1,13 +1,17 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, Directive } from '@angular/core';
 import { UserServiceProxy, UsuarioLogadoServiceProxy, UserDto, UserDtoPagedResultDto } from '@shared/service-proxies/service-proxies';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase, PagedRequestDto } from '@shared/paged-listing-component-base';
 import { MatDialog } from '@angular/material';
 import { finalize } from 'rxjs/operators';
+import { AnuncioServiceProxy, AnuncioDto } from '@shared/service-proxies/service-proxies';
+import { AnunciosComponent } from '@app/components/anuncios/anuncios.component';
 
 class PagedUsersRequestDto extends PagedRequestDto {
   filter: string;
 }
+
+
 
 @Component({
 //selector: 'app-perfil',
@@ -44,7 +48,7 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
 
       request.filter = this.filterText;
 
-      this._userservice
+      this._userservice 
           .getUsuarioLogado()
           .pipe(
               finalize(() => {
@@ -68,7 +72,7 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
           undefined,
           (result: boolean) => {
               if (result) {
-                  this._userservice
+                  /*this._userservice
                       .delete(user.id)
                       .pipe(
                           finalize(() => {
@@ -76,13 +80,16 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
                               this.refresh();
                           })
                       )
-                      .subscribe(() => { });
+                      .subscribe(() => { });*/
               }
           }
       );
   }
 
-  
 
+  createAnun () : void {
+      this._dialog.open(CreateAnuncioDialogComponent);
+
+  }
 
 }

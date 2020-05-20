@@ -13,5 +13,7 @@
         public const string Pages_Anuncios = "Pages.Anuncios";
 
         public const string Pages_Peticiones = "Pages.Peticiones";
+
+        public const string Pages_Chats = "Pages.Chats";
     }
 }

@@ -41,9 +41,13 @@ import { ResetPasswordDialogComponent } from './components/users/reset-password/
 import { AnunciosComponent } from '@app/components/anuncios/anuncios.component';
 import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
 import { EditAnuncioDialogComponent } from '@app/components/anuncios/edit-anuncios/edit-anuncio-dialog.component';
-import { AnuncioServiceProxy, UsuarioLogadoServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy } from '@shared/service-proxies/service-proxies';
 // perfil 
 import { PerfilComponent } from './components/perfil/perfil.component';
+// chats
+import { ChatsComponent } from './components/chats/chats.component';
+import { CreateChatDialogComponent } from './components/chats/create-chats/create-chat-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -75,7 +79,10 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     CreateAnuncioDialogComponent,
     EditAnuncioDialogComponent,
     // perfil
-    PerfilComponent
+    PerfilComponent,
+    // chats
+    ChatsComponent,
+    CreateChatDialogComponent
   ],
   imports: [
     CommonModule,
@@ -90,7 +97,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     SharedModule,
     NgxPaginationModule
   ],
-  providers: [AnuncioServiceProxy, UsuarioLogadoServiceProxy],
+  providers: [AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,
@@ -105,6 +112,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     // anuncios
     CreateAnuncioDialogComponent,
     EditAnuncioDialogComponent,
+    // chats
+    CreateChatDialogComponent,
   ]
 })
 export class AppModule {}

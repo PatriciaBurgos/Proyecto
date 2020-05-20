@@ -10,6 +10,8 @@ import { RolesComponent } from 'app/components/roles/roles.component';
 import { ChangePasswordComponent } from './components/users/change-password/change-password.component';
 import { AnunciosComponent } from 'app/components/anuncios/anuncios.component';
 import { PerfilComponent } from 'app/components/perfil/perfil.component';
+import { ChatsComponent } from './components/chats/chats.component';
+
 
 @NgModule({
     imports: [
@@ -25,7 +27,8 @@ import { PerfilComponent } from 'app/components/perfil/perfil.component';
                     { path: 'about', component: AboutComponent },
                     { path: 'update-password', component: ChangePasswordComponent },
                     { path: 'anuncios', component: AnunciosComponent, data: { permission: 'Pages.Anuncios' } },
-                    { path: 'perfil', component: PerfilComponent, data: { permission: 'Pages.Users' } }
+                    { path: 'perfil', component: PerfilComponent, data: { permission: 'Pages.Users' } },
+                    { path: 'chats', component: ChatsComponent, data: { permission: 'Pages.Chats' } }
                 ]
             }
         ])
