@@ -42,6 +42,11 @@ import { AnunciosComponent } from '@app/components/anuncios/anuncios.component';
 import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
 import { EditAnuncioDialogComponent } from '@app/components/anuncios/edit-anuncios/edit-anuncio-dialog.component';
 import { AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy } from '@shared/service-proxies/service-proxies';
+// peticiones
+import { PeticionesComponent } from '@app/components/peticiones/peticiones.component';
+import { CreatePeticionDialogComponent } from '@app/components/peticiones/create-peticiones/create-peticion-dialog.component';
+import { EditPeticionDialogComponent } from '@app/components/peticiones/edit-peticiones/edit-peticion-dialog.component';
+import { PeticionServiceProxy} from '@shared/service-proxies/service-proxies';
 // perfil 
 import { PerfilComponent } from './components/perfil/perfil.component';
 // chats
@@ -78,6 +83,10 @@ import { CreateChatDialogComponent } from './components/chats/create-chats/creat
     AnunciosComponent,
     CreateAnuncioDialogComponent,
     EditAnuncioDialogComponent,
+    // peticiones
+    PeticionesComponent,
+    CreatePeticionDialogComponent,
+    EditPeticionDialogComponent,
     // perfil
     PerfilComponent,
     // chats
@@ -97,7 +106,7 @@ import { CreateChatDialogComponent } from './components/chats/create-chats/creat
     SharedModule,
     NgxPaginationModule
   ],
-  providers: [AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy],
+  providers: [AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy, PeticionServiceProxy],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,
@@ -112,6 +121,9 @@ import { CreateChatDialogComponent } from './components/chats/create-chats/creat
     // anuncios
     CreateAnuncioDialogComponent,
     EditAnuncioDialogComponent,
+    // peticiones
+    CreatePeticionDialogComponent,
+    EditPeticionDialogComponent,
     // chats
     CreateChatDialogComponent,
   ]

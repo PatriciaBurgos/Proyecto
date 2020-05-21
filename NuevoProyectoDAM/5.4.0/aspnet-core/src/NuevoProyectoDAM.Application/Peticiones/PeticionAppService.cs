@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.Runtime.Session;
 using DAM.Peticiones.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,22 @@ namespace DAM.Peticiones
 			_userManager = userManager;
 		}
 
+		public override async Task<PeticionDto> CreateAsync(PeticionCreateDto input)
+		{
+			CheckUpdatePermission();
+
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var peticion = ObjectMapper.Map<Peticion>(input);
+
+			peticion.Publicacion.UsuarioId = usuarioActual.Id;
+
+			await _peticionRepository.InsertAsync(peticion);
+			await CurrentUnitOfWork.SaveChangesAsync();
+
+			return ObjectMapper.Map<PeticionDto>(peticion);
+		}
+
 		public async Task<ListResultDto<PeticionDto>> GetPublicacionesPeticiones()
 		{
 			var peticiones = await _peticionRepository.GetAll()
@@ -46,6 +63,17 @@ namespace DAM.Peticiones
 				.ToListAsync();
 
 			return new ListResultDto<PeticionGustaAUsuariosDto>(ObjectMapper.Map<List<PeticionGustaAUsuariosDto>>(usuarios));
+		}
+
+		public async Task<ListResultDto<PeticionDto>> GetPeticionesUnUsuario(int id)
+		{
+			var peticiones = await _peticionRepository.GetAll()
+				.Include(a => a.Publicacion)
+				.ThenInclude(p => p.Usuario)
+				.Where(a => a.Publicacion.Usuario.Id == id)
+				.ToListAsync();
+
+			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
 		}
 
 		public async Task<ListResultDto<PeticionDto>> BusquedaPeticionesPorMunicipio(string municipio)

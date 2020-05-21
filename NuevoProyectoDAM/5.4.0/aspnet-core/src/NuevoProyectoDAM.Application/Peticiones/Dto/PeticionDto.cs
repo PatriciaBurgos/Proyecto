@@ -8,8 +8,15 @@ namespace DAM.Peticiones.Dto
 {
 	public class PeticionDto : EntityDto
 	{
-		public PublicacionDto Publicacion { get; set; }
+        public string PublicacionCategoria { get; set; }
+        public string PublicacionTexto { get; set; }
+        public double? PublicacionHorarioInicio { get; set; }
+        public double? PublicacionHorarioFin { get; set; }
+        public string PublicacionMunicipio { get; set; }
+        public string PublicacionCiudad { get; set; }
 
-		public bool IsUrgent { get; set; }
+        public string PublicacionNombreUsuario { get; set; }
+
+        public bool IsUrgent { get; set; }
 	}
 }

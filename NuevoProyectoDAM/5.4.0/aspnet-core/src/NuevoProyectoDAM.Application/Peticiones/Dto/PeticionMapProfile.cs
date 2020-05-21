@@ -9,7 +9,9 @@ namespace DAM.Peticiones.Dto
 	{
 		public PeticionMapProfile()
 		{
-			CreateMap<Peticion, PeticionDto>().ForMember(an => an.Publicacion, opts => opts.MapFrom(p => p.Publicacion));
+			CreateMap<Peticion, PeticionDto>()
+				.ForMember(a => a.PublicacionNombreUsuario, opts => opts.MapFrom(a => a.Publicacion.Usuario.UserName))
+				.ReverseMap();
 
 			CreateMap<Peticion, PeticionCreateDto>().ReverseMap();
 

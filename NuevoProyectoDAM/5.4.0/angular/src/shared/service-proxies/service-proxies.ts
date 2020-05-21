@@ -1194,6 +1194,62 @@ export class PeticionServiceProxy {
     }
 
     /**
+     * @param body (optional) 
+     * @return Success
+     */
+    create(body: PeticionCreateDto | undefined): Observable<PeticionDto> {
+        let url_ = this.baseUrl + "/api/services/app/Peticion/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(<any>response_);
+                } catch (e) {
+                    return <Observable<PeticionDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PeticionDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<PeticionDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PeticionDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PeticionDto>(<any>null);
+    }
+
+    /**
      * @return Success
      */
     getPublicacionesPeticiones(): Observable<PeticionDtoListResultDto> {
@@ -1298,6 +1354,62 @@ export class PeticionServiceProxy {
             }));
         }
         return _observableOf<PeticionGustaAUsuariosDtoListResultDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getPeticionesUnUsuario(id: number | undefined): Observable<PeticionDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Peticion/GetPeticionesUnUsuario?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetPeticionesUnUsuario(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetPeticionesUnUsuario(<any>response_);
+                } catch (e) {
+                    return <Observable<PeticionDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PeticionDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetPeticionesUnUsuario(response: HttpResponseBase): Observable<PeticionDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PeticionDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PeticionDtoListResultDto>(<any>null);
     }
 
     /**
@@ -1644,62 +1756,6 @@ export class PeticionServiceProxy {
             }));
         }
         return _observableOf<PeticionDtoPagedResultDto>(<any>null);
-    }
-
-    /**
-     * @param body (optional) 
-     * @return Success
-     */
-    create(body: PeticionCreateDto | undefined): Observable<PeticionDto> {
-        let url_ = this.baseUrl + "/api/services/app/Peticion/Create";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCreate(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processCreate(<any>response_);
-                } catch (e) {
-                    return <Observable<PeticionDto>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<PeticionDto>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processCreate(response: HttpResponseBase): Observable<PeticionDto> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PeticionDto.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<PeticionDto>(<any>null);
     }
 
     /**
@@ -4378,18 +4434,16 @@ export interface IChangeUiThemeInput {
     theme: string | undefined;
 }
 
-export class PublicacionDto implements IPublicacionDto {
-    categoria: string | undefined;
-    texto: string | undefined;
-    horarioInicio: number | undefined;
-    horarioFin: number | undefined;
-    municipio: string | undefined;
-    ciudad: string | undefined;
-    usuarioId: number;
-    nombreUsuario: string | undefined;
-    id: number;
+export class PeticionCreateDto implements IPeticionCreateDto {
+    publicacionCategoria: string | undefined;
+    publicacionTexto: string | undefined;
+    publicacionHorarioInicio: number | undefined;
+    publicacionHorarioFin: number | undefined;
+    publicacionMunicipio: string | undefined;
+    publicacionCiudad: string | undefined;
+    isUrgent: boolean;
 
-    constructor(data?: IPublicacionDto) {
+    constructor(data?: IPeticionCreateDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -4400,61 +4454,61 @@ export class PublicacionDto implements IPublicacionDto {
 
     init(_data?: any) {
         if (_data) {
-            this.categoria = _data["categoria"];
-            this.texto = _data["texto"];
-            this.horarioInicio = _data["horarioInicio"];
-            this.horarioFin = _data["horarioFin"];
-            this.municipio = _data["municipio"];
-            this.ciudad = _data["ciudad"];
-            this.usuarioId = _data["usuarioId"];
-            this.nombreUsuario = _data["nombreUsuario"];
-            this.id = _data["id"];
+            this.publicacionCategoria = _data["publicacionCategoria"];
+            this.publicacionTexto = _data["publicacionTexto"];
+            this.publicacionHorarioInicio = _data["publicacionHorarioInicio"];
+            this.publicacionHorarioFin = _data["publicacionHorarioFin"];
+            this.publicacionMunicipio = _data["publicacionMunicipio"];
+            this.publicacionCiudad = _data["publicacionCiudad"];
+            this.isUrgent = _data["isUrgent"];
         }
     }
 
-    static fromJS(data: any): PublicacionDto {
+    static fromJS(data: any): PeticionCreateDto {
         data = typeof data === 'object' ? data : {};
-        let result = new PublicacionDto();
+        let result = new PeticionCreateDto();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["categoria"] = this.categoria;
-        data["texto"] = this.texto;
-        data["horarioInicio"] = this.horarioInicio;
-        data["horarioFin"] = this.horarioFin;
-        data["municipio"] = this.municipio;
-        data["ciudad"] = this.ciudad;
-        data["usuarioId"] = this.usuarioId;
-        data["nombreUsuario"] = this.nombreUsuario;
-        data["id"] = this.id;
+        data["publicacionCategoria"] = this.publicacionCategoria;
+        data["publicacionTexto"] = this.publicacionTexto;
+        data["publicacionHorarioInicio"] = this.publicacionHorarioInicio;
+        data["publicacionHorarioFin"] = this.publicacionHorarioFin;
+        data["publicacionMunicipio"] = this.publicacionMunicipio;
+        data["publicacionCiudad"] = this.publicacionCiudad;
+        data["isUrgent"] = this.isUrgent;
         return data; 
     }
 
-    clone(): PublicacionDto {
+    clone(): PeticionCreateDto {
         const json = this.toJSON();
-        let result = new PublicacionDto();
+        let result = new PeticionCreateDto();
         result.init(json);
         return result;
     }
 }
 
-export interface IPublicacionDto {
-    categoria: string | undefined;
-    texto: string | undefined;
-    horarioInicio: number | undefined;
-    horarioFin: number | undefined;
-    municipio: string | undefined;
-    ciudad: string | undefined;
-    usuarioId: number;
-    nombreUsuario: string | undefined;
-    id: number;
+export interface IPeticionCreateDto {
+    publicacionCategoria: string | undefined;
+    publicacionTexto: string | undefined;
+    publicacionHorarioInicio: number | undefined;
+    publicacionHorarioFin: number | undefined;
+    publicacionMunicipio: string | undefined;
+    publicacionCiudad: string | undefined;
+    isUrgent: boolean;
 }
 
 export class PeticionDto implements IPeticionDto {
-    publicacion: PublicacionDto;
+    publicacionCategoria: string | undefined;
+    publicacionTexto: string | undefined;
+    publicacionHorarioInicio: number | undefined;
+    publicacionHorarioFin: number | undefined;
+    publicacionMunicipio: string | undefined;
+    publicacionCiudad: string | undefined;
+    publicacionNombreUsuario: string | undefined;
     isUrgent: boolean;
     id: number;
 
@@ -4469,7 +4523,13 @@ export class PeticionDto implements IPeticionDto {
 
     init(_data?: any) {
         if (_data) {
-            this.publicacion = _data["publicacion"] ? PublicacionDto.fromJS(_data["publicacion"]) : <any>undefined;
+            this.publicacionCategoria = _data["publicacionCategoria"];
+            this.publicacionTexto = _data["publicacionTexto"];
+            this.publicacionHorarioInicio = _data["publicacionHorarioInicio"];
+            this.publicacionHorarioFin = _data["publicacionHorarioFin"];
+            this.publicacionMunicipio = _data["publicacionMunicipio"];
+            this.publicacionCiudad = _data["publicacionCiudad"];
+            this.publicacionNombreUsuario = _data["publicacionNombreUsuario"];
             this.isUrgent = _data["isUrgent"];
             this.id = _data["id"];
         }
@@ -4484,7 +4544,13 @@ export class PeticionDto implements IPeticionDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["publicacion"] = this.publicacion ? this.publicacion.toJSON() : <any>undefined;
+        data["publicacionCategoria"] = this.publicacionCategoria;
+        data["publicacionTexto"] = this.publicacionTexto;
+        data["publicacionHorarioInicio"] = this.publicacionHorarioInicio;
+        data["publicacionHorarioFin"] = this.publicacionHorarioFin;
+        data["publicacionMunicipio"] = this.publicacionMunicipio;
+        data["publicacionCiudad"] = this.publicacionCiudad;
+        data["publicacionNombreUsuario"] = this.publicacionNombreUsuario;
         data["isUrgent"] = this.isUrgent;
         data["id"] = this.id;
         return data; 
@@ -4499,7 +4565,13 @@ export class PeticionDto implements IPeticionDto {
 }
 
 export interface IPeticionDto {
-    publicacion: PublicacionDto;
+    publicacionCategoria: string | undefined;
+    publicacionTexto: string | undefined;
+    publicacionHorarioInicio: number | undefined;
+    publicacionHorarioFin: number | undefined;
+    publicacionMunicipio: string | undefined;
+    publicacionCiudad: string | undefined;
+    publicacionNombreUsuario: string | undefined;
     isUrgent: boolean;
     id: number;
 }
@@ -4718,128 +4790,6 @@ export class PeticionDtoPagedResultDto implements IPeticionDtoPagedResultDto {
 export interface IPeticionDtoPagedResultDto {
     totalCount: number;
     items: PeticionDto[] | undefined;
-}
-
-export class PublicacionCreateDto implements IPublicacionCreateDto {
-    categoria: string | undefined;
-    texto: string | undefined;
-    horarioInicio: number | undefined;
-    horarioFin: number | undefined;
-    municipio: string | undefined;
-    ciudad: string | undefined;
-    usuarioId: number;
-    id: number;
-
-    constructor(data?: IPublicacionCreateDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.categoria = _data["categoria"];
-            this.texto = _data["texto"];
-            this.horarioInicio = _data["horarioInicio"];
-            this.horarioFin = _data["horarioFin"];
-            this.municipio = _data["municipio"];
-            this.ciudad = _data["ciudad"];
-            this.usuarioId = _data["usuarioId"];
-            this.id = _data["id"];
-        }
-    }
-
-    static fromJS(data: any): PublicacionCreateDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PublicacionCreateDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["categoria"] = this.categoria;
-        data["texto"] = this.texto;
-        data["horarioInicio"] = this.horarioInicio;
-        data["horarioFin"] = this.horarioFin;
-        data["municipio"] = this.municipio;
-        data["ciudad"] = this.ciudad;
-        data["usuarioId"] = this.usuarioId;
-        data["id"] = this.id;
-        return data; 
-    }
-
-    clone(): PublicacionCreateDto {
-        const json = this.toJSON();
-        let result = new PublicacionCreateDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IPublicacionCreateDto {
-    categoria: string | undefined;
-    texto: string | undefined;
-    horarioInicio: number | undefined;
-    horarioFin: number | undefined;
-    municipio: string | undefined;
-    ciudad: string | undefined;
-    usuarioId: number;
-    id: number;
-}
-
-export class PeticionCreateDto implements IPeticionCreateDto {
-    publicacion: PublicacionCreateDto;
-    isUrgent: boolean;
-    id: number;
-
-    constructor(data?: IPeticionCreateDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.publicacion = _data["publicacion"] ? PublicacionCreateDto.fromJS(_data["publicacion"]) : <any>undefined;
-            this.isUrgent = _data["isUrgent"];
-            this.id = _data["id"];
-        }
-    }
-
-    static fromJS(data: any): PeticionCreateDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PeticionCreateDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["publicacion"] = this.publicacion ? this.publicacion.toJSON() : <any>undefined;
-        data["isUrgent"] = this.isUrgent;
-        data["id"] = this.id;
-        return data; 
-    }
-
-    clone(): PeticionCreateDto {
-        const json = this.toJSON();
-        let result = new PeticionCreateDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IPeticionCreateDto {
-    publicacion: PublicacionCreateDto;
-    isUrgent: boolean;
-    id: number;
 }
 
 export class CreateRoleDto implements ICreateRoleDto {
