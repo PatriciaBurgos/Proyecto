@@ -50,7 +50,7 @@ namespace NuevoProyectoDAM.Chats
 			return ObjectMapper.Map<ChatDto>(chat);
 		}
 
-		public async Task<object> GetUsuariosConLosQueHabla()
+		public async Task<ListResultDto<MostrarChatReducidoDto>> GetUsuariosConLosQueHabla()
 		{
 			CheckUpdatePermission();
 

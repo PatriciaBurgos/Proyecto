@@ -12,7 +12,7 @@ class PagedAnuncioRequestDto extends PagedRequestDto {
 }
 
 @Component({
-  //selector: 'app-anuncio',
+    selector: 'app-anuncio',
     templateUrl: './anuncios.component.html',
     animations: [appModuleAnimation()],
     styles: [

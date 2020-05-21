@@ -5,7 +5,7 @@ import { PagedListingComponentBase, PagedRequestDto } from '@shared/paged-listin
 import { MatDialog } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { AnuncioServiceProxy, AnuncioDto } from '@shared/service-proxies/service-proxies';
-import { AnunciosComponent } from '@app/components/anuncios/anuncios.component';
+import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
 
 class PagedUsersRequestDto extends PagedRequestDto {
   filter: string;
@@ -28,7 +28,6 @@ class PagedUsersRequestDto extends PagedRequestDto {
 
 
 export class PerfilComponent extends PagedListingComponentBase<UserDto> {
-
   user: UserDto;
   
   filterText = '';

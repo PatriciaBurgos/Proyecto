@@ -839,7 +839,7 @@ export class ChatServiceProxy {
     /**
      * @return Success
      */
-    getUsuariosConLosQueHabla(): Observable<void> {
+    getUsuariosConLosQueHabla(): Observable<MostrarChatReducidoDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Chat/GetUsuariosConLosQueHabla";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -847,6 +847,7 @@ export class ChatServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "text/plain"
             })
         };
 
@@ -857,14 +858,14 @@ export class ChatServiceProxy {
                 try {
                     return this.processGetUsuariosConLosQueHabla(<any>response_);
                 } catch (e) {
-                    return <Observable<void>><any>_observableThrow(e);
+                    return <Observable<MostrarChatReducidoDtoListResultDto>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<void>><any>_observableThrow(response_);
+                return <Observable<MostrarChatReducidoDtoListResultDto>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetUsuariosConLosQueHabla(response: HttpResponseBase): Observable<void> {
+    protected processGetUsuariosConLosQueHabla(response: HttpResponseBase): Observable<MostrarChatReducidoDtoListResultDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -873,14 +874,17 @@ export class ChatServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return _observableOf<void>(<any>null);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MostrarChatReducidoDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<void>(<any>null);
+        return _observableOf<MostrarChatReducidoDtoListResultDto>(<any>null);
     }
 
     /**
@@ -4168,6 +4172,112 @@ export interface IChatDto {
     usuarioDestinoId: number;
     usuarioDestino: string | undefined;
     id: number;
+}
+
+export class MostrarChatReducidoDto implements IMostrarChatReducidoDto {
+    texto: string | undefined;
+    fechaHora: moment.Moment | undefined;
+    usuarioOrigen: string | undefined;
+    usuarioDestino: string | undefined;
+
+    constructor(data?: IMostrarChatReducidoDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.texto = _data["texto"];
+            this.fechaHora = _data["fechaHora"] ? moment(_data["fechaHora"].toString()) : <any>undefined;
+            this.usuarioOrigen = _data["usuarioOrigen"];
+            this.usuarioDestino = _data["usuarioDestino"];
+        }
+    }
+
+    static fromJS(data: any): MostrarChatReducidoDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new MostrarChatReducidoDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["texto"] = this.texto;
+        data["fechaHora"] = this.fechaHora ? this.fechaHora.toISOString() : <any>undefined;
+        data["usuarioOrigen"] = this.usuarioOrigen;
+        data["usuarioDestino"] = this.usuarioDestino;
+        return data; 
+    }
+
+    clone(): MostrarChatReducidoDto {
+        const json = this.toJSON();
+        let result = new MostrarChatReducidoDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IMostrarChatReducidoDto {
+    texto: string | undefined;
+    fechaHora: moment.Moment | undefined;
+    usuarioOrigen: string | undefined;
+    usuarioDestino: string | undefined;
+}
+
+export class MostrarChatReducidoDtoListResultDto implements IMostrarChatReducidoDtoListResultDto {
+    items: MostrarChatReducidoDto[] | undefined;
+
+    constructor(data?: IMostrarChatReducidoDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(MostrarChatReducidoDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): MostrarChatReducidoDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new MostrarChatReducidoDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): MostrarChatReducidoDtoListResultDto {
+        const json = this.toJSON();
+        let result = new MostrarChatReducidoDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IMostrarChatReducidoDtoListResultDto {
+    items: MostrarChatReducidoDto[] | undefined;
 }
 
 export class ChatDtoPagedResultDto implements IChatDtoPagedResultDto {
