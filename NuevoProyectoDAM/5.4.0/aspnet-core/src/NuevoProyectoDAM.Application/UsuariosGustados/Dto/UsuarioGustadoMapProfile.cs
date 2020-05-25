@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using DAM.UsuariosGustados;
-using DAM.UsuarioGustados.Dto;
+using NuevoProyectoDAM.UsuariosGustados.Dto;
 
 namespace DAM.UsuarioGustados.Dto
 {
@@ -11,7 +11,11 @@ namespace DAM.UsuarioGustados.Dto
 	{
 		public UsuarioGustadoMapProfile()
 		{
-			CreateMap<UsuarioGustado, UsuarioGustadoDto>().ReverseMap();
+			CreateMap<UsuarioGustado, UsuarioGustadoSeguidorDto>()
+				.ForMember(p => p.Usuario, opts => opts.MapFrom(p => p.UsuarioSeguidor));
+
+			CreateMap<UsuarioGustado, UsuarioGustadoSeguidoDto>()
+				.ForMember(p => p.Usuario, opts => opts.MapFrom(p => p.UsuarioSeguido));
 		}
 	}
 }

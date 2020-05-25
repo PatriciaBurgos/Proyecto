@@ -38,5 +38,31 @@ namespace NuevoProyectoDAM.Users
 			return ObjectMapper.Map<UserDto>(usuario);
 		}
 
+		public async Task<UsuariosSeguidoresDto> GetMisSeguidores()
+		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var usuarios = await _userRepository.GetAll()
+				.Include(u => u.UsuariosSeguidos)
+				.ThenInclude(u => u.UsuarioSeguidor)
+				.Where(u => u.Id == usuarioActual.Id)
+				.FirstOrDefaultAsync();
+
+			return ObjectMapper.Map<UsuariosSeguidoresDto>(usuarios);
+		}
+
+		public async Task<UsuariosSeguidosDto> GetMisSeguidos()
+		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var usuarios = await _userRepository.GetAll()
+				.Include(u => u.UsuariosSeguidores)
+				.ThenInclude(u => u.UsuarioSeguido)
+				.Where(u => u.Id == usuarioActual.Id)
+				.FirstOrDefaultAsync();
+
+			return ObjectMapper.Map<UsuariosSeguidosDto>(usuarios);
+		}
+
 	}
 }
