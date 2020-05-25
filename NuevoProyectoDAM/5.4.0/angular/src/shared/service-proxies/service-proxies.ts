@@ -3452,6 +3452,108 @@ export class UsuarioLogadoServiceProxy {
         }
         return _observableOf<UserDto>(<any>null);
     }
+
+    /**
+     * @return Success
+     */
+    getMisSeguidores(): Observable<UsuariosSeguidoresDto> {
+        let url_ = this.baseUrl + "/api/services/app/UsuarioLogado/GetMisSeguidores";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetMisSeguidores(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetMisSeguidores(<any>response_);
+                } catch (e) {
+                    return <Observable<UsuariosSeguidoresDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<UsuariosSeguidoresDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetMisSeguidores(response: HttpResponseBase): Observable<UsuariosSeguidoresDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UsuariosSeguidoresDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<UsuariosSeguidoresDto>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    getMisSeguidos(): Observable<UsuariosSeguidosDto> {
+        let url_ = this.baseUrl + "/api/services/app/UsuarioLogado/GetMisSeguidos";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetMisSeguidos(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetMisSeguidos(<any>response_);
+                } catch (e) {
+                    return <Observable<UsuariosSeguidosDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<UsuariosSeguidosDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetMisSeguidos(response: HttpResponseBase): Observable<UsuariosSeguidosDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UsuariosSeguidosDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<UsuariosSeguidosDto>(<any>null);
+    }
 }
 
 export class IsTenantAvailableInput implements IIsTenantAvailableInput {
@@ -6481,6 +6583,206 @@ export class UserDtoPagedResultDto implements IUserDtoPagedResultDto {
 export interface IUserDtoPagedResultDto {
     totalCount: number;
     items: UserDto[] | undefined;
+}
+
+export class UsuarioGustadoSeguidorDto implements IUsuarioGustadoSeguidorDto {
+    usuario: UserNameDto;
+    id: number;
+
+    constructor(data?: IUsuarioGustadoSeguidorDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.usuario = _data["usuario"] ? UserNameDto.fromJS(_data["usuario"]) : <any>undefined;
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): UsuarioGustadoSeguidorDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UsuarioGustadoSeguidorDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["usuario"] = this.usuario ? this.usuario.toJSON() : <any>undefined;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone(): UsuarioGustadoSeguidorDto {
+        const json = this.toJSON();
+        let result = new UsuarioGustadoSeguidorDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUsuarioGustadoSeguidorDto {
+    usuario: UserNameDto;
+    id: number;
+}
+
+export class UsuariosSeguidoresDto implements IUsuariosSeguidoresDto {
+    usuariosSeguidores: UsuarioGustadoSeguidorDto[] | undefined;
+    numUsuarios: number;
+
+    constructor(data?: IUsuariosSeguidoresDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["usuariosSeguidores"])) {
+                this.usuariosSeguidores = [] as any;
+                for (let item of _data["usuariosSeguidores"])
+                    this.usuariosSeguidores.push(UsuarioGustadoSeguidorDto.fromJS(item));
+            }
+            this.numUsuarios = _data["numUsuarios"];
+        }
+    }
+
+    static fromJS(data: any): UsuariosSeguidoresDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UsuariosSeguidoresDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.usuariosSeguidores)) {
+            data["usuariosSeguidores"] = [];
+            for (let item of this.usuariosSeguidores)
+                data["usuariosSeguidores"].push(item.toJSON());
+        }
+        data["numUsuarios"] = this.numUsuarios;
+        return data; 
+    }
+
+    clone(): UsuariosSeguidoresDto {
+        const json = this.toJSON();
+        let result = new UsuariosSeguidoresDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUsuariosSeguidoresDto {
+    usuariosSeguidores: UsuarioGustadoSeguidorDto[] | undefined;
+    numUsuarios: number;
+}
+
+export class UsuarioGustadoSeguidoDto implements IUsuarioGustadoSeguidoDto {
+    usuario: UserNameDto;
+
+    constructor(data?: IUsuarioGustadoSeguidoDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.usuario = _data["usuario"] ? UserNameDto.fromJS(_data["usuario"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): UsuarioGustadoSeguidoDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UsuarioGustadoSeguidoDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["usuario"] = this.usuario ? this.usuario.toJSON() : <any>undefined;
+        return data; 
+    }
+
+    clone(): UsuarioGustadoSeguidoDto {
+        const json = this.toJSON();
+        let result = new UsuarioGustadoSeguidoDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUsuarioGustadoSeguidoDto {
+    usuario: UserNameDto;
+}
+
+export class UsuariosSeguidosDto implements IUsuariosSeguidosDto {
+    usuariosSeguidos: UsuarioGustadoSeguidoDto[] | undefined;
+    numUsuarios: number;
+
+    constructor(data?: IUsuariosSeguidosDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["usuariosSeguidos"])) {
+                this.usuariosSeguidos = [] as any;
+                for (let item of _data["usuariosSeguidos"])
+                    this.usuariosSeguidos.push(UsuarioGustadoSeguidoDto.fromJS(item));
+            }
+            this.numUsuarios = _data["numUsuarios"];
+        }
+    }
+
+    static fromJS(data: any): UsuariosSeguidosDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UsuariosSeguidosDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.usuariosSeguidos)) {
+            data["usuariosSeguidos"] = [];
+            for (let item of this.usuariosSeguidos)
+                data["usuariosSeguidos"].push(item.toJSON());
+        }
+        data["numUsuarios"] = this.numUsuarios;
+        return data; 
+    }
+
+    clone(): UsuariosSeguidosDto {
+        const json = this.toJSON();
+        let result = new UsuariosSeguidosDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUsuariosSeguidosDto {
+    usuariosSeguidos: UsuarioGustadoSeguidoDto[] | undefined;
+    numUsuarios: number;
 }
 
 export class ApiException extends Error {

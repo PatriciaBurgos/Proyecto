@@ -26,92 +26,92 @@
 
 <!--INFORMACION PERSONAL-->
 <div>
-<div class="row clearfix" [@routerTransition] style="display: inline-flex;">
-    <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
-        <div class="card main-content">
-            <div class="body table-responsive">
-                <table class="table table-hover table-striped" [busy]="isTableLoading">
-                    <tbody>
-                        <tr>
-                            <th>Municipio</th>
-                            <td>{{ user.town }}</td>
-                        </tr>
-                        <tr>
-                            <th>Ciudad</th>
-                            <td>{{ user.city }}</td>
-                        </tr>
-                        <tr>
-                            <th>Cualidades</th>
-                            <td>{{ user.qualities }}</td>
-                        </tr>                        
-                    </tbody>
-                </table>
-                <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
-                    <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
-                    </abp-pagination-controls>
+    <div class="row clearfix" [@routerTransition] style="display: inline-flex;">
+        <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
+            <div class="card main-content">
+                <div class="body table-responsive">
+                    <table class="table table-hover table-striped" [busy]="isTableLoading">
+                        <tbody>
+                            <tr>
+                                <th>Municipio</th>
+                                <td>{{ user.town }}</td>
+                            </tr>
+                            <tr>
+                                <th>Ciudad</th>
+                                <td>{{ user.city }}</td>
+                            </tr>
+                            <tr>
+                                <th>Cualidades</th>
+                                <td>{{ user.qualities }}</td>
+                            </tr>                        
+                        </tbody>
+                    </table>
+                    <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
+                        <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
+                        </abp-pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--CREAR ANUNCIO/PETICION-->
+    <!--CREAR ANUNCIO/PETICION-->
 
-<div class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
-    <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
-        <div class="card main-content">
-            <div class="body table-responsive">
-                <table class="table" [busy]="isTableLoading">
-                    <tbody>
-                        <tr>
-                            <button class="mat-raised-button " style="background-color: #ff4081; 
-                                color:white" (click)="createAnun()">NUEVO ANUNCIO</button>
-                        </tr>
-                        <tr>
-                            <button class="mat-raised-button " style="background-color: #ff4081; 
-                                color:white; margin-top: 12px;">NUEVA PETICIÓN</button>
-                        </tr>                        
-                    </tbody>
-                </table>
-                <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
-                    <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
-                    </abp-pagination-controls>
+    <div class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
+        <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
+            <div class="card main-content">
+                <div class="body table-responsive">
+                    <table class="table" [busy]="isTableLoading">
+                        <tbody>
+                            <tr>
+                                <button class="mat-raised-button " style="background-color: #ff4081; 
+                                    color:white" (click)="createAnun()">NUEVO ANUNCIO</button>
+                            </tr>
+                            <tr>
+                                <button class="mat-raised-button " style="background-color: #ff4081; 
+                                    color:white; margin-top: 12px;">NUEVA PETICIÓN</button>
+                            </tr>                        
+                        </tbody>
+                    </table>
+                    <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
+                        <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
+                        </abp-pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--BOTONES DE COSAS GUARDADAS-->
+    <!--BOTONES DE COSAS GUARDADAS-->
 
-<div class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
-    <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
-        <div class="card main-content">
-            <div class="body table-responsive">
-                <table class="table" [busy]="isTableLoading">
-                    <tbody>
-                        <tr>
-                            <button class="mat-raised-button " style="background-color: #ff4081; 
-                                color:white" >USUARIOS GUARDADOS</button>
-                        </tr>
-                        <tr>
-                            <button class="mat-raised-button " style="background-color: #ff4081; 
-                                color:white; margin-top: 12px;">ANUNCIOS GUARDADOS</button>
-                        </tr>   
-                        <tr>
-                            <button class="mat-raised-button " style="background-color: #ff4081; 
-                                color:white; margin-top: 12px;">PETICIONES GUARDADAS</button>
-                        </tr>                        
-                    </tbody>
-                </table>
-                <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
-                    <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
-                    </abp-pagination-controls>
+    <div class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
+        <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
+            <div class="card main-content">
+                <div class="body table-responsive">
+                    <table class="table" [busy]="isTableLoading">
+                        <tbody>
+                            <tr>
+                                <button class="mat-raised-button " style="background-color: #ff4081; 
+                                    color:white" >USUARIOS GUARDADOS</button>
+                            </tr>
+                            <tr>
+                                <button class="mat-raised-button " style="background-color: #ff4081; 
+                                    color:white; margin-top: 12px;">ANUNCIOS GUARDADOS</button>
+                            </tr>   
+                            <tr>
+                                <button class="mat-raised-button " style="background-color: #ff4081; 
+                                    color:white; margin-top: 12px;">PETICIONES GUARDADAS</button>
+                            </tr>                        
+                        </tbody>
+                    </table>
+                    <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
+                        <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
+                        </abp-pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <!--ANUNCIOS DEL USUARIO-->

@@ -42,6 +42,7 @@ import { AnunciosComponent } from '@app/components/anuncios/anuncios.component';
 import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
 import { EditAnuncioDialogComponent } from '@app/components/anuncios/edit-anuncios/edit-anuncio-dialog.component';
 import { AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy } from '@shared/service-proxies/service-proxies';
+import { DesplegableCategoriaComponent } from './components/anuncios/desplegable-categoria/desplegable-categoria.component';
 // peticiones
 import { PeticionesComponent } from '@app/components/peticiones/peticiones.component';
 import { CreatePeticionDialogComponent } from '@app/components/peticiones/create-peticiones/create-peticion-dialog.component';
@@ -52,6 +53,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 // chats
 import { ChatsComponent } from './components/chats/chats.component';
 import { CreateChatDialogComponent } from './components/chats/create-chats/create-chat-dialog.component';
+import { UsuariosSeguidosComponent } from './components/perfil/usuarios-seguidos/usuarios-seguidos.component';
 
 
 @NgModule({
@@ -91,7 +93,9 @@ import { CreateChatDialogComponent } from './components/chats/create-chats/creat
     PerfilComponent,
     // chats
     ChatsComponent,
-    CreateChatDialogComponent
+    CreateChatDialogComponent,
+    DesplegableCategoriaComponent,
+    UsuariosSeguidosComponent
   ],
   imports: [
     CommonModule,

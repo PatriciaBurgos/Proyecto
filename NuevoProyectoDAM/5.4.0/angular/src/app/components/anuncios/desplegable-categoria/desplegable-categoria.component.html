@@ -1,0 +1,11 @@
+<label>Categoria: </label>
+<select required name="categoria"
+        #refPosicion="ngModel"
+        class="form-control" [(ngModel)]="anuncio.publicacionCategoria">
+        
+        <option value="undefined">Seleccione Categoria:</option>
+        <option [ngValue]="Peques">Peques</option>
+        <option [ngValue]="Clases">Clases</option>
+        <option [ngValue]="Informatica">Informática</option>
+        <option [ngValue]="Terapia">Terapia</option>
+</select>

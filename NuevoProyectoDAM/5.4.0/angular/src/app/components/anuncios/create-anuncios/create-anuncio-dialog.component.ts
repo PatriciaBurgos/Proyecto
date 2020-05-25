@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {AnuncioServiceProxy, AnuncioCreateDto} from '@shared/service-proxies/service-proxies';
 
+
 @Component({
     templateUrl: 'create-anuncio-dialog.component.html',
     styles: [
@@ -21,7 +22,7 @@ import {AnuncioServiceProxy, AnuncioCreateDto} from '@shared/service-proxies/ser
 export class CreateAnuncioDialogComponent extends AppComponentBase  {
     saving = false;
     anuncio: AnuncioCreateDto = new AnuncioCreateDto();
-
+    categoria : string = "";
 
     constructor(
         injector: Injector,
@@ -38,6 +39,8 @@ export class CreateAnuncioDialogComponent extends AppComponentBase  {
         const Anuncio_ = new AnuncioCreateDto();
         Anuncio_.init(this.anuncio);
         console.log(Anuncio_);
+        
+        Anuncio_.publicacionCategoria = this.categoria;
         
         this._AnuncioService 
             .create(Anuncio_)
