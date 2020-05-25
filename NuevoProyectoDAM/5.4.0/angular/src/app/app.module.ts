@@ -50,10 +50,13 @@ import { EditPeticionDialogComponent } from '@app/components/peticiones/edit-pet
 import { PeticionServiceProxy} from '@shared/service-proxies/service-proxies';
 // perfil 
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { UsuariosSeguidoresComponent } from './components/perfil/usuarios-seguidores/usuarios-seguidores.component';
+import { UsuariosSeguidosComponent } from './components/perfil/usuarios-seguidos/usuarios-seguidos.component';
+import { MostrarSeguidoresComponent } from './components/perfil/usuarios-seguidores/mostrar-seguidores/mostrar-seguidores.component';
+import { MostrarSeguidosComponent } from './components/perfil/usuarios-seguidos/mostrar-seguidos/mostrar-seguidos.component';
 // chats
 import { ChatsComponent } from './components/chats/chats.component';
 import { CreateChatDialogComponent } from './components/chats/create-chats/create-chat-dialog.component';
-import { UsuariosSeguidosComponent } from './components/perfil/usuarios-seguidos/usuarios-seguidos.component';
 
 
 @NgModule({
@@ -85,17 +88,23 @@ import { UsuariosSeguidosComponent } from './components/perfil/usuarios-seguidos
     AnunciosComponent,
     CreateAnuncioDialogComponent,
     EditAnuncioDialogComponent,
+    DesplegableCategoriaComponent,
     // peticiones
     PeticionesComponent,
     CreatePeticionDialogComponent,
     EditPeticionDialogComponent,
     // perfil
     PerfilComponent,
+    UsuariosSeguidosComponent,
+    UsuariosSeguidoresComponent,
+    MostrarSeguidoresComponent,
+    MostrarSeguidosComponent,
     // chats
     ChatsComponent,
-    CreateChatDialogComponent,
-    DesplegableCategoriaComponent,
-    UsuariosSeguidosComponent
+    CreateChatDialogComponent
+        
+    
+    
   ],
   imports: [
     CommonModule,
@@ -130,6 +139,9 @@ import { UsuariosSeguidosComponent } from './components/perfil/usuarios-seguidos
     EditPeticionDialogComponent,
     // chats
     CreateChatDialogComponent,
+    //perfil
+    MostrarSeguidoresComponent,
+    MostrarSeguidosComponent
   ]
 })
 export class AppModule {}

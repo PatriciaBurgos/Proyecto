@@ -1,10 +1,9 @@
-import { Component, OnInit, Injector } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit, Injector, Optional, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { UsuarioLogadoServiceProxy } from '@shared/service-proxies/service-proxies';
 import { UsuariosSeguidosDto } from '@shared/service-proxies/service-proxies';
 import { PagedRequestDto, PagedListingComponentBase } from '@shared/paged-listing-component-base';
 import { finalize } from 'rxjs/operators';
-import { MostrarSeguidosComponent } from './mostrar-seguidos/mostrar-seguidos.component';
 
 class PagedUsersRequestDto extends PagedRequestDto {
   filter: string;
@@ -12,21 +11,21 @@ class PagedUsersRequestDto extends PagedRequestDto {
 
 @Component({
 
-  selector: 'app-usuarios-seguidos',
+  selector: 'app-mostrar-usuarios-seguidos',
 
-  templateUrl: './usuarios-seguidos.component.html'
+  templateUrl: './mostrar-seguidos.component.html'
 
 })
 
-export class UsuariosSeguidosComponent extends PagedListingComponentBase<UsuariosSeguidosDto> {
+export class MostrarSeguidosComponent extends PagedListingComponentBase<UsuariosSeguidosDto> {
 
-  user: UsuariosSeguidosDto;
   filterText = '';
 
   constructor(
     injector: Injector,
     private _userservice: UsuarioLogadoServiceProxy,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    @Optional() @Inject(MAT_DIALOG_DATA) private _user: UsuariosSeguidosDto
   ) {
     super(injector);
   }
@@ -47,7 +46,7 @@ export class UsuariosSeguidosComponent extends PagedListingComponentBase<Usuario
             })
         )
         .subscribe(result  => {
-            this.user = result;
+            this._user = result;
             
         });
 
@@ -73,7 +72,7 @@ delete(user: UsuariosSeguidosDto): void {
     );*/
   }
 
-  mostrarSeguidos(user : UsuariosSeguidosDto){
+  mostrarSeguidores(user : UsuariosSeguidosDto){
     this._dialog.open(MostrarSeguidosComponent);
   }
 

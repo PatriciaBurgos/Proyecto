@@ -1,10 +1,10 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UsuarioLogadoServiceProxy } from '@shared/service-proxies/service-proxies';
-import { UsuariosSeguidosDto } from '@shared/service-proxies/service-proxies';
+import { UsuariosSeguidoresDto } from '@shared/service-proxies/service-proxies';
 import { PagedRequestDto, PagedListingComponentBase } from '@shared/paged-listing-component-base';
 import { finalize } from 'rxjs/operators';
-import { MostrarSeguidosComponent } from './mostrar-seguidos/mostrar-seguidos.component';
+import { MostrarSeguidoresComponent } from './mostrar-seguidores/mostrar-seguidores.component';
 
 class PagedUsersRequestDto extends PagedRequestDto {
   filter: string;
@@ -12,15 +12,15 @@ class PagedUsersRequestDto extends PagedRequestDto {
 
 @Component({
 
-  selector: 'app-usuarios-seguidos',
+  selector: 'app-usuarios-seguidores',
 
-  templateUrl: './usuarios-seguidos.component.html'
+  templateUrl: './usuarios-seguidores.component.html'
 
 })
 
-export class UsuariosSeguidosComponent extends PagedListingComponentBase<UsuariosSeguidosDto> {
+export class UsuariosSeguidoresComponent extends PagedListingComponentBase<UsuariosSeguidoresDto> {
 
-  user: UsuariosSeguidosDto;
+  user: UsuariosSeguidoresDto;
   filterText = '';
 
   constructor(
@@ -40,7 +40,7 @@ export class UsuariosSeguidosComponent extends PagedListingComponentBase<Usuario
     request.filter = this.filterText;
 
     this._userservice 
-        .getMisSeguidos()
+        .getMisSeguidores()
         .pipe(
             finalize(() => {
                 finishedCallback();
@@ -53,7 +53,7 @@ export class UsuariosSeguidosComponent extends PagedListingComponentBase<Usuario
 
   }
 
-delete(user: UsuariosSeguidosDto): void {
+delete(user: UsuariosSeguidoresDto): void {
     /*abp.message.confirm(
         this.l('UserDeleteWarningMessage', user.Id),
         undefined,
@@ -73,8 +73,8 @@ delete(user: UsuariosSeguidosDto): void {
     );*/
   }
 
-  mostrarSeguidos(user : UsuariosSeguidosDto){
-    this._dialog.open(MostrarSeguidosComponent);
+  mostrarSeguidores(user : UsuariosSeguidoresDto){
+    this._dialog.open(MostrarSeguidoresComponent);
   }
 
 }

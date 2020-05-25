@@ -6,6 +6,8 @@
                 <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
                 <h2 class="card-body" style="display: inline; margin-left: 25px; font-weight: bold;">{{ user.userName }}</h2>
                 <ul class="header-dropdown m-r--5">
+                    <li><app-usuarios-seguidores></app-usuarios-seguidores></li>
+                    <li><app-usuarios-seguidos></app-usuarios-seguidos></li>
                     <li>
                         <button mat-icon-button [matMenuTriggerFor]="headerMenu" 
                             class="header-dropdown-mat-icon-button">
@@ -18,7 +20,7 @@
                             </button>
                         </mat-menu>
                     </li>
-                </ul>
+                </ul>                
             </div>
         </div>
     </div>
@@ -26,7 +28,7 @@
 
 <!--INFORMACION PERSONAL-->
 <div>
-    <div class="row clearfix" [@routerTransition] style="display: inline-flex;">
+    <div class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 8px;">
         <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
             <div class="card main-content">
                 <div class="body table-responsive">
