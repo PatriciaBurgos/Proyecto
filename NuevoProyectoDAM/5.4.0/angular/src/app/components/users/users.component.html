@@ -37,7 +37,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-12 text-right p-r-25">
-                                <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
+                                <button mat-raised-button style="background-color: #EA80FC; color: white;" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
                             </div>
                         </div>
                     </form>
@@ -111,7 +111,7 @@
                     <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
                     </abp-pagination-controls>
                 </div>
-                <button mat-mini-fab color="primary" class="pull-right" (click)="createUser()">
+                <button mat-mini-fab style="background-color: #EA80FC; color: white;" class="pull-right" (click)="createUser()">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>

@@ -371,6 +371,57 @@ export class AnuncioServiceProxy {
     }
 
     /**
+     * @return Success
+     */
+    getAnunciosUsuarioLogado(): Observable<AnuncioDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Anuncio/GetAnunciosUsuarioLogado";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAnunciosUsuarioLogado(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAnunciosUsuarioLogado(<any>response_);
+                } catch (e) {
+                    return <Observable<AnuncioDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AnuncioDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAnunciosUsuarioLogado(response: HttpResponseBase): Observable<AnuncioDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AnuncioDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AnuncioDtoListResultDto>(<any>null);
+    }
+
+    /**
      * @param municipio (optional) 
      * @return Success
      */
@@ -888,6 +939,62 @@ export class ChatServiceProxy {
     }
 
     /**
+     * @param userDestino (optional) 
+     * @return Success
+     */
+    getChatDosUsuarios(userDestino: string | undefined): Observable<ChatDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Chat/GetChatDosUsuarios?";
+        if (userDestino === null)
+            throw new Error("The parameter 'userDestino' cannot be null.");
+        else if (userDestino !== undefined)
+            url_ += "userDestino=" + encodeURIComponent("" + userDestino) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetChatDosUsuarios(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetChatDosUsuarios(<any>response_);
+                } catch (e) {
+                    return <Observable<ChatDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ChatDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetChatDosUsuarios(response: HttpResponseBase): Observable<ChatDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ChatDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ChatDtoListResultDto>(<any>null);
+    }
+
+    /**
      * @param id (optional) 
      * @return Success
      */
@@ -1391,6 +1498,57 @@ export class PeticionServiceProxy {
     }
 
     protected processGetPeticionesUnUsuario(response: HttpResponseBase): Observable<PeticionDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PeticionDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PeticionDtoListResultDto>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    getPeticionesUsuarioLogado(): Observable<PeticionDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Peticion/GetPeticionesUsuarioLogado";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetPeticionesUsuarioLogado(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetPeticionesUsuarioLogado(<any>response_);
+                } catch (e) {
+                    return <Observable<PeticionDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PeticionDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetPeticionesUsuarioLogado(response: HttpResponseBase): Observable<PeticionDtoListResultDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4436,6 +4594,57 @@ export class MostrarChatReducidoDtoListResultDto implements IMostrarChatReducido
 
 export interface IMostrarChatReducidoDtoListResultDto {
     items: MostrarChatReducidoDto[] | undefined;
+}
+
+export class ChatDtoListResultDto implements IChatDtoListResultDto {
+    items: ChatDto[] | undefined;
+
+    constructor(data?: IChatDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(ChatDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ChatDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChatDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): ChatDtoListResultDto {
+        const json = this.toJSON();
+        let result = new ChatDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IChatDtoListResultDto {
+    items: ChatDto[] | undefined;
 }
 
 export class ChatDtoPagedResultDto implements IChatDtoPagedResultDto {

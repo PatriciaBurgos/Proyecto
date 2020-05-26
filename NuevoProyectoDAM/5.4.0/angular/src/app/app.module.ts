@@ -54,9 +54,15 @@ import { UsuariosSeguidoresComponent } from './components/perfil/usuarios-seguid
 import { UsuariosSeguidosComponent } from './components/perfil/usuarios-seguidos/usuarios-seguidos.component';
 import { MostrarSeguidoresComponent } from './components/perfil/usuarios-seguidores/mostrar-seguidores/mostrar-seguidores.component';
 import { MostrarSeguidosComponent } from './components/perfil/usuarios-seguidos/mostrar-seguidos/mostrar-seguidos.component';
+import { MostrarAnunciosComponent } from './components/perfil/mostrar-anuncios/mostrar-anuncios.component';
+import { MostrarPeticionesComponent } from './components/perfil/mostrar-peticiones/mostrar-peticiones.component';
 // chats
 import { ChatsComponent } from './components/chats/chats.component';
 import { CreateChatDialogComponent } from './components/chats/create-chats/create-chat-dialog.component';
+import { ChatsReducidosComponent } from './components/chats/chats-reducidos/chats-reducidos.component';
+import { ChatsUsuariosComponent } from './components/chats/chats-usuarios/chats-usuarios.component';
+// usuarios
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 
 @NgModule({
@@ -99,10 +105,15 @@ import { CreateChatDialogComponent } from './components/chats/create-chats/creat
     UsuariosSeguidoresComponent,
     MostrarSeguidoresComponent,
     MostrarSeguidosComponent,
+    MostrarAnunciosComponent,
+    MostrarPeticionesComponent,
     // chats
     ChatsComponent,
-    CreateChatDialogComponent
-        
+    CreateChatDialogComponent,
+    ChatsReducidosComponent,
+    ChatsUsuariosComponent,
+    //usuarios
+    UsuariosComponent         
     
     
   ],
@@ -139,9 +150,13 @@ import { CreateChatDialogComponent } from './components/chats/create-chats/creat
     EditPeticionDialogComponent,
     // chats
     CreateChatDialogComponent,
+    ChatsReducidosComponent,
+    ChatsUsuariosComponent,
     //perfil
     MostrarSeguidoresComponent,
-    MostrarSeguidosComponent
-  ]
+    MostrarSeguidosComponent,
+    MostrarAnunciosComponent,
+    MostrarPeticionesComponent
+  ],
 })
 export class AppModule {}

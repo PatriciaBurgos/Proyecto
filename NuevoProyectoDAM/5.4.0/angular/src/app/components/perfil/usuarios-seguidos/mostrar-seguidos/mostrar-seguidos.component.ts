@@ -72,7 +72,7 @@ delete(user: UsuariosSeguidosDto): void {
     );*/
   }
 
-  mostrarSeguidores(user : UsuariosSeguidosDto){
+  mostrarSeguidos(user : UsuariosSeguidosDto){
     this._dialog.open(MostrarSeguidosComponent);
   }
 

@@ -76,6 +76,19 @@ namespace DAM.Peticiones
 			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
 		}
 
+		public async Task<ListResultDto<PeticionDto>> GetPeticionesUsuarioLogado()
+		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var peticiones = await _peticionRepository.GetAll()
+				.Include(a => a.Publicacion)
+				.ThenInclude(p => p.Usuario)
+				.Where(a => a.Publicacion.Usuario.Id == usuarioActual.Id)
+				.ToListAsync();
+
+			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+		}
+
 		public async Task<ListResultDto<PeticionDto>> BusquedaPeticionesPorMunicipio(string municipio)
 		{
 			var peticiones = await _peticionRepository.GetAll()

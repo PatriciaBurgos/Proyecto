@@ -2,7 +2,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card main-content">
             <div class="header">
-                <h2><mat-icon>list</mat-icon> {{ "Anuncios" | localize }}</h2>
+                <h2><mat-icon>list</mat-icon> {{ "Peticiones" | localize }}</h2>
                 <ul class="header-dropdown m-r--5">
                     <li>
                         <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
@@ -43,14 +43,14 @@
                             <th>{{ "HorarioFin" | localize }}</th>
                             <th>{{ "Municipio" | localize }}</th>
                             <th>{{ "Ciudad" | localize }}</th>
-                            <th>{{ "Preferencias" | localize }}</th>
+                            <th>{{ "EsUrgente" | localize }}</th>
                             
                             <th>{{ "Actions" | localize }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="
-                let anuncio of (anuncios
+                let peticion of (peticiones
                   | paginate
                     : {
                         id: 'server',
@@ -59,24 +59,24 @@
                         totalItems: totalItems
                       })
               ">            
-                            <td>{{ anuncio.publicacionNombreUsuario }}</td>
-                            <td>{{ anuncio.publicacionCategoria }}</td>
-                            <td>{{ anuncio.publicacionTexto }}</td>
-                            <td>{{ anuncio.publicacionHorarioInicio }}</td>
-                            <td>{{ anuncio.publicacionHorarioFin }}</td>
-                            <td>{{ anuncio.publicacionMunicipio }}</td>
-                            <td>{{ anuncio.publicacionCiudad }}</td>
-                            <td>{{ anuncio.preferencias }}</td>
+                            <td>{{ peticion.publicacionNombreUsuario }}</td>
+                            <td>{{ peticion.publicacionCategoria }}</td>
+                            <td>{{ peticion.publicacionTexto }}</td>
+                            <td>{{ peticion.publicacionHorarioInicio }}</td>
+                            <td>{{ peticion.publicacionHorarioFin }}</td>
+                            <td>{{ peticion.publicacionMunicipio }}</td>
+                            <td>{{ peticion.publicacionCiudad }}</td>
+                            <td>{{ peticion.isUrgent }}</td>
                             <td>
                                 <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                     <mat-icon>menu</mat-icon>
                                 </button>
                                 <mat-menu #actionsMenu="matMenu">
-                                    <button mat-menu-item (click)="editAnuncio(anuncio)">
+                                    <button mat-menu-item (click)="editPeticion(peticion)">
                                         <mat-icon>edit</mat-icon>
                                         <span>{{ "Edit" | localize }}</span>
                                     </button>
-                                    <button mat-menu-item (click)="delete(anuncio)">
+                                    <button mat-menu-item (click)="delete(peticion)">
                                         <mat-icon>delete</mat-icon>
                                         <span>{{ "Delete" | localize }}</span>
                                     </button>
@@ -89,7 +89,7 @@
                     <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
                     </abp-pagination-controls>
                 </div>
-                <button mat-mini-fab style="background-color: #EA80FC; color: white;" class="pull-right" (click)="createAnuncio()">
+                <button mat-mini-fab style="background-color: #EA80FC; color: white;" class="pull-right" (click)="createPeticion()">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>

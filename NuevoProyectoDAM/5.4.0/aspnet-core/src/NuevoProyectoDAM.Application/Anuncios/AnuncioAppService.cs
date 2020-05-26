@@ -78,6 +78,19 @@ namespace DAM.Anuncios
 			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anuncios));
 		}
 
+		public async Task<ListResultDto<AnuncioDto>> GetAnunciosUsuarioLogado()
+		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var anuncios = await _anuncioRepository.GetAll()
+				.Include(a => a.Publicacion)
+				.ThenInclude(p => p.Usuario)
+				.Where(a => a.Publicacion.Usuario.Id == usuarioActual.Id)
+				.ToListAsync();
+
+			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anuncios));
+		}
+
 		public async Task<ListResultDto<AnuncioDto>> BusquedaAnunciosPorMunicipio(string municipio)
 		{
 			var anuncios = await _anuncioRepository.GetAll()

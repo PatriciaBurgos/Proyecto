@@ -93,13 +93,26 @@ namespace NuevoProyectoDAM.Chats
 					{
 						chats.RemoveAt(i);
 					}
-				}
-				
+				}				
 			}
-				
-			
 
 			return new ListResultDto<MostrarChatReducidoDto>(ObjectMapper.Map<List<MostrarChatReducidoDto>>(chatsDefinitivos));
+		}
+
+		public async Task<ListResultDto<ChatDto>> GetChatDosUsuarios (string userDestino)
+		{
+			CheckUpdatePermission();
+
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var chat = await _chatRepository.GetAll()
+				.Include(c => c.UsuarioOrigen)
+				.Include(c => c.UsuarioDestino)
+				.Where(c => c.UsuarioOrigenId == usuarioActual.Id || c.UsuarioDestinoId == usuarioActual.Id)
+				.Where(c => c.UsuarioOrigen.UserName == userDestino || c.UsuarioDestino.UserName == userDestino)
+				.ToListAsync();
+
+			return new ListResultDto<ChatDto>(ObjectMapper.Map<List<ChatDto>>(chat));
 		}
 	}
 }

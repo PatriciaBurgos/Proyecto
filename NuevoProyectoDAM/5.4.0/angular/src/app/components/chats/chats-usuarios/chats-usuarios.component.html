@@ -1,0 +1,67 @@
+<div class="row clearfix" [@routerTransition] style="height: 700px; margin-left: 50px;">
+    <div class="col-lg-15 col-md-15 col-sm-15 col-xs-15" style="height: 700px;">
+        <div class="card main-content" style="height: 700px;">
+            <div class="header">
+                <h2><mat-icon>message</mat-icon> {{ "Chats" | localize }}</h2>
+                <ul class="header-dropdown m-r--5">
+                    <li>
+                        <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #headerMenu="matMenu">
+                            <button mat-menu-item (click)="refresh()">
+                                <mat-icon>refresh</mat-icon>
+                                <span>{{ "Refresh" | localize }}</span>
+                            </button>
+                        </mat-menu>
+                    </li>
+                </ul>
+            </div>
+            <div class="body table-responsive">
+                <!--query start-->
+                <div class="row clearfix">
+                    <form>
+                        <mat-form-field>
+                            <input matInput [placeholder]="l('Filter')" [(ngModel)]="filterText" name="keyword">
+                        </mat-form-field>
+
+                        <div class="row">
+                            <div class="col-md-12 text-right p-r-25">
+                                <button mat-raised-button style="background-color: #EA80FC; color: white;" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--query end-->
+                <table class="table table-hover table-striped" [busy]="isTableLoading">
+                    <tbody>
+                        <tr *ngFor="
+                let chat of (chats
+                  | paginate
+                    : {
+                        id: 'server',
+                        itemsPerPage: pageSize,
+                        currentPage: pageNumber,
+                        totalItems: totalItems
+                      })
+              " (click)="mostrarChat(chat.usuarioDestino)">            
+                        <td>{{ chat.usuarioOrigen }}</td>
+
+                        <td>{{ chat.usuarioDestino }}</td>
+
+                        <td>{{ chat.texto }}</td>
+                        
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
+                    <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
+                    </abp-pagination-controls>
+                </div>
+                <button mat-mini-fab style="background-color: #EA80FC; color: white;" class="pull-right" (click)="createChat()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -66,11 +66,11 @@
                     <table class="table" [busy]="isTableLoading">
                         <tbody>
                             <tr>
-                                <button class="mat-raised-button " style="background-color: #ff4081; 
+                                <button class="mat-raised-button " style="background-color: #EA80FC; 
                                     color:white" (click)="createAnun()">NUEVO ANUNCIO</button>
                             </tr>
                             <tr>
-                                <button class="mat-raised-button " style="background-color: #ff4081; 
+                                <button class="mat-raised-button " style="background-color: #EA80FC; 
                                     color:white; margin-top: 12px;">NUEVA PETICIÓN</button>
                             </tr>                        
                         </tbody>
@@ -93,15 +93,15 @@
                     <table class="table" [busy]="isTableLoading">
                         <tbody>
                             <tr>
-                                <button class="mat-raised-button " style="background-color: #ff4081; 
+                                <button class="mat-raised-button " style="background-color: #EA80FC; 
                                     color:white" >USUARIOS GUARDADOS</button>
                             </tr>
                             <tr>
-                                <button class="mat-raised-button " style="background-color: #ff4081; 
+                                <button class="mat-raised-button " style="background-color: #EA80FC; 
                                     color:white; margin-top: 12px;">ANUNCIOS GUARDADOS</button>
                             </tr>   
                             <tr>
-                                <button class="mat-raised-button " style="background-color: #ff4081; 
+                                <button class="mat-raised-button " style="background-color: #EA80FC; 
                                     color:white; margin-top: 12px;">PETICIONES GUARDADAS</button>
                             </tr>                        
                         </tbody>
@@ -118,5 +118,19 @@
 
 <!--ANUNCIOS DEL USUARIO-->
 
-<app-anuncio></app-anuncio>
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#anuncios">Anuncios</a></li>
+        <li><a data-toggle="tab" href="#peticiones">Peticiones</a></li>
+    </ul>
 
+    <div class="tab-content">
+        <div id="anuncios" class="tab-pane fade in active">
+            <app-mostrar-anuncios></app-mostrar-anuncios>
+        </div>
+        <div id="peticiones" class="tab-pane fade">
+          <app-mostrar-peticiones></app-mostrar-peticiones>
+        </div>
+    </div>
+</div>
+  
