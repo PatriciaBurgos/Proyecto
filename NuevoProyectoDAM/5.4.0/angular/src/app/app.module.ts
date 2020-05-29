@@ -113,7 +113,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     ChatsReducidosComponent,
     ChatsUsuariosComponent,
     //usuarios
-    UsuariosComponent         
+    UsuariosComponent,      
     
     
   ],

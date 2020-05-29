@@ -995,6 +995,62 @@ export class ChatServiceProxy {
     }
 
     /**
+     * @param idChat (optional) 
+     * @return Success
+     */
+    getChatCompletoDosUsuarios(idChat: number | undefined): Observable<ChatDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Chat/GetChatCompletoDosUsuarios?";
+        if (idChat === null)
+            throw new Error("The parameter 'idChat' cannot be null.");
+        else if (idChat !== undefined)
+            url_ += "idChat=" + encodeURIComponent("" + idChat) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetChatCompletoDosUsuarios(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetChatCompletoDosUsuarios(<any>response_);
+                } catch (e) {
+                    return <Observable<ChatDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ChatDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetChatCompletoDosUsuarios(response: HttpResponseBase): Observable<ChatDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ChatDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ChatDtoListResultDto>(<any>null);
+    }
+
+    /**
      * @param id (optional) 
      * @return Success
      */
@@ -3663,6 +3719,62 @@ export class UsuarioLogadoServiceProxy {
     }
 
     /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getSeguidoresUsuario(id: number | undefined): Observable<UsuariosSeguidoresDto> {
+        let url_ = this.baseUrl + "/api/services/app/UsuarioLogado/GetSeguidoresUsuario?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetSeguidoresUsuario(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetSeguidoresUsuario(<any>response_);
+                } catch (e) {
+                    return <Observable<UsuariosSeguidoresDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<UsuariosSeguidoresDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetSeguidoresUsuario(response: HttpResponseBase): Observable<UsuariosSeguidoresDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UsuariosSeguidoresDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<UsuariosSeguidoresDto>(<any>null);
+    }
+
+    /**
      * @return Success
      */
     getMisSeguidos(): Observable<UsuariosSeguidosDto> {
@@ -3711,6 +3823,118 @@ export class UsuarioLogadoServiceProxy {
             }));
         }
         return _observableOf<UsuariosSeguidosDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getSeguidosUsuario(id: number | undefined): Observable<UsuariosSeguidosDto> {
+        let url_ = this.baseUrl + "/api/services/app/UsuarioLogado/GetSeguidosUsuario?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetSeguidosUsuario(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetSeguidosUsuario(<any>response_);
+                } catch (e) {
+                    return <Observable<UsuariosSeguidosDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<UsuariosSeguidosDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetSeguidosUsuario(response: HttpResponseBase): Observable<UsuariosSeguidosDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UsuariosSeguidosDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<UsuariosSeguidosDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getUsuarioAplicacion(id: number | undefined): Observable<UserDto> {
+        let url_ = this.baseUrl + "/api/services/app/UsuarioLogado/GetUsuarioAplicacion?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetUsuarioAplicacion(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetUsuarioAplicacion(<any>response_);
+                } catch (e) {
+                    return <Observable<UserDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<UserDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetUsuarioAplicacion(response: HttpResponseBase): Observable<UserDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UserDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<UserDto>(<any>null);
     }
 }
 
@@ -4495,6 +4719,7 @@ export class MostrarChatReducidoDto implements IMostrarChatReducidoDto {
     fechaHora: moment.Moment | undefined;
     usuarioOrigen: string | undefined;
     usuarioDestino: string | undefined;
+    id: number;
 
     constructor(data?: IMostrarChatReducidoDto) {
         if (data) {
@@ -4511,6 +4736,7 @@ export class MostrarChatReducidoDto implements IMostrarChatReducidoDto {
             this.fechaHora = _data["fechaHora"] ? moment(_data["fechaHora"].toString()) : <any>undefined;
             this.usuarioOrigen = _data["usuarioOrigen"];
             this.usuarioDestino = _data["usuarioDestino"];
+            this.id = _data["id"];
         }
     }
 
@@ -4527,6 +4753,7 @@ export class MostrarChatReducidoDto implements IMostrarChatReducidoDto {
         data["fechaHora"] = this.fechaHora ? this.fechaHora.toISOString() : <any>undefined;
         data["usuarioOrigen"] = this.usuarioOrigen;
         data["usuarioDestino"] = this.usuarioDestino;
+        data["id"] = this.id;
         return data; 
     }
 
@@ -4543,6 +4770,7 @@ export interface IMostrarChatReducidoDto {
     fechaHora: moment.Moment | undefined;
     usuarioOrigen: string | undefined;
     usuarioDestino: string | undefined;
+    id: number;
 }
 
 export class MostrarChatReducidoDtoListResultDto implements IMostrarChatReducidoDtoListResultDto {

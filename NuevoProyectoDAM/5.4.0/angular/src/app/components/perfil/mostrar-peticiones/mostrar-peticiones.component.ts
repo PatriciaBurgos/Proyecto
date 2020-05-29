@@ -5,6 +5,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing-component-base';
 import { MatDialog } from '@angular/material';
 import { CreatePeticionDialogComponent } from 'app/components/peticiones/create-peticiones/create-peticion-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 class PagedPeticionRequestDto extends PagedRequestDto {
@@ -21,12 +22,15 @@ class PagedPeticionRequestDto extends PagedRequestDto {
 export class MostrarPeticionesComponent extends PagedListingComponentBase<PeticionDto> {
 
   peticiones: PeticionDto[] = [];
+  idUsuario : number;
+  comprobacion : boolean = false;
   
   filterText = '';
   constructor(
       injector: Injector,
       private _peticioneservice: PeticionServiceProxy,
-      private _dialog: MatDialog
+      private _dialog: MatDialog,
+      private rutaActiva: ActivatedRoute
   ) {
       super(injector);
   }
@@ -37,8 +41,11 @@ export class MostrarPeticionesComponent extends PagedListingComponentBase<Petici
       finishedCallback: Function
   ): void {
 
-      request.filter = this.filterText;
+    this.idUsuario = this.rutaActiva.snapshot.params.id;
+    request.filter = this.filterText;
 
+    if(this.idUsuario == null){
+        this.comprobacion = true;
       this._peticioneservice
           .getPeticionesUsuarioLogado()
           .pipe(
@@ -50,6 +57,19 @@ export class MostrarPeticionesComponent extends PagedListingComponentBase<Petici
               this.peticiones = result.items;
               
           });
+    }else{
+      this._peticioneservice
+          .getPeticionesUnUsuario(this.idUsuario)
+          .pipe(
+              finalize(() => {
+                  finishedCallback();
+              })
+          )
+          .subscribe(result  => {
+              this.peticiones = result.items;
+              
+          });
+    }
 
   //ngOnInit() {
   //    this._peticioneservice.getAll('', 0, 20)

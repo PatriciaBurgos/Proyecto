@@ -45,7 +45,7 @@
                             <th>{{ "Ciudad" | localize }}</th>
                             <th>{{ "EsUrgente" | localize }}</th>
                             
-                            <th>{{ "Actions" | localize }}</th>
+                            <th *ngIf="comprobacion==true">{{ "Actions" | localize }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,7 +67,7 @@
                             <td>{{ peticion.publicacionMunicipio }}</td>
                             <td>{{ peticion.publicacionCiudad }}</td>
                             <td>{{ peticion.isUrgent }}</td>
-                            <td>
+                            <td *ngIf="comprobacion==true">
                                 <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                     <mat-icon>menu</mat-icon>
                                 </button>
@@ -89,7 +89,7 @@
                     <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
                     </abp-pagination-controls>
                 </div>
-                <button mat-mini-fab style="background-color: #EA80FC; color: white;" class="pull-right" (click)="createPeticion()">
+                <button *ngIf="comprobacion==true" mat-mini-fab style="background-color: #EA80FC; color: white;" class="pull-right" (click)="createPeticion()">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>

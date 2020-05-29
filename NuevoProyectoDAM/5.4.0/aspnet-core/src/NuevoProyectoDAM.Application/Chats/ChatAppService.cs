@@ -114,5 +114,30 @@ namespace NuevoProyectoDAM.Chats
 
 			return new ListResultDto<ChatDto>(ObjectMapper.Map<List<ChatDto>>(chat));
 		}
+
+		public async Task<ListResultDto<ChatDto>> GetChatCompletoDosUsuarios(int idChat)
+		{
+			CheckUpdatePermission();
+
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var chat = await _chatRepository.GetAll()
+				.Include(c => c.UsuarioOrigen)
+				.Include(c => c.UsuarioDestino)
+				.Where(c => c.Id == idChat)
+				.FirstOrDefaultAsync();
+
+			long uOrigen = chat.UsuarioOrigenId;
+			long uDestino = chat.UsuarioDestinoId;
+
+			var chats = await _chatRepository.GetAll()
+				.Include(c => c.UsuarioOrigen)
+				.Include(c => c.UsuarioDestino)
+				.Where(c => c.UsuarioOrigenId == uOrigen || c.UsuarioOrigenId == uDestino) 
+				.Where(c => c.UsuarioDestinoId == uOrigen || c.UsuarioDestinoId == uDestino)
+				.ToListAsync();
+
+			return new ListResultDto<ChatDto>(ObjectMapper.Map<List<ChatDto>>(chats));
+		}
 	}
 }

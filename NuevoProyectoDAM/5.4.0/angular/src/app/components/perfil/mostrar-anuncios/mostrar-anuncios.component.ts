@@ -5,6 +5,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing-component-base';
 import { MatDialog } from '@angular/material';
 import { CreateAnuncioDialogComponent } from 'app/components/anuncios/create-anuncios/create-anuncio-dialog.component'
+import { ActivatedRoute } from '@angular/router';
 
 class PagedAnuncioRequestDto extends PagedRequestDto {
     filter: string;
@@ -19,12 +20,15 @@ class PagedAnuncioRequestDto extends PagedRequestDto {
 export class MostrarAnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
 
   anuncios: AnuncioDto[] = [];
+  idUsuario : number;
+  comprobacion : boolean = false;
   
   filterText = '';
   constructor(
       injector: Injector,
       private _anuncioservice: AnuncioServiceProxy,
-      private _dialog: MatDialog
+      private _dialog: MatDialog,
+      private rutaActiva: ActivatedRoute
   ) {
       super(injector);
   }
@@ -34,20 +38,36 @@ export class MostrarAnunciosComponent extends PagedListingComponentBase<AnuncioD
       pageNumber: number,
       finishedCallback: Function
   ): void {
-
+      
+      this.idUsuario = this.rutaActiva.snapshot.params.id;
       request.filter = this.filterText;
 
-      this._anuncioservice
-          .getAnunciosUsuarioLogado()
-          .pipe(
-              finalize(() => {
-                  finishedCallback();
-              })
-          )
-          .subscribe(result  => {
-              this.anuncios = result.items;
-              
-          });
+      if(this.idUsuario == null){
+          this.comprobacion = true;
+        this._anuncioservice
+            .getAnunciosUsuarioLogado()
+            .pipe(
+                finalize(() => {
+                    finishedCallback();
+                })
+            )
+            .subscribe(result  => {
+                this.anuncios = result.items;
+                
+            });
+      }else{
+        this._anuncioservice
+            .getAnunciosUnUsuario(this.idUsuario)
+            .pipe(
+                finalize(() => {
+                    finishedCallback();
+                })
+            )
+            .subscribe(result  => {
+                this.anuncios = result.items;
+                
+            });
+      }
 
   //ngOnInit() {
   //    this._anuncioservice.getAll('', 0, 20)

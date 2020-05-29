@@ -59,7 +59,7 @@
 
     <!--CREAR ANUNCIO/PETICION-->
 
-    <div class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
+    <div *ngIf="comprobacion==true" class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
         <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
             <div class="card main-content">
                 <div class="body table-responsive">
@@ -86,7 +86,7 @@
 
     <!--BOTONES DE COSAS GUARDADAS-->
 
-    <div class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
+    <div *ngIf="comprobacion==true" class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
         <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
             <div class="card main-content">
                 <div class="body table-responsive">

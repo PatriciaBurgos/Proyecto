@@ -5,6 +5,8 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing-component-base';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { CreateChatDialogComponent } from 'app/components/chats/create-chats/create-chat-dialog.component';
+import { ActivatedRoute, Params } from '@angular/router';
+
 
 class PagedChatRequestDto extends PagedRequestDto {
     filter: string;
@@ -20,13 +22,15 @@ class PagedChatRequestDto extends PagedRequestDto {
 export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
 
   chats: ChatDto[] = [];
+  chatuno : ChatDto;
+  idChat : number;
 
   filterText = '';
   constructor(
       injector: Injector,
       private _chatservice: ChatServiceProxy,
       private _dialog: MatDialog,
-      @Optional() @Inject(MAT_DIALOG_DATA) private _userDestino: string
+      private rutaActiva: ActivatedRoute
 
   ) {
       super(injector);
@@ -38,10 +42,11 @@ export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
       finishedCallback: Function
   ): void {
 
+      this.idChat = this.rutaActiva.snapshot.params.id;
       request.filter = this.filterText;
 
       this._chatservice
-          .getChatDosUsuarios(this._userDestino)
+          .getChatCompletoDosUsuarios(this.idChat)
           .pipe(
               finalize(() => {
                   finishedCallback();
@@ -49,8 +54,10 @@ export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
           )
           .subscribe(result  => {
               this.chats = result.items;
-              
+              this.chatuno = this.chats[0];
           });
+
+          
 
   //ngOnInit() {
   //    this._anuncioservice.getAll('', 0, 20)

@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { AnuncioServiceProxy, AnuncioDto } from '@shared/service-proxies/service-proxies';
 import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 class PagedUsersRequestDto extends PagedRequestDto {
   filter: string;
@@ -29,12 +30,15 @@ class PagedUsersRequestDto extends PagedRequestDto {
 
 export class PerfilComponent extends PagedListingComponentBase<UserDto> {
   user: UserDto;
+  idUsuario : number;
+  comprobacion : boolean = false;
   
   filterText = '';
   constructor(
       injector: Injector,
       private _userservice: UsuarioLogadoServiceProxy,
-      private _dialog: MatDialog
+      private _dialog: MatDialog,
+      private rutaActiva: ActivatedRoute
   ) {
       super(injector);
   }
@@ -44,20 +48,34 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
       pageNumber: number,
       finishedCallback: Function
   ): void {
-
+      this.idUsuario = this.rutaActiva.snapshot.params.id;
       request.filter = this.filterText;
-
-      this._userservice 
-          .getUsuarioLogado()
-          .pipe(
-              finalize(() => {
-                  finishedCallback();
-              })
-          )
-          .subscribe(result  => {
-              this.user = result;
-              
-          });
+        if(this.idUsuario == null){
+            this.comprobacion = true;
+            this._userservice 
+                .getUsuarioLogado()
+                .pipe(
+                    finalize(() => {
+                        finishedCallback();
+                    })
+                )
+                .subscribe(result  => {
+                    this.user = result;
+                    
+                });
+        }else{
+            this._userservice 
+                .getUsuarioAplicacion(this.idUsuario)
+                .pipe(
+                    finalize(() => {
+                        finishedCallback();
+                    })
+                )
+                .subscribe(result  => {
+                    this.user = result;
+                    
+                });
+        }
 
   //ngOnInit() {
   //    this._anuncioservice.getAll('', 0, 20)

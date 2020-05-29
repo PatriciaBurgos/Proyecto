@@ -51,6 +51,17 @@ namespace NuevoProyectoDAM.Users
 			return ObjectMapper.Map<UsuariosSeguidoresDto>(usuarios);
 		}
 
+		public async Task<UsuariosSeguidoresDto> GetSeguidoresUsuario(int id)
+		{
+			var usuarios = await _userRepository.GetAll()
+				.Include(u => u.UsuariosSeguidos)
+				.ThenInclude(u => u.UsuarioSeguidor)
+				.Where(u => u.Id == id)
+				.FirstOrDefaultAsync();
+
+			return ObjectMapper.Map<UsuariosSeguidoresDto>(usuarios);
+		}
+
 		public async Task<UsuariosSeguidosDto> GetMisSeguidos()
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -62,6 +73,26 @@ namespace NuevoProyectoDAM.Users
 				.FirstOrDefaultAsync();
 
 			return ObjectMapper.Map<UsuariosSeguidosDto>(usuarios);
+		}
+
+		public async Task<UsuariosSeguidosDto> GetSeguidosUsuario(int id)
+		{ 
+			var usuarios = await _userRepository.GetAll()
+				.Include(u => u.UsuariosSeguidores)
+				.ThenInclude(u => u.UsuarioSeguido)
+				.Where(u => u.Id == id)
+				.FirstOrDefaultAsync();
+
+			return ObjectMapper.Map<UsuariosSeguidosDto>(usuarios);
+		}
+
+		public async Task<UserDto> GetUsuarioAplicacion(int id)
+		{			
+			var usuario = await _userRepository.GetAll()
+				.Where(u => u.Id == id)
+				.FirstOrDefaultAsync();
+
+			return ObjectMapper.Map<UserDto>(usuario);
 		}
 
 	}
