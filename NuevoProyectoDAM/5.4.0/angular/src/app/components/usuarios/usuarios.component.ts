@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase, PagedRequestDto } from 'shared/paged-listing-component-base';
-import { UserServiceProxy, UserDto, UserDtoPagedResultDto } from '@shared/service-proxies/service-proxies';
+import { UserDto, UserDtoPagedResultDto, UsuarioLogadoServiceProxy } from '@shared/service-proxies/service-proxies';
 
 
 class PagedUsersRequestDto extends PagedRequestDto {
@@ -24,7 +24,7 @@ export class UsuariosComponent extends PagedListingComponentBase<UserDto> {
 
   constructor(
       injector: Injector,
-      private _userService: UserServiceProxy,
+      private _userService: UsuarioLogadoServiceProxy,
       private _dialog: MatDialog
   ) {
       super(injector);
@@ -41,7 +41,7 @@ export class UsuariosComponent extends PagedListingComponentBase<UserDto> {
       request.isActive = this.isActive;
 
       this._userService
-          .getAll(request.keyword, request.isActive, request.skipCount, request.maxResultCount)
+          .getAllUsuarios()
           .pipe(
               finalize(() => {
                   finishedCallback();
@@ -54,7 +54,7 @@ export class UsuariosComponent extends PagedListingComponentBase<UserDto> {
   }
 
   protected delete(user: UserDto): void {
-      abp.message.confirm(
+      /*abp.message.confirm(
           this.l('UserDeleteWarningMessage', user.fullName),
           undefined,
           (result: boolean) => {
@@ -65,7 +65,7 @@ export class UsuariosComponent extends PagedListingComponentBase<UserDto> {
                   });
               }
           }
-      );
+      );*/
   }
 
   

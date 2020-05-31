@@ -91,7 +91,7 @@ delete(user: UsuariosSeguidoresDto): void {
   }
 
   mostrarSeguidores(user : UsuariosSeguidoresDto){
-    this._dialog.open(MostrarSeguidoresComponent);
+    this._dialog.open(MostrarSeguidoresComponent, {data: this.idUsuario});
   }
 
 }

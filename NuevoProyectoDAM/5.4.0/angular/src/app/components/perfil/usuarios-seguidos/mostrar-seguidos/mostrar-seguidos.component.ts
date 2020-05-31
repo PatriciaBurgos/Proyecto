@@ -5,6 +5,7 @@ import { UsuariosSeguidosDto } from '@shared/service-proxies/service-proxies';
 import { PagedRequestDto, PagedListingComponentBase } from '@shared/paged-listing-component-base';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { appModuleAnimation } from '@shared/animations/routerTransition';
 
 class PagedUsersRequestDto extends PagedRequestDto {
   filter: string;
@@ -21,15 +22,15 @@ class PagedUsersRequestDto extends PagedRequestDto {
 export class MostrarSeguidosComponent extends PagedListingComponentBase<UsuariosSeguidosDto> {
 
   filterText = '';
-  user: UsuariosSeguidosDto;
-  idUsuario : number;
+  user: UsuariosSeguidosDto ;
+  
 
 
   constructor(
     injector: Injector,
     private _userservice: UsuarioLogadoServiceProxy,
     private _dialog: MatDialog,
-    @Optional() @Inject(MAT_DIALOG_DATA) private _user: UsuariosSeguidosDto,
+    @Optional() @Inject(MAT_DIALOG_DATA) private _idUs: number,
     private rutaActiva: ActivatedRoute
   ) {
     super(injector);
@@ -40,10 +41,10 @@ export class MostrarSeguidosComponent extends PagedListingComponentBase<Usuarios
     pageNumber: number,
     finishedCallback: Function
 ): void {
-  this.idUsuario = this.rutaActiva.snapshot.params.id;
+  
   request.filter = this.filterText;
 
-  if(this.idUsuario == null){
+  if(this._idUs == null){
     this._userservice 
         .getMisSeguidos()
         .pipe(
@@ -57,7 +58,7 @@ export class MostrarSeguidosComponent extends PagedListingComponentBase<Usuarios
         });
   } else{
     this._userservice 
-        .getSeguidosUsuario(this.idUsuario)
+        .getSeguidosUsuario(this._idUs)
         .pipe(
             finalize(() => {
                 finishedCallback();
@@ -91,8 +92,5 @@ delete(user: UsuariosSeguidosDto): void {
     );*/
   }
 
-  mostrarSeguidos(user : UsuariosSeguidosDto){
-    this._dialog.open(MostrarSeguidosComponent);
-  }
-
+  
 }

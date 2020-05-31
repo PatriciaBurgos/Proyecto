@@ -22,14 +22,14 @@ export class MostrarSeguidoresComponent extends PagedListingComponentBase<Usuari
 
   filterText = '';
   user: UsuariosSeguidoresDto;
-  idUsuario : number;
+  
 
 
   constructor(
     injector: Injector,
     private _userservice: UsuarioLogadoServiceProxy,
     private _dialog: MatDialog,
-    @Optional() @Inject(MAT_DIALOG_DATA) private _user: UsuariosSeguidoresDto,
+    @Optional() @Inject(MAT_DIALOG_DATA) private _idUs: number,
     private rutaActiva: ActivatedRoute
   ) {
     super(injector);
@@ -40,10 +40,10 @@ export class MostrarSeguidoresComponent extends PagedListingComponentBase<Usuari
     pageNumber: number,
     finishedCallback: Function
 ): void {
-  this.idUsuario = this.rutaActiva.snapshot.params.id;
+  
   request.filter = this.filterText;
 
-  if(this.idUsuario == null){
+  if(this._idUs == null){
     this._userservice 
         .getMisSeguidores()
         .pipe(
@@ -57,7 +57,7 @@ export class MostrarSeguidoresComponent extends PagedListingComponentBase<Usuari
         });
   } else{
     this._userservice 
-        .getSeguidoresUsuario(this.idUsuario)
+        .getSeguidoresUsuario(this._idUs)
         .pipe(
             finalize(() => {
                 finishedCallback();
@@ -91,8 +91,6 @@ delete(user: UsuariosSeguidoresDto): void {
     );*/
   }
 
-  mostrarSeguidores(user : UsuariosSeguidoresDto){
-    this._dialog.open(MostrarSeguidoresComponent);
-  }
+  
 
 }

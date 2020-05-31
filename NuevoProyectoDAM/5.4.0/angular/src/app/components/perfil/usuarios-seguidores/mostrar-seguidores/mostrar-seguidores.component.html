@@ -7,7 +7,7 @@
                 <table class="table table-hover table-striped" [busy]="isTableLoading" style="width: 500px;">
                     <tbody>
                         <tr *ngFor="
-                let user of (_user.usuariosSeguidores
+                let user1 of (user.usuariosSeguidores
                   | paginate
                     : {
                         id: 'server',
@@ -16,7 +16,7 @@
                         totalItems: totalItems
                       })
               ">            
-                            <td>{{ user.usuario.userName }}</td>
+                            <td>{{ user1.usuario.userName }}</td>
                             <td>
                                 <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                     <mat-icon>menu</mat-icon>

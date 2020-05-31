@@ -90,8 +90,8 @@ delete(user: UsuariosSeguidosDto): void {
     );*/
   }
 
-  mostrarSeguidos(user : UsuariosSeguidosDto){
-    this._dialog.open(MostrarSeguidosComponent);
+  mostrarSeguidos(){
+    this._dialog.open(MostrarSeguidosComponent, {data: this.idUsuario});
   }
 
 }

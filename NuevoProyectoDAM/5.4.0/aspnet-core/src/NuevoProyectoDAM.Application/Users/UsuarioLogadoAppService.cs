@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
@@ -93,6 +94,13 @@ namespace NuevoProyectoDAM.Users
 				.FirstOrDefaultAsync();
 
 			return ObjectMapper.Map<UserDto>(usuario);
+		}
+
+		public async Task<ListResultDto<UserDto>> GetAllUsuarios()
+		{
+			var usuarios = await _userRepository.GetAllListAsync();
+
+			return new ListResultDto<UserDto>(ObjectMapper.Map<List<UserDto>>(usuarios));
 		}
 
 	}
