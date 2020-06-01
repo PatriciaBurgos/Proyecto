@@ -37,7 +37,7 @@ namespace NuevoProyectoDAM.Authorization.Users
             AbpSession = NullAbpSession.Instance;
         }
 
-        public async Task<User> RegisterAsync(string name, string surname, string emailAddress, string userName, string plainPassword, bool isEmailConfirmed)
+        public async Task<User> RegisterAsync(string name, string surname, string emailAddress, string userName, string plainPassword, bool isEmailConfirmed, string city, string town, DateTime birthDate, string qualities)
         {
             CheckForTenant();
 
@@ -45,14 +45,19 @@ namespace NuevoProyectoDAM.Authorization.Users
 
             var user = new User
             {
-                TenantId = tenant.Id,
+                //TenantId = tenant.Id,
+                TenantId = null,
                 Name = name,
                 Surname = surname,
                 EmailAddress = emailAddress,
                 IsActive = true,
                 UserName = userName,
                 IsEmailConfirmed = isEmailConfirmed,
-                Roles = new List<UserRole>()
+                Roles = new List<UserRole>(),
+                City = city,
+                Town = town,
+                BirthDate = birthDate,
+                Qualities = qualities
             };
 
             user.SetNormalizedNames();

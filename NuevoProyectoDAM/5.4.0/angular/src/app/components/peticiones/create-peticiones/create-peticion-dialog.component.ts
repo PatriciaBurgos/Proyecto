@@ -21,7 +21,7 @@ import {PeticionServiceProxy, PeticionCreateDto} from '@shared/service-proxies/s
 export class CreatePeticionDialogComponent extends AppComponentBase  {
     saving = false;
     peticion: PeticionCreateDto = new PeticionCreateDto();
-
+    categoria : string = "";
 
     constructor(
         injector: Injector,
@@ -39,6 +39,8 @@ export class CreatePeticionDialogComponent extends AppComponentBase  {
         Peticion_.init(this.peticion);
         console.log(Peticion_);
         
+        Peticion_.publicacionCategoria = this.categoria;
+
         this._PeticionService 
             .create(Peticion_)
             .pipe(

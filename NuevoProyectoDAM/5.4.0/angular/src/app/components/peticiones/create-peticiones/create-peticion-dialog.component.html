@@ -8,59 +8,23 @@
                   <div class="col-md-6">
                     
                     <mat-form-field>
-                      <input
-                        matInput
-                        name="Categoria"
-                        [placeholder]="'Categoria' | localize"
-                        [(ngModel)]="peticion.publicacionCategoria"
-                        required
-                        minlength="2"
-                        maxlength="32"
-                      />
-                       <!--
-                      <select id="categoria">
-                        <option value=" "> </option>
-                        <option value="niños">Niños</option>
-                        <option value="clases">Clases</option>
-                        <option value="informatica">Informatica</option>
-                        <option value="compras">Compras</option>
-                      </select>-->
+                      <mat-label>Categoría: </mat-label>
+                      <mat-select matNativeControl required [formControl]="selectFormControl"
+                           [(value)]="categoria">
+                        <mat-option label="--seleccione categoria--"></mat-option>
+                        <mat-option value="Peques">Peques</mat-option>
+                        <mat-option value="Clases">Clases</mat-option>
+                        <mat-option value="Informatica">Informatica</mat-option>
+                        <mat-option value="Terapia">Terapia</mat-option>
+                      </mat-select>
+                     <!-- <mat-error *ngIf="selectFormControl.hasError('required')">
+                        This field is required
+                      </mat-error> -->
+                      <mat-hint>Aqui puedes seleccionar la categoria</mat-hint>
                     </mat-form-field>
-                  
-                    <!--<div ng-app="myApp" ng-controller="myCtrl">
-                      <select ng-model="selectedName" ng-options="x for x in names">
-                      </select>
-                    </div>
-                    <script>
-                    var app = angular.module('myApp', []);
-                    app.controller('myCtrl', function($scope) {
-                        $scope.names = ["Emil", "Tobias", "Linus"];
-                    });
-                    </script>-->
-                    <!--
-                    <div ng-app="myApp" ng-controller="myCtrl">
 
-                      <p>Select a categoria:</p>
-                      
-                      <select ng-categoria="selectedCategoria">
-                      <option ng-repeat="x in categorias" value="{{x.categoria}}">{{x.categoria}}</option>
-                      </select>
-                      
-                      <h1>You selected: {{selectedCategoria}}</h1>
-                      
-                      </div>
-                      
-                      <script>
-                      var app = angular.module('myApp', []);
-                      app.controller('myCtrl', function($scope) {
-                          $scope.categorias = [
-                              {categoria : "Niños", color : "red"},
-                              {categoria : "Informatica", color : "white"},
-                              {categoria : "Clases", color : "black"}
-                          ];
-                      });
-                      </script>
-                    -->
+
+                    
                     <mat-form-field>
                       <input
                         matInput
@@ -116,7 +80,7 @@
                       />
                     </mat-form-field>
                     
-                    <mat-form-field>
+                    <!--<mat-form-field>
                       <input
                         matInput
                         name="EsUrgente"
@@ -125,7 +89,13 @@
                         required
                         maxlength="256"
                       />
-                    </mat-form-field>
+                    </mat-form-field>-->
+
+                    <div class="checkbox-wrapper">
+                      <mat-checkbox name="EsUrgente" [(ngModel)]="peticion.isUrgent">
+                        {{ "EsUrgente" | localize }}
+                      </mat-checkbox>
+                    </div>
                     
                   </div>
                 </div>

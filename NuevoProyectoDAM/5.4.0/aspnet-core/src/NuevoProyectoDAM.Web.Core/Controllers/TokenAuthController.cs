@@ -141,7 +141,12 @@ namespace NuevoProyectoDAM.Controllers
                 externalUser.EmailAddress,
                 externalUser.EmailAddress,
                 Authorization.Users.User.CreateRandomPassword(),
-                true
+                true,
+                externalUser.City,
+                externalUser.Town,
+                externalUser.BirthDate,
+                externalUser.Qualities
+
             );
 
             user.Logins = new List<UserLogin>

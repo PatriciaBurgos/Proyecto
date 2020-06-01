@@ -4092,6 +4092,10 @@ export class RegisterInput implements IRegisterInput {
     emailAddress: string | undefined;
     password: string | undefined;
     captchaResponse: string | undefined;
+    birthDate: moment.Moment;
+    town: string | undefined;
+    city: string | undefined;
+    qualities: string | undefined;
 
     constructor(data?: IRegisterInput) {
         if (data) {
@@ -4110,6 +4114,10 @@ export class RegisterInput implements IRegisterInput {
             this.emailAddress = _data["emailAddress"];
             this.password = _data["password"];
             this.captchaResponse = _data["captchaResponse"];
+            this.birthDate = _data["birthDate"] ? moment(_data["birthDate"].toString()) : <any>undefined;
+            this.town = _data["town"];
+            this.city = _data["city"];
+            this.qualities = _data["qualities"];
         }
     }
 
@@ -4128,6 +4136,10 @@ export class RegisterInput implements IRegisterInput {
         data["emailAddress"] = this.emailAddress;
         data["password"] = this.password;
         data["captchaResponse"] = this.captchaResponse;
+        data["birthDate"] = this.birthDate ? this.birthDate.toISOString() : <any>undefined;
+        data["town"] = this.town;
+        data["city"] = this.city;
+        data["qualities"] = this.qualities;
         return data; 
     }
 
@@ -4146,6 +4158,10 @@ export interface IRegisterInput {
     emailAddress: string | undefined;
     password: string | undefined;
     captchaResponse: string | undefined;
+    birthDate: moment.Moment;
+    town: string | undefined;
+    city: string | undefined;
+    qualities: string | undefined;
 }
 
 export class RegisterOutput implements IRegisterOutput {
@@ -6632,7 +6648,7 @@ export class CreateUserDto implements ICreateUserDto {
     isActive: boolean;
     roleNames: string[] | undefined;
     password: string | undefined;
-    birthDate: moment.Moment | undefined;
+    birthDate: moment.Moment;
     town: string | undefined;
     city: string | undefined;
     qualities: string | undefined;
@@ -6712,7 +6728,7 @@ export interface ICreateUserDto {
     isActive: boolean;
     roleNames: string[] | undefined;
     password: string | undefined;
-    birthDate: moment.Moment | undefined;
+    birthDate: moment.Moment;
     town: string | undefined;
     city: string | undefined;
     qualities: string | undefined;

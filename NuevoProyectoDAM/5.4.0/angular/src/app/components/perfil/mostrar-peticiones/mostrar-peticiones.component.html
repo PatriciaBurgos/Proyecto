@@ -66,7 +66,10 @@
                             <td>{{ peticion.publicacionHorarioFin }}</td>
                             <td>{{ peticion.publicacionMunicipio }}</td>
                             <td>{{ peticion.publicacionCiudad }}</td>
-                            <td>{{ peticion.isUrgent }}</td>
+                            <td *ngIf="peticion.isUrgent==true">Si</td>
+                            <td *ngIf="peticion.isUrgent==false">No</td>
+
+                            
                             <td *ngIf="comprobacion==true">
                                 <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                     <mat-icon>menu</mat-icon>

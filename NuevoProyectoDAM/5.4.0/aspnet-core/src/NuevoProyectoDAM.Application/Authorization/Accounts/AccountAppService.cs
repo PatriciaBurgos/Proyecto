@@ -42,8 +42,12 @@ namespace NuevoProyectoDAM.Authorization.Accounts
                 input.Surname,
                 input.EmailAddress,
                 input.UserName,
-                input.Password,
-                true // Assumed email address is always confirmed. Change this if you want to implement email confirmation.
+                input.Password,                
+                true, // Assumed email address is always confirmed. Change this if you want to implement email confirmation.
+                input.City,
+                input.Town,
+                input.BirthDate,
+                input.Qualities
             );
 
             var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueAsync<bool>(AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin);

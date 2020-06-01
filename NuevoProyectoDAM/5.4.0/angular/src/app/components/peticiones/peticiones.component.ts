@@ -28,7 +28,9 @@ class PagedPeticionRequestDto extends PagedRequestDto {
 export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> {
 
     peticiones: PeticionDto[] = [];
-    
+    estadoPositivo: boolean = true;
+
+
     filterText = '';
     constructor(
         injector: Injector,
@@ -57,6 +59,9 @@ export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> 
                 this.peticiones = result.items;
                 
             });
+
+
+           
 
     //ngOnInit() {
     //    this._peticioneservice.getAll('', 0, 20)
@@ -109,5 +114,9 @@ export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> 
         });
     }
 
+
+    cambiaEstado() {
+        this.estadoPositivo = !this.estadoPositivo; 
+      }
 
 }

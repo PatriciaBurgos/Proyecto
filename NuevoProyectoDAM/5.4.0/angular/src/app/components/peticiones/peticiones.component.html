@@ -97,6 +97,15 @@
     </div>
 </div>-->
 
+<style>
+    .si{
+    color: #6c5 !important;
+    }
+    .no{
+    color: #933 !important;
+    }
+</style>
+
 
 <mat-toolbar style="background-color: white; color: #D500F9;">
     <h1>Peticiones</h1>
@@ -116,12 +125,13 @@
             <div class="header" style="margin: 10px">
                 <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
                 <p class="card-body" style="display: inline; margin-left: 25px; font-size: large;"><strong>{{ peticion.publicacionNombreUsuario }}</strong></p>
-                <button class="mdc-icon-button material-icons" (click)="color= red;" style="display: inline; margin-left: 25px; margin-top: 32px; float: right; background-color: transparent;">favorite</button>
+                <button class="mdc-icon-button material-icons" [ngClass]="{si: estadoPositivo, no: !estadoPositivo}" (click)="cambiaEstado()" style="display: inline; margin-left: 25px; margin-top: 32px; float: right; background-color: transparent;">favorite</button>
                 <p class="card-body text-right" style="display: inline; margin-left: 25px; margin-top: 32px; float: right;"><strong>Categoría:</strong> {{ peticion.publicacionCategoria }}</p>
             </div>
             <div class="card-body" style="margin: 30px">
                 <p style="font-size: large;">{{ peticion.publicacionTexto }}</p>
-                <p><strong>Es urgente: </strong> {{ peticion.isUrgent }}</p>
+                <p *ngIf="peticion.isUrgent==true"><strong>Es urgente: </strong>Si</p>
+                <p *ngIf="peticion.isUrgent==false"><strong>Es urgente: </strong>No</p>
             </div>
             <div class="card-body" style="margin: 30px; padding-bottom: 20px;">
                 <p  style="display: inline;"><strong>Horario Inicio:</strong> {{ peticion.publicacionHorarioInicio }}</p>

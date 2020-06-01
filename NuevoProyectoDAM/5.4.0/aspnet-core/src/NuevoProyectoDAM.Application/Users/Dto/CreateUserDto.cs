@@ -45,7 +45,7 @@ namespace NuevoProyectoDAM.Users.Dto
             }
         }
 
-        public DateTime? BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         [MaxLength(50)]
         public String? Town { get; set; }
         [MaxLength(50)]

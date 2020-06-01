@@ -1,54 +1,90 @@
-﻿<div class="card" [@routerTransition]>
-  <div class="body">
+﻿<div class="card" [@routerTransition] style="width:max-content;height:auto;">
+  <div class="body" >
     <form novalidate 
           #registerForm="ngForm" 
           (ngSubmit)="save()">
       <h4 class="text-center">{{ "Register" | localize }}</h4>
       <div class="form-group form-float">
-          <mat-form-field>
-              <input matInput
-                 name="Name"
-                 [(ngModel)]="model.name"
-                 [placeholder]="'Name' | localize"
-                 required
-                 maxlength="32" />
-          </mat-form-field>
-          <mat-form-field>
-              <input matInput
-                  name="Surname"
-                  [(ngModel)]="model.surname"
-                  [placeholder]="'Surname' | localize"
+          <div class="col-md-6">
+            <mat-form-field>
+                <input matInput
+                  name="Name"
+                  [(ngModel)]="model.name"
+                  [placeholder]="'Name' | localize"
                   required
-                  maxlength="32"/>
-          </mat-form-field>
-          <mat-form-field>
-              <input matInput
-                   type="email"
-                   name="EmailAddress"
-                   [(ngModel)]="model.emailAddress"
-                   [placeholder]="'EmailAddress' | localize"         
-                   required
-                   maxlength="255"
-                   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"/>
-          </mat-form-field>
-          <mat-form-field>
-              <input matInput
-                   name="UserName"
-                   [(ngModel)]="model.userName"
-                   [placeholder]="'UserName' | localize"         
-                   required
-                   maxlength="32"/>
-          </mat-form-field>
-          <mat-form-field>
-             <input matInput
-                    name="Password"
-                    [(ngModel)]="model.password"
-                    [placeholder]="'Password' | localize"
-                    type="password"         
+                  maxlength="32" />
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput
+                    name="Surname"
+                    [(ngModel)]="model.surname"
+                    [placeholder]="'Surname' | localize"
                     required
                     maxlength="32"/>
-          </mat-form-field>
-      </div>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput
+                    type="email"
+                    name="EmailAddress"
+                    [(ngModel)]="model.emailAddress"
+                    [placeholder]="'EmailAddress' | localize"         
+                    required
+                    maxlength="255"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput
+                    name="UserName"
+                    [(ngModel)]="model.userName"
+                    [placeholder]="'UserName' | localize"         
+                    required
+                    maxlength="32"/>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput
+              [ngModel]="model.birthDate | date:'yyyy-MM-dd'" 
+              (ngModelChange)="startDate = $event" 
+              [placeholder]="'BirthDate' | localize" 
+              type="date" 
+              name="BirthDate"/>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field>
+              <input matInput
+                  name="Town"
+                  [(ngModel)]="model.town"
+                  [placeholder]="'Town' | localize"         
+                  required
+                  maxlength="32"/>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput
+                  name="City"
+                  [(ngModel)]="model.city"
+                  [placeholder]="'City' | localize"         
+                  required
+                  maxlength="32"/>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput
+                  name="Qualities"
+                  [(ngModel)]="model.qualities"
+                  [placeholder]="'Qualities' | localize"         
+                  required
+                  maxlength="32"/>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput
+                      name="Password"
+                      [(ngModel)]="model.password"
+                      [placeholder]="'Password' | localize"
+                      type="password"         
+                      required
+                      maxlength="32"/>
+            </mat-form-field>
+          </div>
+        </div>
       <div class="form-actions text-center">
             <button mat-button 
                     type="button"

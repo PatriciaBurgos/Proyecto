@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Abp.Auditing;
 using Abp.Authorization.Users;
@@ -44,5 +45,14 @@ namespace NuevoProyectoDAM.Authorization.Accounts.Dto
                 }
             }
         }
+
+        public DateTime BirthDate { get; set; }
+        [MaxLength(50)]
+        public String Town { get; set; }
+        [MaxLength(50)]
+        public String City { get; set; }
+        [MaxLength(256)]
+        public String Qualities { get; set; }
+        
     }
 }
