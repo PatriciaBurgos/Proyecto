@@ -74,6 +74,7 @@ namespace NuevoProyectoDAM.Chats
 
 			
 			var amigo = "";
+			var num = 0;
 
 			for (int f = 0; f < chats.Count; f++)
 			{	
@@ -92,8 +93,17 @@ namespace NuevoProyectoDAM.Chats
 					if(amigo == chats[i].UsuarioOrigen.UserName || amigo == chats[i].UsuarioDestino.UserName)
 					{
 						chats.RemoveAt(i);
+						num++;
+						i--;
 					}
-				}				
+					
+				}
+				if (num != 0)
+				{
+					f--;
+					num = 0;
+				}
+
 			}
 
 			return new ListResultDto<MostrarChatReducidoDto>(ObjectMapper.Map<List<MostrarChatReducidoDto>>(chatsDefinitivos));

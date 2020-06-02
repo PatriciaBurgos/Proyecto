@@ -1,7 +1,29 @@
+<div class="card main-content" style="margin-bottom: 15px;">
+    <mat-toolbar style="background-color: white; color: #D500F9;">
+        <h1>{{ "Usuarios" | localize }}</h1>
+        <ul class="header-dropdown m-r--5" style="position: absolute; top: 20px; right: 15px;">
+            <li style="list-style: none;">
+                <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #headerMenu="matMenu">
+                    <button mat-menu-item (click)="refresh()">
+                        <mat-icon>refresh</mat-icon>
+                        <span>{{ "Refresh" | localize }}</span>
+                    </button>
+                </mat-menu>
+            </li>
+        </ul>
+    </mat-toolbar>
+</div>
+
+
+
+
 <div class="row clearfix" [@routerTransition]>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
         <div class="card main-content">
-            <div class="header">
+            <!--<div class="header">
                 <h2 style="font-size: large;">{{ "Usuarios" | localize }}</h2>
                 <ul class="header-dropdown m-r--5">
                     <li>
@@ -16,7 +38,7 @@
                         </mat-menu>
                     </li>
                 </ul>
-            </div>
+            </div>-->
             <div class="body table-responsive">
                 <!--query start-->
                 <div class="row clearfix">

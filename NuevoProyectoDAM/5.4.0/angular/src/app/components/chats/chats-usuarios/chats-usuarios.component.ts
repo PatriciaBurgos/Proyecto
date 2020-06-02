@@ -1,5 +1,5 @@
 import { Component,  Injector, OnInit, Optional, Inject } from '@angular/core';
-import { ChatServiceProxy, ChatDto, AuthenticateResultModel, ChatDtoPagedResultDto, UsuariosSeguidosDto } from 'shared/service-proxies/service-proxies';
+import { ChatServiceProxy, ChatDto, AuthenticateResultModel, ChatDtoPagedResultDto, UsuariosSeguidosDto, ChatCreateDto } from 'shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing-component-base';
@@ -22,8 +22,10 @@ class PagedChatRequestDto extends PagedRequestDto {
 export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
 
   chats: ChatDto[] = [];
-  chatuno : ChatDto;
+  chatUDest : string = "";
+  chatUOrig : string = ""; 
   idChat : number;
+  text : string = "";
 
   filterText = '';
   constructor(
@@ -54,7 +56,16 @@ export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
           )
           .subscribe(result  => {
               this.chats = result.items;
-              this.chatuno = this.chats[0];
+              if (this.chats[this.chats.length-1].usuarioOrigen == this.appSession.user.userName){
+                this.chatUOrig = this.chats[this.chats.length-1].usuarioOrigen;
+                this.chatUDest = this.chats[this.chats.length-1].usuarioDestino;
+              }else{
+                this.chatUOrig = this.chats[this.chats.length-1].usuarioDestino;
+                this.chatUDest = this.chats[this.chats.length-1].usuarioOrigen;
+              }
+
+              console.log("UORIG = "+ this.chatUOrig);
+              console.log("UDEST = "+ this.chatUDest);
           });
 
           
@@ -86,7 +97,11 @@ export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
   }
 
   createChat(): void {
-      this.showCreateChatDialog();
+     // this.showCreateChatDialog();
+     console.log(this.appSession.user.userName);
+     const Chat_ = new ChatCreateDto();
+     //Chat_.userName = this.
+
   }
 
   
@@ -103,5 +118,6 @@ export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
       });
   }
 
+  
 
 }
