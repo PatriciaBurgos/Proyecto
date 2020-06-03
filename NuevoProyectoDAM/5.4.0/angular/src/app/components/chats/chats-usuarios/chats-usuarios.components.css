@@ -1,0 +1,33 @@
+    template{
+        float: right; 
+        font-size: large;
+    }
+
+    .scrollbar {
+        height: 500px;
+        padding: inherit;
+        background: #fff;
+        overflow-y: scroll;
+        margin-bottom: 25px;
+        height: xyz;
+    }
+    .force-overflow {
+        min-height: 450px;
+    }
+
+    .scrollbar-secondary::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-color: #F5F5F5;
+        border-radius: 10px; 
+    }
+
+    .scrollbar-secondary::-webkit-scrollbar {
+        width: 12px;
+        background-color: #F5F5F5; 
+    }
+
+    .scrollbar-secondary::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-color: #aa66cc; 
+    }

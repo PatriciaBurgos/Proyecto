@@ -66,62 +66,48 @@
     </div>
 </div>-->
 
-<style>
-    template{
-        float: right; 
-        font-size: large;
-    }
-</style>
 
-<div class="card main-content row clearfix" style="margin-bottom: 15px; padding: 16px;" >
+
+<div class="card main-content clearfix" style="margin-bottom: 15px; padding: 16px;" >
     <mat-toolbar style="background-color: white; color: #D500F9; display: inline; ">
         <h2 style="margin-left: 50px; text-align: center; float: left;">{{chatUOrig}}</h2>
         <h2 style="margin-right: 50px; text-align: center; float: right;">{{chatUDest}}</h2>        
     </mat-toolbar>
 </div>
 
-<!--<div class="card main-content header">
-    <mat-toolbar style="background-color: white; color: #D500F9;  display: inline;">
-        <h2 style="margin-left: 50px; text-align: center; float: left;">{{chatuno.usuarioOrigen}}</h2>
-        <h2 style="margin-right: 50px; text-align: center; float: right;">{{chatuno.usuarioDestino}}</h2>
-    </mat-toolbar>
-</div>-->
 
+<div class="card main-content center-block card-body " style="width: auto; margin-top: 10px; padding: 0 16px;">
+    
+    <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="scrollbar scrollbar-secondary">
+        <div class="force-overflow">
+            <div *ngFor="
+            let chat of (chats)"  style="margin-top: 10px 0 10px; padding-top: 10px;" >
 
-
-
-
-<!--<div class="card main-content center-block card-body " style="width: auto; margin-top: 100px; padding: 0 16px;">
-    <div *ngFor="
-    let chat of (chats
-      | paginate
-        : {
-            id: 'server',
-            itemsPerPage: pageSize,
-            currentPage: pageNumber,
-            totalItems: totalItems
-          })" >
-
-          <div>
-              <p class="card-text"  *ngIf="chat.usuarioOrigen == chatuno.usuarioOrigen; else uDestino" style="float: left; font-size: large;">{{chat.texto}}</p>
-              <ng-template  class="card-text" #uDestino>
-                  <p style="float: right; font-size: large;">{{chat.texto}}</p>
-                </ng-template>
-              <br>
-          </div>
+                <div>
+                    <p class="card-text"  *ngIf="chat.usuarioOrigen == uLogado; else uDestino" style="float: left; font-size: large;"><span style="color: mediumvioletred;">{{chat.texto}}</span><span style="font-size: small;"> &nbsp;&nbsp;&nbsp;&nbsp;{{chat.fechaHora | date:'medium'}}</span></p>
+                    <ng-template  class="card-text" #uDestino>
+                        <p style="float: right; font-size: large;"><span style="color: rosybrown;">{{chat.texto}}</span><span style="font-size: small;"> &nbsp;&nbsp;&nbsp;&nbsp;{{chat.fechaHora}}</span></p>
+                        </ng-template>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
     </div>
+    
 
     <div class="card-footer">
-    <mat-form-field>
-        <mat-label>Escribe algo</mat-label>
-        <input matInput [(ngModel)]="text">
-    </mat-form-field>
-</div>
+        <mat-form-field>
+            <mat-label>Escribe algo</mat-label>
+            <input matInput [(ngModel)]="text">
+        </mat-form-field>
+    </div>
 
     <button class="mdc-fab " mat-mini-fab style="background-color: #EA80FC; color: white;"
-     class="pull-right" (click)="createChat()">
+     class="pull-right" (click)="createChat()" (keyup.enter)="createChat()">
         <div class="mdc-fab__ripple"></div>
         <span class="mdc-fab__icon material-icons">add</span>
     </button>
-</div>-->
+
+</div>
 

@@ -1,4 +1,4 @@
-import { Component,  Injector, OnInit, Optional, Inject } from '@angular/core';
+import { Component,  Injector, OnInit, Optional, Inject} from '@angular/core';
 import { ChatServiceProxy, ChatDto, AuthenticateResultModel, ChatDtoPagedResultDto, UsuariosSeguidosDto, ChatCreateDto } from 'shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
@@ -6,6 +6,7 @@ import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { CreateChatDialogComponent } from 'app/components/chats/create-chats/create-chat-dialog.component';
 import { ActivatedRoute, Params } from '@angular/router';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 class PagedChatRequestDto extends PagedRequestDto {
@@ -14,8 +15,8 @@ class PagedChatRequestDto extends PagedRequestDto {
 
 @Component({
   selector: 'app-chats-usuarios',
-  templateUrl: './chats-usuarios.component.html'
-
+  templateUrl: './chats-usuarios.component.html',
+  styleUrls: ['./chats-usuarios.components.css']
 })
 
 
@@ -24,8 +25,11 @@ export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
   chats: ChatDto[] = [];
   chatUDest : string = "";
   chatUOrig : string = ""; 
+  uLogado : string = "";
   idChat : number;
   text : string = "";
+
+  
 
   filterText = '';
   constructor(
@@ -56,7 +60,10 @@ export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
           )
           .subscribe(result  => {
               this.chats = result.items;
-              if (this.chats[this.chats.length-1].usuarioOrigen == this.appSession.user.userName){
+
+              this.uLogado = this.appSession.user.userName;
+
+              if (this.chats[this.chats.length-1].usuarioOrigen == this.uLogado){
                 this.chatUOrig = this.chats[this.chats.length-1].usuarioOrigen;
                 this.chatUDest = this.chats[this.chats.length-1].usuarioDestino;
               }else{
@@ -69,12 +76,8 @@ export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
           });
 
           
-
-  //ngOnInit() {
-  //    this._anuncioservice.getAll('', 0, 20)
-  //        .subscribe(result =>
-  //        this.anuncios = result.items);
-  }
+        }
+ 
 
   delete(chat: ChatDto): void {
       abp.message.confirm(
@@ -98,10 +101,26 @@ export class ChatsUsuariosComponent extends PagedListingComponentBase<ChatDto> {
 
   createChat(): void {
      // this.showCreateChatDialog();
-     console.log(this.appSession.user.userName);
-     const Chat_ = new ChatCreateDto();
-     //Chat_.userName = this.
+     if(this.text!=""){
+        console.log(this.appSession.user.userName);
+        const Chat_ = new ChatCreateDto();
+        Chat_.userName = this.chatUDest;
+        Chat_.texto = this.text;
 
+        this._chatservice 
+                .create(Chat_)
+                .pipe(
+                    finalize(() => {
+                        //this.saving = false;
+                    })
+                )
+                .subscribe(() => {
+                    this.notify.info(this.l('SavedSuccessfully'));
+                    //this.close(true);
+                    this.refresh();
+                    this.text= "";
+                });
+    }
   }
 
   
