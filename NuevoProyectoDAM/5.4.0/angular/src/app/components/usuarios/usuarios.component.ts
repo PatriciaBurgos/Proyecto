@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase, PagedRequestDto } from 'shared/paged-listing-component-base';
-import { UserDto, UserDtoPagedResultDto, UsuarioLogadoServiceProxy } from '@shared/service-proxies/service-proxies';
+import { UserDto, UserDtoPagedResultDto, UsuarioLogadoServiceProxy, UserServiceProxy } from '@shared/service-proxies/service-proxies';
 
 
 class PagedUsersRequestDto extends PagedRequestDto {
@@ -24,7 +24,7 @@ export class UsuariosComponent extends PagedListingComponentBase<UserDto> {
 
   constructor(
       injector: Injector,
-      private _userService: UsuarioLogadoServiceProxy,
+      private _userService: UserServiceProxy,
       private _dialog: MatDialog
   ) {
       super(injector);
@@ -41,7 +41,7 @@ export class UsuariosComponent extends PagedListingComponentBase<UserDto> {
       request.isActive = this.isActive;
 
       this._userService
-          .getAllUsuarios()
+          .getAll(request.keyword, request.isActive, request.skipCount, request.maxResultCount)
           .pipe(
               finalize(() => {
                   finishedCallback();

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Abp.Configuration;
+using Abp.UI;
 using Abp.Zero.Configuration;
 using NuevoProyectoDAM.Authorization.Accounts.Dto;
 using NuevoProyectoDAM.Authorization.Users;
@@ -57,5 +58,38 @@ namespace NuevoProyectoDAM.Authorization.Accounts
                 CanLogin = user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin)
             };
         }
+
+       /* public async Task SendPasswordResetCode(string emailAddress)
+        {
+            var user = await UserManager.FindByEmailAsync(emailAddress);
+
+            if (user == null)
+            {
+                throw new UserFriendlyException("User not found!");
+            }
+
+            user.SetNewPasswordResetCode();
+
+            //Send an email to user with the below password reset code
+            /* Uri.EscapeDataString(user.PasswordResetCode) */
+        /*}
+
+        public virtual async Task ForgotPassword(ForgotPasswordViewModel forgotPasswordModel, string returnUrl = "", string returnUrlHash = "")
+        { //var user = await GetUserByChecking(emailAddress);
+
+            var user = await _userManager.FindByEmailAsync(forgotPasswordModel.UsernameOrEmailAddress);
+
+            if (user == null)
+            {
+                throw new UserFriendlyException("User not found!");
+            }
+
+            user.SetNewPasswordResetCode();
+
+            //Send an email to user with the below password reset code
+            /* Uri.EscapeDataString(user.PasswordResetCode) */
+
+            /*return Json("");
+        }*/
     }
 }

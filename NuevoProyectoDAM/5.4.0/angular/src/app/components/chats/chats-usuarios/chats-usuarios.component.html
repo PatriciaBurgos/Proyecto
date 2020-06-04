@@ -86,7 +86,7 @@
                 <div>
                     <p class="card-text"  *ngIf="chat.usuarioOrigen == uLogado; else uDestino" style="float: left; font-size: large;"><span style="color: mediumvioletred;">{{chat.texto}}</span><span style="font-size: small;"> &nbsp;&nbsp;&nbsp;&nbsp;{{chat.fechaHora | date:'medium'}}</span></p>
                     <ng-template  class="card-text" #uDestino>
-                        <p style="float: right; font-size: large;"><span style="color: rosybrown;">{{chat.texto}}</span><span style="font-size: small;"> &nbsp;&nbsp;&nbsp;&nbsp;{{chat.fechaHora}}</span></p>
+                        <p style="float: right; font-size: large;"><span style="color: rosybrown;">{{chat.texto}}</span><span style="font-size: small;"> &nbsp;&nbsp;&nbsp;&nbsp;{{chat.fechaHora | date:'medium'}}</span></p>
                         </ng-template>
                     <br>
                     <br>

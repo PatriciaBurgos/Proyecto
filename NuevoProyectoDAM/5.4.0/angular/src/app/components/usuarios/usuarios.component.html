@@ -69,9 +69,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="
-                let user of (users
-                  | paginate
-                    : {
+                        let user of (users
+                        | paginate
+                            : {
                         id: 'server',
                         itemsPerPage: pageSize,
                         currentPage: pageNumber,
@@ -103,6 +103,7 @@
                         </tr>
                     </tbody>
                 </table>
+                
                 <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
                     <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
                     </abp-pagination-controls>

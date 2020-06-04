@@ -14,6 +14,8 @@
 
         public const string Pages_Peticiones = "Pages.Peticiones";
 
+        public const string Pages_Publicaciones = "Pages.Publicaciones";
+
         public const string Pages_Chats = "Pages.Chats";
     }
 }

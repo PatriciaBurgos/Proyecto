@@ -14,6 +14,7 @@ namespace NuevoProyectoDAM.Authorization
             context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
             context.CreatePermission(PermissionNames.Pages_Anuncios, L("Anuncios"));
             context.CreatePermission(PermissionNames.Pages_Peticiones, L("Peticiones"));
+            context.CreatePermission(PermissionNames.Pages_Publicaciones, L("Publicaciones"));
             context.CreatePermission(PermissionNames.Pages_Chats, L("Chats"));
         }
 

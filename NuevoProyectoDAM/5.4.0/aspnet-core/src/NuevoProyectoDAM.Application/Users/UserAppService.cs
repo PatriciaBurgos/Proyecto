@@ -55,11 +55,15 @@ namespace NuevoProyectoDAM.Users
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
         {
             CheckCreatePermission();
+            if (input.RoleNames != null) { 
+                input.RoleNames[0] = "USUARIO";
+            }
 
             var user = ObjectMapper.Map<User>(input);
 
             user.TenantId = AbpSession.TenantId;
             user.IsEmailConfirmed = true;
+            
 
             await _userManager.InitializeOptionsAsync(AbpSession.TenantId);
 

@@ -4,6 +4,7 @@ using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
 using DAM.Peticiones.Dto;
+using DAM.PublicacionesGustadas.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NuevoProyectoDAM.Authorization;
@@ -46,14 +47,16 @@ namespace DAM.Peticiones
 		public async Task<ListResultDto<PeticionDto>> GetPublicacionesPeticiones()
 		{
 			var peticiones = await _peticionRepository.GetAll()
-				.Include(a => a.Publicacion)
+				.Include(a => a.Publicacion)				
+				.ThenInclude(p => p.PublicacionesGustadas)
 				.ThenInclude(p => p.Usuario)
+				.Include(a => a.Publicacion.Usuario)
 				.ToListAsync();
 
 			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
 		}
 
-		public async Task<ListResultDto<PeticionGustaAUsuariosDto>> GetUsuariosGustaPeticion(int id)
+		/*public async Task<ListResultDto<PeticionGustaAUsuariosDto>> GetUsuariosGustaPeticion(int id)
 		{
 			var usuarios = await _peticionRepository.GetAll()
 				.Include(a => a.Publicacion)
@@ -63,7 +66,8 @@ namespace DAM.Peticiones
 				.ToListAsync();
 
 			return new ListResultDto<PeticionGustaAUsuariosDto>(ObjectMapper.Map<List<PeticionGustaAUsuariosDto>>(usuarios));
-		}
+		}*/
+
 
 		public async Task<ListResultDto<PeticionDto>> GetPeticionesUnUsuario(int id)
 		{

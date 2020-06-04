@@ -49,12 +49,12 @@ export class ChatsReducidosComponent extends PagedListingComponentBase<MostrarCh
               this.chats = result.items;
               
           });
-
+        }
   //ngOnInit() {
-  //    this._anuncioservice.getAll('', 0, 20)
+ //     this._chatservice.getAll('', 0, 20)
   //        .subscribe(result =>
-  //        this.anuncios = result.items);
-  }
+  //        this.chats = result.items);
+ // }
 
   delete(chat: ChatDto): void {
       abp.message.confirm(

@@ -11,6 +11,8 @@ namespace DAM.Peticiones.Dto
 		{
 			CreateMap<Peticion, PeticionDto>()
 				.ForMember(a => a.PublicacionNombreUsuario, opts => opts.MapFrom(a => a.Publicacion.Usuario.UserName))
+				.ForMember(cdto => cdto.NumUsuarios, opts => opts.MapFrom(cb => cb.Publicacion.PublicacionesGustadas.Count > 0 ? cb.Publicacion.PublicacionesGustadas.Count : 0))
+				.ForMember(a => a.UsuariosGustaPeticion, opts => opts.MapFrom(a => a.Publicacion.PublicacionesGustadas))
 				.ReverseMap();
 
 			CreateMap<Peticion, PeticionCreateDto>().ReverseMap();

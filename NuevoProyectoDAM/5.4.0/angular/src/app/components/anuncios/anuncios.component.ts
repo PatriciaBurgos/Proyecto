@@ -57,12 +57,12 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
                 this.anuncios = result.items;
                 
             });
-
-    //ngOnInit() {
-    //    this._anuncioservice.getAll('', 0, 20)
-    //        .subscribe(result =>
-    //        this.anuncios = result.items);
-    }
+        }
+  //  ngOnInit() {
+   //     this._anuncioservice.getAll('', 0, 20)
+   //         .subscribe(result =>
+   //         this.anuncios = result.items);
+   // }
 
     delete(anuncio: AnuncioDto): void {
         abp.message.confirm(
