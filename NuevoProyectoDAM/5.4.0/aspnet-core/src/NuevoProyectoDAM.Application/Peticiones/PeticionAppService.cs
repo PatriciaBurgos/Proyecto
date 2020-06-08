@@ -4,6 +4,7 @@ using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
 using DAM.Peticiones.Dto;
+using DAM.PublicacionesGustadas;
 using DAM.PublicacionesGustadas.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,10 @@ namespace DAM.Peticiones
 
 		public async Task<ListResultDto<PeticionDto>> GetPublicacionesPeticiones()
 		{
+			CheckUpdatePermission();
+
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
 			var peticiones = await _peticionRepository.GetAll()
 				.Include(a => a.Publicacion)				
 				.ThenInclude(p => p.PublicacionesGustadas)
@@ -53,7 +58,34 @@ namespace DAM.Peticiones
 				.Include(a => a.Publicacion.Usuario)
 				.ToListAsync();
 
-			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+			var peticionesDto = new List<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+
+
+			foreach (PeticionDto peti in peticionesDto)
+			{
+				foreach (PublicacionGustadaDto publiGus in peti.UsuariosGustaPeticion)
+				{
+					if(usuarioActual.Id == publiGus.Usuario.Id)
+					{
+						peti.usuarioActualGustaPublicacion = true;
+					}
+				}
+			}
+
+			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticionesDto));
+		}
+
+		public async Task<PeticionDto> GetUnaPeticion(int id)
+		{
+			var peticion = await _peticionRepository.GetAll()
+				.Include(a => a.Publicacion)
+				.ThenInclude(p => p.PublicacionesGustadas)
+				.ThenInclude(p => p.Usuario)
+				.Include(p => p.Publicacion.Usuario)
+				.Where(a => a.Id == id)
+				.FirstOrDefaultAsync();
+
+			return ObjectMapper.Map<PeticionDto>(peticion);
 		}
 
 		/*public async Task<ListResultDto<PeticionGustaAUsuariosDto>> GetUsuariosGustaPeticion(int id)

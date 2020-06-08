@@ -1,5 +1,5 @@
 import { Component,  Injector, OnInit } from '@angular/core';
-import { AnuncioServiceProxy, AnuncioDto, AuthenticateResultModel, AnuncioDtoPagedResultDto } from 'shared/service-proxies/service-proxies';
+import { AnuncioServiceProxy, AnuncioDto, AuthenticateResultModel, AnuncioDtoPagedResultDto, PublicacionGustadaServiceProxy } from 'shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing-component-base';
@@ -33,6 +33,7 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
     constructor(
         injector: Injector,
         private _anuncioservice: AnuncioServiceProxy,
+        private _pubGustadaservice: PublicacionGustadaServiceProxy,
         private _dialog: MatDialog
     ) {
         super(injector);
@@ -109,5 +110,39 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
         });
     }
 
+
+    gustaPublicacion(idPub : number){
+        console.log("PUB = " + idPub);
+
+        this._pubGustadaservice
+            .usuarioLogadoGustaPublicacion(idPub)
+            .pipe(
+                finalize(() => {})
+            )
+            .subscribe(() => {
+            this.notify.info(this.l('SavedSuccessfully'));
+                console.log("PublicacionGustada");
+                this.refresh();
+                
+            });
+        this.refresh();
+    }
+
+    noGustaPublicacion(idPub : number){
+        console.log("PUB = " + idPub);
+
+        this._pubGustadaservice
+            .usuarioLogadoNOGustaPublicacion(idPub)
+            .pipe(
+                finalize(() => {})
+            )
+            .subscribe(() => {
+            this.notify.info(this.l('SavedSuccessfully'));
+                console.log("PublicacionGustada");
+                this.refresh();
+                
+            });
+        this.refresh();
+    }
 
 }

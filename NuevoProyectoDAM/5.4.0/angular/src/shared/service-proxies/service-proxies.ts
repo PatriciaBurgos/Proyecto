@@ -262,6 +262,62 @@ export class AnuncioServiceProxy {
      * @param id (optional) 
      * @return Success
      */
+    getUnAnuncio(id: number | undefined): Observable<AnuncioDto> {
+        let url_ = this.baseUrl + "/api/services/app/Anuncio/GetUnAnuncio?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetUnAnuncio(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetUnAnuncio(<any>response_);
+                } catch (e) {
+                    return <Observable<AnuncioDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AnuncioDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetUnAnuncio(response: HttpResponseBase): Observable<AnuncioDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AnuncioDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AnuncioDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
     getUsuariosGustaAnuncio(id: number | undefined): Observable<AnuncioGustaAUsuariosDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Anuncio/GetUsuariosGustaAnuncio?";
         if (id === null)
@@ -1461,6 +1517,62 @@ export class PeticionServiceProxy {
             }));
         }
         return _observableOf<PeticionDtoListResultDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getUnaPeticion(id: number | undefined): Observable<PeticionDto> {
+        let url_ = this.baseUrl + "/api/services/app/Peticion/GetUnaPeticion?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetUnaPeticion(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetUnaPeticion(<any>response_);
+                } catch (e) {
+                    return <Observable<PeticionDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PeticionDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetUnaPeticion(response: HttpResponseBase): Observable<PeticionDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PeticionDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PeticionDto>(<any>null);
     }
 
     /**
@@ -4047,6 +4159,62 @@ export class UsuarioLogadoServiceProxy {
         }
         return _observableOf<UserDtoListResultDto>(<any>null);
     }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    uploadFoto(body: Blob | undefined): Observable<string> {
+        let url_ = this.baseUrl + "/api/services/app/UsuarioLogado/UploadFoto";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = body;
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "multipart/form-data",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUploadFoto(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUploadFoto(<any>response_);
+                } catch (e) {
+                    return <Observable<string>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<string>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processUploadFoto(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<string>(<any>null);
+    }
 }
 
 export class IsTenantAvailableInput implements IIsTenantAvailableInput {
@@ -4334,132 +4502,6 @@ export interface IAnuncioCreateDto {
     preferencias: string | undefined;
 }
 
-export class AnuncioDto implements IAnuncioDto {
-    publicacionCategoria: string | undefined;
-    publicacionTexto: string | undefined;
-    publicacionHorarioInicio: number | undefined;
-    publicacionHorarioFin: number | undefined;
-    publicacionMunicipio: string | undefined;
-    publicacionCiudad: string | undefined;
-    publicacionNombreUsuario: string | undefined;
-    preferencias: string | undefined;
-    id: number;
-
-    constructor(data?: IAnuncioDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.publicacionCategoria = _data["publicacionCategoria"];
-            this.publicacionTexto = _data["publicacionTexto"];
-            this.publicacionHorarioInicio = _data["publicacionHorarioInicio"];
-            this.publicacionHorarioFin = _data["publicacionHorarioFin"];
-            this.publicacionMunicipio = _data["publicacionMunicipio"];
-            this.publicacionCiudad = _data["publicacionCiudad"];
-            this.publicacionNombreUsuario = _data["publicacionNombreUsuario"];
-            this.preferencias = _data["preferencias"];
-            this.id = _data["id"];
-        }
-    }
-
-    static fromJS(data: any): AnuncioDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new AnuncioDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["publicacionCategoria"] = this.publicacionCategoria;
-        data["publicacionTexto"] = this.publicacionTexto;
-        data["publicacionHorarioInicio"] = this.publicacionHorarioInicio;
-        data["publicacionHorarioFin"] = this.publicacionHorarioFin;
-        data["publicacionMunicipio"] = this.publicacionMunicipio;
-        data["publicacionCiudad"] = this.publicacionCiudad;
-        data["publicacionNombreUsuario"] = this.publicacionNombreUsuario;
-        data["preferencias"] = this.preferencias;
-        data["id"] = this.id;
-        return data; 
-    }
-
-    clone(): AnuncioDto {
-        const json = this.toJSON();
-        let result = new AnuncioDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IAnuncioDto {
-    publicacionCategoria: string | undefined;
-    publicacionTexto: string | undefined;
-    publicacionHorarioInicio: number | undefined;
-    publicacionHorarioFin: number | undefined;
-    publicacionMunicipio: string | undefined;
-    publicacionCiudad: string | undefined;
-    publicacionNombreUsuario: string | undefined;
-    preferencias: string | undefined;
-    id: number;
-}
-
-export class AnuncioDtoListResultDto implements IAnuncioDtoListResultDto {
-    items: AnuncioDto[] | undefined;
-
-    constructor(data?: IAnuncioDtoListResultDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["items"])) {
-                this.items = [] as any;
-                for (let item of _data["items"])
-                    this.items.push(AnuncioDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): AnuncioDtoListResultDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new AnuncioDtoListResultDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.items)) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJSON());
-        }
-        return data; 
-    }
-
-    clone(): AnuncioDtoListResultDto {
-        const json = this.toJSON();
-        let result = new AnuncioDtoListResultDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IAnuncioDtoListResultDto {
-    items: AnuncioDto[] | undefined;
-}
-
 export class UserNameDto implements IUserNameDto {
     userName: string | undefined;
     id: number;
@@ -4552,6 +4594,156 @@ export class PublicacionGustadaDto implements IPublicacionGustadaDto {
 export interface IPublicacionGustadaDto {
     usuario: UserNameDto;
     id: number;
+}
+
+export class AnuncioDto implements IAnuncioDto {
+    publicacionCategoria: string | undefined;
+    publicacionTexto: string | undefined;
+    publicacionHorarioInicio: number | undefined;
+    publicacionHorarioFin: number | undefined;
+    publicacionMunicipio: string | undefined;
+    publicacionCiudad: string | undefined;
+    publicacionId: string | undefined;
+    usuariosGustaAnuncio: PublicacionGustadaDto[] | undefined;
+    usuarioActualGustaPublicacion: boolean;
+    numUsuarios: number;
+    publicacionNombreUsuario: string | undefined;
+    preferencias: string | undefined;
+    id: number;
+
+    constructor(data?: IAnuncioDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.publicacionCategoria = _data["publicacionCategoria"];
+            this.publicacionTexto = _data["publicacionTexto"];
+            this.publicacionHorarioInicio = _data["publicacionHorarioInicio"];
+            this.publicacionHorarioFin = _data["publicacionHorarioFin"];
+            this.publicacionMunicipio = _data["publicacionMunicipio"];
+            this.publicacionCiudad = _data["publicacionCiudad"];
+            this.publicacionId = _data["publicacionId"];
+            if (Array.isArray(_data["usuariosGustaAnuncio"])) {
+                this.usuariosGustaAnuncio = [] as any;
+                for (let item of _data["usuariosGustaAnuncio"])
+                    this.usuariosGustaAnuncio.push(PublicacionGustadaDto.fromJS(item));
+            }
+            this.usuarioActualGustaPublicacion = _data["usuarioActualGustaPublicacion"];
+            this.numUsuarios = _data["numUsuarios"];
+            this.publicacionNombreUsuario = _data["publicacionNombreUsuario"];
+            this.preferencias = _data["preferencias"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): AnuncioDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AnuncioDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["publicacionCategoria"] = this.publicacionCategoria;
+        data["publicacionTexto"] = this.publicacionTexto;
+        data["publicacionHorarioInicio"] = this.publicacionHorarioInicio;
+        data["publicacionHorarioFin"] = this.publicacionHorarioFin;
+        data["publicacionMunicipio"] = this.publicacionMunicipio;
+        data["publicacionCiudad"] = this.publicacionCiudad;
+        data["publicacionId"] = this.publicacionId;
+        if (Array.isArray(this.usuariosGustaAnuncio)) {
+            data["usuariosGustaAnuncio"] = [];
+            for (let item of this.usuariosGustaAnuncio)
+                data["usuariosGustaAnuncio"].push(item.toJSON());
+        }
+        data["usuarioActualGustaPublicacion"] = this.usuarioActualGustaPublicacion;
+        data["numUsuarios"] = this.numUsuarios;
+        data["publicacionNombreUsuario"] = this.publicacionNombreUsuario;
+        data["preferencias"] = this.preferencias;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone(): AnuncioDto {
+        const json = this.toJSON();
+        let result = new AnuncioDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAnuncioDto {
+    publicacionCategoria: string | undefined;
+    publicacionTexto: string | undefined;
+    publicacionHorarioInicio: number | undefined;
+    publicacionHorarioFin: number | undefined;
+    publicacionMunicipio: string | undefined;
+    publicacionCiudad: string | undefined;
+    publicacionId: string | undefined;
+    usuariosGustaAnuncio: PublicacionGustadaDto[] | undefined;
+    usuarioActualGustaPublicacion: boolean;
+    numUsuarios: number;
+    publicacionNombreUsuario: string | undefined;
+    preferencias: string | undefined;
+    id: number;
+}
+
+export class AnuncioDtoListResultDto implements IAnuncioDtoListResultDto {
+    items: AnuncioDto[] | undefined;
+
+    constructor(data?: IAnuncioDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(AnuncioDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): AnuncioDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AnuncioDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): AnuncioDtoListResultDto {
+        const json = this.toJSON();
+        let result = new AnuncioDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAnuncioDtoListResultDto {
+    items: AnuncioDto[] | undefined;
 }
 
 export class AnuncioGustaAUsuariosDto implements IAnuncioGustaAUsuariosDto {
@@ -5176,6 +5368,7 @@ export class PeticionDto implements IPeticionDto {
     publicacionCiudad: string | undefined;
     publicacionId: string | undefined;
     usuariosGustaPeticion: PublicacionGustadaDto[] | undefined;
+    usuarioActualGustaPublicacion: boolean;
     numUsuarios: number;
     publicacionNombreUsuario: string | undefined;
     isUrgent: boolean;
@@ -5204,6 +5397,7 @@ export class PeticionDto implements IPeticionDto {
                 for (let item of _data["usuariosGustaPeticion"])
                     this.usuariosGustaPeticion.push(PublicacionGustadaDto.fromJS(item));
             }
+            this.usuarioActualGustaPublicacion = _data["usuarioActualGustaPublicacion"];
             this.numUsuarios = _data["numUsuarios"];
             this.publicacionNombreUsuario = _data["publicacionNombreUsuario"];
             this.isUrgent = _data["isUrgent"];
@@ -5232,6 +5426,7 @@ export class PeticionDto implements IPeticionDto {
             for (let item of this.usuariosGustaPeticion)
                 data["usuariosGustaPeticion"].push(item.toJSON());
         }
+        data["usuarioActualGustaPublicacion"] = this.usuarioActualGustaPublicacion;
         data["numUsuarios"] = this.numUsuarios;
         data["publicacionNombreUsuario"] = this.publicacionNombreUsuario;
         data["isUrgent"] = this.isUrgent;
@@ -5256,6 +5451,7 @@ export interface IPeticionDto {
     publicacionCiudad: string | undefined;
     publicacionId: string | undefined;
     usuariosGustaPeticion: PublicacionGustadaDto[] | undefined;
+    usuarioActualGustaPublicacion: boolean;
     numUsuarios: number;
     publicacionNombreUsuario: string | undefined;
     isUrgent: boolean;

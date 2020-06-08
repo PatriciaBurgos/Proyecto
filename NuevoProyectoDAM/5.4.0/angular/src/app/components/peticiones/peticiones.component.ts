@@ -6,7 +6,7 @@ import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing
 import { MatDialog } from '@angular/material';
 import { CreatePeticionDialogComponent } from './create-peticiones/create-peticion-dialog.component';
 import { EditPeticionDialogComponent } from './edit-peticiones/edit-peticion-dialog.component';
-import { FavPublicacionComponent } from '../fav-publicacion/fav-publicacion.component';
+
 
 class PagedPeticionRequestDto extends PagedRequestDto {
     filter: string;
@@ -26,10 +26,11 @@ class PagedPeticionRequestDto extends PagedRequestDto {
 })
 
 
-export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> {
+export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> implements OnInit {
 
     peticiones: PeticionDto[] = [];
     estadoPositivo: boolean = true;
+
        
     uLogado = this.appSession.user.userName;
     
@@ -62,21 +63,15 @@ export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> 
                     finishedCallback();
                 })
             )
-            .subscribe(result  => {
+            .subscribe(result   => {
                 this.peticiones = result.items;
-
-                
                 console.log("User:" + this.uLogado);
             });
 
 
-           
+        }
 
-    //ngOnInit() {
-    //    this._peticioneservice.getAll('', 0, 20)
-    //        .subscribe(result =>
-    //        this.peticiones = result.items);
-    }
+ 
 
     delete(peticion: PeticionDto): void {
         abp.message.confirm(
@@ -124,9 +119,7 @@ export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> 
     }
 
 
-    cambiaEstado() {
-        this.estadoPositivo = !this.estadoPositivo; 
-      }
+    
 
     gustaPublicacion(idPub : number){
         console.log("PUB = " + idPub);
@@ -147,6 +140,7 @@ export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> 
 
     noGustaPublicacion(idPub : number){
         console.log("PUB = " + idPub);
+
 
         this._pubGustadaservice
             .usuarioLogadoNOGustaPublicacion(idPub)

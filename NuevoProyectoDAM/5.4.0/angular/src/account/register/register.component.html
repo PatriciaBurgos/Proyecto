@@ -3,14 +3,14 @@
     <form novalidate 
           #registerForm="ngForm" 
           (ngSubmit)="save()">
-      <h4 class="text-center">{{ "Register" | localize }}</h4>
+      <h4 class="text-center">{{ "Registro" | localize }}</h4>
       <div class="form-group form-float">
           <div class="col-md-6">
             <mat-form-field>
                 <input matInput
                   name="Name"
                   [(ngModel)]="model.name"
-                  [placeholder]="'Name' | localize"
+                  [placeholder]="'Nombre' | localize"
                   required
                   maxlength="32" />
             </mat-form-field>
@@ -18,7 +18,7 @@
                 <input matInput
                     name="Surname"
                     [(ngModel)]="model.surname"
-                    [placeholder]="'Surname' | localize"
+                    [placeholder]="'Apellidos' | localize"
                     required
                     maxlength="32"/>
             </mat-form-field>
@@ -27,7 +27,7 @@
                     type="email"
                     name="EmailAddress"
                     [(ngModel)]="model.emailAddress"
-                    [placeholder]="'EmailAddress' | localize"         
+                    [placeholder]="'Correo Electrónico' | localize"         
                     required
                     maxlength="255"
                     pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"/>
@@ -36,7 +36,7 @@
                 <input matInput
                     name="UserName"
                     [(ngModel)]="model.userName"
-                    [placeholder]="'UserName' | localize"         
+                    [placeholder]="'Login' | localize"         
                     required
                     maxlength="32"/>
             </mat-form-field>
@@ -44,7 +44,7 @@
               <input matInput
               [ngModel]="model.birthDate | date:'yyyy-MM-dd'" 
               (ngModelChange)="startDate = $event" 
-              [placeholder]="'BirthDate' | localize" 
+              [placeholder]="'Fecha de Nacimiento' | localize" 
               type="date" 
               name="BirthDate"/>
             </mat-form-field>
@@ -54,7 +54,7 @@
               <input matInput
                   name="Town"
                   [(ngModel)]="model.town"
-                  [placeholder]="'Town' | localize"         
+                  [placeholder]="'Municipio' | localize"         
                   required
                   maxlength="32"/>
             </mat-form-field>
@@ -62,7 +62,7 @@
               <input matInput
                   name="City"
                   [(ngModel)]="model.city"
-                  [placeholder]="'City' | localize"         
+                  [placeholder]="'Ciudad' | localize"         
                   required
                   maxlength="32"/>
             </mat-form-field>
@@ -70,7 +70,7 @@
               <input matInput
                   name="Qualities"
                   [(ngModel)]="model.qualities"
-                  [placeholder]="'Qualities' | localize"         
+                  [placeholder]="'Cualidades' | localize"         
                   required
                   maxlength="32"/>
             </mat-form-field>
@@ -78,7 +78,7 @@
               <input matInput
                       name="Password"
                       [(ngModel)]="model.password"
-                      [placeholder]="'Password' | localize"
+                      [placeholder]="'Contraseña' | localize"
                       type="password"         
                       required
                       maxlength="32"/>
@@ -90,7 +90,7 @@
                     type="button"
                     [disabled]="saving"
                     [routerLink]="['../login']">
-                    {{ "Back" | localize }}
+                    {{ "Volver" | localize }}
             </button>
             <span>&nbsp;</span>
             <button mat-flat-button
@@ -98,7 +98,7 @@
                     flex="15"
                     color="primary"
                     [disabled]="!registerForm.form.valid || saving">
-                    {{ "Submit" | localize }}
+                    {{ "Entrar" | localize }}
             </button>    
       </div>
     </form>

@@ -6,6 +6,7 @@ import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing
 import { MatDialog } from '@angular/material';
 import { CreateAnuncioDialogComponent } from 'app/components/anuncios/create-anuncios/create-anuncio-dialog.component'
 import { ActivatedRoute } from '@angular/router';
+import { AnunciosCompletosComponent } from './anuncios-completos/anuncios-completos.component';
 
 class PagedAnuncioRequestDto extends PagedRequestDto {
     filter: string;
@@ -118,6 +119,10 @@ export class MostrarAnunciosComponent extends PagedListingComponentBase<AnuncioD
               this.refresh();
           }
       });
+  }
+
+  abrirAnuncio(idAnuncio:number):void{
+    this._dialog.open(AnunciosCompletosComponent, {data:idAnuncio});
   }
 
 

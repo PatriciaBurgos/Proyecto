@@ -39,11 +39,7 @@
                             <th>{{ "NombreUsuario" | localize }}</th>
                             <th>{{ "Categoria" | localize }}</th>
                             <th>{{ "Texto" | localize }}</th>
-                            <th>{{ "HorarioInicio" | localize }}</th>
-                            <th>{{ "HorarioFin" | localize }}</th>
-                            <th>{{ "Municipio" | localize }}</th>
                             <th>{{ "Ciudad" | localize }}</th>
-                            <th>{{ "EsUrgente" | localize }}</th>
                             
                             <th *ngIf="comprobacion==true">{{ "Actions" | localize }}</th>
                         </tr>
@@ -58,16 +54,11 @@
                         currentPage: pageNumber,
                         totalItems: totalItems
                       })
-              ">            
+              " (click)="abrirPeticion(peticion.id)">            
                             <td>{{ peticion.publicacionNombreUsuario }}</td>
                             <td>{{ peticion.publicacionCategoria }}</td>
                             <td>{{ peticion.publicacionTexto }}</td>
-                            <td>{{ peticion.publicacionHorarioInicio }}</td>
-                            <td>{{ peticion.publicacionHorarioFin }}</td>
-                            <td>{{ peticion.publicacionMunicipio }}</td>
                             <td>{{ peticion.publicacionCiudad }}</td>
-                            <td *ngIf="peticion.isUrgent==true">Si</td>
-                            <td *ngIf="peticion.isUrgent==false">No</td>
 
                             
                             <td *ngIf="comprobacion==true">

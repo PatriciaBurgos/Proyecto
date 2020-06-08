@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 import { AnuncioServiceProxy, AnuncioDto } from '@shared/service-proxies/service-proxies';
 import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
 import { ActivatedRoute } from '@angular/router';
+import { CreatePeticionDialogComponent } from '../peticiones/create-peticiones/create-peticion-dialog.component';
 
 class PagedUsersRequestDto extends PagedRequestDto {
   filter: string;
@@ -18,13 +19,14 @@ class PagedUsersRequestDto extends PagedRequestDto {
 //selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   animations: [appModuleAnimation()],
-  styles: [
+  styleUrls: ['./perfil.component.css'],
+  /*styles: [
       `
         mat-form-field {
           padding: 10px;
         }
       `
-  ]
+  ]*/
 })
 
 
@@ -73,7 +75,6 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
                 )
                 .subscribe(result  => {
                     this.user = result;
-                    
                 });
         }
 
@@ -106,7 +107,13 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
 
   createAnun () : void {
       this._dialog.open(CreateAnuncioDialogComponent);
+      this.refresh();
 
   }
+
+  createPeti () : void {
+    this._dialog.open(CreatePeticionDialogComponent);
+    this.refresh();
+}
 
 }

@@ -97,14 +97,90 @@
     </div>
 </div>-->
 
-<style>
-    .si{
-    color: #6c5 !important;
-    }
-    .no{
-    color: #933 !important;
-    }
-</style>
+
+
+
+<!--<mat-toolbar style="background-color: white; color: #D500F9;">
+    <h1>Peticiones</h1>
+  </mat-toolbar>
+<div >
+    <div *ngFor="
+    let peticion of (peticiones
+      | paginate
+        : {
+            id: 'server',
+            itemsPerPage: pageSize,
+            currentPage: pageNumber,
+            totalItems: totalItems
+          })
+  ">
+        <div class="card main-content">
+
+            <div class="header" style="margin: 10px">
+                <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
+                <p class="card-body" style="display: inline; margin-left: 25px; font-size: large;"><strong>{{ peticion.publicacionNombreUsuario }}</strong></p>
+            --><!-- <button class="mdc-icon-button material-icons" [ngClass]="{si: estadoPositivo, no: !estadoPositivo}" (click)="cambiaEstado()" style="display: inline; margin-left: 25px; margin-top: 32px; float: right; background-color: transparent;">favorite</button>-->
+
+               <!--<div style="display: inline;" *ngIf="peticion.numUsuarios > 0; else no">                
+
+                    <div style="display: inline;" *ngFor="let usu of peticion.usuariosGustaPeticion">
+                        
+                        HOLAA-{{countFav}}
+                        <ng-container #hola *ngIf="usu.usuario.userName == uLogado ">                            
+                            HOLA-{{countFav}}
+                            <button class="mdc-icon-button material-icons" 
+                                style="color: red; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
+                                background-color: transparent;" (click)="noGustaPublicacion(peticion.publicacionId)">favorite</button>
+                            
+                        </ng-container>
+
+                        QUEE-{{countFav}}
+                        <ng-container *ngIf="usu.usuario.userName != uLogado ">
+                            QUE-{{countFav}}
+                            <button class="mdc-icon-button material-icons" 
+                                style="color: grey; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
+                                background-color: transparent;" (click)="gustaPublicacion(peticion.publicacionId)">favorite</button>
+                        </ng-container>
+                    </div>
+                </div>
+                PASAA-{{countFav}}
+                <ng-template #no >
+                    PASA-{{countFav}}
+                    <button class="mdc-icon-button material-icons" 
+                        style="color: grey; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
+                        background-color: transparent;" (click)="gustaPublicacion(peticion.publicacionId)">favorite</button>
+                </ng-template>
+
+                <p class="card-body text-right" style="display: inline; margin-left: 25px; margin-top: 32px; float: right;"><strong>Numero de Favoritos:</strong>{{peticion.numUsuarios}}</p>
+
+
+                <p class="card-body text-right" style="display: inline; margin-left: 25px; margin-top: 32px; float: right;"><strong>Categoría:</strong> {{ peticion.publicacionCategoria }}</p>
+            </div>
+
+            <div class="card-body" style="margin: 30px">
+                <p style="font-size: large;">{{ peticion.publicacionTexto }}</p>
+                <p *ngIf="peticion.isUrgent==true"><strong>Es urgente: </strong>Si</p>
+                <p *ngIf="peticion.isUrgent==false"><strong>Es urgente: </strong>No</p>
+            </div>
+
+            <div class="card-body" style="margin: 30px; padding-bottom: 20px;">
+                <p  style="display: inline;"><strong>Horario Inicio:</strong> {{ peticion.publicacionHorarioInicio }}</p>
+                <p  style="display: inline; margin-left: 70px;"><strong>Horario Fin:</strong> {{ peticion.publicacionHorarioFin }}</p>
+                <p  style="display: inline; margin-left: 150px;"><strong>Municipio:</strong> {{ peticion.publicacionMunicipio }}</p>
+                <p  style="display: inline; margin-left: 70px;"><strong>Ciudad:</strong> {{ peticion.publicacionCiudad }}</p>
+            </div>
+
+        </div>
+
+    </div> 
+
+    <button class="mdc-fab " mat-mini-fab style="background-color: #EA80FC; color: white; width: 70px; height: 70px;
+        position: fixed;bottom: 1rem;right: 1rem;" class="pull-right" (click)="createPeticion()">
+        <div class="mdc-fab__ripple"></div>
+        <span class="mdc-fab__icon material-icons">add</span>
+    </button>
+
+</div>-->
 
 
 <mat-toolbar style="background-color: white; color: #D500F9;">
@@ -127,34 +203,24 @@
                 <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
                 <p class="card-body" style="display: inline; margin-left: 25px; font-size: large;"><strong>{{ peticion.publicacionNombreUsuario }}</strong></p>
                <!-- <button class="mdc-icon-button material-icons" [ngClass]="{si: estadoPositivo, no: !estadoPositivo}" (click)="cambiaEstado()" style="display: inline; margin-left: 25px; margin-top: 32px; float: right; background-color: transparent;">favorite</button>-->
+       
+                <div style="display: inline;">
+                    
+                    <ng-container *ngIf="peticion.usuarioActualGustaPublicacion; else no">   
+                        <button class="mdc-icon-button material-icons" 
+                            style="color: red; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
+                            background-color: transparent;" (click)="noGustaPublicacion(peticion.publicacionId)">favorite</button>     
+                    </ng-container>
 
-               <div style="display: inline;" *ngIf="peticion.numUsuarios > 0; else no">                
-
-                    <div style="display: inline;" *ngFor="let usu of peticion.usuariosGustaPeticion">
+                    <ng-template #no>
                         
-                        <ng-container *ngIf="usu.usuario.userName == uLogado;">
-                            <button class="mdc-icon-button material-icons" 
-                                style="color: red; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
-                                background-color: transparent;" (click)="noGustaPublicacion(peticion.publicacionId)">favorite</button>
-                        </ng-container>
-
-                        <ng-container *ngIf="usu.usuario.userName != uLogado">
-                            <button class="mdc-icon-button material-icons" 
-                                style="color: grey; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
-                                background-color: transparent;" (click)="gustaPublicacion(peticion.publicacionId)">favorite</button>
-                        </ng-container>
-
-                    </div>
+                        <button class="mdc-icon-button material-icons" 
+                            style="color: grey; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
+                            background-color: transparent;" (click)="gustaPublicacion(peticion.publicacionId)">favorite</button>
+                    </ng-template>
                 </div>
 
-                <ng-template #no>
-                    <button class="mdc-icon-button material-icons" 
-                        style="color: grey; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
-                        background-color: transparent;" (click)="gustaPublicacion(peticion.publicacionId)">favorite</button>
-                </ng-template>
-
                 <p class="card-body text-right" style="display: inline; margin-left: 25px; margin-top: 32px; float: right;"><strong>Numero de Favoritos:</strong>{{peticion.numUsuarios}}</p>
-
 
                 <p class="card-body text-right" style="display: inline; margin-left: 25px; margin-top: 32px; float: right;"><strong>Categoría:</strong> {{ peticion.publicacionCategoria }}</p>
             </div>

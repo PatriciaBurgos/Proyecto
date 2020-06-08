@@ -6,6 +6,7 @@ import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing
 import { MatDialog } from '@angular/material';
 import { CreatePeticionDialogComponent } from 'app/components/peticiones/create-peticiones/create-peticion-dialog.component';
 import { ActivatedRoute } from '@angular/router';
+import { PeticionesCompletasComponent } from './peticiones-completas/peticiones-completas.component';
 
 
 class PagedPeticionRequestDto extends PagedRequestDto {
@@ -118,5 +119,8 @@ export class MostrarPeticionesComponent extends PagedListingComponentBase<Petici
       });
   }
 
+  abrirPeticion(idPeticion:number):void{
+    this._dialog.open(PeticionesCompletasComponent, {data:idPeticion});
+  }
 
 }

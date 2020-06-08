@@ -11,6 +11,9 @@ namespace DAM.Anuncios.Dto
 		{
 			CreateMap<Anuncio, AnuncioDto>()
 				.ForMember(a => a.PublicacionNombreUsuario, opts => opts.MapFrom(a => a.Publicacion.Usuario.UserName))
+				.ForMember(cdto => cdto.NumUsuarios, opts => opts.MapFrom(cb => cb.Publicacion.PublicacionesGustadas.Count > 0 ? cb.Publicacion.PublicacionesGustadas.Count : 0))
+				.ForMember(a => a.UsuariosGustaAnuncio, opts => opts.MapFrom(a => a.Publicacion.PublicacionesGustadas))
+				.ForMember(a => a.usuarioActualGustaPublicacion, opts => opts.Ignore())
 				.ReverseMap();
 
 			CreateMap<Anuncio, AnuncioCreateDto>().ReverseMap();

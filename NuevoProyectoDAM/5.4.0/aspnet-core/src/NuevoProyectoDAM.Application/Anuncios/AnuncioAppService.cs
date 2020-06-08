@@ -3,7 +3,9 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
+using AutoMapper;
 using DAM.Anuncios.Dto;
+using DAM.PublicacionesGustadas.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -45,14 +47,48 @@ namespace DAM.Anuncios
 			return ObjectMapper.Map<AnuncioDto>(anuncio);
 		}
 
+
 		public async Task<ListResultDto<AnuncioDto>> GetPublicacionesAnuncios()
 		{
+			CheckUpdatePermission();
+
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
 			var anuncios = await _anuncioRepository.GetAll()
 				.Include(a => a.Publicacion)
-				.Include(p => p.Publicacion.Usuario)
+				.ThenInclude(p => p.PublicacionesGustadas)
+				.ThenInclude(p => p.Usuario)
+				.Include(a => a.Publicacion.Usuario)
 				.ToListAsync();
 
-			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anuncios));
+			var anunciosDto = new List<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anuncios));
+
+
+			foreach (AnuncioDto anun in anunciosDto)
+			{				 
+				foreach (PublicacionGustadaDto publiGus in anun.UsuariosGustaAnuncio)
+				{
+					if (usuarioActual.Id == publiGus.Usuario.Id)
+					{
+						anun.usuarioActualGustaPublicacion = true;
+					}
+				}
+				
+			}
+
+			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anunciosDto));
+		}
+
+
+		public async Task<AnuncioDto> GetUnAnuncio(int id)
+		{
+			var anuncio = await _anuncioRepository.GetAll()
+				.Include(a => a.Publicacion)
+				.Include(p => p.Publicacion.Usuario)
+				.Where(a => a.Id == id)
+				.FirstOrDefaultAsync();
+
+			return ObjectMapper.Map<AnuncioDto>(anuncio);
 		}
 
 		public async Task<ListResultDto<AnuncioGustaAUsuariosDto>> GetUsuariosGustaAnuncio(int id)

@@ -56,6 +56,8 @@ import { MostrarSeguidoresComponent } from './components/perfil/usuarios-seguido
 import { MostrarSeguidosComponent } from './components/perfil/usuarios-seguidos/mostrar-seguidos/mostrar-seguidos.component';
 import { MostrarAnunciosComponent } from './components/perfil/mostrar-anuncios/mostrar-anuncios.component';
 import { MostrarPeticionesComponent } from './components/perfil/mostrar-peticiones/mostrar-peticiones.component';
+import { AnunciosCompletosComponent } from './components/perfil/mostrar-anuncios/anuncios-completos/anuncios-completos.component';
+import { PeticionesCompletasComponent } from './components/perfil/mostrar-peticiones/peticiones-completas/peticiones-completas.component';
 // chats
 import { ChatsComponent } from './components/chats/chats.component';
 import { CreateChatDialogComponent } from './components/chats/create-chats/create-chat-dialog.component';
@@ -63,6 +65,7 @@ import { ChatsReducidosComponent } from './components/chats/chats-reducidos/chat
 import { ChatsUsuariosComponent } from './components/chats/chats-usuarios/chats-usuarios.component';
 // usuarios
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { FotoComponent } from './components/foto/foto.component';
 
 
 @NgModule({
@@ -107,13 +110,17 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     MostrarSeguidosComponent,
     MostrarAnunciosComponent,
     MostrarPeticionesComponent,
+    AnunciosCompletosComponent,
+    PeticionesCompletasComponent,
     // chats
     ChatsComponent,
     CreateChatDialogComponent,
     ChatsReducidosComponent,
     ChatsUsuariosComponent,
     //usuarios
-    UsuariosComponent
+    UsuariosComponent,
+    FotoComponent
+    
     
     
   ],
@@ -157,7 +164,10 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     MostrarSeguidoresComponent,
     MostrarSeguidosComponent,
     MostrarAnunciosComponent,
-    MostrarPeticionesComponent
+    MostrarPeticionesComponent,
+    FotoComponent,
+    AnunciosCompletosComponent,
+    PeticionesCompletasComponent
   ],
 })
 export class AppModule {}

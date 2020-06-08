@@ -4,6 +4,7 @@ using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
 using Abp.UI;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using NuevoProyectoDAM.Authorization;
 using NuevoProyectoDAM.Authorization.Users;
@@ -105,6 +106,26 @@ namespace NuevoProyectoDAM.Users
 			return new ListResultDto<UserDto>(ObjectMapper.Map<List<UserDto>>(usuarios));
 		}
 
-		
+		public  string UploadFoto(IFormFile file)
+		{
+
+			var uploads = Path.Combine("c:\\temp\\", "uploads");
+
+			var filePath = "";
+
+			if (file.Length > 0)
+			{
+				filePath = Path.Combine(uploads, file.FileName);
+
+				using (var fileStream = new FileStream(filePath, FileMode.Create))
+				{
+					file.CopyTo(fileStream);
+				}
+			}
+
+			return filePath;
+		}
+
+
 	}
 }

@@ -4,6 +4,7 @@ import { finalize } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {AnuncioServiceProxy, AnuncioCreateDto} from '@shared/service-proxies/service-proxies';
+import { PagedListingComponentBase } from '@shared/paged-listing-component-base';
 
 
 @Component({
@@ -19,7 +20,8 @@ import {AnuncioServiceProxy, AnuncioCreateDto} from '@shared/service-proxies/ser
     `
     ]
 })
-export class CreateAnuncioDialogComponent extends AppComponentBase  {
+export class CreateAnuncioDialogComponent extends PagedListingComponentBase<AnuncioCreateDto> {
+    
     saving = false;
     anuncio: AnuncioCreateDto = new AnuncioCreateDto();
     categoria : string = "";
@@ -33,7 +35,11 @@ export class CreateAnuncioDialogComponent extends AppComponentBase  {
     }
 
   
-    
+    list ():void{}
+    delete ():void{}   
+        
+        
+
     save(): void {
         this.saving = true;
         const Anuncio_ = new AnuncioCreateDto();
@@ -50,8 +56,10 @@ export class CreateAnuncioDialogComponent extends AppComponentBase  {
                 })
             )
             .subscribe(() => {
-                this.notify.info(this.l('SavedSuccessfully'));
+                this.notify.info(this.l('SavedSuccessfully'));    
+                this.refresh();            
                 this.close(true);
+                
             });
     }
 

@@ -39,11 +39,7 @@
                             <th>{{ "NombreUsuario" | localize }}</th>
                             <th>{{ "Categoria" | localize }}</th>
                             <th>{{ "Texto" | localize }}</th>
-                            <th>{{ "HorarioInicio" | localize }}</th>
-                            <th>{{ "HorarioFin" | localize }}</th>
-                            <th>{{ "Municipio" | localize }}</th>
                             <th>{{ "Ciudad" | localize }}</th>
-                            <th>{{ "Preferencias" | localize }}</th>
                             
                             <th *ngIf="comprobacion==true">{{ "Actions" | localize }}</th>
                         </tr>
@@ -58,15 +54,12 @@
                         currentPage: pageNumber,
                         totalItems: totalItems
                       })
-              ">            
+              " (click)="abrirAnuncio(anuncio.id)">            
                             <td>{{ anuncio.publicacionNombreUsuario }}</td>
                             <td>{{ anuncio.publicacionCategoria }}</td>
                             <td>{{ anuncio.publicacionTexto }}</td>
-                            <td>{{ anuncio.publicacionHorarioInicio }}</td>
-                            <td>{{ anuncio.publicacionHorarioFin }}</td>
-                            <td>{{ anuncio.publicacionMunicipio }}</td>
                             <td>{{ anuncio.publicacionCiudad }}</td>
-                            <td>{{ anuncio.preferencias }}</td>
+
                             <td *ngIf="comprobacion==true">
                                 <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                     <mat-icon>menu</mat-icon>

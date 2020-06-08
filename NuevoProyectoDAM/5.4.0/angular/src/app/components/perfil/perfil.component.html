@@ -4,7 +4,7 @@
         <div class="card main-content ">
             <div class="header " >
                 <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
-                <h2 class="card-body" style="display: inline; margin-left: 25px; font-weight: bold;">{{ user.userName }}</h2>
+                <h2 class="card-body" style="display: inline; margin-left: 25px; font-weight: bold; font-size: large;">{{ user.userName }}</h2>
                 <ul class="header-dropdown m-r--5">
                     <li><app-usuarios-seguidores></app-usuarios-seguidores></li>
                     <li><app-usuarios-seguidos></app-usuarios-seguidos></li>
@@ -28,12 +28,13 @@
 
 <!--INFORMACION PERSONAL-->
 <div>
-    <div class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 8px;">
-        <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
+    <div class="row clearfix" [@routerTransition] >
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
             <div class="card main-content">
-                <div class="body table-responsive">
-                    <table class="table table-hover table-striped" [busy]="isTableLoading">
-                        <tbody>
+                <div class="body table-responsive" style="align-items: center; text-align: -webkit-center;">
+                    
+                    <table class="table table-hover " [busy]="isTableLoading" #linea style="text-align: end;">
+                        
                             <tr>
                                 <th>Municipio</th>
                                 <td>{{ user.town }}</td>
@@ -46,12 +47,40 @@
                                 <th>Cualidades</th>
                                 <td>{{ user.qualities }}</td>
                             </tr>                        
-                        </tbody>
+                        
                     </table>
-                    <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
-                        <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
-                        </abp-pagination-controls>
-                    </div>
+
+
+                    <table *ngIf="comprobacion==true" class="table" [busy]="isTableLoading" #separacion >
+                        
+                            <tr>
+                                <th>
+                                    <button class="mat-raised-button " style="background-color: #EA80FC; 
+                                        color:white; margin-top: 12px;">ANUNCIOS FAV &nbsp;<i class="fa fa-heart" aria-hidden="true"></i></button>
+                                </th>   
+                                <th>
+                                    <button class="mat-raised-button " style="background-color: #EA80FC; 
+                                        color:white; margin-top: 12px;">PETICIONES FAV &nbsp;<i class="fa fa-heart" aria-hidden="true"></i></button>
+                                </th>  
+                            </tr>                      
+                        
+                    </table>
+
+
+                    <!--<table class="table" [busy]="isTableLoading" #separacion>
+                        <tbody>
+                            <tr>
+                                <button class="mat-raised-button " style="background-color: #EA80FC; 
+                                    color:white" (click)="createAnun()">NUEVO ANUNCIO</button>
+                            </tr>
+                            <tr>
+                                <button class="mat-raised-button " style="background-color: #EA80FC; 
+                                    color:white; margin-top: 12px;" (click)="createPeti()">NUEVA PETICIÓN</button>
+                            </tr>                        
+                        </tbody>
+                    </table>-->
+
+                    
                 </div>
             </div>
         </div>
@@ -59,7 +88,7 @@
 
     <!--CREAR ANUNCIO/PETICION-->
 
-    <div *ngIf="comprobacion==true" class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
+    <!--<div *ngIf="comprobacion==true" class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
         <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
             <div class="card main-content">
                 <div class="body table-responsive">
@@ -71,7 +100,7 @@
                             </tr>
                             <tr>
                                 <button class="mat-raised-button " style="background-color: #EA80FC; 
-                                    color:white; margin-top: 12px;">NUEVA PETICIÓN</button>
+                                    color:white; margin-top: 12px;" (click)="createPeti()">NUEVA PETICIÓN</button>
                             </tr>                        
                         </tbody>
                     </table>
@@ -82,11 +111,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <!--BOTONES DE COSAS GUARDADAS-->
 
-    <div *ngIf="comprobacion==true" class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
+    <!--<div *ngIf="comprobacion==true" class="row clearfix" [@routerTransition] style="display: inline-flex; margin-left: 200px;">
         <div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
             <div class="card main-content">
                 <div class="body table-responsive">
@@ -114,7 +143,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 <!--ANUNCIOS DEL USUARIO-->
 

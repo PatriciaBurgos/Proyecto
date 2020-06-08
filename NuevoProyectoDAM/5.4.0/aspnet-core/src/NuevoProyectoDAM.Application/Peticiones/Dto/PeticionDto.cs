@@ -19,6 +19,9 @@ namespace DAM.Peticiones.Dto
         public string PublicacionId { get; set; }
 
         public ICollection<PublicacionGustadaDto> UsuariosGustaPeticion { get; set; }
+
+        public bool usuarioActualGustaPublicacion { get; set; }
+
         public int NumUsuarios { get; set; }
 
         public string PublicacionNombreUsuario { get; set; }
