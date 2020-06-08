@@ -2,9 +2,11 @@
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.IdentityFramework;
 using Abp.Runtime.Session;
 using Abp.UI;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NuevoProyectoDAM.Authorization;
 using NuevoProyectoDAM.Authorization.Users;
@@ -16,6 +18,8 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
+
+
 
 namespace NuevoProyectoDAM.Users
 {
@@ -41,6 +45,8 @@ namespace NuevoProyectoDAM.Users
 
 			return ObjectMapper.Map<UserDto>(usuario);
 		}
+
+		
 
 		public async Task<UsuariosSeguidoresDto> GetMisSeguidores()
 		{
@@ -126,6 +132,29 @@ namespace NuevoProyectoDAM.Users
 			return filePath;
 		}
 
+		public async Task<UserDto> UpdateAsync(UserDto input)
+		{
+			//CheckUpdatePermission();
+
+			var user = await _userManager.GetUserByIdAsync(input.Id);
+
+			MapToEntity(input, user);
+
+			CheckErrors(await _userManager.UpdateAsync(user));
+
+			return input;
+		}
+
+		protected void MapToEntity(UserDto input, User user)
+		{
+			ObjectMapper.Map(input, user);
+			user.SetNormalizedNames();
+		}
+
+		protected virtual void CheckErrors(IdentityResult identityResult)
+		{
+			identityResult.CheckErrors(LocalizationManager);
+		}
 
 	}
 }

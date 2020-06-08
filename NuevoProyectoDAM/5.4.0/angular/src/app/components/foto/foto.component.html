@@ -1,1 +1,7 @@
-<p>foto works!</p>
+<label class="image-upload-container btn btn-bwm">
+    <span>Select Image</span>
+    <input #imageInput
+           type="file"
+           name="file"
+           (change)="processFile(imageInput)">
+  </label>

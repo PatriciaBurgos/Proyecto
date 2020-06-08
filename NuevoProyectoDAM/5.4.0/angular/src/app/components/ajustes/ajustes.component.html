@@ -1,0 +1,119 @@
+<form autocomplete="off" #editUserModal="ngForm" (ngSubmit)="save()">
+
+    <div class="card main-content clearfix" style="margin-bottom: 15px; padding: 16px;" >
+        <mat-toolbar style="background-color: white; color: #D500F9; display: inline; ">
+            <h2 style="margin-left: 50px; text-align: center; float: left;">Ajustes</h2>       
+        </mat-toolbar>
+    </div>
+    
+    <div class="card main-content center-block card-body " style="width: auto; margin-top: 10px; padding: 0 16px;">
+        
+          <br />
+          <div class="row-fluid">
+            <div class="col-md-6">
+              <mat-form-field>
+                <input
+                  matInput
+                  name="UserName"
+                  [placeholder]="'UserName' | localize"
+                  [(ngModel)]="user.userName"
+                  required
+                  minlength="2"
+                  maxlength="32"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  name="Name"
+                  [placeholder]="'Name' | localize"
+                  [(ngModel)]="user.name"
+                  required
+                  maxlength="32"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  name="Town"
+                  [placeholder]="'Town' | localize"
+                  [(ngModel)]="user.town"
+                  required
+                  maxlength="32"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  name="BirthDate"
+                  [placeholder]="'BirthDate' | localize"
+                  [(ngModel)]="user.birthDate "
+                  required
+                  maxlength="32"
+                />
+              </mat-form-field>
+              
+            </div>
+            <div class="col-md-6">
+              <mat-form-field>
+                <input
+                  matInput
+                  name="EmailAddress"
+                  [placeholder]="'EmailAddress' | localize"
+                  [(ngModel)]="user.emailAddress"
+                  type="email"
+                  required
+                  maxlength="256"
+                  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  name="Surname"
+                  [placeholder]="'Surname' | localize"
+                  [(ngModel)]="user.surname"
+                  required
+                  maxlength="32"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  name="City"
+                  [placeholder]="'City' | localize"
+                  [(ngModel)]="user.city"
+                  required
+                  maxlength="32"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  name="Qualities"
+                  [placeholder]="'Qualities' | localize"
+                  [(ngModel)]="user.qualities"
+                  required
+                  maxlength="32"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+    
+        <div align="end">
+            <!-- <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+                {{ "Cancel" | localize }}
+            </button>-->
+            <button
+                mat-flat-button
+                type="submit"
+                flex="15"
+                style="background-color: #EA80FC; color: white;"
+                [disabled]="!editUserModal.form.valid || saving"
+            >
+                {{ "Save" | localize }}
+            </button>
+        </div>
+    </div>
+  </form>
+  

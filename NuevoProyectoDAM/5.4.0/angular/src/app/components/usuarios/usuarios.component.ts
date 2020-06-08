@@ -24,7 +24,7 @@ export class UsuariosComponent extends PagedListingComponentBase<UserDto> {
 
   constructor(
       injector: Injector,
-      private _userService: UserServiceProxy,
+      private _userService: UsuarioLogadoServiceProxy,
       private _dialog: MatDialog
   ) {
       super(injector);
@@ -41,7 +41,7 @@ export class UsuariosComponent extends PagedListingComponentBase<UserDto> {
       request.isActive = this.isActive;
 
       this._userService
-          .getAll(request.keyword, request.isActive, request.skipCount, request.maxResultCount)
+          .getAllUsuarios()
           .pipe(
               finalize(() => {
                   finishedCallback();

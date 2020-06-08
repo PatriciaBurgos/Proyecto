@@ -10,15 +10,9 @@
                     <li><app-usuarios-seguidos></app-usuarios-seguidos></li>
                     <li>
                         <button mat-icon-button [matMenuTriggerFor]="headerMenu" 
-                            class="header-dropdown-mat-icon-button">
+                            class="header-dropdown-mat-icon-button" [routerLink] = "['/app/ajustes']">
                             <mat-icon>settings</mat-icon>
-                        </button>
-                        <mat-menu #headerMenu="matMenu">
-                            <button mat-menu-item (click)="refresh()">
-                                <mat-icon>refresh</mat-icon>
-                                <span>{{ "Refresh" | localize }}</span>
-                            </button>
-                        </mat-menu>
+                        </button>                        
                     </li>
                 </ul>                
             </div>
@@ -163,3 +157,4 @@
     </div>
 </div>
   
+<app-foto></app-foto>

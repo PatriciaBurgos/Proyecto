@@ -14,6 +14,7 @@ import { ChatsComponent } from './components/chats/chats.component';
 import { PeticionesComponent } from './components/peticiones/peticiones.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { ChatsUsuariosComponent } from './components/chats/chats-usuarios/chats-usuarios.component';
+import { AjustesComponent } from './components/ajustes/ajustes.component';
 
 
 
@@ -36,6 +37,7 @@ import { ChatsUsuariosComponent } from './components/chats/chats-usuarios/chats-
                     { path: 'perfil/:id', component: PerfilComponent, data: { permission: 'Pages.UsersNormales' } },
                     { path: 'chats', component: ChatsComponent, data: { permission: 'Pages.Chats' } },
                     { path: 'chats/:id', component: ChatsUsuariosComponent, data: { permission: 'Pages.Chats' } },
+                    { path: 'ajustes', component: AjustesComponent, data: { permission: 'Pages.UsersNormales' } },
                     { path: 'usuarios', component: UsuariosComponent, data: { permission: 'Pages.UsersNormales' } }
                 ]
             }

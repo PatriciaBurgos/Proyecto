@@ -66,6 +66,8 @@ import { ChatsUsuariosComponent } from './components/chats/chats-usuarios/chats-
 // usuarios
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { FotoComponent } from './components/foto/foto.component';
+// ajustes
+import { AjustesComponent } from './components/ajustes/ajustes.component';
 
 
 @NgModule({
@@ -119,7 +121,9 @@ import { FotoComponent } from './components/foto/foto.component';
     ChatsUsuariosComponent,
     //usuarios
     UsuariosComponent,
-    FotoComponent
+    FotoComponent,
+    //ajustes
+    AjustesComponent
     
     
     
