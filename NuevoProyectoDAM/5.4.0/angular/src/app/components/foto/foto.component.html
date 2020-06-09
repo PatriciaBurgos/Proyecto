@@ -1,7 +1,30 @@
-<label class="image-upload-container btn btn-bwm">
+<!--<label class="image-upload-container btn btn-bwm">
     <span>Select Image</span>
     <input #imageInput
            type="file"
            name="file"
-           (change)="processFile(imageInput)">
-  </label>
+           (change)="processFile($event)">
+</label>-->
+
+<!--<form method="post" enctype="multipart/form-data" asp-controller="Home"
+                                                  asp-action="UploadFiles">
+    <div class="form-group">
+        <div class="col-md-10">
+            <p>Upload one or more files using this form:</p>
+            <input type="file" name="file" (change)="processFile($event)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Upload"  />
+        </div>
+    </div>
+</form>
+
+-->
+
+<input  (change)="fileChange($event)"  type="file"  class="custom-file-input"  id="inputGroupFile01"  aria-describedby="inputGroupFileAddon01">
+<button><span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Upload</span></button>
+
+
+<!--<input method="post" enctype="application/json" type="file" (change)="processFile($event)">-->

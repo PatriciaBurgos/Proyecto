@@ -58,6 +58,8 @@ import { MostrarAnunciosComponent } from './components/perfil/mostrar-anuncios/m
 import { MostrarPeticionesComponent } from './components/perfil/mostrar-peticiones/mostrar-peticiones.component';
 import { AnunciosCompletosComponent } from './components/perfil/mostrar-anuncios/anuncios-completos/anuncios-completos.component';
 import { PeticionesCompletasComponent } from './components/perfil/mostrar-peticiones/peticiones-completas/peticiones-completas.component';
+import { AnunciosFavComponent } from './components/perfil/mostrar-anuncios/anuncios-fav/anuncios-fav.component';
+import { PeticionesFavComponent } from './components/perfil/mostrar-peticiones/peticiones-fav/peticiones-fav.component';
 // chats
 import { ChatsComponent } from './components/chats/chats.component';
 import { CreateChatDialogComponent } from './components/chats/create-chats/create-chat-dialog.component';
@@ -114,6 +116,8 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     MostrarPeticionesComponent,
     AnunciosCompletosComponent,
     PeticionesCompletasComponent,
+    //AnunciosFavComponent,
+    //PeticionesFavComponent,
     // chats
     ChatsComponent,
     CreateChatDialogComponent,
@@ -123,7 +127,7 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     UsuariosComponent,
     FotoComponent,
     //ajustes
-    AjustesComponent
+    AjustesComponent   
     
     
     
@@ -171,7 +175,9 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     MostrarPeticionesComponent,
     FotoComponent,
     AnunciosCompletosComponent,
-    PeticionesCompletasComponent
+    PeticionesCompletasComponent,
+    //AnunciosFavComponent,
+    //PeticionesFavComponent
   ],
 })
 export class AppModule {}

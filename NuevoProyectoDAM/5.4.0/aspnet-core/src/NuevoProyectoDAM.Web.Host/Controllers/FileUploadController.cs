@@ -3,61 +3,59 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Abp.IO.Extensions;
 using Abp.UI;
 using Abp.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace NuevoProyectoDAM.Web.Host.Controllers
 {
-    
+    [Route("api/[controller]")]
+    [ApiController]
+   
     public class FileUploadController : ControllerBase
     {
-        
-        public UploadProfilePictureOutput UploadProfilePicture()
+        [HttpPost, DisableRequestSizeLimit]
+        public ActionResult UploadFile()
         {
             try
             {
-                var profilePictureFile = Request.Form.Files.First();
+                
+                var file = Request.Form.Files[0];
+                var folderName = Path.Combine("Resources");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                
 
-                //Check input
-                if (profilePictureFile == null)
+                if (file.Length > 0)
                 {
-                    throw new UserFriendlyException("An error occurred!");
-                }
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.ToString();
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
 
-                if (profilePictureFile.Length > 9999999) //change the max value
-                {
-                    throw new UserFriendlyException("Picture exceeds max size!");
+                   
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        
+                        file.CopyTo(stream);
                     }
 
-                byte[] fileBytes;
-                using (var stream = profilePictureFile.OpenReadStream())
+                    return Ok(new { dbPath });
+
+                }
+                else
                 {
-                    fileBytes = stream.GetAllBytes();
+                    return BadRequest();
                 }
 
-                //Save new picture
-                var fileInfo = new FileInfo(profilePictureFile.FileName);
-                var tempFileName = Guid.NewGuid().ToString() + fileInfo.Extension;
-                var tempFilePath = Path.Combine(@"c:\temp\upload", tempFileName);
-                System.IO.File.WriteAllBytes(tempFilePath, fileBytes);
-
-                using (var bmpImage = new Bitmap(tempFilePath))
-                {
-                    return new UploadProfilePictureOutput
-                    {
-                        FileName = tempFileName,
-                        Width = bmpImage.Width,
-                        Height = bmpImage.Height
-                    };
-                }
             }
-            catch (UserFriendlyException ex)
+            catch (Exception ex)
             {
-                return new UploadProfilePictureOutput(new ErrorInfo(ex.Message));
+                return StatusCode(500, $"Internal server error: {ex}");
             }
         }
     }

@@ -8,6 +8,8 @@ import { AnuncioServiceProxy, AnuncioDto } from '@shared/service-proxies/service
 import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
 import { ActivatedRoute } from '@angular/router';
 import { CreatePeticionDialogComponent } from '../peticiones/create-peticiones/create-peticion-dialog.component';
+import { AnunciosFavComponent } from './mostrar-anuncios/anuncios-fav/anuncios-fav.component';
+import { PeticionesFavComponent } from './mostrar-peticiones/peticiones-fav/peticiones-fav.component';
 
 class PagedUsersRequestDto extends PagedRequestDto {
   filter: string;
@@ -105,15 +107,23 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
   }
 
 
-  createAnun () : void {
-      this._dialog.open(CreateAnuncioDialogComponent);
-      this.refresh();
+    createAnun () : void {
+        this._dialog.open(CreateAnuncioDialogComponent);
+        this.refresh();
 
-  }
+    }
 
-  createPeti () : void {
-    this._dialog.open(CreatePeticionDialogComponent);
-    this.refresh();
-}
+    createPeti () : void {
+        this._dialog.open(CreatePeticionDialogComponent);
+        this.refresh();
+    }
+
+    abrirAnunFav () : void{
+        this._dialog.open(AnunciosFavComponent);
+    }
+
+    abrirPetiFav () : void{
+        this._dialog.open(PeticionesFavComponent);
+    }
 
 }

@@ -5,6 +5,7 @@ using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
 using AutoMapper;
 using DAM.Anuncios.Dto;
+using DAM.PublicacionesGustadas;
 using DAM.PublicacionesGustadas.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

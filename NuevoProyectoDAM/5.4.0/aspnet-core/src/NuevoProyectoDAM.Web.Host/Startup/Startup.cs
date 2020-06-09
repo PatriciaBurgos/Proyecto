@@ -18,6 +18,10 @@ using Abp.Dependency;
 using Abp.Json;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace NuevoProyectoDAM.Web.Host.Startup
 {
@@ -34,6 +38,18 @@ namespace NuevoProyectoDAM.Web.Host.Startup
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+
+            //Configuración para el "FileUpload"
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+
+            });
+
+            
+
             //MVC
             services.AddControllersWithViews(
                 options =>
@@ -68,10 +84,12 @@ namespace NuevoProyectoDAM.Web.Host.Startup
                                 .ToArray()
                         )
                         .AllowAnyHeader()
+
                         .AllowAnyMethod()
                         .AllowCredentials()
                 )
             );
+            //services.AddCors();
 
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
             services.AddSwaggerGen(options =>
@@ -100,9 +118,23 @@ namespace NuevoProyectoDAM.Web.Host.Startup
 
         public void Configure(IApplicationBuilder app,  ILoggerFactory loggerFactory)
         {
+
+
             app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
 
             app.UseCors(_defaultCorsPolicyName); // Enable CORS!
+            //Configuración de Cors
+            //app.UseCors(options =>
+             //  options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+                       
+
+            //Configuración para el "FileUpload"
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
 
             app.UseStaticFiles();
 
