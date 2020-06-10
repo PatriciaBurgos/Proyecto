@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector, ViewChild, Directive } from '@angular/core';
-import { UserServiceProxy, UsuarioLogadoServiceProxy, UserDto, UserDtoPagedResultDto } from '@shared/service-proxies/service-proxies';
+import { UserServiceProxy, UsuarioLogadoServiceProxy, UserDto, UserDtoPagedResultDto, UsuarioGustadoServiceProxy } from '@shared/service-proxies/service-proxies';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase, PagedRequestDto } from '@shared/paged-listing-component-base';
 import { MatDialog } from '@angular/material';
@@ -36,11 +36,13 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
   user: UserDto;
   idUsuario : number;
   comprobacion : boolean = false;
+  siSigue : boolean = false;
   
   filterText = '';
   constructor(
       injector: Injector,
       private _userservice: UsuarioLogadoServiceProxy,
+      private _usuarioGustadoService: UsuarioGustadoServiceProxy,
       private _dialog: MatDialog,
       private rutaActiva: ActivatedRoute
   ) {
@@ -54,6 +56,7 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
   ): void {
       this.idUsuario = this.rutaActiva.snapshot.params.id;
       request.filter = this.filterText;
+      
         if(this.idUsuario == null){
             this.comprobacion = true;
             this._userservice 
@@ -78,6 +81,14 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
                 .subscribe(result  => {
                     this.user = result;
                 });
+
+                this._userservice
+                    .saberSiUsuarioActualEsSeguidor(this.idUsuario)
+                    .subscribe(result  => {
+                        this.siSigue = result;
+                        console.log("Si segue = " + this.siSigue);
+                        
+                    });
         }
 
   //ngOnInit() {
@@ -126,4 +137,33 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
         this._dialog.open(PeticionesFavComponent);
     }
 
+    seguirUser(){
+
+        this.idUsuario = this.rutaActiva.snapshot.params.id;
+        console.log("Id user = " + this.idUsuario);
+    
+        this._usuarioGustadoService
+              .usuarioLogadoGustaUsuario(this.idUsuario)
+              .subscribe(result  => {
+                this.refresh();
+                this.pageRefresh();
+              });
+      }
+    
+      dejarDeSeguirUser(){
+    
+        this.idUsuario = this.rutaActiva.snapshot.params.id;
+        console.log("Id user = " + this.idUsuario);
+    
+        this._usuarioGustadoService
+              .usuarioLogadoNOGustaUsuario(this.idUsuario)
+              .subscribe(result  => {
+                this.refresh();  
+                this.pageRefresh();        
+              });
+      }
+
+      pageRefresh() {
+        location.reload();
+     }
 }

@@ -41,7 +41,7 @@ import { ResetPasswordDialogComponent } from './components/users/reset-password/
 import { AnunciosComponent } from '@app/components/anuncios/anuncios.component';
 import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
 import { EditAnuncioDialogComponent } from '@app/components/anuncios/edit-anuncios/edit-anuncio-dialog.component';
-import { AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy, PublicacionGustadaServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy, PublicacionGustadaServiceProxy, UsuarioGustadoServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DesplegableCategoriaComponent } from './components/anuncios/desplegable-categoria/desplegable-categoria.component';
 // peticiones
 import { PeticionesComponent } from '@app/components/peticiones/peticiones.component';
@@ -60,6 +60,7 @@ import { AnunciosCompletosComponent } from './components/perfil/mostrar-anuncios
 import { PeticionesCompletasComponent } from './components/perfil/mostrar-peticiones/peticiones-completas/peticiones-completas.component';
 import { AnunciosFavComponent } from './components/perfil/mostrar-anuncios/anuncios-fav/anuncios-fav.component';
 import { PeticionesFavComponent } from './components/perfil/mostrar-peticiones/peticiones-fav/peticiones-fav.component';
+import { SeguirUsuarioComponent } from './components/perfil/seguir-usuario/seguir-usuario.component';
 // chats
 import { ChatsComponent } from './components/chats/chats.component';
 import { CreateChatDialogComponent } from './components/chats/create-chats/create-chat-dialog.component';
@@ -118,6 +119,7 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     PeticionesCompletasComponent,
     AnunciosFavComponent,
     PeticionesFavComponent,
+    SeguirUsuarioComponent,
     // chats
     ChatsComponent,
     CreateChatDialogComponent,
@@ -127,7 +129,7 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     UsuariosComponent,
     FotoComponent,
     //ajustes
-    AjustesComponent   
+    AjustesComponent     
     
     
     
@@ -146,7 +148,7 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     SharedModule,
     NgxPaginationModule
   ],
-  providers: [AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy, PeticionServiceProxy, PublicacionGustadaServiceProxy],
+  providers: [AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy, PeticionServiceProxy, PublicacionGustadaServiceProxy, UsuarioGustadoServiceProxy],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,

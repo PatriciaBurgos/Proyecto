@@ -5,6 +5,7 @@ using Abp.Domain.Repositories;
 using Abp.IdentityFramework;
 using Abp.Runtime.Session;
 using Abp.UI;
+using DAM.UsuariosGustados;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -103,6 +104,29 @@ namespace NuevoProyectoDAM.Users
 				.FirstOrDefaultAsync();
 
 			return ObjectMapper.Map<UserDto>(usuario);
+		}
+
+		public async Task<bool> SaberSiUsuarioActualEsSeguidorAsync(int idUser)
+		{
+			bool usSeguido = false;
+
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var usuarios = await _userRepository.GetAll()
+				.Include(u => u.UsuariosSeguidos)
+				.ThenInclude(u => u.UsuarioSeguidor)
+				.Where(u => u.Id == idUser)
+				.FirstOrDefaultAsync();
+
+			foreach(UsuarioGustado us in usuarios.UsuariosSeguidos)
+			{
+				if(us.UsuarioSeguidorId == usuarioActual.Id)
+				{
+					usSeguido = true;
+				}
+			}
+
+			return usSeguido;
 		}
 
 		public async Task<ListResultDto<UserDto>> GetAllUsuarios()
