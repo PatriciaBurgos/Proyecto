@@ -1,4 +1,4 @@
-<div >
+<div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="scrollbar scrollbar-secondary">
     <div *ngFor="
     let anuncio of (anuncios
       | paginate
@@ -14,7 +14,9 @@
                 <div class="header" style="margin: 10px">
                     <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
                     <p class="card-body" style="display: inline; margin-left: 25px; font-size: large;"><strong>{{ anuncio.publicacionNombreUsuario }}</strong></p>
-                    <button class="mdc-icon-button material-icons" (click)="color= red;" style="display: inline; margin-left: 25px; margin-top: 32px; float: right; background-color: transparent;">favorite</button>
+                    <button class="mdc-icon-button material-icons" 
+                            style="color: red; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
+                            background-color: transparent;" (click)="noGustaPublicacion(anuncio.publicacionId)">favorite</button>     
                     <p class="card-body text-right" style="display: inline; margin-left: 25px; margin-top: 32px; float: right;"><strong>Categoría:</strong> {{ anuncio.publicacionCategoria }}</p>
                 </div>
                 <div class="card-body" style="margin: 30px">
@@ -28,11 +30,7 @@
                     <p  style="display: inline; margin-left: 70px;"><strong>Ciudad:</strong> {{ anuncio.publicacionCiudad }}</p>
                 </div>
             </div>
-            </ng-container>
+        </ng-container>
     </div>    
-    <button class="mdc-fab " mat-mini-fab style="background-color: #EA80FC; color: white; width: 70px; height: 70px;
-        position: fixed;bottom: 1rem;right: 1rem;" class="pull-right" (click)="createAnuncio()">
-        <div class="mdc-fab__ripple"></div>
-        <span class="mdc-fab__icon material-icons">add</span>
-    </button>
+    
 </div>

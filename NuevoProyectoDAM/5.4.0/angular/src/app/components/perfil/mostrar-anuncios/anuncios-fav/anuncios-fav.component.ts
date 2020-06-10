@@ -1,10 +1,14 @@
 import { Component, OnInit, Injector, Optional, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import { UsuarioLogadoServiceProxy, AnuncioDto, AnuncioServiceProxy } from '@shared/service-proxies/service-proxies';
+import { UsuarioLogadoServiceProxy, AnuncioDto, AnuncioServiceProxy, PublicacionGustadaServiceProxy } from '@shared/service-proxies/service-proxies';
 import { UsuariosSeguidoresDto } from '@shared/service-proxies/service-proxies';
 import { PagedRequestDto, PagedListingComponentBase } from '@shared/paged-listing-component-base';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+
+class PagedAnuncioRequestDto extends PagedRequestDto {
+  filter: string;
+}
 
 
 @Component({
@@ -13,23 +17,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./anuncios-fav.component.css']
 })
 
-class PagedAnuncioRequestDto extends PagedRequestDto {
-  filter: string;
-}
+
 
 
 export class AnunciosFavComponent extends PagedListingComponentBase<AnuncioDto> {
   
 
   filterText = '';
-  anuncio: AnuncioDto;
+  anuncios: AnuncioDto[]=[];
 
 
   constructor(
     injector: Injector,
     private _anuncioservice: AnuncioServiceProxy,
-    private _dialog: MatDialog,
-    @Optional() @Inject(MAT_DIALOG_DATA) private _idAnun: number,
+    private _pubGustadaservice: PublicacionGustadaServiceProxy,
+    private _dialog: MatDialog
     
   ) {
     super(injector);
@@ -45,14 +47,14 @@ export class AnunciosFavComponent extends PagedListingComponentBase<AnuncioDto> 
 
     
       this._anuncioservice 
-          .getUnAnuncio(this._idAnun)
+          .getPublicacionesAnuncios()
           .pipe(
               finalize(() => {
                   finishedCallback();
               })
           )
           .subscribe(result  => {
-              this.anuncio = result;
+              this.anuncios = result.items;
               
           });
     }
@@ -79,5 +81,21 @@ export class AnunciosFavComponent extends PagedListingComponentBase<AnuncioDto> 
       );*/
   }
 
+  noGustaPublicacion(idPub : number){
+    console.log("PUB = " + idPub);
+
+    this._pubGustadaservice
+        .usuarioLogadoNOGustaPublicacion(idPub)
+        .pipe(
+            finalize(() => {})
+        )
+        .subscribe(() => {
+        this.notify.info(this.l('SavedSuccessfully'));
+            console.log("PublicacionGustada");
+            this.refresh();
+            
+        });
+    this.refresh();
+}
   
 }

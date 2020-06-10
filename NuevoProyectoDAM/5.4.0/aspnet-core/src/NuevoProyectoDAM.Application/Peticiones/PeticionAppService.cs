@@ -77,6 +77,8 @@ namespace DAM.Peticiones
 
 		public async Task<PeticionDto> GetUnaPeticion(int id)
 		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
 			var peticion = await _peticionRepository.GetAll()
 				.Include(a => a.Publicacion)
 				.ThenInclude(p => p.PublicacionesGustadas)
@@ -85,7 +87,18 @@ namespace DAM.Peticiones
 				.Where(a => a.Id == id)
 				.FirstOrDefaultAsync();
 
-			return ObjectMapper.Map<PeticionDto>(peticion);
+			var petiDto = ObjectMapper.Map<PeticionDto>(peticion);
+
+			foreach (PublicacionGustadaDto publiGus in petiDto.UsuariosGustaPeticion)
+			{
+				if (usuarioActual.Id == publiGus.Usuario.Id)
+				{
+					petiDto.usuarioActualGustaPublicacion = true;
+				}
+			}
+
+
+			return ObjectMapper.Map<PeticionDto>(petiDto);
 		}
 
 		/*public async Task<ListResultDto<PeticionGustaAUsuariosDto>> GetUsuariosGustaPeticion(int id)

@@ -31,7 +31,7 @@ class ImageSnippet {
       for (var i = 0; i < this.uploadedFiles.length; i++) {
           formData.append("uploads[]", this.uploadedFiles[i], this.uploadedFiles[i].name);
       }
-      this.http.post('https://localhost:21021/api/FileUpload', formData)
+      this.http.post('http://localhost:21021/api/FileUpload', formData)
       .subscribe((response) => {
            console.log('response received is ', response);
       })

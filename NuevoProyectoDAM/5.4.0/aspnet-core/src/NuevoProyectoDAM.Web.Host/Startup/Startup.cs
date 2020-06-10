@@ -84,7 +84,6 @@ namespace NuevoProyectoDAM.Web.Host.Startup
                                 .ToArray()
                         )
                         .AllowAnyHeader()
-
                         .AllowAnyMethod()
                         .AllowCredentials()
                 )

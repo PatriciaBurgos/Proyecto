@@ -116,8 +116,8 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     MostrarPeticionesComponent,
     AnunciosCompletosComponent,
     PeticionesCompletasComponent,
-    //AnunciosFavComponent,
-    //PeticionesFavComponent,
+    AnunciosFavComponent,
+    PeticionesFavComponent,
     // chats
     ChatsComponent,
     CreateChatDialogComponent,
@@ -176,8 +176,8 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     FotoComponent,
     AnunciosCompletosComponent,
     PeticionesCompletasComponent,
-    //AnunciosFavComponent,
-    //PeticionesFavComponent
+    AnunciosFavComponent,
+    PeticionesFavComponent
   ],
 })
 export class AppModule {}

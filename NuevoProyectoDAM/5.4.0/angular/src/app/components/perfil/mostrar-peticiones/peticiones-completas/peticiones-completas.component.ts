@@ -2,7 +2,7 @@
 
 import { Component, OnInit, Injector, Optional, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import { UsuarioLogadoServiceProxy, PeticionDto, PeticionServiceProxy } from '@shared/service-proxies/service-proxies';
+import { UsuarioLogadoServiceProxy, PeticionDto, PeticionServiceProxy, PublicacionGustadaServiceProxy } from '@shared/service-proxies/service-proxies';
 import { UsuariosSeguidoresDto } from '@shared/service-proxies/service-proxies';
 import { PagedRequestDto, PagedListingComponentBase } from '@shared/paged-listing-component-base';
 import { finalize } from 'rxjs/operators';
@@ -31,6 +31,7 @@ export class PeticionesCompletasComponent extends PagedListingComponentBase<Peti
   constructor(
     injector: Injector,
     private _peticionesservice: PeticionServiceProxy,
+    private _pubGustadaservice: PublicacionGustadaServiceProxy,
     private _dialog: MatDialog,
     @Optional() @Inject(MAT_DIALOG_DATA) private _idPeti: number,
     
@@ -81,6 +82,40 @@ export class PeticionesCompletasComponent extends PagedListingComponentBase<Peti
           }
       );*/
   }
+
+  gustaPublicacion(idPub : number){
+    console.log("PUB = " + idPub);
+
+    this._pubGustadaservice
+        .usuarioLogadoGustaPublicacion(idPub)
+        .pipe(
+            finalize(() => {})
+        )
+        .subscribe(() => {
+        this.notify.info(this.l('SavedSuccessfully'));
+            console.log("PublicacionGustada");
+            this.refresh();
+            
+        });
+    this.refresh();
+}
+
+noGustaPublicacion(idPub : number){
+    console.log("PUB = " + idPub);
+
+    this._pubGustadaservice
+        .usuarioLogadoNOGustaPublicacion(idPub)
+        .pipe(
+            finalize(() => {})
+        )
+        .subscribe(() => {
+        this.notify.info(this.l('SavedSuccessfully'));
+            console.log("PublicacionGustada");
+            this.refresh();
+            
+        });
+    this.refresh();
+}
 
   
 }

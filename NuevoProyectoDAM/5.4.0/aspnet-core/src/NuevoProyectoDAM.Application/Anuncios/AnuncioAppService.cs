@@ -83,13 +83,27 @@ namespace DAM.Anuncios
 
 		public async Task<AnuncioDto> GetUnAnuncio(int id)
 		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
 			var anuncio = await _anuncioRepository.GetAll()
 				.Include(a => a.Publicacion)
-				.Include(p => p.Publicacion.Usuario)
+				.ThenInclude(p => p.PublicacionesGustadas)
+				.ThenInclude(p => p.Usuario)
+				.Include(a => a.Publicacion.Usuario)
 				.Where(a => a.Id == id)
 				.FirstOrDefaultAsync();
 
-			return ObjectMapper.Map<AnuncioDto>(anuncio);
+			var anunDto = ObjectMapper.Map<AnuncioDto>(anuncio);
+
+			foreach (PublicacionGustadaDto publiGus in anunDto.UsuariosGustaAnuncio)
+			{
+				if (usuarioActual.Id == publiGus.Usuario.Id)
+				{
+					anunDto.usuarioActualGustaPublicacion = true;
+				}
+			}
+
+			return ObjectMapper.Map<AnuncioDto>(anunDto);
 		}
 
 		public async Task<ListResultDto<AnuncioGustaAUsuariosDto>> GetUsuariosGustaAnuncio(int id)
