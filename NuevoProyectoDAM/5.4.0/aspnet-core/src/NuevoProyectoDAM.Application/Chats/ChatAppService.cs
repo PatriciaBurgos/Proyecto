@@ -130,22 +130,32 @@ namespace NuevoProyectoDAM.Chats
 			CheckUpdatePermission();
 
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+			var userDest = await _userManager.GetUserByIdAsync(idChat);
 
-			var chat = await _chatRepository.GetAll()
-				.Include(c => c.UsuarioOrigen)
-				.Include(c => c.UsuarioDestino)
-				.Where(c => c.Id == idChat)
-				.FirstOrDefaultAsync();
+			//var chat = await _chatRepository.GetAll()
+			//	.Include(c => c.UsuarioOrigen)
+			//	.Include(c => c.UsuarioDestino)
+			//	.Where(c => c.Id == idChat)
+			//	.FirstOrDefaultAsync();
 
-			long uOrigen = chat.UsuarioOrigenId;
-			long uDestino = chat.UsuarioDestinoId;
+			//long uOrigen = chat.UsuarioOrigenId;
+			//long uDestino = chat.UsuarioDestinoId;
 
 			var chats = await _chatRepository.GetAll()
 				.Include(c => c.UsuarioOrigen)
 				.Include(c => c.UsuarioDestino)
-				.Where(c => c.UsuarioOrigenId == uOrigen || c.UsuarioOrigenId == uDestino) 
-				.Where(c => c.UsuarioDestinoId == uOrigen || c.UsuarioDestinoId == uDestino)
+				.Where(c => c.UsuarioOrigenId == idChat || c.UsuarioOrigenId == usuarioActual.Id) 
+				.Where(c => c.UsuarioDestinoId == idChat || c.UsuarioDestinoId == usuarioActual.Id)
 				.ToListAsync();
+
+			if (chats.Count == 0)
+			{
+				Chat chatNuevo = new Chat();
+
+				chatNuevo.UsuarioDestino = userDest;
+				chatNuevo.UsuarioOrigen = usuarioActual;
+				chats.Add(chatNuevo);
+			}
 
 			return new ListResultDto<ChatDto>(ObjectMapper.Map<List<ChatDto>>(chats));
 		}

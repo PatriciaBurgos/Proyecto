@@ -4651,7 +4651,7 @@ export class RegisterInput implements IRegisterInput {
         data["emailAddress"] = this.emailAddress;
         data["password"] = this.password;
         data["captchaResponse"] = this.captchaResponse;
-        data["birthDate"] = this.birthDate ? this.birthDate.toISOString() : <any>undefined;
+        data["birthDate"] = this.birthDate ? this.birthDate.toLocaleString() : <any>undefined;
         data["town"] = this.town;
         data["city"] = this.city;
         data["qualities"] = this.qualities;
@@ -5324,7 +5324,9 @@ export class MostrarChatReducidoDto implements IMostrarChatReducidoDto {
     texto: string | undefined;
     fechaHora: moment.Moment | undefined;
     usuarioOrigen: string | undefined;
+    usuarioOrigenId: number;
     usuarioDestino: string | undefined;
+    usuarioDestinoId: number;
     id: number;
 
     constructor(data?: IMostrarChatReducidoDto) {
@@ -5341,7 +5343,9 @@ export class MostrarChatReducidoDto implements IMostrarChatReducidoDto {
             this.texto = _data["texto"];
             this.fechaHora = _data["fechaHora"] ? moment(_data["fechaHora"].toString()) : <any>undefined;
             this.usuarioOrigen = _data["usuarioOrigen"];
+            this.usuarioOrigenId = _data["usuarioOrigenId"];
             this.usuarioDestino = _data["usuarioDestino"];
+            this.usuarioDestinoId = _data["usuarioDestinoId"];
             this.id = _data["id"];
         }
     }
@@ -5358,7 +5362,9 @@ export class MostrarChatReducidoDto implements IMostrarChatReducidoDto {
         data["texto"] = this.texto;
         data["fechaHora"] = this.fechaHora ? this.fechaHora.toISOString() : <any>undefined;
         data["usuarioOrigen"] = this.usuarioOrigen;
+        data["usuarioOrigenId"] = this.usuarioOrigenId;
         data["usuarioDestino"] = this.usuarioDestino;
+        data["usuarioDestinoId"] = this.usuarioDestinoId;
         data["id"] = this.id;
         return data; 
     }
@@ -5375,7 +5381,9 @@ export interface IMostrarChatReducidoDto {
     texto: string | undefined;
     fechaHora: moment.Moment | undefined;
     usuarioOrigen: string | undefined;
+    usuarioOrigenId: number;
     usuarioDestino: string | undefined;
+    usuarioDestinoId: number;
     id: number;
 }
 

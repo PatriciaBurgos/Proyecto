@@ -40,13 +40,13 @@
                     required
                     maxlength="32"/>
             </mat-form-field>
-            <mat-form-field>
-              <input matInput
-              [ngModel]="model.birthDate | date:'yyyy-MM-dd'" 
-              (ngModelChange)="startDate = $event" 
-              [placeholder]="'Fecha de Nacimiento' | localize" 
-              type="date" 
-              name="BirthDate"/>
+            <mat-form-field>              
+                <input matInput
+                       type="date"
+                       name="fecha_Inicio"
+                       [placeholder]="'Fecha de Nacimiento' | localize"
+                       [(ngModel)]="model.birthDate"
+                       required />            
             </mat-form-field>
           </div>
           <div class="col-md-6">

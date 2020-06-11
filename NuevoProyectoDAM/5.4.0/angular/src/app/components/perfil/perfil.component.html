@@ -6,6 +6,16 @@
                 <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
                 <h2 class="card-body" style="display: inline; margin-left: 25px; font-weight: bold; font-size: large;">{{ user.userName }}</h2>
                 <ul class="header-dropdown m-r--5">
+                    
+                    <li *ngIf="comprobacion==false">
+                        
+                        <button class="mat-raised-button" style="background-color: white; 
+                        margin-right: 30px; margin-top: 20px;"><a [routerLink] = "['/app/chats',user.id]" style="color: black; text-decoration: none;">
+                            <mat-icon>chat</mat-icon>
+                            <span class="mdc-button__label" style="color:#EA80FC">&nbsp; Contactar </span></a>
+                        
+                        </button>
+                    </li>
                     <li *ngIf="comprobacion==false">
                         
                         <ng-container *ngIf="siSigue; else noSigue">

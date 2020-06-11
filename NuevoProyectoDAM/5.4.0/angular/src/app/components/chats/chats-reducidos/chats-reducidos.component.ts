@@ -20,7 +20,8 @@ class PagedChatRequestDto extends PagedRequestDto {
 export class ChatsReducidosComponent extends PagedListingComponentBase<MostrarChatReducidoDto> {
 
   chats: MostrarChatReducidoDto[] = [];
-  
+  uLogado : number = 0;
+
   filterText = '';
   constructor(
       injector: Injector,
@@ -35,6 +36,8 @@ export class ChatsReducidosComponent extends PagedListingComponentBase<MostrarCh
       pageNumber: number,
       finishedCallback: Function
   ): void {
+
+    this.uLogado = this.appSession.user.id;
 
       request.filter = this.filterText;
 

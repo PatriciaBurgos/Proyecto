@@ -11,7 +11,9 @@ namespace NuevoProyectoDAM.Chats.Dto
         public DateTime? FechaHora { get; set; }
 
         public string UsuarioOrigen { get; set; }
+        public int UsuarioOrigenId { get; set; }
         public string UsuarioDestino { get; set; }
+        public int UsuarioDestinoId { get; set; }
 
     }
 }

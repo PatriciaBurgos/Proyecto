@@ -89,9 +89,9 @@
                                     <mat-icon>menu</mat-icon>
                                 </button>
                                 <mat-menu #actionsMenu="matMenu">
-                                    <button mat-menu-item >
+                                    <button mat-menu-item > <a [routerLink] = "['/app/chats',user.id]" style="color: black; text-decoration: none;">
                                         <mat-icon>chat</mat-icon>
-                                        <span>{{ "Mensaje" | localize }}</span>
+                                        <span>{{ "Mensaje" | localize }}</span></a>
                                     </button>
                                     <button mat-menu-item >
                                         <mat-icon>email</mat-icon>

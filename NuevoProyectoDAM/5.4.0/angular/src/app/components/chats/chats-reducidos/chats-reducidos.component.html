@@ -66,15 +66,28 @@
                         currentPage: pageNumber,
                         totalItems: totalItems
                       })
-                "  style="text-align: center;">          
-                            <td><a [routerLink] = "['/app/chats',chat.id]" style="color: black; text-decoration: none;"> {{ chat.usuarioOrigen }}</a></td>
+                "  style="text-align: center;">   
+                
+                        <ng-container *ngIf="chat.usuarioOrigenId == uLogado; else no">
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]" style="color: black; text-decoration: none;"> {{ chat.usuarioOrigen }}</a></td>
                         
-                            <td><a [routerLink] = "['/app/chats',chat.id]" style="color: black; text-decoration: none;"> {{ chat.usuarioDestino }}</a></td>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]" style="color: black; text-decoration: none;"> {{ chat.usuarioDestino }}</a></td>
 
-                            <td><a [routerLink] = "['/app/chats',chat.id]" style="color: black; text-decoration: none;"> {{ chat.texto }}</a></td>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]" style="color: black; text-decoration: none;"> {{ chat.texto }}</a></td>
 
-                            <td><a [routerLink] = "['/app/chats',chat.id]" style="color: black; text-decoration: none;"> {{ chat.fechaHora | date:'medium' }}</a></td>
-                      
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]" style="color: black; text-decoration: none;"> {{ chat.fechaHora | date:'medium' }}</a></td>
+                        </ng-container>
+
+                        <ng-template #no>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]" style="color: black; text-decoration: none;"> {{ chat.usuarioOrigen }}</a></td>
+                        
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]" style="color: black; text-decoration: none;"> {{ chat.usuarioDestino }}</a></td>
+
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]" style="color: black; text-decoration: none;"> {{ chat.texto }}</a></td>
+
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]" style="color: black; text-decoration: none;"> {{ chat.fechaHora | date:'medium' }}</a></td>
+                        </ng-template>
+
                         </tr>
                     </tbody>
                 </table>
