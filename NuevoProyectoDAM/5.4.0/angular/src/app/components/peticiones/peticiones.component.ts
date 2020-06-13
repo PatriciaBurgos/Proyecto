@@ -30,7 +30,7 @@ export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> 
 
     peticiones: PeticionDto[] = [];
     estadoPositivo: boolean = true;
-
+    urge: boolean = false;
        
     uLogado = this.appSession.user.userName;
     
@@ -155,5 +155,101 @@ export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> 
             });
         this.refresh();
     }
+
+
+    buscarTodas(){
+        this.peticiones.splice(0);
+        this._peticioneservice
+            .getPublicacionesPeticiones()
+            .pipe(
+                finalize(() => {
+                    
+                })
+            )
+            .subscribe(result  => {
+                this.peticiones = result.items;
+                
+            });
+    }
+
+    buscarCategoria(categ : string){
+        this.peticiones.splice(0);
+        console.log("Categ = " + categ);
+
+        this._peticioneservice
+        .busquedaPeticionesPorCategoria(categ)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.peticiones = result.items;
+            
+        });        
+    }
+
+    buscarCiudad(ciu : string){
+        this.peticiones.splice(0);
+        console.log("Ciu = " + ciu);
+
+        this._peticioneservice
+        .busquedaPeticionesPorCiudad(ciu)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.peticiones = result.items;
+            
+        });
+        
+    }
+
+    buscarMunicipio(muni : string){
+        this.peticiones.splice(0);
+        console.log("Ciu = " + muni);
+
+        this._peticioneservice
+        .busquedaPeticionesPorMunicipio(muni)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.peticiones = result.items;
+            
+        });
+        
+    }
+
+    esUrgente(urgent : string){
+
+        if(urgent=="Si"){
+            this.urge = true;
+        }else{
+            this.urge = false;
+        }
+        console.log("urge = " + this.urge);
+
+        this.peticiones.splice(0);
+        console.log("Ciu = " + this.urge);
+
+        this._peticioneservice
+        .busquedaPeticionesUrgentes(this.urge)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.peticiones = result.items;
+            
+        });
+        
+    }
+
 
 }

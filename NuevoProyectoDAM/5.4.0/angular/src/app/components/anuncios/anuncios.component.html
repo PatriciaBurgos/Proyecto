@@ -104,17 +104,20 @@
 <br />
 <div class="dropdown" mdbDropdown>
     <mat-toolbar style="background-color: white;">
-        <h2 style="color : #EA80FC">Buscar por...  &nbsp;&nbsp;</h2>
+        <h2 style="color : #EA80FC; margin-left: 10px;">Buscar por...</h2>
 
         <mat-menu #appCategoria="matMenu">
+            <button mat-menu-item (click)="buscarTodas()">-Todas-</button>
             <button mat-menu-item (click)="buscarCategoria('Peques')">Peques</button>
             <button mat-menu-item (click)="buscarCategoria('Clases')">Clases</button>
             <button mat-menu-item (click)="buscarCategoria('Informatica')">Informatica</button>
             <button mat-menu-item (click)="buscarCategoria('Terapia')">Terapia</button>
         </mat-menu>
         
-        <button  [matMenuTriggerFor]="appCategoria" >
-            <span>Categoria</span>
+        <button [matMenuTriggerFor]="appCategoria" class="mat-raised-button " 
+                style="background-color: #EA80FC;  margin-left: 30px;
+                color:white;">Categoria &nbsp;
+                <i class="fa fa-list-ul" aria-hidden="true"></i>
         </button>
 
         <mat-menu #appCiudad="matMenu">
@@ -124,8 +127,23 @@
             </mat-form-field>
         </mat-menu>
         
-        <button  [matMenuTriggerFor]="appCiudad" >
-            <span>Ciudad</span>
+        <button [matMenuTriggerFor]="appCiudad" class="mat-raised-button " 
+                style="background-color: #EA80FC;  margin-left: 20px;
+                color:white;">Ciudad &nbsp;
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+        </button>
+
+        <mat-menu #appMunicipio="matMenu">
+            <mat-form-field autoClose="nonInput">
+                <mat-label>Municipio...</mat-label>
+                <input class="input-log" name="texto" matInput [(ngModel)]="texto" (click)="buscarMunicipio(texto)">
+            </mat-form-field>
+        </mat-menu>
+        
+        <button [matMenuTriggerFor]="appMunicipio" class="mat-raised-button " 
+                style="background-color: #EA80FC;  margin-left: 20px;
+                color:white;">Municipio &nbsp;
+                <i class="fa fa-home" aria-hidden="true"></i>
         </button>
 
 

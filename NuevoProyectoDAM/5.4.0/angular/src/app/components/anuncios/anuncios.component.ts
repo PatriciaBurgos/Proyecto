@@ -145,6 +145,21 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
         this.refresh();
     }
 
+    buscarTodas(){
+        this.anuncios.splice(0);
+        this._anuncioservice
+            .getPublicacionesAnuncios()
+            .pipe(
+                finalize(() => {
+                    
+                })
+            )
+            .subscribe(result  => {
+                this.anuncios = result.items;
+                
+            });
+    }
+
     buscarCategoria(categ : string){
         this.anuncios.splice(0);
         console.log("Categ = " + categ);
@@ -168,6 +183,24 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
 
         this._anuncioservice
         .busquedaAnunciosPorCiudad(ciu)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.anuncios = result.items;
+            
+        });
+        
+    }
+
+    buscarMunicipio(muni : string){
+        this.anuncios.splice(0);
+        console.log("Ciu = " + muni);
+
+        this._anuncioservice
+        .busquedaAnunciosPorMunicipio(muni)
         .pipe(
             finalize(() => {
                 

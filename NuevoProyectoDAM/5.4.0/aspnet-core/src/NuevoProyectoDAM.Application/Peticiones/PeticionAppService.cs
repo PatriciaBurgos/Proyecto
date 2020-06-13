@@ -140,42 +140,122 @@ namespace DAM.Peticiones
 
 		public async Task<ListResultDto<PeticionDto>> BusquedaPeticionesPorMunicipio(string municipio)
 		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
 			var peticiones = await _peticionRepository.GetAll()
 				.Include(a => a.Publicacion)
+				.ThenInclude(p => p.PublicacionesGustadas)
+				.ThenInclude(p => p.Usuario)
+				.Include(a => a.Publicacion.Usuario)
 				.Where(a => a.Publicacion.Municipio == municipio)
 				.ToListAsync();
 
-			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+			var peticionesDto = new List<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+
+
+			foreach (PeticionDto peti in peticionesDto)
+			{
+				foreach (PublicacionGustadaDto publiGus in peti.UsuariosGustaPeticion)
+				{
+					if (usuarioActual.Id == publiGus.Usuario.Id)
+					{
+						peti.usuarioActualGustaPublicacion = true;
+					}
+				}
+
+			}
+
+			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticionesDto));
 		}
 
 		public async Task<ListResultDto<PeticionDto>> BusquedaPeticionesPorCiudad(string ciudad)
 		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
 			var peticiones = await _peticionRepository.GetAll()
 				.Include(a => a.Publicacion)
+				.ThenInclude(p => p.PublicacionesGustadas)
+				.ThenInclude(p => p.Usuario)
+				.Include(a => a.Publicacion.Usuario)
 				.Where(a => a.Publicacion.Ciudad == ciudad)
 				.ToListAsync();
 
-			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+			var peticionesDto = new List<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+
+
+			foreach (PeticionDto peti in peticionesDto)
+			{
+				foreach (PublicacionGustadaDto publiGus in peti.UsuariosGustaPeticion)
+				{
+					if (usuarioActual.Id == publiGus.Usuario.Id)
+					{
+						peti.usuarioActualGustaPublicacion = true;
+					}
+				}
+
+			}
+
+			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticionesDto));
 		}
 
 		public async Task<ListResultDto<PeticionDto>> BusquedaPeticionesPorCategoria(string categoria)
 		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
 			var peticiones = await _peticionRepository.GetAll()
 				.Include(a => a.Publicacion)
+				.ThenInclude(p => p.PublicacionesGustadas)
+				.ThenInclude(p => p.Usuario)
+				.Include(a => a.Publicacion.Usuario)
 				.Where(a => a.Publicacion.Categoria == categoria)
 				.ToListAsync();
 
-			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+			var peticionesDto = new List<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+
+
+			foreach (PeticionDto peti in peticionesDto)
+			{
+				foreach (PublicacionGustadaDto publiGus in peti.UsuariosGustaPeticion)
+				{
+					if (usuarioActual.Id == publiGus.Usuario.Id)
+					{
+						peti.usuarioActualGustaPublicacion = true;
+					}
+				}
+
+			}
+
+			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticionesDto));
 		}
 
 		public async Task<ListResultDto<PeticionDto>> BusquedaPeticionesUrgentes(bool urgente)
 		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
 			var peticiones = await _peticionRepository.GetAll()
 				.Include(a => a.Publicacion)
+				.ThenInclude(p => p.PublicacionesGustadas)
+				.ThenInclude(p => p.Usuario)
+				.Include(a => a.Publicacion.Usuario)
 				.Where(p => p.IsUrgent == urgente)
 				.ToListAsync();
 
-			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+			var peticionesDto = new List<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+
+
+			foreach (PeticionDto peti in peticionesDto)
+			{
+				foreach (PublicacionGustadaDto publiGus in peti.UsuariosGustaPeticion)
+				{
+					if (usuarioActual.Id == publiGus.Usuario.Id)
+					{
+						peti.usuarioActualGustaPublicacion = true;
+					}
+				}
+
+			}
+
+			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticionesDto));
 		}
 	}
 }
