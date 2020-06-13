@@ -4651,7 +4651,7 @@ export class RegisterInput implements IRegisterInput {
         data["emailAddress"] = this.emailAddress;
         data["password"] = this.password;
         data["captchaResponse"] = this.captchaResponse;
-        data["birthDate"] = this.birthDate ? this.birthDate.toLocaleString() : <any>undefined;
+        data["birthDate"] = this.birthDate ? this.birthDate.toISOString() : <any>undefined;
         data["town"] = this.town;
         data["city"] = this.city;
         data["qualities"] = this.qualities;

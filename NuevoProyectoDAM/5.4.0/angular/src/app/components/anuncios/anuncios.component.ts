@@ -125,7 +125,7 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
                 this.refresh();
                 
             });
-        this.refresh();
+        //this.refresh();
     }
 
     noGustaPublicacion(idPub : number){
@@ -143,6 +143,41 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
                 
             });
         this.refresh();
+    }
+
+    buscarCategoria(categ : string){
+        this.anuncios.splice(0);
+        console.log("Categ = " + categ);
+
+        this._anuncioservice
+        .busquedaAnunciosPorCategoria(categ)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.anuncios = result.items;
+            
+        });        
+    }
+
+    buscarCiudad(ciu : string){
+        this.anuncios.splice(0);
+        console.log("Ciu = " + ciu);
+
+        this._anuncioservice
+        .busquedaAnunciosPorCiudad(ciu)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.anuncios = result.items;
+            
+        });
+        
     }
 
 }

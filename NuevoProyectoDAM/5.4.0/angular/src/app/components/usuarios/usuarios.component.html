@@ -69,14 +69,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="
-                        let user of (users
-                        | paginate
-                            : {
-                        id: 'server',
-                        itemsPerPage: pageSize,
-                        currentPage: pageNumber,
-                        totalItems: totalItems
-                      })
+                        let user of (users)
                       " >     
 
                             <td style="font-size: large;"><a [routerLink] = "['/app/perfil',user.id]" style="color: black; text-decoration: none;">{{ user.userName }}</a></td>

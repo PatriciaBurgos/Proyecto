@@ -101,6 +101,38 @@
 <mat-toolbar style="background-color: white; color: #D500F9;">
     <h1>Anuncios</h1>
   </mat-toolbar>
+<br />
+<div class="dropdown" mdbDropdown>
+    <mat-toolbar style="background-color: white;">
+        <h2 style="color : #EA80FC">Buscar por...  &nbsp;&nbsp;</h2>
+
+        <mat-menu #appCategoria="matMenu">
+            <button mat-menu-item (click)="buscarCategoria('Peques')">Peques</button>
+            <button mat-menu-item (click)="buscarCategoria('Clases')">Clases</button>
+            <button mat-menu-item (click)="buscarCategoria('Informatica')">Informatica</button>
+            <button mat-menu-item (click)="buscarCategoria('Terapia')">Terapia</button>
+        </mat-menu>
+        
+        <button  [matMenuTriggerFor]="appCategoria" >
+            <span>Categoria</span>
+        </button>
+
+        <mat-menu #appCiudad="matMenu">
+            <mat-form-field autoClose="nonInput">
+                <mat-label>Ciudad...</mat-label>
+                <input class="input-log" name="text" matInput [(ngModel)]="text" (click)="buscarCiudad(text)">
+            </mat-form-field>
+        </mat-menu>
+        
+        <button  [matMenuTriggerFor]="appCiudad" >
+            <span>Ciudad</span>
+        </button>
+
+
+    </mat-toolbar>
+</div>
+
+<br />
 <div >
     <div *ngFor="
     let anuncio of (anuncios
