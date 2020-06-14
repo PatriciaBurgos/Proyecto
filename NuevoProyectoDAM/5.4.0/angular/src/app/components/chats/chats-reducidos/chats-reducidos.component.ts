@@ -97,8 +97,6 @@ export class ChatsReducidosComponent extends PagedListingComponentBase<MostrarCh
       });
   }
 
-  mostrarChat(userDestino : string){
-    this._dialog.open(ChatsUsuariosComponent);
-  }
+  
 
 }

@@ -244,6 +244,47 @@
                 <i class="fa fa-asterisk" aria-hidden="true"></i>
         </button>
 
+        <mat-menu #appUsu="matMenu">
+            <mat-form-field autoClose="nonInput">
+                <mat-label>Usuario...</mat-label>
+                <input class="input-log" name="texti" matInput [(ngModel)]="texti" (click)="buscarUsuario(texti)">
+            </mat-form-field>
+        </mat-menu>
+        
+        <button [matMenuTriggerFor]="appUsu" class="mat-raised-button " 
+                style="background-color: #EA80FC;  margin-left: 20px;
+                color:white;">Usuario &nbsp;
+                <i class="fa fa-user" aria-hidden="true"></i>
+        </button>
+
+        <mat-menu #appHorarioIni="matMenu">
+            <button mat-menu-item (click)="buscarTodas()">-Todas-</button>
+            <button mat-menu-item (click)="buscarHorarioIni('6')">6</button>
+            <button mat-menu-item (click)="buscarHorarioIni('7')">7</button>
+            <button mat-menu-item (click)="buscarHorarioIni('8')">8</button>
+            <button mat-menu-item (click)="buscarHorarioIni('9')">9</button>
+            <button mat-menu-item (click)="buscarHorarioIni('10')">10</button>
+            <button mat-menu-item (click)="buscarHorarioIni('11')">11</button>
+            <button mat-menu-item (click)="buscarHorarioIni('12')">12</button>
+            <button mat-menu-item (click)="buscarHorarioIni('13')">13</button>
+            <button mat-menu-item (click)="buscarHorarioIni('14')">14</button>
+            <button mat-menu-item (click)="buscarHorarioIni('15')">15</button>
+            <button mat-menu-item (click)="buscarHorarioIni('16')">16</button>
+            <button mat-menu-item (click)="buscarHorarioIni('17')">17</button>
+            <button mat-menu-item (click)="buscarHorarioIni('18')">18</button>
+            <button mat-menu-item (click)="buscarHorarioIni('19')">19</button>
+            <button mat-menu-item (click)="buscarHorarioIni('20')">20</button>
+            <button mat-menu-item (click)="buscarHorarioIni('21')">21</button>
+            <button mat-menu-item (click)="buscarHorarioIni('22')">22</button>
+        </mat-menu>
+        
+        <button [matMenuTriggerFor]="appHorarioIni" class="mat-raised-button " 
+                style="background-color: #EA80FC;  margin-left: 30px;
+                color:white;">Horario de Inicio &nbsp;
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
+        </button>
+
+        
 
     </mat-toolbar>
 </div>

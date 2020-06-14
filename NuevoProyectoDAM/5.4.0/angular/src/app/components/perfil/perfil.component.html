@@ -8,13 +8,24 @@
                 <ul class="header-dropdown m-r--5">
                     
                     <li *ngIf="comprobacion==false">
-                        
-                        <button class="mat-raised-button" style="background-color: white; 
-                        margin-right: 30px; margin-top: 20px;"><a [routerLink] = "['/app/chats',user.id]" style="color: black; text-decoration: none;">
-                            <mat-icon>chat</mat-icon>
-                            <span class="mdc-button__label" style="color:#EA80FC">&nbsp; Contactar </span></a>
-                        
+                     
+                        <button class="mat-raised-button" [matMenuTriggerFor]="actionsMenu"
+                            style="background-color: white; margin-right: 30px; margin-top: 20px;">                            
+                            <span class="mdc-button__label" style="color:#EA80FC">
+                                <i style="color:#EA80FC" class="fa fa-comment" aria-hidden="true"></i>
+                                &nbsp; Contactar </span>
                         </button>
+                        <mat-menu #actionsMenu="matMenu">
+                            <button mat-menu-item > <a [routerLink] = "['/app/chats',user.id]" style="color: black; text-decoration: none;">
+                                <mat-icon>chat</mat-icon>
+                                <span>{{ "Mensaje" | localize }}</span></a>
+                            </button>
+                            <button mat-menu-item ><a [routerLink] = "['/app/correo']" style="color: black; text-decoration: none;"> 
+                                <mat-icon>email</mat-icon>
+                                <span>{{ "Correo" | localize }}</span></a>
+                            </button>
+                        </mat-menu>
+
                     </li>
                     <li *ngIf="comprobacion==false">
                         
@@ -37,7 +48,7 @@
                     </li>
                     <li><app-usuarios-seguidores></app-usuarios-seguidores></li>
                     <li><app-usuarios-seguidos></app-usuarios-seguidos></li>
-                    <li>
+                    <li *ngIf="comprobacion==true">
                         <button mat-icon-button [matMenuTriggerFor]="headerMenu" 
                             class="header-dropdown-mat-icon-button" [routerLink] = "['/app/ajustes']">
                             <mat-icon>settings</mat-icon>

@@ -32,13 +32,17 @@
                     <p  style="font-size: x-large; "><strong>¡EMPIEZA AHORA!</strong></p>
 
                     <button class="mdc-button--raised" style="background-color: #EA80FC; border-radius: 50px;">
-                        <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label" style="color: #D500F9; font-size: large; padding: 16px; font-weight: bold;">ANUNCIATE COMO VOLUNTARIO</span>
+                        <a [routerLink] = "['/app/anuncios']" style="color: black; text-decoration: none;"> 
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label" style="color: #D500F9; font-size: large; padding: 16px; font-weight: bold;">ANUNCIATE COMO VOLUNTARIO</span>
+                        </a>
                     </button>
 
                     <button class="mdc-button--raised" style="background-color: #EA80FC; border-radius: 50px;">
-                        <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label" style="color: #D500F9; font-size: large; padding: 16px; font-weight: bold;">PIDE AYUDA</span>
+                        <a [routerLink] = "['/app/peticiones']" style="color: black; text-decoration: none;"> 
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label" style="color: #D500F9; font-size: large; padding: 16px; font-weight: bold;">PIDE AYUDA</span>
+                        </a>
                     </button>
 
                 </div>

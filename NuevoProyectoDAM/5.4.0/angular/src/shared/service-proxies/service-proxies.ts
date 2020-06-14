@@ -646,6 +646,118 @@ export class AnuncioServiceProxy {
     }
 
     /**
+     * @param horIni (optional) 
+     * @return Success
+     */
+    busquedaAnunciosPorHorarioInicio(horIni: number | undefined): Observable<AnuncioDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Anuncio/BusquedaAnunciosPorHorarioInicio?";
+        if (horIni === null)
+            throw new Error("The parameter 'horIni' cannot be null.");
+        else if (horIni !== undefined)
+            url_ += "horIni=" + encodeURIComponent("" + horIni) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processBusquedaAnunciosPorHorarioInicio(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processBusquedaAnunciosPorHorarioInicio(<any>response_);
+                } catch (e) {
+                    return <Observable<AnuncioDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AnuncioDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processBusquedaAnunciosPorHorarioInicio(response: HttpResponseBase): Observable<AnuncioDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AnuncioDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AnuncioDtoListResultDto>(<any>null);
+    }
+
+    /**
+     * @param userNam (optional) 
+     * @return Success
+     */
+    busquedaAnunciosPorUsuario(userNam: string | undefined): Observable<AnuncioDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Anuncio/BusquedaAnunciosPorUsuario?";
+        if (userNam === null)
+            throw new Error("The parameter 'userNam' cannot be null.");
+        else if (userNam !== undefined)
+            url_ += "userNam=" + encodeURIComponent("" + userNam) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processBusquedaAnunciosPorUsuario(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processBusquedaAnunciosPorUsuario(<any>response_);
+                } catch (e) {
+                    return <Observable<AnuncioDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AnuncioDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processBusquedaAnunciosPorUsuario(response: HttpResponseBase): Observable<AnuncioDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AnuncioDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AnuncioDtoListResultDto>(<any>null);
+    }
+
+    /**
      * @param id (optional) 
      * @return Success
      */
@@ -1944,6 +2056,118 @@ export class PeticionServiceProxy {
     }
 
     protected processBusquedaPeticionesUrgentes(response: HttpResponseBase): Observable<PeticionDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PeticionDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PeticionDtoListResultDto>(<any>null);
+    }
+
+    /**
+     * @param horIni (optional) 
+     * @return Success
+     */
+    busquedaPeticionesHorarioInicio(horIni: number | undefined): Observable<PeticionDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Peticion/BusquedaPeticionesHorarioInicio?";
+        if (horIni === null)
+            throw new Error("The parameter 'horIni' cannot be null.");
+        else if (horIni !== undefined)
+            url_ += "horIni=" + encodeURIComponent("" + horIni) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processBusquedaPeticionesHorarioInicio(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processBusquedaPeticionesHorarioInicio(<any>response_);
+                } catch (e) {
+                    return <Observable<PeticionDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PeticionDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processBusquedaPeticionesHorarioInicio(response: HttpResponseBase): Observable<PeticionDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PeticionDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PeticionDtoListResultDto>(<any>null);
+    }
+
+    /**
+     * @param userNam (optional) 
+     * @return Success
+     */
+    busquedaPeticionesPorUsuario(userNam: string | undefined): Observable<PeticionDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Peticion/BusquedaPeticionesPorUsuario?";
+        if (userNam === null)
+            throw new Error("The parameter 'userNam' cannot be null.");
+        else if (userNam !== undefined)
+            url_ += "userNam=" + encodeURIComponent("" + userNam) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processBusquedaPeticionesPorUsuario(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processBusquedaPeticionesPorUsuario(<any>response_);
+                } catch (e) {
+                    return <Observable<PeticionDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PeticionDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processBusquedaPeticionesPorUsuario(response: HttpResponseBase): Observable<PeticionDtoListResultDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4501,6 +4725,82 @@ export class UsuarioLogadoServiceProxy {
             }));
         }
         return _observableOf<UserDto>(<any>null);
+    }
+
+    /**
+     * @param emisor (optional) 
+     * @param password (optional) 
+     * @param receptor (optional) 
+     * @param asunto (optional) 
+     * @param texto (optional) 
+     * @return Success
+     */
+    enviarCorreo(emisor: string | undefined, password: string | undefined, receptor: string | undefined, asunto: string | undefined, texto: string | undefined): Observable<boolean> {
+        let url_ = this.baseUrl + "/api/services/app/UsuarioLogado/EnviarCorreo?";
+        if (emisor === null)
+            throw new Error("The parameter 'emisor' cannot be null.");
+        else if (emisor !== undefined)
+            url_ += "emisor=" + encodeURIComponent("" + emisor) + "&";
+        if (password === null)
+            throw new Error("The parameter 'password' cannot be null.");
+        else if (password !== undefined)
+            url_ += "password=" + encodeURIComponent("" + password) + "&";
+        if (receptor === null)
+            throw new Error("The parameter 'receptor' cannot be null.");
+        else if (receptor !== undefined)
+            url_ += "receptor=" + encodeURIComponent("" + receptor) + "&";
+        if (asunto === null)
+            throw new Error("The parameter 'asunto' cannot be null.");
+        else if (asunto !== undefined)
+            url_ += "asunto=" + encodeURIComponent("" + asunto) + "&";
+        if (texto === null)
+            throw new Error("The parameter 'texto' cannot be null.");
+        else if (texto !== undefined)
+            url_ += "texto=" + encodeURIComponent("" + texto) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processEnviarCorreo(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processEnviarCorreo(<any>response_);
+                } catch (e) {
+                    return <Observable<boolean>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<boolean>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processEnviarCorreo(response: HttpResponseBase): Observable<boolean> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<boolean>(<any>null);
     }
 }
 

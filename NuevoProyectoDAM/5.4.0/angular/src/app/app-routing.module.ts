@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRouteGuard } from '@shared/auth/auth-route-guard';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './about/about.component';
 import { UsersComponent } from './components/users/users.component';
 import { TenantsComponent } from './tenants/tenants.component';
@@ -15,6 +15,7 @@ import { PeticionesComponent } from './components/peticiones/peticiones.componen
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { ChatsUsuariosComponent } from './components/chats/chats-usuarios/chats-usuarios.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { CorreoComponent } from './components/correo/correo.component';
 
 
 
@@ -38,7 +39,8 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
                     { path: 'chats', component: ChatsComponent, data: { permission: 'Pages.Chats' } },
                     { path: 'chats/:id', component: ChatsUsuariosComponent, data: { permission: 'Pages.Chats' } },
                     { path: 'ajustes', component: AjustesComponent, data: { permission: 'Pages.UsersNormales' } },
-                    { path: 'usuarios', component: UsuariosComponent, data: { permission: 'Pages.UsersNormales' } }
+                    { path: 'usuarios', component: UsuariosComponent, data: { permission: 'Pages.UsersNormales' } },
+                    { path: 'correo', component: CorreoComponent, data: { permission: 'Pages.UsersNormales' } }
                 ]
             }
         ])

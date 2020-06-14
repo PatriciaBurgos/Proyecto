@@ -257,5 +257,65 @@ namespace DAM.Peticiones
 
 			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticionesDto));
 		}
+
+		public async Task<ListResultDto<PeticionDto>> BusquedaPeticionesHorarioInicio(double horIni)
+		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var peticiones = await _peticionRepository.GetAll()
+				.Include(a => a.Publicacion)
+				.ThenInclude(p => p.PublicacionesGustadas)
+				.ThenInclude(p => p.Usuario)
+				.Include(a => a.Publicacion.Usuario)
+				.Where(p => p.Publicacion.HorarioInicio == horIni)
+				.ToListAsync();
+
+			var peticionesDto = new List<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+
+
+			foreach (PeticionDto peti in peticionesDto)
+			{
+				foreach (PublicacionGustadaDto publiGus in peti.UsuariosGustaPeticion)
+				{
+					if (usuarioActual.Id == publiGus.Usuario.Id)
+					{
+						peti.usuarioActualGustaPublicacion = true;
+					}
+				}
+
+			}
+
+			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticionesDto));
+		}
+
+		public async Task<ListResultDto<PeticionDto>> BusquedaPeticionesPorUsuario(string userNam)
+		{
+			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+
+			var peticiones = await _peticionRepository.GetAll()
+				.Include(a => a.Publicacion)
+				.ThenInclude(p => p.PublicacionesGustadas)
+				.ThenInclude(p => p.Usuario)
+				.Include(a => a.Publicacion.Usuario)
+				.Where(p => p.Publicacion.Usuario.UserName == userNam)
+				.ToListAsync();
+
+			var peticionesDto = new List<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticiones));
+
+
+			foreach (PeticionDto peti in peticionesDto)
+			{
+				foreach (PublicacionGustadaDto publiGus in peti.UsuariosGustaPeticion)
+				{
+					if (usuarioActual.Id == publiGus.Usuario.Id)
+					{
+						peti.usuarioActualGustaPublicacion = true;
+					}
+				}
+
+			}
+
+			return new ListResultDto<PeticionDto>(ObjectMapper.Map<List<PeticionDto>>(peticionesDto));
+		}
 	}
 }

@@ -108,10 +108,20 @@
 
         <mat-menu #appCategoria="matMenu">
             <button mat-menu-item (click)="buscarTodas()">-Todas-</button>
-            <button mat-menu-item (click)="buscarCategoria('Peques')">Peques</button>
-            <button mat-menu-item (click)="buscarCategoria('Clases')">Clases</button>
+            <button mat-menu-item (click)="buscarCategoria('Infantil')">Infantil</button>
+            <button mat-menu-item (click)="buscarCategoria('Educativo')">Educativo</button>
             <button mat-menu-item (click)="buscarCategoria('Informatica')">Informatica</button>
             <button mat-menu-item (click)="buscarCategoria('Terapia')">Terapia</button>
+            <button mat-menu-item (click)="buscarCategoria('Compras')">Compras</button>
+            <button mat-menu-item (click)="buscarCategoria('Mayores')">Mayores</button>
+            <button mat-menu-item (click)="buscarCategoria('Idiomas')">Idiomas</button>
+            <button mat-menu-item (click)="buscarCategoria('Ambiental')">Ambiental</button>
+            <button mat-menu-item (click)="buscarCategoria('Cultural')">Cultural</button>
+            <button mat-menu-item (click)="buscarCategoria('Comunitario')">Comunitario</button>
+            <button mat-menu-item (click)="buscarCategoria('Internacional')">Internacional</button>
+            <button mat-menu-item (click)="buscarCategoria('Sanitario')">Sanitario</button>
+            <button mat-menu-item (click)="buscarCategoria('Ocio')">Ocio</button>
+
         </mat-menu>
         
         <button [matMenuTriggerFor]="appCategoria" class="mat-raised-button " 
@@ -144,6 +154,46 @@
                 style="background-color: #EA80FC;  margin-left: 20px;
                 color:white;">Municipio &nbsp;
                 <i class="fa fa-home" aria-hidden="true"></i>
+        </button>
+
+        <mat-menu #appUsuario="matMenu">
+            <mat-form-field autoClose="nonInput">
+                <mat-label>Usuario...</mat-label>
+                <input class="input-log" name="tex" matInput [(ngModel)]="tex" (click)="buscarUsuario(tex)">
+            </mat-form-field>
+        </mat-menu>
+        
+        <button [matMenuTriggerFor]="appUsuario" class="mat-raised-button " 
+                style="background-color: #EA80FC;  margin-left: 20px;
+                color:white;">Usuario &nbsp;
+                <i class="fa fa-user" aria-hidden="true"></i>
+        </button>
+
+        <mat-menu #appHorarioIni="matMenu">
+            <button mat-menu-item (click)="buscarTodas()">-Todas-</button>
+            <button mat-menu-item (click)="buscarHorarioIni('6')">6</button>
+            <button mat-menu-item (click)="buscarHorarioIni('7')">7</button>
+            <button mat-menu-item (click)="buscarHorarioIni('8')">8</button>
+            <button mat-menu-item (click)="buscarHorarioIni('9')">9</button>
+            <button mat-menu-item (click)="buscarHorarioIni('10')">10</button>
+            <button mat-menu-item (click)="buscarHorarioIni('11')">11</button>
+            <button mat-menu-item (click)="buscarHorarioIni('12')">12</button>
+            <button mat-menu-item (click)="buscarHorarioIni('13')">13</button>
+            <button mat-menu-item (click)="buscarHorarioIni('14')">14</button>
+            <button mat-menu-item (click)="buscarHorarioIni('15')">15</button>
+            <button mat-menu-item (click)="buscarHorarioIni('16')">16</button>
+            <button mat-menu-item (click)="buscarHorarioIni('17')">17</button>
+            <button mat-menu-item (click)="buscarHorarioIni('18')">18</button>
+            <button mat-menu-item (click)="buscarHorarioIni('19')">19</button>
+            <button mat-menu-item (click)="buscarHorarioIni('20')">20</button>
+            <button mat-menu-item (click)="buscarHorarioIni('21')">21</button>
+            <button mat-menu-item (click)="buscarHorarioIni('22')">22</button>
+        </mat-menu>
+        
+        <button [matMenuTriggerFor]="appHorarioIni" class="mat-raised-button " 
+                style="background-color: #EA80FC;  margin-left: 30px;
+                color:white;">Horario de Inicio &nbsp;
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
         </button>
 
 

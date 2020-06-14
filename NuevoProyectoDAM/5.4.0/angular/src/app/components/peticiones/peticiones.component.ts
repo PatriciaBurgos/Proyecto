@@ -251,5 +251,40 @@ export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> 
         
     }
 
+    buscarUsuario(usu : string){
+        this.peticiones.splice(0);
+        console.log("usu = " + usu);
+
+        this._peticioneservice
+        .busquedaPeticionesPorUsuario(usu)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.peticiones = result.items;
+            
+        });
+        
+    }
+
+    buscarHorarioIni(hor : number){
+        this.peticiones.splice(0);
+        console.log("hor = " + hor);
+
+        this._peticioneservice
+        .busquedaPeticionesHorarioInicio(hor)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.peticiones = result.items;
+            
+        });
+        
+    }
 
 }

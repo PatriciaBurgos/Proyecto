@@ -17,6 +17,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -178,6 +180,21 @@ namespace NuevoProyectoDAM.Users
 		protected virtual void CheckErrors(IdentityResult identityResult)
 		{
 			identityResult.CheckErrors(LocalizationManager);
+		}
+
+		public async Task<bool> EnviarCorreo(string emisor, string password, string receptor, string asunto, string texto)
+		{
+
+			var client = new SmtpClient("smtp.gmail.com", 587)
+			{
+				Credentials = new NetworkCredential(emisor, password),
+				EnableSsl = true
+			};
+			client.Send(emisor, receptor, asunto, texto);
+			Console.WriteLine("Sent");
+			
+
+			return true;
 		}
 
 	}

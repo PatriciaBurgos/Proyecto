@@ -39,21 +39,7 @@
                 </ul>
             </div>-->
             <div class="body table-responsive">
-                <!--query start-->
-                <div class="row clearfix">
-                    <form>
-                        <mat-form-field>
-                            <input matInput [placeholder]="l('Filter')" [(ngModel)]="filterText" name="keyword">
-                        </mat-form-field>
-
-                        <div class="row">
-                            <div class="col-md-12 text-right p-r-25">
-                                <button mat-raised-button style="background-color: #EA80FC; color: white;" 
-                                (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+         
                 <!--query end-->
                 <table class="table table-hover table-striped" [busy]="isTableLoading">
                     <tbody>
@@ -66,7 +52,7 @@
                         currentPage: pageNumber,
                         totalItems: totalItems
                       })
-                "  style="text-align: center;">   
+                "  style="text-align: center; font-size: large;">   
                 
                         <ng-container *ngIf="chat.usuarioOrigenId == uLogado; else no">
                             <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]" style="color: black; text-decoration: none;"> {{ chat.usuarioOrigen }}</a></td>

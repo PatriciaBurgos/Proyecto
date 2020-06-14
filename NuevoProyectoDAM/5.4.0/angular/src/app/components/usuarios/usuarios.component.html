@@ -86,9 +86,9 @@
                                         <mat-icon>chat</mat-icon>
                                         <span>{{ "Mensaje" | localize }}</span></a>
                                     </button>
-                                    <button mat-menu-item >
+                                    <button mat-menu-item ><a [routerLink] = "['/app/correo']" style="color: black; text-decoration: none;"> 
                                         <mat-icon>email</mat-icon>
-                                        <span>{{ "Correo" | localize }}</span>
+                                        <span>{{ "Correo" | localize }}</span></a>
                                     </button>
                                 </mat-menu>
                             </td>

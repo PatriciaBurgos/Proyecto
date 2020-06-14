@@ -213,4 +213,40 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
         
     }
 
+    buscarUsuario(name : string){
+        this.anuncios.splice(0);
+        console.log("name = " + name);
+
+        this._anuncioservice
+        .busquedaAnunciosPorUsuario(name)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.anuncios = result.items;
+            
+        });
+        
+    }
+
+    buscarHorarioIni(hor : number){
+        this.anuncios.splice(0);
+        console.log("hora = " + hor);
+
+        this._anuncioservice
+        .busquedaAnunciosPorHorarioInicio(hor)
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.anuncios = result.items;
+            
+        });
+        
+    }
+
 }

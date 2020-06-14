@@ -1,0 +1,94 @@
+<mat-toolbar style="background-color: white; color: #D500F9;">
+    <h1>Correo</h1>
+  </mat-toolbar>
+<br />
+
+<form autocomplete="off" #createCorreoForm="ngForm" (ngSubmit)="save()" style="background-color: white;">
+
+    
+        
+            <mat-tab-group>
+                <mat-tab [label]="'CorreoDetalles' | localize">
+                    <br />
+                    <div class="row-fluid">
+                    
+                    <div class="col-md-6">
+                    
+                    
+                        <mat-form-field>
+                        <input
+                            matInput
+                            name="Emisor"
+                            [placeholder]="'Emisor' | localize"
+                            [(ngModel)]="emisor"
+                            required
+                        
+                        />
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <input
+                            matInput
+                            type="password"
+                            name="Contraseña"
+                            [placeholder]="'Contraseña' | localize"
+                            [(ngModel)]="contrasenia"
+                            required
+                            
+                            />
+                        </mat-form-field>
+
+                        <mat-form-field>
+                        <input
+                            matInput
+                            name="Receptor"
+                            [placeholder]="'Receptor' | localize"
+                            [(ngModel)]="receptor"
+                            required
+                            
+                        />
+                        </mat-form-field>
+
+                        <mat-form-field>
+                        <input
+                            matInput
+                            name="Asunto"
+                            [placeholder]="'Asunto' | localize"
+                            [(ngModel)]="asunto"
+                            required
+                            
+                        />
+                        </mat-form-field>
+
+                        <mat-form-field>
+                        <input
+                            matInput
+                            name="Texto"
+                            [placeholder]="'Texto' | localize"
+                            [(ngModel)]="texto"
+                            required
+                            maxlength="32"
+                        />
+                        </mat-form-field>
+                        
+                    </div>
+                    </div>
+                </mat-tab>
+                
+                
+            </mat-tab-group>
+        
+        <div mat-dialog-actions align="end">
+            <button mat-button type="reset" [disabled]="saving" >
+                {{ "Cancelar / Borrar información" | localize }}
+            </button>
+            <button mat-flat-button
+                    type="submit"
+                    flex="15"
+                    style="background-color: #EA80FC; color: white;"
+                    [disabled]="!createCorreoForm.form.valid || saving">
+                {{ "Enviar" | localize }}
+            </button>
+        </div>
+    
+</form>

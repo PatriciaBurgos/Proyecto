@@ -15,7 +15,7 @@ import { AbpModule } from '@abp/abp.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { SharedModule } from '@shared/shared.module';
 
-import { HomeComponent } from '@app/home/home.component';
+import { HomeComponent } from '@app/components/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
 import { TopBarComponent } from '@app/layout/topbar.component';
 import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch.component';
@@ -42,7 +42,6 @@ import { AnunciosComponent } from '@app/components/anuncios/anuncios.component';
 import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
 import { EditAnuncioDialogComponent } from '@app/components/anuncios/edit-anuncios/edit-anuncio-dialog.component';
 import { AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy, PublicacionGustadaServiceProxy, UsuarioGustadoServiceProxy } from '@shared/service-proxies/service-proxies';
-import { DesplegableCategoriaComponent } from './components/anuncios/desplegable-categoria/desplegable-categoria.component';
 // peticiones
 import { PeticionesComponent } from '@app/components/peticiones/peticiones.component';
 import { CreatePeticionDialogComponent } from '@app/components/peticiones/create-peticiones/create-peticion-dialog.component';
@@ -71,6 +70,8 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { FotoComponent } from './components/foto/foto.component';
 // ajustes
 import { AjustesComponent } from './components/ajustes/ajustes.component';
+// correo
+import { CorreoComponent } from './components/correo/correo.component';
 
 
 @NgModule({
@@ -102,7 +103,6 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     AnunciosComponent,
     CreateAnuncioDialogComponent,
     EditAnuncioDialogComponent,
-    DesplegableCategoriaComponent,
     // peticiones
     PeticionesComponent,
     CreatePeticionDialogComponent,
@@ -129,7 +129,9 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     UsuariosComponent,
     FotoComponent,
     //ajustes
-    AjustesComponent     
+    AjustesComponent,
+    //correo
+    CorreoComponent     
     
     
     

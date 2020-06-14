@@ -45,9 +45,10 @@
               <mat-form-field>
                 <input
                   matInput
+                  
                   name="BirthDate"
                   [placeholder]="'BirthDate' | localize"
-                  [(ngModel)]="user.birthDate "
+                  [(ngModel)]="user.birthDate"
                   required
                   maxlength="32"
                 />
@@ -106,12 +107,23 @@
             </button>-->
             <button
                 mat-flat-button
+                type="button"
+                flex="15"
+                style="background-color: #EA80FC; color: white;">
+               <!--</button> [disabled]="!editUserModal.form.valid || saving"-->
+               <a [routerLink] = "['/app/chats','1']" style="color: white; text-decoration: none;">
+                {{ "Contactar con administrador" | localize }}
+                </a>
+            </button>
+            <button
+                mat-flat-button
                 type="submit"
                 flex="15"
-                style="background-color: #EA80FC; color: white;"
+                style="background-color: #EA80FC; color: white; margin-left: 20px;"
                 [disabled]="!editUserModal.form.valid || saving"
+                
             >
-                {{ "Save" | localize }}
+                {{ "Guardar" | localize }}
             </button>
         </div>
     </div>
