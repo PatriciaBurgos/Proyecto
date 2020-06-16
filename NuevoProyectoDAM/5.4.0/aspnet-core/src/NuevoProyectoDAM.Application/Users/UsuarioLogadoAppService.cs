@@ -31,11 +31,13 @@ namespace NuevoProyectoDAM.Users
 	{
 		private readonly IRepository<User,long> _userRepository;
 		private readonly UserManager _userManager;
-		
-		public UsuarioLogadoAppService(IRepository<User,long> repository, UserManager userManager) 
+		private readonly IAbpSession _abpSession;
+
+		public UsuarioLogadoAppService(IRepository<User,long> repository, IAbpSession abpSession, UserManager userManager) 
 		{
 			_userRepository = repository;
 			_userManager = userManager;
+			_abpSession = abpSession;
 		}
 
 		public async Task<UserDto> GetUsuarioLogado()
@@ -138,24 +140,35 @@ namespace NuevoProyectoDAM.Users
 			return new ListResultDto<UserDto>(ObjectMapper.Map<List<UserDto>>(usuarios));
 		}
 
-		public  string UploadFoto(IFormFile file)
+		public async Task<string> UploadFoto(IFormFile file)
 		{
+			if (file == null || file.Length == 0)
+				throw new UserFriendlyException("Por favor, seleccione una fotografía");
 
-			var uploads = Path.Combine("c:\\temp\\", "uploads");
+			var folderName = Path.Combine("Resources", "ProfilePics");
+			var filePath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
-			var filePath = "";
-
-			if (file.Length > 0)
+			if (!Directory.Exists(filePath))
 			{
-				filePath = Path.Combine(uploads, file.FileName);
+				Directory.CreateDirectory(filePath);
+			}
+			long currentUserId = _abpSession.UserId.Value;
 
-				using (var fileStream = new FileStream(filePath, FileMode.Create))
-				{
-					file.CopyTo(fileStream);
-				}
+			var uniqueFileName = $"{currentUserId}_profilepic.png";
+			var dbPath = Path.Combine(folderName, uniqueFileName);
+
+			using (var fileStream = new FileStream(Path.Combine(filePath, uniqueFileName), FileMode.Create))
+			{
+				await file.CopyToAsync(fileStream);
 			}
 
-			return filePath;
+			var user = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+			user.Photo = "C:\\Users\\patri\\Desktop\\2DAM\\PROYECTO\\Proyecto\\NuevoProyectoDAM\\5.4.0\\aspnet-core\\src\\NuevoProyectoDAM.Web.Host\\Resources\\ProfilePics\\" + user.Id + "_profilepic.png";
+
+			await _userRepository.UpdateAsync(user);
+			await CurrentUnitOfWork.SaveChangesAsync();
+
+			return dbPath;
 		}
 
 		public async Task<UserDto> UpdateAsync(UserDto input)

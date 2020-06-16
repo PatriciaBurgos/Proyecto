@@ -94,10 +94,11 @@
             </button>
             <span>&nbsp;</span>
             <button mat-flat-button
-                    type="submit"
+                    type="button"
                     flex="15"
                     color="primary"
-                    [disabled]="!registerForm.form.valid || saving">
+                    [disabled]="!registerForm.form.valid || saving"
+                    (click)="save()">
                     {{ "Entrar" | localize }}
             </button>    
       </div>

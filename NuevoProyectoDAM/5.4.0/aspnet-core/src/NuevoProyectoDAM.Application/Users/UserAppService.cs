@@ -61,7 +61,7 @@ namespace NuevoProyectoDAM.Users
 
             var user = ObjectMapper.Map<User>(input);
 
-            user.TenantId = AbpSession.TenantId;
+            user.TenantId = null;
             user.IsEmailConfirmed = true;
             
 

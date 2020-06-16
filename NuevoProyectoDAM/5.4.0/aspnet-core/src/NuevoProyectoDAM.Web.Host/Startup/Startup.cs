@@ -128,7 +128,7 @@ namespace NuevoProyectoDAM.Web.Host.Startup
                        
 
             //Configuración para el "FileUpload"
-            app.UseStaticFiles();
+            
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),

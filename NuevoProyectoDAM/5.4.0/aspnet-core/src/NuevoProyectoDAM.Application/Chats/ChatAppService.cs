@@ -109,7 +109,7 @@ namespace NuevoProyectoDAM.Chats
 			return new ListResultDto<MostrarChatReducidoDto>(ObjectMapper.Map<List<MostrarChatReducidoDto>>(chatsDefinitivos));
 		}
 
-		public async Task<ListResultDto<ChatDto>> GetChatDosUsuarios (string userDestino)
+		/*public async Task<ListResultDto<ChatDto>> GetChatDosUsuarios (string userDestino)
 		{
 			CheckUpdatePermission();
 
@@ -123,7 +123,7 @@ namespace NuevoProyectoDAM.Chats
 				.ToListAsync();
 
 			return new ListResultDto<ChatDto>(ObjectMapper.Map<List<ChatDto>>(chat));
-		}
+		}*/
 
 		public async Task<ListResultDto<ChatDto>> GetChatCompletoDosUsuarios(int idChat)
 		{

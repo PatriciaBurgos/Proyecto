@@ -38,6 +38,7 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
   comprobacion : boolean = false;
   siSigue : boolean = false;
   
+  
   filterText = '';
   constructor(
       injector: Injector,
@@ -80,6 +81,7 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
                 )
                 .subscribe(result  => {
                     this.user = result;
+                    
                 });
 
                 this._userservice

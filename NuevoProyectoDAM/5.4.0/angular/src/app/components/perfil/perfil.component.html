@@ -1,9 +1,9 @@
 <!--NOMBRE E IMAGEN-->
-<div class="row clearfix " [@routerTransition]>
+<div class="row clearfix " >
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
         <div class="card main-content ">
             <div class="header " >
-                <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
+                <img class="card-img-left" src={{user.photo}} width="88" height="88" alt="User"/>  
                 <h2 class="card-body" style="display: inline; margin-left: 25px; font-weight: bold; font-size: large;">{{ user.userName }}</h2>
                 <ul class="header-dropdown m-r--5">
                     
@@ -197,4 +197,3 @@
     </div>
 </div>
   
-<app-foto></app-foto>

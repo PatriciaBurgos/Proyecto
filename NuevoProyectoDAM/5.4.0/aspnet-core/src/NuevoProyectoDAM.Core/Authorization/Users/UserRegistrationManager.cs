@@ -41,7 +41,8 @@ namespace NuevoProyectoDAM.Authorization.Users
         {
             CheckForTenant();
 
-            var tenant = await GetActiveTenantAsync();
+            // var tenant = await GetActiveTenantAsync();
+            //var tenant = null;
 
             var user = new User
             {
@@ -61,16 +62,21 @@ namespace NuevoProyectoDAM.Authorization.Users
             };
 
             user.SetNormalizedNames();
-           
-            foreach (var defaultRole in await _roleManager.Roles.Where(r => r.IsDefault).ToListAsync())
-            {
-                user.Roles.Add(new UserRole(tenant.Id, user.Id, defaultRole.Id));
-            }
 
-            await _userManager.InitializeOptionsAsync(tenant.Id);
+            //foreach (var defaultRole in await _roleManager.Roles.Where(r => r.IsDefault).ToListAsync())
+            //{
+            //  user.Roles.Add(new UserRole(null, user.Id, defaultRole.Id));
+            //}
+            user.Roles.Add(new UserRole(null, user.Id, 3));
+            await _userManager.InitializeOptionsAsync(null);
 
+            
+            user.TenantId = null;
             CheckErrors(await _userManager.CreateAsync(user, plainPassword));
+            user.Roles.Add(new UserRole(null, user.Id, 3));
+            user.TenantId = null;
             await CurrentUnitOfWork.SaveChangesAsync();
+            
 
             return user;
         }
