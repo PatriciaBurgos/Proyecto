@@ -7,28 +7,21 @@
                 <table class="table table-hover table-striped" [busy]="isTableLoading" style="width: 500px;">
                     <tbody>
                         <tr *ngFor="
-                let user1 of (user.usuariosSeguidores
-                  | paginate
-                    : {
-                        id: 'server',
-                        itemsPerPage: pageSize,
-                        currentPage: pageNumber,
-                        totalItems: totalItems
-                      })
+                let user1 of (user.usuariosSeguidores)
               ">            
-                            <td>{{ user1.usuario.userName }}</td>
+                            <a [routerLink] = "['/app/perfil',user1.usuario.id]" style="color: black; text-decoration: none;"><td>{{ user1.usuario.userName }}</td></a>
                             <td>
                                 <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                     <mat-icon>menu</mat-icon>
                                 </button>
                                 <mat-menu #actionsMenu="matMenu">
-                                    <button mat-menu-item >
+                                    <button mat-menu-item > <a [routerLink] = "['/app/chats',user1.usuario.id]" style="color: black; text-decoration: none;">
                                         <mat-icon>chat</mat-icon>
-                                        <span>{{ "Mensaje" | localize }}</span>
+                                        <span>{{ "Mensaje" | localize }}</span></a>
                                     </button>
-                                    <button mat-menu-item >
+                                    <button mat-menu-item ><a [routerLink] = "['/app/correo']" style="color: black; text-decoration: none;"> 
                                         <mat-icon>email</mat-icon>
-                                        <span>{{ "Correo" | localize }}</span>
+                                        <span>{{ "Correo" | localize }}</span></a>
                                     </button>
                                 </mat-menu>
                             </td>

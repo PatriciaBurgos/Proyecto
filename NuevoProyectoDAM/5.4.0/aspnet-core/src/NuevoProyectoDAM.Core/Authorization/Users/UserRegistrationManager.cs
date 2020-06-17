@@ -69,7 +69,8 @@ namespace NuevoProyectoDAM.Authorization.Users
             //}
             user.Roles.Add(new UserRole(null, user.Id, 3));
             await _userManager.InitializeOptionsAsync(null);
-
+            
+            user.Photo = "http://localhost:21021/Resources/ProfilePics/user_profilepic.png";
             
             user.TenantId = null;
             CheckErrors(await _userManager.CreateAsync(user, plainPassword));

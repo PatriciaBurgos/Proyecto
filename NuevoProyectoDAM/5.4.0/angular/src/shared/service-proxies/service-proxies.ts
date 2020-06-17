@@ -4746,6 +4746,62 @@ export class UsuarioLogadoServiceProxy {
         }
         return _observableOf<boolean>(<any>null);
     }
+
+    /**
+     * @param login (optional) 
+     * @return Success
+     */
+    busquedaLogin(login: string | undefined): Observable<UserDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/UsuarioLogado/BusquedaLogin?";
+        if (login === null)
+            throw new Error("The parameter 'login' cannot be null.");
+        else if (login !== undefined)
+            url_ += "login=" + encodeURIComponent("" + login) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processBusquedaLogin(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processBusquedaLogin(<any>response_);
+                } catch (e) {
+                    return <Observable<UserDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<UserDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processBusquedaLogin(response: HttpResponseBase): Observable<UserDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UserDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<UserDtoListResultDto>(<any>null);
+    }
 }
 
 export class IsTenantAvailableInput implements IIsTenantAvailableInput {
@@ -5139,6 +5195,8 @@ export class AnuncioDto implements IAnuncioDto {
     usuarioActualGustaPublicacion: boolean;
     numUsuarios: number;
     publicacionNombreUsuario: string | undefined;
+    usuarioId: number;
+    publicacionFoto: string | undefined;
     preferencias: string | undefined;
     id: number;
 
@@ -5168,6 +5226,8 @@ export class AnuncioDto implements IAnuncioDto {
             this.usuarioActualGustaPublicacion = _data["usuarioActualGustaPublicacion"];
             this.numUsuarios = _data["numUsuarios"];
             this.publicacionNombreUsuario = _data["publicacionNombreUsuario"];
+            this.usuarioId = _data["usuarioId"];
+            this.publicacionFoto = _data["publicacionFoto"];
             this.preferencias = _data["preferencias"];
             this.id = _data["id"];
         }
@@ -5197,6 +5257,8 @@ export class AnuncioDto implements IAnuncioDto {
         data["usuarioActualGustaPublicacion"] = this.usuarioActualGustaPublicacion;
         data["numUsuarios"] = this.numUsuarios;
         data["publicacionNombreUsuario"] = this.publicacionNombreUsuario;
+        data["usuarioId"] = this.usuarioId;
+        data["publicacionFoto"] = this.publicacionFoto;
         data["preferencias"] = this.preferencias;
         data["id"] = this.id;
         return data; 
@@ -5222,6 +5284,8 @@ export interface IAnuncioDto {
     usuarioActualGustaPublicacion: boolean;
     numUsuarios: number;
     publicacionNombreUsuario: string | undefined;
+    usuarioId: number;
+    publicacionFoto: string | undefined;
     preferencias: string | undefined;
     id: number;
 }
@@ -5910,6 +5974,8 @@ export class PeticionDto implements IPeticionDto {
     usuarioActualGustaPublicacion: boolean;
     numUsuarios: number;
     publicacionNombreUsuario: string | undefined;
+    usuarioId: number;
+    publicacionFoto: string | undefined;
     isUrgent: boolean;
     id: number;
 
@@ -5939,6 +6005,8 @@ export class PeticionDto implements IPeticionDto {
             this.usuarioActualGustaPublicacion = _data["usuarioActualGustaPublicacion"];
             this.numUsuarios = _data["numUsuarios"];
             this.publicacionNombreUsuario = _data["publicacionNombreUsuario"];
+            this.usuarioId = _data["usuarioId"];
+            this.publicacionFoto = _data["publicacionFoto"];
             this.isUrgent = _data["isUrgent"];
             this.id = _data["id"];
         }
@@ -5968,6 +6036,8 @@ export class PeticionDto implements IPeticionDto {
         data["usuarioActualGustaPublicacion"] = this.usuarioActualGustaPublicacion;
         data["numUsuarios"] = this.numUsuarios;
         data["publicacionNombreUsuario"] = this.publicacionNombreUsuario;
+        data["usuarioId"] = this.usuarioId;
+        data["publicacionFoto"] = this.publicacionFoto;
         data["isUrgent"] = this.isUrgent;
         data["id"] = this.id;
         return data; 
@@ -5993,6 +6063,8 @@ export interface IPeticionDto {
     usuarioActualGustaPublicacion: boolean;
     numUsuarios: number;
     publicacionNombreUsuario: string | undefined;
+    usuarioId: number;
+    publicacionFoto: string | undefined;
     isUrgent: boolean;
     id: number;
 }

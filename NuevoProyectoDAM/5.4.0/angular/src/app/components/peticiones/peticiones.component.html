@@ -294,20 +294,13 @@
 
 <div >
     <div *ngFor="
-    let peticion of (peticiones
-      | paginate
-        : {
-            id: 'server',
-            itemsPerPage: pageSize,
-            currentPage: pageNumber,
-            totalItems: totalItems
-          })
+    let peticion of (peticiones)
   ">
         <div class="card main-content">
 
             <div class="header" style="margin: 10px">
-                <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
-                <p class="card-body" style="display: inline; margin-left: 25px; font-size: large;"><strong>{{ peticion.publicacionNombreUsuario }}</strong></p>
+                <a [routerLink] = "['/app/perfil',peticion.usuarioId]" style="color: black; text-decoration: none;"><img class="card-img-left" src={{peticion.publicacionFoto}} width="88" height="88" alt="User"/></a>  
+                <p class="card-body" style="display: inline; margin-left: 25px; font-size: large;"><a [routerLink] = "['/app/perfil',peticion.usuarioId]" style="color: black; text-decoration: none;"><strong>{{ peticion.publicacionNombreUsuario }}</strong></a></p>
                <!-- <button class="mdc-icon-button material-icons" [ngClass]="{si: estadoPositivo, no: !estadoPositivo}" (click)="cambiaEstado()" style="display: inline; margin-left: 25px; margin-top: 32px; float: right; background-color: transparent;">favorite</button>-->
        
                 <div style="display: inline;">

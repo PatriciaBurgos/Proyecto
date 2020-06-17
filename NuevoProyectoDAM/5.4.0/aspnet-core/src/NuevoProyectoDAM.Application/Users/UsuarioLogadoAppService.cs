@@ -163,7 +163,7 @@ namespace NuevoProyectoDAM.Users
 			}
 
 			var user = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
-			user.Photo = "C:\\Users\\patri\\Desktop\\2DAM\\PROYECTO\\Proyecto\\NuevoProyectoDAM\\5.4.0\\aspnet-core\\src\\NuevoProyectoDAM.Web.Host\\Resources\\ProfilePics\\" + user.Id + "_profilepic.png";
+			user.Photo = "http://localhost:21021/Resources/ProfilePics/" + user.Id + "_profilepic.png";
 
 			await _userRepository.UpdateAsync(user);
 			await CurrentUnitOfWork.SaveChangesAsync();
@@ -208,6 +208,15 @@ namespace NuevoProyectoDAM.Users
 			
 
 			return true;
+		}
+
+		public async Task<ListResultDto<UserDto>> BusquedaLogin(string login)
+		{
+			var usuarios = await _userRepository.GetAll()
+				.Where(u => u.UserName == login)
+				.ToListAsync();
+
+			return new ListResultDto<UserDto>(ObjectMapper.Map<List<UserDto>>(usuarios));
 		}
 
 	}

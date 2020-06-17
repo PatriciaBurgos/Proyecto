@@ -26,6 +26,10 @@ namespace DAM.Peticiones.Dto
 
         public string PublicacionNombreUsuario { get; set; }
 
+        public int UsuarioId { get; set; }
+
+        public string PublicacionFoto { get; set; }
+
         public bool IsUrgent { get; set; }
 
 

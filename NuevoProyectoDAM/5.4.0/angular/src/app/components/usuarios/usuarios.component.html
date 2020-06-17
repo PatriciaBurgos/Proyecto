@@ -51,7 +51,9 @@
                             </div>
                             <div class="col-md-12 text-left p-r-25">
                                 <button mat-raised-button style="background-color: #EA80FC; 
-                                color:white; margin: 10px;" (click)="getDataPage(1)">{{ 'Buscar' | localize }}</button>
+                                color:white; margin: 10px;" (click)="buscarLogin(keyword)">{{ 'Buscar' | localize }}</button>
+                                <button mat-raised-button style="background-color: #EA80FC; 
+                                color:white; margin: 10px;" (click)="buscarTodos()">{{ 'Todos' | localize }}</button>
                             </div>
                         </div>
                     </form>
@@ -95,13 +97,7 @@
                         
                         </tr>
                     </tbody>
-                </table>
-                
-                <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
-                    <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
-                    </abp-pagination-controls>
-                </div>
-                
+                </table>                
             </div>
         </div>
     </div>

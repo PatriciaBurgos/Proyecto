@@ -68,5 +68,37 @@ export class UsuariosComponent extends PagedListingComponentBase<UserDto> {
       );*/
   }
 
-  
+  buscarLogin(login: string){
+    this.users.splice(0);
+    console.log("login = " + login);
+
+    this._userService
+    .busquedaLogin(login)
+    .pipe(
+        finalize(() => {
+            
+        })
+    )
+    .subscribe(result  => {
+        this.users = result.items;
+        
+    });
+  }
+
+    buscarTodos(){
+        this.users.splice(0);
+    
+        this._userService
+        .getAllUsuarios()
+        .pipe(
+            finalize(() => {
+                
+            })
+        )
+        .subscribe(result  => {
+            this.users = result.items;
+            
+        });
+
+    }
 }

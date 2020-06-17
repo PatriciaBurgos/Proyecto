@@ -25,6 +25,10 @@ namespace DAM.Anuncios.Dto
 
         public string PublicacionNombreUsuario { get; set; }
 
+        public int UsuarioId { get; set; }
+
+        public string PublicacionFoto { get; set; }
+
         public string Preferencias { get; set; }
 	}
 }
