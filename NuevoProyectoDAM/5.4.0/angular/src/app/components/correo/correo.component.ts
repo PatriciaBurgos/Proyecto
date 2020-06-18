@@ -38,13 +38,6 @@ export class CorreoComponent  extends PagedListingComponentBase<UserDto> {
         
 
     save(): void {
-        //this.saving = true;
-        //const Correo_ = new ();
-        //Correo_.init(this.anuncio);
-        //console.log(Correo_);
-        
-        //Correo_.publicacionCategoria = this.categoria;
-        
         this._userService 
             .enviarCorreo(this.emisor, this.contrasenia, this.receptor, this.asunto, this.texto)
             
@@ -52,9 +45,7 @@ export class CorreoComponent  extends PagedListingComponentBase<UserDto> {
                 this.notify.info(this.l('SavedSuccessfully'));    
                 this.refresh();            
                 
-                
             });
     }
-
-    
+  
 }

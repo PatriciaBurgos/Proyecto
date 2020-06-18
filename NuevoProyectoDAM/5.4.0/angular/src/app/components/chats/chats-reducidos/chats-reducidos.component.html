@@ -1,8 +1,8 @@
-<div class="card main-content row clearfix" style="margin-bottom: 15px; " >
-    <mat-toolbar style="background-color: white; color: #D500F9;">
+<div class="card main-content row clearfix" id="div1" >
+    <mat-toolbar id="toolbar">
         <h1>{{ "Chats" | localize }}</h1>
-        <ul class="header-dropdown m-r--5" style="position: absolute; top: 20px; right: 15px;">
-            <li style="list-style: none;">
+        <ul class="header-dropdown m-r--5" id="ul1">
+            <li>
                 <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
                     <mat-icon>more_vert</mat-icon>
                 </button>
@@ -22,56 +22,33 @@
 <div class="row clearfix" [@routerTransition] >
     <div class="col-lg-15 col-md-15 col-sm-15 col-xs-15" >
         <div class="card main-content" >
-            <!--<div class="header">
-                <h2><mat-icon>message</mat-icon> {{ "Chats" | localize }}</h2>
-                <ul class="header-dropdown m-r--5">
-                    <li>
-                        <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #headerMenu="matMenu">
-                            <button mat-menu-item (click)="refresh()">
-                                <mat-icon>refresh</mat-icon>
-                                <span>{{ "Refresh" | localize }}</span>
-                            </button>
-                        </mat-menu>
-                    </li>
-                </ul>
-            </div>-->
             <div class="body table-responsive">
          
                 <!--query end-->
                 <table class="table table-hover table-striped" [busy]="isTableLoading">
                     <tbody>
                         <tr *ngFor="
-                let chat of (chats
-                  | paginate
-                    : {
-                        id: 'server',
-                        itemsPerPage: pageSize,
-                        currentPage: pageNumber,
-                        totalItems: totalItems
-                      })
-                "  style="text-align: center; font-size: large;">   
+                let chat of (chats)
+                "  id="for">   
                 
                         <ng-container *ngIf="chat.usuarioOrigenId == uLogado; else no">
-                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]" style="color: black; text-decoration: none;"> {{ chat.usuarioOrigen }}</a></td>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]"> {{ chat.usuarioOrigen }}</a></td>
                         
-                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]" style="color: black; text-decoration: none;"> {{ chat.usuarioDestino }}</a></td>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]"> {{ chat.usuarioDestino }}</a></td>
 
-                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]" style="color: black; text-decoration: none;"> {{ chat.texto }}</a></td>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]"> {{ chat.texto }}</a></td>
 
-                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]" style="color: black; text-decoration: none;"> {{ chat.fechaHora | date:'medium' }}</a></td>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioDestinoId]"> {{ chat.fechaHora | date:'medium' }}</a></td>
                         </ng-container>
 
                         <ng-template #no>
-                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]" style="color: black; text-decoration: none;"> {{ chat.usuarioOrigen }}</a></td>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]"> {{ chat.usuarioOrigen }}</a></td>
                         
-                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]" style="color: black; text-decoration: none;"> {{ chat.usuarioDestino }}</a></td>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]"> {{ chat.usuarioDestino }}</a></td>
 
-                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]" style="color: black; text-decoration: none;"> {{ chat.texto }}</a></td>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]"> {{ chat.texto }}</a></td>
 
-                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]" style="color: black; text-decoration: none;"> {{ chat.fechaHora | date:'medium' }}</a></td>
+                            <td><a [routerLink] = "['/app/chats',chat.usuarioOrigenId]"> {{ chat.fechaHora | date:'medium' }}</a></td>
                         </ng-template>
 
                         </tr>

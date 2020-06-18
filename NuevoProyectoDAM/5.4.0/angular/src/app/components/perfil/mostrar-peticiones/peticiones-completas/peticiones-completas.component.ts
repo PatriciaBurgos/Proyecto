@@ -63,25 +63,7 @@ export class PeticionesCompletasComponent extends PagedListingComponentBase<Peti
 
   
 
-  delete(peticion: PeticionDto): void {
-      /*abp.message.confirm(
-          this.l('UserDeleteWarningMessage', user.Id),
-          undefined,
-          (result: boolean) => {
-              if (result) {
-                  /*this._userservice
-                      .delete(user.id)
-                      .pipe(
-                          finalize(() => {
-                              abp.notify.success(this.l('SuccessfullyDeleted'));
-                              this.refresh();
-                          })
-                      )
-                      .subscribe(() => { });
-              }
-          }
-      );*/
-  }
+  delete(peticion: PeticionDto): void { }
 
   gustaPublicacion(idPub : number){
     console.log("PUB = " + idPub);
@@ -115,7 +97,6 @@ noGustaPublicacion(idPub : number){
             
         });
     this.refresh();
-}
+  }
 
-  
 }

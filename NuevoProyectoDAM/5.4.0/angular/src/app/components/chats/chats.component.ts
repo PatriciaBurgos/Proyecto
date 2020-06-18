@@ -57,11 +57,7 @@ export class ChatsComponent extends PagedListingComponentBase<MostrarChatReducid
                 
             });
         }
-  //  ngOnInit() {
-  //      this._chatservice.getAll('', 0, 20)
-  //          .subscribe(result =>
-  //          this.chats = result.items);
-   // }
+ 
 
     delete(chat: ChatDto): void {
         abp.message.confirm(

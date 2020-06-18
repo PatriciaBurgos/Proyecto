@@ -69,11 +69,6 @@ export class MostrarAnunciosComponent extends PagedListingComponentBase<AnuncioD
                 
             });
       }
-
-  //ngOnInit() {
-  //    this._anuncioservice.getAll('', 0, 20)
-  //        .subscribe(result =>
-  //        this.anuncios = result.items);
   }
 
   delete(anuncio: AnuncioDto): void {
@@ -100,19 +95,12 @@ export class MostrarAnunciosComponent extends PagedListingComponentBase<AnuncioD
       this.showCreateOrEditAnuncioDialog();
   }
 
-  /*editAnuncio(anuncio: AnuncioDto): void {
-      this.showCreateOrEditAnuncioDialog(anuncio.id);
-  }*/
 
   showCreateOrEditAnuncioDialog(id?: number): void {
       let createOrEditAnuncioDialog;
       if (id === undefined || id <= 0) {
           createOrEditAnuncioDialog = this._dialog.open(CreateAnuncioDialogComponent);
-      } /*else {
-        //  createOrEditAnuncioDialog = this._dialog.open(EditAnuncioDialogComponent, {
-        //      data: id
-          });
-      }*/
+      } 
       
       createOrEditAnuncioDialog.afterClosed().subscribe(result => {
           if (result) {
@@ -124,7 +112,6 @@ export class MostrarAnunciosComponent extends PagedListingComponentBase<AnuncioD
   abrirAnuncio(idAnuncio:number):void{
     this._dialog.open(AnunciosCompletosComponent, {data:idAnuncio});
   }
-
 
 }
 

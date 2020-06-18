@@ -1,196 +1,11 @@
-<!--<div class="row clearfix" [@routerTransition]>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card main-content">
-            <div class="header">
-                <h2><mat-icon>list</mat-icon> {{ "Peticiones" | localize }}</h2>
-                <ul class="header-dropdown m-r--5">
-                    <li>
-                        <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #headerMenu="matMenu">
-                            <button mat-menu-item (click)="refresh()">
-                                <mat-icon>refresh</mat-icon>
-                                <span>{{ "Refresh" | localize }}</span>
-                            </button>
-                        </mat-menu>
-                    </li>
-                </ul>
-            </div>
-            <div class="body table-responsive">
-            --><!--query start--><!--
-                <div class="row clearfix">
-                    <form>
-                        <mat-form-field>
-                            <input matInput [placeholder]="l('Filter')" [(ngModel)]="filterText" name="keyword">
-                        </mat-form-field>
-
-                        <div class="row">
-                            <div class="col-md-12 text-right p-r-25">
-                                <button mat-raised-button style="background-color: #EA80FC; color: white;"s (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            --><!--query end--><!--
-                <table class="table table-hover table-striped" [busy]="isTableLoading">
-                    <thead>
-                        <tr>
-                            <th>{{ "NombreUsuario" | localize }}</th>
-                            <th>{{ "Categoria" | localize }}</th>
-                            <th>{{ "Texto" | localize }}</th>
-                            <th>{{ "HorarioInicio" | localize }}</th>
-                            <th>{{ "HorarioFin" | localize }}</th>
-                            <th>{{ "Municipio" | localize }}</th>
-                            <th>{{ "Ciudad" | localize }}</th>
-                            <th>{{ "EsUrgente" | localize }}</th>
-                            
-                            <th>{{ "Actions" | localize }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="
-                let peticion of (peticiones
-                  | paginate
-                    : {
-                        id: 'server',
-                        itemsPerPage: pageSize,
-                        currentPage: pageNumber,
-                        totalItems: totalItems
-                      })
-              ">            
-                            <td>{{ peticion.publicacionNombreUsuario }}</td>
-                            <td>{{ peticion.publicacionCategoria }}</td>
-                            <td>{{ peticion.publicacionTexto }}</td>
-                            <td>{{ peticion.publicacionHorarioInicio }}</td>
-                            <td>{{ peticion.publicacionHorarioFin }}</td>
-                            <td>{{ peticion.publicacionMunicipio }}</td>
-                            <td>{{ peticion.publicacionCiudad }}</td>
-                            <td>{{ peticion.isUrgent }}</td>
-                            <td>
-                                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
-                                    <mat-icon>menu</mat-icon>
-                                </button>
-                                <mat-menu #actionsMenu="matMenu">
-                                    <button mat-menu-item (click)="editPeticion(peticion)">
-                                        <mat-icon>edit</mat-icon>
-                                        <span>{{ "Edit" | localize }}</span>
-                                    </button>
-                                    <button mat-menu-item (click)="delete(peticion)">
-                                        <mat-icon>delete</mat-icon>
-                                        <span>{{ "Delete" | localize }}</span>
-                                    </button>
-                                </mat-menu>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
-                    <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
-                    </abp-pagination-controls>
-                </div>
-                <button mat-mini-fab style="background-color: #EA80FC; color: white;" class="pull-right" (click)="createPeticion()">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>-->
-
-
-
-
-<!--<mat-toolbar style="background-color: white; color: #D500F9;">
-    <h1>Peticiones</h1>
-  </mat-toolbar>
-<div >
-    <div *ngFor="
-    let peticion of (peticiones
-      | paginate
-        : {
-            id: 'server',
-            itemsPerPage: pageSize,
-            currentPage: pageNumber,
-            totalItems: totalItems
-          })
-  ">
-        <div class="card main-content">
-
-            <div class="header" style="margin: 10px">
-                <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
-                <p class="card-body" style="display: inline; margin-left: 25px; font-size: large;"><strong>{{ peticion.publicacionNombreUsuario }}</strong></p>
-            --><!-- <button class="mdc-icon-button material-icons" [ngClass]="{si: estadoPositivo, no: !estadoPositivo}" (click)="cambiaEstado()" style="display: inline; margin-left: 25px; margin-top: 32px; float: right; background-color: transparent;">favorite</button>-->
-
-               <!--<div style="display: inline;" *ngIf="peticion.numUsuarios > 0; else no">                
-
-                    <div style="display: inline;" *ngFor="let usu of peticion.usuariosGustaPeticion">
-                        
-                        HOLAA-{{countFav}}
-                        <ng-container #hola *ngIf="usu.usuario.userName == uLogado ">                            
-                            HOLA-{{countFav}}
-                            <button class="mdc-icon-button material-icons" 
-                                style="color: red; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
-                                background-color: transparent;" (click)="noGustaPublicacion(peticion.publicacionId)">favorite</button>
-                            
-                        </ng-container>
-
-                        QUEE-{{countFav}}
-                        <ng-container *ngIf="usu.usuario.userName != uLogado ">
-                            QUE-{{countFav}}
-                            <button class="mdc-icon-button material-icons" 
-                                style="color: grey; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
-                                background-color: transparent;" (click)="gustaPublicacion(peticion.publicacionId)">favorite</button>
-                        </ng-container>
-                    </div>
-                </div>
-                PASAA-{{countFav}}
-                <ng-template #no >
-                    PASA-{{countFav}}
-                    <button class="mdc-icon-button material-icons" 
-                        style="color: grey; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
-                        background-color: transparent;" (click)="gustaPublicacion(peticion.publicacionId)">favorite</button>
-                </ng-template>
-
-                <p class="card-body text-right" style="display: inline; margin-left: 25px; margin-top: 32px; float: right;"><strong>Numero de Favoritos:</strong>{{peticion.numUsuarios}}</p>
-
-
-                <p class="card-body text-right" style="display: inline; margin-left: 25px; margin-top: 32px; float: right;"><strong>Categoría:</strong> {{ peticion.publicacionCategoria }}</p>
-            </div>
-
-            <div class="card-body" style="margin: 30px">
-                <p style="font-size: large;">{{ peticion.publicacionTexto }}</p>
-                <p *ngIf="peticion.isUrgent==true"><strong>Es urgente: </strong>Si</p>
-                <p *ngIf="peticion.isUrgent==false"><strong>Es urgente: </strong>No</p>
-            </div>
-
-            <div class="card-body" style="margin: 30px; padding-bottom: 20px;">
-                <p  style="display: inline;"><strong>Horario Inicio:</strong> {{ peticion.publicacionHorarioInicio }}</p>
-                <p  style="display: inline; margin-left: 70px;"><strong>Horario Fin:</strong> {{ peticion.publicacionHorarioFin }}</p>
-                <p  style="display: inline; margin-left: 150px;"><strong>Municipio:</strong> {{ peticion.publicacionMunicipio }}</p>
-                <p  style="display: inline; margin-left: 70px;"><strong>Ciudad:</strong> {{ peticion.publicacionCiudad }}</p>
-            </div>
-
-        </div>
-
-    </div> 
-
-    <button class="mdc-fab " mat-mini-fab style="background-color: #EA80FC; color: white; width: 70px; height: 70px;
-        position: fixed;bottom: 1rem;right: 1rem;" class="pull-right" (click)="createPeticion()">
-        <div class="mdc-fab__ripple"></div>
-        <span class="mdc-fab__icon material-icons">add</span>
-    </button>
-
-</div>-->
-
-
-<mat-toolbar style="background-color: white; color: #D500F9;">
+<mat-toolbar id="tb">
     <h1>Peticiones</h1>
   </mat-toolbar>
 
   <br />
 <div class="dropdown" mdbDropdown>
-    <mat-toolbar style="background-color: white;">
-        <h2 style="color : #EA80FC; margin-left: 10px;">Buscar por...</h2>
+    <mat-toolbar id="bc-white">
+        <h2>Buscar por...</h2>
 
         <mat-menu #appCategoria="matMenu">
             <button mat-menu-item (click)="buscarTodas()">-Todas-</button>
@@ -201,8 +16,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appCategoria" class="mat-raised-button " 
-                style="background-color: #EA80FC;  margin-left: 30px;
-                color:white;">Categoria &nbsp;
+                id="but1">Categoria &nbsp;
                 <i class="fa fa-list-ul" aria-hidden="true"></i>
         </button>
 
@@ -214,8 +28,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appCiudad" class="mat-raised-button " 
-                style="background-color: #EA80FC;  margin-left: 20px;
-                color:white;">Ciudad &nbsp;
+                id="but2">Ciudad &nbsp;
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
         </button>
 
@@ -227,8 +40,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appMunicipio" class="mat-raised-button " 
-                style="background-color: #EA80FC;  margin-left: 20px;
-                color:white;">Municipio &nbsp;
+                id="but2">Municipio &nbsp;
                 <i class="fa fa-home" aria-hidden="true"></i>
         </button>
 
@@ -239,8 +51,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appUrgente" class="mat-raised-button " 
-                style="background-color: #EA80FC;  margin-left: 20px;
-                color:white;">Es urgente &nbsp;
+                id="but2">Es urgente &nbsp;
                 <i class="fa fa-asterisk" aria-hidden="true"></i>
         </button>
 
@@ -252,8 +63,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appUsu" class="mat-raised-button " 
-                style="background-color: #EA80FC;  margin-left: 20px;
-                color:white;">Usuario &nbsp;
+                id="but2">Usuario &nbsp;
                 <i class="fa fa-user" aria-hidden="true"></i>
         </button>
 
@@ -279,8 +89,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appHorarioIni" class="mat-raised-button " 
-                style="background-color: #EA80FC;  margin-left: 30px;
-                color:white;">Horario de Inicio &nbsp;
+                id="but2">Horario de Inicio &nbsp;
                 <i class="fa fa-clock-o" aria-hidden="true"></i>
         </button>
 
@@ -298,51 +107,47 @@
   ">
         <div class="card main-content">
 
-            <div class="header" style="margin: 10px">
-                <a [routerLink] = "['/app/perfil',peticion.usuarioId]" style="color: black; text-decoration: none;"><img class="card-img-left" src={{peticion.publicacionFoto}} width="88" height="88" alt="User"/></a>  
-                <p class="card-body" style="display: inline; margin-left: 25px; font-size: large;"><a [routerLink] = "['/app/perfil',peticion.usuarioId]" style="color: black; text-decoration: none;"><strong>{{ peticion.publicacionNombreUsuario }}</strong></a></p>
-               <!-- <button class="mdc-icon-button material-icons" [ngClass]="{si: estadoPositivo, no: !estadoPositivo}" (click)="cambiaEstado()" style="display: inline; margin-left: 25px; margin-top: 32px; float: right; background-color: transparent;">favorite</button>-->
+            <div class="header" id="m10">
+                <a [routerLink] = "['/app/perfil',peticion.usuarioId]" ><img class="card-img-left" src={{peticion.publicacionFoto}} width="88" height="88" alt="User"/></a>  
+                <p class="card-body" id="p-nombre"><a [routerLink] = "['/app/perfil',peticion.usuarioId]"><strong>{{ peticion.publicacionNombreUsuario }}</strong></a></p>
        
-                <div style="display: inline;">
+                <div id="div-inline">
                     
                     <ng-container *ngIf="peticion.usuarioActualGustaPublicacion; else no">   
                         <button class="mdc-icon-button material-icons" 
-                            style="color: red; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
-                            background-color: transparent;" (click)="noGustaPublicacion(peticion.publicacionId)">favorite</button>     
+                            id="fav-red" (click)="noGustaPublicacion(peticion.publicacionId)">favorite</button>     
                     </ng-container>
 
                     <ng-template #no>
                         
                         <button class="mdc-icon-button material-icons" 
-                            style="color: grey; display: inline; margin-left: 25px; margin-top: 32px; float: right; 
-                            background-color: transparent;" (click)="gustaPublicacion(peticion.publicacionId)">favorite</button>
+                            id="fav-grey" (click)="gustaPublicacion(peticion.publicacionId)">favorite</button>
                     </ng-template>
                 </div>
 
-                <p class="card-body text-right" style="display: inline; margin-left: 25px; margin-top: 32px; float: right;"><strong>Numero de Favoritos:</strong>{{peticion.numUsuarios}}</p>
+                <p class="card-body text-right" id="p-categ-nfav"><strong>Numero de Favoritos:</strong>{{peticion.numUsuarios}}</p>
 
-                <p class="card-body text-right" style="display: inline; margin-left: 25px; margin-top: 32px; float: right;"><strong>Categoría:</strong> {{ peticion.publicacionCategoria }}</p>
+                <p class="card-body text-right" id="p-categ-nfav"><strong>Categoría:</strong> {{ peticion.publicacionCategoria }}</p>
             </div>
 
-            <div class="card-body" style="margin: 30px">
-                <p style="font-size: large;">{{ peticion.publicacionTexto }}</p>
+            <div class="card-body" id="m30">
+                <p id="f-large">{{ peticion.publicacionTexto }}</p>
                 <p *ngIf="peticion.isUrgent==true"><strong>Es urgente: </strong>Si</p>
                 <p *ngIf="peticion.isUrgent==false"><strong>Es urgente: </strong>No</p>
             </div>
 
-            <div class="card-body" style="margin: 30px; padding-bottom: 20px;">
-                <p  style="display: inline;"><strong>Horario Inicio:</strong> {{ peticion.publicacionHorarioInicio }}</p>
-                <p  style="display: inline; margin-left: 70px;"><strong>Horario Fin:</strong> {{ peticion.publicacionHorarioFin }}</p>
-                <p  style="display: inline; margin-left: 150px;"><strong>Municipio:</strong> {{ peticion.publicacionMunicipio }}</p>
-                <p  style="display: inline; margin-left: 70px;"><strong>Ciudad:</strong> {{ peticion.publicacionCiudad }}</p>
+            <div class="card-body" id="div-bot">
+                <p id="div-inline"><strong>Horario Inicio:</strong> {{ peticion.publicacionHorarioInicio }}</p>
+                <p id="p1"><strong>Horario Fin:</strong> {{ peticion.publicacionHorarioFin }}</p>
+                <p id="p2"><strong>Municipio:</strong> {{ peticion.publicacionMunicipio }}</p>
+                <p id="p1"><strong>Ciudad:</strong> {{ peticion.publicacionCiudad }}</p>
             </div>
 
         </div>
 
     </div> 
 
-    <button class="mdc-fab " mat-mini-fab style="background-color: #EA80FC; color: white; width: 70px; height: 70px;
-        position: fixed;bottom: 1rem;right: 1rem;" class="pull-right" (click)="createPeticion()">
+    <button class="mdc-fab " mat-mini-fab id="but-add" class="pull-right" (click)="createPeticion()">
         <div class="mdc-fab__ripple"></div>
         <span class="mdc-fab__icon material-icons">add</span>
     </button>

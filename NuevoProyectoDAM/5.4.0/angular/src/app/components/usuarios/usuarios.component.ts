@@ -13,7 +13,8 @@ class PagedUsersRequestDto extends PagedRequestDto {
 
 @Component({
   selector: 'app-usuarios',
-  templateUrl: './usuarios.component.html'
+  templateUrl: './usuarios.component.html',
+  styleUrls: ['./usuarios.component.css']
 })
 
 
@@ -53,20 +54,7 @@ export class UsuariosComponent extends PagedListingComponentBase<UserDto> {
           });
   }
 
-  protected delete(user: UserDto): void {
-      /*abp.message.confirm(
-          this.l('UserDeleteWarningMessage', user.fullName),
-          undefined,
-          (result: boolean) => {
-              if (result) {
-                  this._userService.delete(user.id).subscribe(() => {
-                      abp.notify.success(this.l('SuccessfullyDeleted'));
-                      this.refresh();
-                  });
-              }
-          }
-      );*/
-  }
+  protected delete(user: UserDto): void {  }
 
   buscarLogin(login: string){
     this.users.splice(0);

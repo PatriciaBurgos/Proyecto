@@ -1,0 +1,51 @@
+#m10{
+    margin: 10px;
+}
+#p-user{
+    display: inline; 
+    margin-left: 25px; 
+    font-size: large;
+}
+#but-fav-red{
+    color: red; 
+    display: inline; 
+    margin-left: 25px; 
+    margin-top: 32px; 
+    float: right; 
+    background-color: transparent;
+}
+#but-fav-grey{
+    color: grey; 
+    display: inline; 
+    margin-left: 25px; 
+    margin-top: 32px; 
+    float: right; 
+    background-color: transparent;
+}
+#categ{
+    display: inline; 
+    margin-left: 25px; 
+    margin-top: 32px; 
+    float: right;
+}
+#m30{
+    margin: 30px
+}
+#text{
+    font-size: large;
+}
+#div1{
+    margin: 30px; 
+    padding-bottom: 20px;
+}
+#div-inline{
+    display: inline;
+}
+#div2{
+    display: inline; 
+    margin-left: 70px;
+}
+#div3{
+    display: inline; 
+    margin-left: 150px;
+}

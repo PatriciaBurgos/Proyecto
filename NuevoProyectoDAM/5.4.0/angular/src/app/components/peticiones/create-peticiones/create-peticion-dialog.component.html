@@ -27,12 +27,9 @@
                         <mat-option value="Ocio">Ocio</mat-option>
   
                       </mat-select>
-                     <!-- <mat-error *ngIf="selectFormControl.hasError('required')">
-                        This field is required
-                      </mat-error> -->
+                      
                       <mat-hint>Aqui puedes seleccionar la categoria</mat-hint>
                     </mat-form-field>
-
 
                     
                     <mat-form-field>
@@ -90,17 +87,6 @@
                       />
                     </mat-form-field>
                     
-                    <!--<mat-form-field>
-                      <input
-                        matInput
-                        name="EsUrgente"
-                        [placeholder]="'EsUrgente' | localize"
-                        [(ngModel)]="peticion.isUrgent"
-                        required
-                        maxlength="256"
-                      />
-                    </mat-form-field>-->
-
                     <div class="checkbox-wrapper">
                       <mat-checkbox name="EsUrgente" [(ngModel)]="peticion.isUrgent">
                         {{ "EsUrgente" | localize }}

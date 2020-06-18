@@ -1,93 +1,27 @@
-<!--<div class="row clearfix" [@routerTransition] >
-    <div class="col-lg-15 col-md-15 col-sm-15 col-xs-15" >
-        <div class="card main-content" >
-            <div class="header">
-                <h2><mat-icon>message</mat-icon> {{ "Chats" | localize }}</h2>
-                <ul class="header-dropdown m-r--5">
-                    <li>
-                        <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #headerMenu="matMenu">
-                            <button mat-menu-item (click)="refresh()">
-                                <mat-icon>refresh</mat-icon>
-                                <span>{{ "Refresh" | localize }}</span>
-                            </button>
-                        </mat-menu>
-                    </li>
-                </ul>
-            </div>
-            <div class="body table-responsive">
-            --><!--query start--><!--
-                <div class="row clearfix">
-                    <form>
-                        <mat-form-field>
-                            <input matInput [placeholder]="l('Filter')" [(ngModel)]="filterText" name="keyword">
-                        </mat-form-field>
-
-                        <div class="row">
-                            <div class="col-md-12 text-right p-r-25">
-                                <button mat-raised-button style="background-color: #EA80FC; color: white;" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            --> <!--query end--><!--
-                <table class="table table-hover table-striped" [busy]="isTableLoading">
-                    <tbody>
-                        <tr *ngFor="
-                let chat of (chats
-                  | paginate
-                    : {
-                        id: 'server',
-                        itemsPerPage: pageSize,
-                        currentPage: pageNumber,
-                        totalItems: totalItems
-                      })
-              " (click)="mostrarChat(chat.usuarioDestino)">            
-                        <td>{{ chat.usuarioOrigen }}</td>
-
-                        <td>{{ chat.usuarioDestino }}</td>
-
-                        <td>{{ chat.texto }}</td>
-                        
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
-                    <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
-                    </abp-pagination-controls>
-                </div>
-                <button mat-mini-fab style="background-color: #EA80FC; color: white;" class="pull-right" (click)="createChat()">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>-->
-
-
-
-<div class="card main-content clearfix" style="margin-bottom: 15px; padding: 16px;" >
-    <mat-toolbar style="background-color: white; color: #D500F9; display: inline; ">
-        <h2 style="margin-left: 50px; text-align: center; float: left;">{{chatUOrig}}</h2>
-        <h2 style="margin-right: 50px; text-align: center; float: right;">{{chatUDest}}</h2>        
+<div class="card main-content clearfix" id="div1" >
+    <mat-toolbar id="toolbar">
+        <h2 id="h2-1">{{chatUOrig}}</h2>
+        <h2 id="h2-2">{{chatUDest}}</h2>        
     </mat-toolbar>
 </div>
 
 
-<div class="card main-content center-block card-body " style="width: auto; margin-top: 10px; padding: 0 16px;">
+<div class="card main-content center-block card-body " id="div2">
     
     <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="scrollbar scrollbar-secondary">
         <div class="force-overflow">
             <div *ngFor="
-            let chat of (chats)"  style="margin-top: 10px 0 10px; padding-top: 10px;" >
-
+            let chat of (chats)"  id="for" >
                 <div>
-                    <p class="card-text"  *ngIf="chat.usuarioOrigen == uLogado; else uDestino" style="float: left; font-size: large;"><span style="color: mediumvioletred;">{{chat.texto}}</span><span style="font-size: small;"> &nbsp;&nbsp;&nbsp;&nbsp;{{chat.fechaHora | date:'medium'}}</span></p>
+                    <p class="card-text"  *ngIf="chat.usuarioOrigen == uLogado; else uDestino" id="p-texto">
+                        <span id="span-1">{{chat.texto}}</span>
+                        <span id="span-2"> &nbsp;&nbsp;&nbsp;&nbsp;{{chat.fechaHora | date:'medium'}}</span></p>
+                    
                     <ng-template  class="card-text" #uDestino>
-                        <p style="float: right; font-size: large;"><span style="color: rosybrown;">{{chat.texto}}</span><span style="font-size: small;"> &nbsp;&nbsp;&nbsp;&nbsp;{{chat.fechaHora | date:'medium'}}</span></p>
-                        </ng-template>
+                        <p id="p-texto2">
+                            <span id="span-3">{{chat.texto}}</span>
+                            <span id="span-2"> &nbsp;&nbsp;&nbsp;&nbsp;{{chat.fechaHora | date:'medium'}}</span></p>
+                    </ng-template>
                     <br>
                     <br>
                 </div>
@@ -103,7 +37,7 @@
         </mat-form-field>
     </div>
 
-    <button class="mdc-fab " mat-mini-fab style="background-color: #EA80FC; color: white;"
+    <button class="mdc-fab " mat-mini-fab id="but-add"
      class="pull-right" (click)="createChat()" (keyup.enter)="createChat()">
         <div class="mdc-fab__ripple"></div>
         <span class="mdc-fab__icon material-icons">add</span>

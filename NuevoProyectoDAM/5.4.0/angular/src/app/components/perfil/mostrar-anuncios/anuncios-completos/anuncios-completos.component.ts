@@ -61,25 +61,7 @@ export class AnunciosCompletosComponent extends PagedListingComponentBase<Anunci
 
   
 
-  delete(anuncios: AnuncioDto): void {
-      /*abp.message.confirm(
-          this.l('UserDeleteWarningMessage', user.Id),
-          undefined,
-          (result: boolean) => {
-              if (result) {
-                  /*this._userservice
-                      .delete(user.id)
-                      .pipe(
-                          finalize(() => {
-                              abp.notify.success(this.l('SuccessfullyDeleted'));
-                              this.refresh();
-                          })
-                      )
-                      .subscribe(() => { });
-              }
-          }
-      );*/
-  }
+  delete(anuncios: AnuncioDto): void { }
 
   gustaPublicacion(idPub : number){
     console.log("PUB = " + idPub);

@@ -24,6 +24,10 @@ export class AppSessionService {
         return this._application;
     }
 
+    getPhoto(): string {
+        return this._user.photo;
+    }
+
     get user(): UserLoginInfoDto {
         return this._user;
     }

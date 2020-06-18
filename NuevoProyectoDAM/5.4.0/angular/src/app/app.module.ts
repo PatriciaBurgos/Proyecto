@@ -40,12 +40,10 @@ import { ResetPasswordDialogComponent } from './components/users/reset-password/
 // anuncios
 import { AnunciosComponent } from '@app/components/anuncios/anuncios.component';
 import { CreateAnuncioDialogComponent } from '@app/components/anuncios/create-anuncios/create-anuncio-dialog.component';
-import { EditAnuncioDialogComponent } from '@app/components/anuncios/edit-anuncios/edit-anuncio-dialog.component';
 import { AnuncioServiceProxy, UsuarioLogadoServiceProxy, ChatServiceProxy, PublicacionGustadaServiceProxy, UsuarioGustadoServiceProxy } from '@shared/service-proxies/service-proxies';
 // peticiones
 import { PeticionesComponent } from '@app/components/peticiones/peticiones.component';
 import { CreatePeticionDialogComponent } from '@app/components/peticiones/create-peticiones/create-peticion-dialog.component';
-import { EditPeticionDialogComponent } from '@app/components/peticiones/edit-peticiones/edit-peticion-dialog.component';
 import { PeticionServiceProxy} from '@shared/service-proxies/service-proxies';
 // perfil 
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -102,11 +100,9 @@ import { CorreoComponent } from './components/correo/correo.component';
     // anuncios
     AnunciosComponent,
     CreateAnuncioDialogComponent,
-    EditAnuncioDialogComponent,
     // peticiones
     PeticionesComponent,
     CreatePeticionDialogComponent,
-    EditPeticionDialogComponent,
     // perfil
     PerfilComponent,
     UsuariosSeguidosComponent,
@@ -164,10 +160,8 @@ import { CorreoComponent } from './components/correo/correo.component';
     ResetPasswordDialogComponent,
     // anuncios
     CreateAnuncioDialogComponent,
-    EditAnuncioDialogComponent,
     // peticiones
     CreatePeticionDialogComponent,
-    EditPeticionDialogComponent,
     // chats
     CreateChatDialogComponent,
     ChatsReducidosComponent,

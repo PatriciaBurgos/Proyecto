@@ -71,11 +71,6 @@ export class MostrarPeticionesComponent extends PagedListingComponentBase<Petici
               
           });
     }
-
-  //ngOnInit() {
-  //    this._peticioneservice.getAll('', 0, 20)
-  //        .subscribe(result =>
-  //        this.peticiones = result.items);
   }
 
   delete(peticion: PeticionDto): void {

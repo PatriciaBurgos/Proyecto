@@ -102,15 +102,11 @@
           </div>
     
         <div align="end">
-            <!-- <button mat-button type="button" [disabled]="saving" (click)="close(false)">
-                {{ "Cancel" | localize }}
-            </button>-->
             <button
                 mat-flat-button
                 type="button"
                 flex="15"
                 style="background-color: #EA80FC; color: white;">
-               <!--</button> [disabled]="!editUserModal.form.valid || saving"-->
                <a [routerLink] = "['/app/chats','1']" style="color: white; text-decoration: none;">
                 {{ "Contactar con administrador" | localize }}
                 </a>
@@ -120,9 +116,7 @@
                 type="submit"
                 flex="15"
                 style="background-color: #EA80FC; color: white; margin-left: 20px;"
-                [disabled]="!editUserModal.form.valid || saving"
-                
-            >
+                [disabled]="!editUserModal.form.valid || saving">
                 {{ "Guardar" | localize }}
             </button>
         </div>

@@ -5,7 +5,6 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing-component-base';
 import { MatDialog } from '@angular/material';
 import { CreateAnuncioDialogComponent } from './create-anuncios/create-anuncio-dialog.component';
-import { EditAnuncioDialogComponent } from './edit-anuncios/edit-anuncio-dialog.component';
 
 class PagedAnuncioRequestDto extends PagedRequestDto {
     filter: string;
@@ -22,6 +21,8 @@ class PagedAnuncioRequestDto extends PagedRequestDto {
           }
         `
     ]
+    ,
+    styleUrls: ['./anuncios.component.css']
 })
 
 
@@ -59,11 +60,6 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
                 
             });
         }
-  //  ngOnInit() {
-   //     this._anuncioservice.getAll('', 0, 20)
-   //         .subscribe(result =>
-   //         this.anuncios = result.items);
-   // }
 
     delete(anuncio: AnuncioDto): void {
         abp.message.confirm(
@@ -97,11 +93,7 @@ export class AnunciosComponent extends PagedListingComponentBase<AnuncioDto> {
         let createOrEditAnuncioDialog;
         if (id === undefined || id <= 0) {
             createOrEditAnuncioDialog = this._dialog.open(CreateAnuncioDialogComponent);
-        } else {
-            createOrEditAnuncioDialog = this._dialog.open(EditAnuncioDialogComponent, {
-                data: id
-            });
-        }
+        } 
         
         createOrEditAnuncioDialog.afterClosed().subscribe(result => {
             if (result) {

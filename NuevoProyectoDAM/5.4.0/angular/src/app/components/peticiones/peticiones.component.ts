@@ -5,7 +5,6 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing-component-base';
 import { MatDialog } from '@angular/material';
 import { CreatePeticionDialogComponent } from './create-peticiones/create-peticion-dialog.component';
-import { EditPeticionDialogComponent } from './edit-peticiones/edit-peticion-dialog.component';
 
 
 class PagedPeticionRequestDto extends PagedRequestDto {
@@ -22,7 +21,9 @@ class PagedPeticionRequestDto extends PagedRequestDto {
             padding: 10px;
           }
         `
-    ]
+    ],
+    styleUrls: ['./peticiones.component.css']
+
 })
 
 
@@ -105,11 +106,7 @@ export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> 
         let createOrEditPeticionDialog;
         if (id === undefined || id <= 0) {
             createOrEditPeticionDialog = this._dialog.open(CreatePeticionDialogComponent);
-        } else {
-            createOrEditPeticionDialog = this._dialog.open(EditPeticionDialogComponent, {
-                data: id
-            });
-        }
+        } 
         
         createOrEditPeticionDialog.afterClosed().subscribe(result => {
             if (result) {
@@ -118,8 +115,6 @@ export class PeticionesComponent extends PagedListingComponentBase<PeticionDto> 
         });
     }
 
-
-    
 
     gustaPublicacion(idPub : number){
         console.log("PUB = " + idPub);

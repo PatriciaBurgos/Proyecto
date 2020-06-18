@@ -73,6 +73,4 @@ export class SeguirUsuarioComponent implements OnInit {
           });
   }
   
- 
-
 }

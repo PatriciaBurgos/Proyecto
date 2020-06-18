@@ -14,8 +14,7 @@ import {
 
 @Component({
   selector: 'app-ajustes',
-  templateUrl: './ajustes.component.html',
-  styleUrls: ['./ajustes.component.css']
+  templateUrl: './ajustes.component.html'
 })
 
 export class AjustesComponent extends AppComponentBase

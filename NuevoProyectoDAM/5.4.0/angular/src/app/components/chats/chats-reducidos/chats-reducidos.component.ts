@@ -13,7 +13,8 @@ class PagedChatRequestDto extends PagedRequestDto {
 
 @Component({
   selector: 'app-chats-reducidos',
-  templateUrl: './chats-reducidos.component.html'
+  templateUrl: './chats-reducidos.component.html',
+  styleUrls: ['./chats-reducidos.component.css']
 })
 
 
@@ -53,11 +54,7 @@ export class ChatsReducidosComponent extends PagedListingComponentBase<MostrarCh
               
           });
         }
-  //ngOnInit() {
- //     this._chatservice.getAll('', 0, 20)
-  //        .subscribe(result =>
-  //        this.chats = result.items);
- // }
+        
 
   delete(chat: ChatDto): void {
       abp.message.confirm(
@@ -96,7 +93,4 @@ export class ChatsReducidosComponent extends PagedListingComponentBase<MostrarCh
           }
       });
   }
-
-  
-
 }

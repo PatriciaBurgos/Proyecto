@@ -6833,6 +6833,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
     surname: string | undefined;
     userName: string | undefined;
     emailAddress: string | undefined;
+    photo: string | undefined;
     id: number;
 
     constructor(data?: IUserLoginInfoDto) {
@@ -6850,6 +6851,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
             this.surname = _data["surname"];
             this.userName = _data["userName"];
             this.emailAddress = _data["emailAddress"];
+            this.photo = _data["photo"];
             this.id = _data["id"];
         }
     }
@@ -6867,6 +6869,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
         data["surname"] = this.surname;
         data["userName"] = this.userName;
         data["emailAddress"] = this.emailAddress;
+        data["photo"] = this.photo;
         data["id"] = this.id;
         return data; 
     }
@@ -6884,6 +6887,7 @@ export interface IUserLoginInfoDto {
     surname: string | undefined;
     userName: string | undefined;
     emailAddress: string | undefined;
+    photo: string | undefined;
     id: number;
 }
 

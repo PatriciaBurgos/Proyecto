@@ -1,11 +1,11 @@
-#mb15{
+#div1{
     margin-bottom: 15px;
 }
 #toolbar{
     background-color: white; 
     color: #D500F9;
 }
-ul{
+#ul1{
     position: absolute; 
     top: 20px; 
     right: 15px;
@@ -13,15 +13,8 @@ ul{
 li{
     list-style: none;
 }
-#ml10{
-    margin-left: 10px;
-}
-#but{
-    background-color: #EA80FC; 
-    color:white; 
-    margin: 10px;
-}
-#font{
+#for{
+    text-align: center; 
     font-size: large;
 }
 a{

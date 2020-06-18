@@ -19,7 +19,6 @@ class PagedPeticionRequestDto extends PagedRequestDto {
 
 export class PeticionesFavComponent extends PagedListingComponentBase<PeticionDto> {
   
-
   filterText = '';
   peticiones: PeticionDto[]=[];
 
@@ -58,25 +57,7 @@ export class PeticionesFavComponent extends PagedListingComponentBase<PeticionDt
 
   
 
-  delete(anuncios: PeticionDto): void {
-      /*abp.message.confirm(
-          this.l('UserDeleteWarningMessage', user.Id),
-          undefined,
-          (result: boolean) => {
-              if (result) {
-                  /*this._userservice
-                      .delete(user.id)
-                      .pipe(
-                          finalize(() => {
-                              abp.notify.success(this.l('SuccessfullyDeleted'));
-                              this.refresh();
-                          })
-                      )
-                      .subscribe(() => { });
-              }
-          }
-      );*/
-  }
+  delete(anuncios: PeticionDto): void { }
 
   noGustaPublicacion(idPub : number){
     console.log("PUB = " + idPub);

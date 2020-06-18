@@ -92,11 +92,6 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
                         
                     });
         }
-
-  //ngOnInit() {
-  //    this._anuncioservice.getAll('', 0, 20)
-  //        .subscribe(result =>
-  //        this.anuncios = result.items);
   }
 
   delete(user: UserDto): void {
@@ -105,15 +100,6 @@ export class PerfilComponent extends PagedListingComponentBase<UserDto> {
           undefined,
           (result: boolean) => {
               if (result) {
-                  /*this._userservice
-                      .delete(user.id)
-                      .pipe(
-                          finalize(() => {
-                              abp.notify.success(this.l('SuccessfullyDeleted'));
-                              this.refresh();
-                          })
-                      )
-                      .subscribe(() => { });*/
               }
           }
       );

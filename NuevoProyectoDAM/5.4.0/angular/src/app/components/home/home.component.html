@@ -1,47 +1,46 @@
 ﻿<div>
-    <mat-toolbar style="background-color: white; color: #D500F9; font-size: large; 
-        ">
-        <h1 style="font-weight: bold; font-size: xx-large; margin-left: auto; margin-right: auto;">
+    <mat-toolbar id="toolbar">
+        <h1>
             <i class="fa fa-exchange" aria-hidden="true"></i> Voluntarios España</h1>
     </mat-toolbar>
 </div>
 
-<div class="card main-content" style="background-color: #EA80FC; margin-top: 20px;">
+<div class="card main-content" id="div1">
 
-    <div style="display: flex; justify-content: center; height: 600px;">
+    <div id="div2">
 
-        <div class="card main-content" style="padding: 20px 0px; width: 40%; margin-top: 50px; height: fit-content; margin-left: auto;">
+        <div class="card main-content" id="div3">
 
-            <div class="header" style="margin: 10px">
+            <div class="header" id="div4">
                 
                 <div class="card-body" s>
-                    <p style="font-weight: bold; font-size: large; ">¿Te gustaría ayudar a las personas mas cercanas a ti?</p>
-                    <p  style="font-weight: bold; font-size: large; ">¿Te gustaría ser voluntario con personas de tu barrio?</p>
-                    <p  style="font-weight: bold; font-size: large; ">¿Necesitas ayuda y no saber como pedirla?</p>
+                    <p id="preguntas">¿Te gustaría ayudar a las personas mas cercanas a ti?</p>
+                    <p id="preguntas">¿Te gustaría ser voluntario con personas de tu barrio?</p>
+                    <p id="preguntas">¿Necesitas ayuda y no saber como pedirla?</p>
                     
                 </div>
             </div>
         </div>
 
-        <div class="card main-content" style="padding: 20px 0px; width: 40%; margin-bottom: 50px; margin-top: auto; height: fit-content; margin-right: auto;">
+        <div class="card main-content" id="div5">
 
-            <div class="header" style="margin: 10px">
+            <div class="header" id="div4">
                 
                 <div class="card-body" >
                     
-                    <p  style="font-size: x-large; "><strong>¡EMPIEZA AHORA!</strong></p>
+                    <p id="p1"><strong>¡EMPIEZA AHORA!</strong></p>
 
-                    <button class="mdc-button--raised" style="background-color: #EA80FC; border-radius: 50px;">
-                        <a [routerLink] = "['/app/anuncios']" style="color: black; text-decoration: none;"> 
+                    <button class="mdc-button--raised" id="but1">
+                        <a [routerLink] = "['/app/anuncios']"> 
                             <div class="mdc-button__ripple"></div>
-                            <span class="mdc-button__label" style="color: #D500F9; font-size: large; padding: 16px; font-weight: bold;">ANUNCIATE COMO VOLUNTARIO</span>
+                            <span class="mdc-button__label" id="span-but">ANUNCIATE COMO VOLUNTARIO</span>
                         </a>
                     </button>
 
-                    <button class="mdc-button--raised" style="background-color: #EA80FC; border-radius: 50px;">
-                        <a [routerLink] = "['/app/peticiones']" style="color: black; text-decoration: none;"> 
+                    <button class="mdc-button--raised" id="but1">
+                        <a [routerLink] = "['/app/peticiones']"> 
                             <div class="mdc-button__ripple"></div>
-                            <span class="mdc-button__label" style="color: #D500F9; font-size: large; padding: 16px; font-weight: bold;">PIDE AYUDA</span>
+                            <span class="mdc-button__label" id="span-but">PIDE AYUDA</span>
                         </a>
                     </button>
 

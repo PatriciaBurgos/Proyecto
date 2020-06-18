@@ -18,8 +18,6 @@ class PagedAnuncioRequestDto extends PagedRequestDto {
 })
 
 
-
-
 export class AnunciosFavComponent extends PagedListingComponentBase<AnuncioDto> {
   
 
@@ -61,25 +59,7 @@ export class AnunciosFavComponent extends PagedListingComponentBase<AnuncioDto> 
 
   
 
-  delete(anuncios: AnuncioDto): void {
-      /*abp.message.confirm(
-          this.l('UserDeleteWarningMessage', user.Id),
-          undefined,
-          (result: boolean) => {
-              if (result) {
-                  /*this._userservice
-                      .delete(user.id)
-                      .pipe(
-                          finalize(() => {
-                              abp.notify.success(this.l('SuccessfullyDeleted'));
-                              this.refresh();
-                          })
-                      )
-                      .subscribe(() => { });
-              }
-          }
-      );*/
-  }
+  delete(anuncios: AnuncioDto): void { }
 
   noGustaPublicacion(idPub : number){
     console.log("PUB = " + idPub);
@@ -96,6 +76,6 @@ export class AnunciosFavComponent extends PagedListingComponentBase<AnuncioDto> 
             
         });
     this.refresh();
-}
+ }
   
 }

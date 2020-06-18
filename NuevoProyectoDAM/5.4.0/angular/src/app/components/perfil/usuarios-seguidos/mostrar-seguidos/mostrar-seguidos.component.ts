@@ -12,11 +12,9 @@ class PagedUsersRequestDto extends PagedRequestDto {
 }
 
 @Component({
-
   selector: 'app-mostrar-usuarios-seguidos',
-
-  templateUrl: './mostrar-seguidos.component.html'
-
+  templateUrl: './mostrar-seguidos.component.html',
+  styleUrls: ['./mostrar-seguidos.component.css']
 })
 
 export class MostrarSeguidosComponent extends PagedListingComponentBase<UsuariosSeguidosDto> {
@@ -24,7 +22,6 @@ export class MostrarSeguidosComponent extends PagedListingComponentBase<Usuarios
   filterText = '';
   user: UsuariosSeguidosDto ;
   
-
 
   constructor(
     injector: Injector,
@@ -72,25 +69,7 @@ export class MostrarSeguidosComponent extends PagedListingComponentBase<Usuarios
 
 }
 
-delete(user: UsuariosSeguidosDto): void {
-    /*abp.message.confirm(
-        this.l('UserDeleteWarningMessage', user.Id),
-        undefined,
-        (result: boolean) => {
-            if (result) {
-                /*this._userservice
-                    .delete(user.id)
-                    .pipe(
-                        finalize(() => {
-                            abp.notify.success(this.l('SuccessfullyDeleted'));
-                            this.refresh();
-                        })
-                    )
-                    .subscribe(() => { });
-            }
-        }
-    );*/
-  }
+delete(user: UsuariosSeguidosDto): void {  }
 
   
 }

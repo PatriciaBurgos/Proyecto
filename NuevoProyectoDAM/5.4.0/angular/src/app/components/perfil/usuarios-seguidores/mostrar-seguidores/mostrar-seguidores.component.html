@@ -1,25 +1,25 @@
-<div class="row clearfix" [@routerTransition] style="width: 500px;">
+<div class="row clearfix" [@routerTransition] id="w500">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
        
-            <h3 style="color:#EA80FC"><i class="fa fa-users" aria-hidden="true" style="color:#EA80FC"></i>&nbsp; SEGUIDORES</h3>
+            <h3 id="color"><i class="fa fa-users" aria-hidden="true" id="color"></i>&nbsp; SEGUIDORES</h3>
             <div class="body table-responsive">
                 <!--query end-->
-                <table class="table table-hover table-striped" [busy]="isTableLoading" style="width: 500px;">
+                <table class="table table-hover table-striped" [busy]="isTableLoading" id="w500">
                     <tbody>
                         <tr *ngFor="
                 let user1 of (user.usuariosSeguidores)
               ">            
-                            <a [routerLink] = "['/app/perfil',user1.usuario.id]" style="color: black; text-decoration: none;"><td>{{ user1.usuario.userName }}</td></a>
+                            <a [routerLink] = "['/app/perfil',user1.usuario.id]"><td>{{ user1.usuario.userName }}</td></a>
                             <td>
                                 <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                     <mat-icon>menu</mat-icon>
                                 </button>
                                 <mat-menu #actionsMenu="matMenu">
-                                    <button mat-menu-item > <a [routerLink] = "['/app/chats',user1.usuario.id]" style="color: black; text-decoration: none;">
+                                    <button mat-menu-item > <a [routerLink] = "['/app/chats',user1.usuario.id]">
                                         <mat-icon>chat</mat-icon>
                                         <span>{{ "Mensaje" | localize }}</span></a>
                                     </button>
-                                    <button mat-menu-item ><a [routerLink] = "['/app/correo']" style="color: black; text-decoration: none;"> 
+                                    <button mat-menu-item ><a [routerLink] = "['/app/correo']"> 
                                         <mat-icon>email</mat-icon>
                                         <span>{{ "Correo" | localize }}</span></a>
                                     </button>
@@ -28,10 +28,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
-                    <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
-                    </abp-pagination-controls>
-                </div>
+                
             </div>
         
     </div>
