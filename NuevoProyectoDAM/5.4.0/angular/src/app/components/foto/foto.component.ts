@@ -27,10 +27,14 @@ class ImageSnippet {
         this.http.post('http://localhost:21021/api/services/app/UsuarioLogado/UploadFoto', formData)
         .subscribe(result => {
           console.log(result);
+          this.pageRefresh();
         });
       } else {
        alert('Nothing');
      }
+  }
+  pageRefresh() {
+    location.reload();
   }
 
 }

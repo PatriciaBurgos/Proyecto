@@ -10,8 +10,8 @@ h1{
     margin-right: auto;
 }
 #div1{
-    background-color: #EA80FC; 
     margin-top: 20px;
+    background-image: url("/assets/images/home.png");
 }
 #div2{
     display: flex; 
