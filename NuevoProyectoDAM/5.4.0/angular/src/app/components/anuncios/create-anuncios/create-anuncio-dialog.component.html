@@ -1,5 +1,5 @@
 <form autocomplete="off" #createAnuncioForm="ngForm" (ngSubmit)="save()">
-    <h1 mat-dialog-title>{{ "CreateNewAnuncio" | localize }}</h1>
+    <h1 mat-dialog-title>{{ "CrearNuevoAnuncio" | localize }}</h1>
     <mat-dialog-content style="width:600px;height:300px;">
         <mat-tab-group>
             <mat-tab [label]="'AnuncioDetalles' | localize">
@@ -107,14 +107,14 @@
     </mat-dialog-content>
     <div mat-dialog-actions align="end">
         <button mat-button type="button" [disabled]="saving" (click)="close(false)">
-            {{ "Cancel" | localize }}
+            {{ "Cancelar" | localize }}
         </button>
         <button mat-flat-button
                 type="submit"
                 flex="15"
                 style="background-color: #EA80FC; color: white;"
                 [disabled]="!createAnuncioForm.form.valid || saving">
-            {{ "Save" | localize }}
+            {{ "Guardar" | localize }}
         </button>
     </div>
 </form>
