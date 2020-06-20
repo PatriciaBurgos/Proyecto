@@ -22,12 +22,12 @@
                 <div class="row clearfix">
                     <form>
                         <mat-form-field>
-                            <input matInput [placeholder]="l('Filter')" [(ngModel)]="keyword" name="keyword">
+                            <input matInput [placeholder]="l('Filtro')" [(ngModel)]="keyword" name="keyword">
                         </mat-form-field>
 
                         <div class="row">
                             <div class="col-md-12 text-right p-r-25">
-                                <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
+                                <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Buscar' | localize }}</button>
                             </div>
                         </div>
                     </form>
@@ -36,9 +36,9 @@
                 <table class="table table-hover table-striped" [busy]="isTableLoading">
                     <thead>
                         <tr>
-                            <th>{{ "RoleName" | localize }}</th>
-                            <th>{{ "DisplayName" | localize }}</th>
-                            <th>{{ "Actions" | localize }}</th>
+                            <th>{{ "RoleNombre" | localize }}</th>
+                            <th>{{ "NombreAlMostrar" | localize }}</th>
+                            <th>{{ "Acciones" | localize }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,11 +61,11 @@
                                 <mat-menu #actionsMenu="matMenu">
                                     <button mat-menu-item (click)="editRole(role)">
                                         <mat-icon>edit</mat-icon>
-                                        <span>{{ "Edit" | localize }}</span>
+                                        <span>{{ "Editar" | localize }}</span>
                                     </button>
                                     <button mat-menu-item (click)="delete(role)">
                                         <mat-icon>delete</mat-icon>
-                                        <span>{{ "Delete" | localize }}</span>
+                                        <span>{{ "Borrar" | localize }}</span>
                                     </button>
                                 </mat-menu>
                             </td>

@@ -1,8 +1,8 @@
 <form autocomplete="off" #createRoleForm="ngForm" (ngSubmit)="save()">
-  <h1 mat-dialog-title>{{ "CreateNewRole" | localize }}</h1>
+  <h1 mat-dialog-title>{{ "CrearNuevoRol" | localize }}</h1>
   <mat-dialog-content style="width:600px;height:300px;">
     <mat-tab-group>
-      <mat-tab [label]="'Details' | localize">
+      <mat-tab [label]="'Detalles' | localize">
         <br />
         <div class="row-fluid">
           <div class="col-md-12">
@@ -10,7 +10,7 @@
               <input
                 matInput
                 name="Name"
-                [placeholder]="'Name' | localize"
+                [placeholder]="'Nombre' | localize"
                 [(ngModel)]="role.name"
                 required
                 minlength="2"
@@ -21,7 +21,7 @@
               <input
                 matInput
                 name="DisplayName"
-                [placeholder]="'DisplayName' | localize"
+                [placeholder]="'NombreAlMostrar' | localize"
                 [(ngModel)]="role.displayName"
                 required
                 minlength="2"
@@ -32,14 +32,14 @@
               <textarea
                 matInput
                 name="Description"
-                [placeholder]="'RoleDescription' | localize"
+                [placeholder]="'RolDescripcion' | localize"
                 [(ngModel)]="role.description"
               ></textarea>
             </mat-form-field>
           </div>
         </div>
       </mat-tab>
-      <mat-tab [label]="'Permissions' | localize">
+      <mat-tab [label]="'Permisos' | localize">
         <br />
         <div class="row-fluid">
           <ng-template ngFor let-permission [ngForOf]="permissions">
@@ -61,7 +61,7 @@
   </mat-dialog-content>
   <div mat-dialog-actions align="end">
     <button mat-button type="button" [disabled]="saving" (click)="close(false)">
-      {{ "Cancel" | localize }}
+      {{ "Cancelar" | localize }}
     </button>
     <button
       mat-flat-button
@@ -70,7 +70,7 @@
       color="primary"
       [disabled]="!createRoleForm.form.valid || saving"
     >
-      {{ "Save" | localize }}
+      {{ "Guardar" | localize }}
     </button>
   </div>
 </form>

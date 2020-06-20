@@ -163,7 +163,7 @@ namespace NuevoProyectoDAM.Users
 			}
 
 			var user = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
-			user.Photo = "http://localhost:21021/Resources/ProfilePics/" + user.Id + "_profilepic.png";
+			user.Photo = "http://192.168.1.43:21021/Resources/ProfilePics/" + user.Id + "_profilepic.png";
 
 			await _userRepository.UpdateAsync(user);
 			await CurrentUnitOfWork.SaveChangesAsync();

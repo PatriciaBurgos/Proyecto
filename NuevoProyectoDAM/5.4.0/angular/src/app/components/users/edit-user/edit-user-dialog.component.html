@@ -1,8 +1,8 @@
 ﻿<form autocomplete="off" #editUserModal="ngForm" (ngSubmit)="save()">
-  <h1 mat-dialog-title>{{ "EditUser" | localize }}</h1>
+  <h1 mat-dialog-title>{{ "EditarUsuario" | localize }}</h1>
   <mat-dialog-content style="width:800px;height:250px;">
     <mat-tab-group>
-      <mat-tab [label]="'UserDetails' | localize">
+      <mat-tab [label]="'UsuarioDetalles' | localize">
         <br />
         <div class="row-fluid">
           <div class="col-md-6">
@@ -10,7 +10,7 @@
               <input
                 matInput
                 name="UserName"
-                [placeholder]="'UserName' | localize"
+                [placeholder]="'Nombre de Usuario' | localize"
                 [(ngModel)]="user.userName"
                 required
                 minlength="2"
@@ -21,7 +21,7 @@
               <input
                 matInput
                 name="Name"
-                [placeholder]="'Name' | localize"
+                [placeholder]="'Nombre' | localize"
                 [(ngModel)]="user.name"
                 required
                 maxlength="32"
@@ -31,7 +31,7 @@
               <input
                 matInput
                 name="Town"
-                [placeholder]="'Town' | localize"
+                [placeholder]="'Municipio' | localize"
                 [(ngModel)]="user.town"
                 required
                 maxlength="32"
@@ -41,7 +41,7 @@
               <input
                 matInput
                 name="BirthDate"
-                [placeholder]="'BirthDate' | localize"
+                [placeholder]="'Fecha de Nacimiento' | localize"
                 [(ngModel)]="user.birthDate"
                 required
                 maxlength="32"
@@ -49,7 +49,7 @@
             </mat-form-field>
             <div class="checkbox-wrapper">
               <mat-checkbox name="IsActive" [(ngModel)]="user.isActive">
-                {{ "IsActive" | localize }}
+                {{ "EstaActivo" | localize }}
               </mat-checkbox>
             </div>
           </div>
@@ -58,7 +58,7 @@
               <input
                 matInput
                 name="EmailAddress"
-                [placeholder]="'EmailAddress' | localize"
+                [placeholder]="'Correo' | localize"
                 [(ngModel)]="user.emailAddress"
                 type="email"
                 required
@@ -70,7 +70,7 @@
               <input
                 matInput
                 name="Surname"
-                [placeholder]="'Surname' | localize"
+                [placeholder]="'Apellido' | localize"
                 [(ngModel)]="user.surname"
                 required
                 maxlength="32"
@@ -80,7 +80,7 @@
               <input
                 matInput
                 name="City"
-                [placeholder]="'City' | localize"
+                [placeholder]="'Ciudad' | localize"
                 [(ngModel)]="user.city"
                 required
                 maxlength="32"
@@ -90,7 +90,7 @@
               <input
                 matInput
                 name="Qualities"
-                [placeholder]="'Qualities' | localize"
+                [placeholder]="'Cualidades' | localize"
                 [(ngModel)]="user.qualities"
                 required
                 maxlength="32"
@@ -99,7 +99,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab [label]="'UserRoles' | localize">
+      <mat-tab [label]="'UsuariosRoles' | localize">
         <br />
         <div class="row-fluid">
           <ng-template ngFor let-role [ngForOf]="roles">
@@ -120,7 +120,7 @@
   </mat-dialog-content>
   <div mat-dialog-actions align="end">
     <button mat-button type="button" [disabled]="saving" (click)="close(false)">
-      {{ "Cancel" | localize }}
+      {{ "Cancelar" | localize }}
     </button>
     <button
       mat-flat-button
@@ -129,7 +129,7 @@
       style="background-color: #EA80FC; color: white;"
       [disabled]="!editUserModal.form.valid || saving"
     >
-      {{ "Save" | localize }}
+      {{ "Guardar" | localize }}
     </button>
   </div>
 </form>

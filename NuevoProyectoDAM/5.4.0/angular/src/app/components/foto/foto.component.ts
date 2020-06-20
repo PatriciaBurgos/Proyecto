@@ -24,7 +24,7 @@ class ImageSnippet {
         let formData = new FormData();
 
         formData.append("file", file);
-        this.http.post('http://localhost:21021/api/services/app/UsuarioLogado/UploadFoto', formData)
+        this.http.post('http://192.168.1.43:21021/api/services/app/UsuarioLogado/UploadFoto', formData)
         .subscribe(result => {
           console.log(result);
           this.pageRefresh();

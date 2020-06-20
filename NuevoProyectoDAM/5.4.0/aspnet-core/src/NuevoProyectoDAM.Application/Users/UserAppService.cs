@@ -59,7 +59,7 @@ namespace NuevoProyectoDAM.Users
                 input.RoleNames[0] = "USUARIO";
             }
 
-            input.Photo = "http://localhost:21021/Resources/ProfilePics/user_profilepic.png";
+            input.Photo = "http://192.168.1.43:21021/Resources/ProfilePics/user_profilepic.png";
 
             var user = ObjectMapper.Map<User>(input);
 

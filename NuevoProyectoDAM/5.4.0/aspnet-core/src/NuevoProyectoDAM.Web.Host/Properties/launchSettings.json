@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:21021/",
+      "applicationUrl": "http://192.168.1.43:21021/",
       "sslPort": 0
     }
   },
@@ -16,13 +16,13 @@
       }
     },
     "NuevoProyectoDAM.Web.Host": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "http://localhost:21021",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:21021/"
+        "commandName": "Project",
+        "launchBrowser": true,
+        "launchUrl": "http://192.168.1.43:21021",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        },
+        "applicationUrl": "http://192.168.1.43:21021/"
     }
   }
 }
