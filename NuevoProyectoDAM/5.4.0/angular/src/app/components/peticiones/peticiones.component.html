@@ -16,7 +16,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appCategoria" class="mat-raised-button " 
-                id="but1">Categoria &nbsp;
+                id="but1" matTooltip="Buscar por categoria">Categoria &nbsp;
                 <i class="fa fa-list-ul" aria-hidden="true"></i>
         </button>
 
@@ -28,7 +28,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appCiudad" class="mat-raised-button " 
-                id="but2">Ciudad &nbsp;
+                id="but2"  matTooltip="Buscar por ciudad">Ciudad &nbsp;
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
         </button>
 
@@ -40,7 +40,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appMunicipio" class="mat-raised-button " 
-                id="but2">Municipio &nbsp;
+                id="but2" matTooltip="Buscar por municipio">Municipio &nbsp;
                 <i class="fa fa-home" aria-hidden="true"></i>
         </button>
 
@@ -51,7 +51,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appUrgente" class="mat-raised-button " 
-                id="but2">Es urgente &nbsp;
+                id="but2" matTooltip="Buscar si es urgente">Es urgente &nbsp;
                 <i class="fa fa-asterisk" aria-hidden="true"></i>
         </button>
 
@@ -63,7 +63,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appUsu" class="mat-raised-button " 
-                id="but2">Usuario &nbsp;
+                id="but2" matTooltip="Buscar por usuario">Usuario &nbsp;
                 <i class="fa fa-user" aria-hidden="true"></i>
         </button>
 
@@ -89,7 +89,7 @@
         </mat-menu>
         
         <button [matMenuTriggerFor]="appHorarioIni" class="mat-raised-button " 
-                id="but2">Horario de Inicio &nbsp;
+                id="but2" matTooltip="Buscar por horario de inicio">Horario de Inicio &nbsp;
                 <i class="fa fa-clock-o" aria-hidden="true"></i>
         </button>
 
@@ -114,13 +114,13 @@
                 <div id="div-inline">
                     
                     <ng-container *ngIf="peticion.usuarioActualGustaPublicacion; else no">   
-                        <button class="mdc-icon-button material-icons" 
+                        <button class="mdc-icon-button material-icons" matTooltip="Te gusta la petición" 
                             id="fav-red" (click)="noGustaPublicacion(peticion.publicacionId)">favorite</button>     
                     </ng-container>
 
                     <ng-template #no>
                         
-                        <button class="mdc-icon-button material-icons" 
+                        <button class="mdc-icon-button material-icons" matTooltip="No te gusta la petición"
                             id="fav-grey" (click)="gustaPublicacion(peticion.publicacionId)">favorite</button>
                     </ng-template>
                 </div>
@@ -147,7 +147,8 @@
 
     </div> 
 
-    <button class="mdc-fab " mat-mini-fab id="but-add" class="pull-right" (click)="createPeticion()">
+    <button class="mdc-fab " mat-mini-fab id="but-add" class="pull-right" (click)="createPeticion()"
+            matTooltip="Crear petición">
         <div class="mdc-fab__ripple"></div>
         <span class="mdc-fab__icon material-icons">add</span>
     </button>

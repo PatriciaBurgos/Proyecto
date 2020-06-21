@@ -26,6 +26,11 @@ namespace NuevoProyectoDAM.UsuariosGustados
 			_userManager = userManager;
 		}
 
+		/// <summary>
+		/// Crea una instancia en usuario gustado del usuario logado con otro usuario
+		/// </summary>
+		/// <param name="idUser">Identificador del usuario que quiere seguir el usuario logado</param>
+		/// <returns></returns>
 		public async Task UsuarioLogadoGustaUsuario(int idUser)
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -39,6 +44,11 @@ namespace NuevoProyectoDAM.UsuariosGustados
 
 		}
 
+		/// <summary>
+		/// Borra una instancia en usuario gustado del usuario logado con otro usuario
+		/// </summary>
+		/// <param name="idUser">Identificador del usuario que no quiere seguir el usuario logado</param>
+		/// <returns></returns>
 		public async Task UsuarioLogadoNOGustaUsuario(int idUser)
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());

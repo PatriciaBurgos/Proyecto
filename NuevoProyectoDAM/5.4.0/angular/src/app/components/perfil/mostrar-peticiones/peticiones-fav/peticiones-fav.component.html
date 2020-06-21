@@ -7,7 +7,7 @@
                 <div class="header" id="m10">
                     <img class="card-img-left" src="assets/images/user.png" width="88" height="88" alt="User"/>  
                     <p class="card-body" id="name"><strong>{{ peticion.publicacionNombreUsuario }}</strong></p>
-                    <button class="mdc-icon-button material-icons" 
+                    <button class="mdc-icon-button material-icons" matTooltip="Te gusta la peticion" 
                             id="fav-red" (click)="noGustaPublicacion(peticion.publicacionId)">favorite</button>     
                     <p class="card-body text-right" id="categ"><strong>Categoría:</strong> {{ peticion.publicacionCategoria }}</p>
                 </div>

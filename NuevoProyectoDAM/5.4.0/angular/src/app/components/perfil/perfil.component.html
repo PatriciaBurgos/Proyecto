@@ -10,17 +10,17 @@
                     <li *ngIf="comprobacion==false">
                      
                         <button class="mat-raised-button" [matMenuTriggerFor]="actionsMenu"
-                            id="b-contactar">                            
+                            id="b-contactar" matTooltip="Contactar">                            
                             <span class="mdc-button__label" id="color">
                                 <i id="color" class="fa fa-comment" aria-hidden="true"></i>
                                 &nbsp; Contactar </span>
                         </button>
                         <mat-menu #actionsMenu="matMenu">
-                            <button mat-menu-item > <a [routerLink] = "['/app/chats',user.id]">
+                            <button mat-menu-item matTooltip="Abrir chat"> <a [routerLink] = "['/app/chats',user.id]">
                                 <mat-icon>chat</mat-icon>
                                 <span>{{ "Mensaje" | localize }}</span></a>
                             </button>
-                            <button mat-menu-item ><a [routerLink] = "['/app/correo']"> 
+                            <button mat-menu-item matTooltip="Abrir correo"><a [routerLink] = "['/app/correo']"> 
                                 <mat-icon>email</mat-icon>
                                 <span>{{ "Correo" | localize }}</span></a>
                             </button>
@@ -30,14 +30,14 @@
                     <li *ngIf="comprobacion==false">
                         
                         <ng-container *ngIf="siSigue; else noSigue">
-                            <button class="mat-raised-button" id="but-fav" (click)="dejarDeSeguirUser()">
+                            <button class="mat-raised-button" id="but-fav" (click)="dejarDeSeguirUser()" matTooltip="Sigues al usuario">
                                 <span class="mdc-button__label" id="color"><i class="fa fa-heart" aria-hidden="true" id="red"></i>&nbsp; Seguir Usuario </span>
                             
                             </button>
                         </ng-container>
                         
                         <ng-template #noSigue>
-                            <button class="mat-raised-button" id="but-fav" (click)="seguirUser()">
+                            <button class="mat-raised-button" id="but-fav" (click)="seguirUser()" matTooltip="No sigues al usuario">
                                 <span class="mdc-button__label" id="color"><i class="fa fa-heart" aria-hidden="true" id="grey"></i>&nbsp; Seguir Usuario </span>
                             
                             </button>
@@ -47,7 +47,7 @@
                     <li><app-usuarios-seguidores></app-usuarios-seguidores></li>
                     <li><app-usuarios-seguidos></app-usuarios-seguidos></li>
                     <li *ngIf="comprobacion==true">
-                        <button mat-icon-button [matMenuTriggerFor]="headerMenu" 
+                        <button mat-icon-button [matMenuTriggerFor]="headerMenu" matTooltip="Ajustes" 
                             class="header-dropdown-mat-icon-button" [routerLink] = "['/app/ajustes']">
                             <mat-icon>settings</mat-icon>
                         </button>                        
@@ -84,11 +84,11 @@
                         
                             <tr>
                                 <th>
-                                    <button class="mat-raised-button " id="fav" 
+                                    <button class="mat-raised-button " id="fav" matTooltip="Abrir anuncios favoritos"
                                     (click)="abrirAnunFav()">ANUNCIOS FAV &nbsp;<i class="fa fa-heart" aria-hidden="true"></i></button>
                                 </th>   
                                 <th>
-                                    <button class="mat-raised-button " id="fav"
+                                    <button class="mat-raised-button " id="fav" matTooltip="Abrir peticiones favoritas"
                                     (click)="abrirPetiFav()">PETICIONES FAV &nbsp;<i class="fa fa-heart" aria-hidden="true"></i></button>
                                  </th>  
                             </tr>                      
@@ -105,8 +105,8 @@
 
 <div class="container">
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#anuncios">Anuncios</a></li>
-        <li><a data-toggle="tab" href="#peticiones">Peticiones</a></li>
+        <li class="active" id="anun-peti"><a data-toggle="tab" href="#anuncios"><strong>Anuncios</strong></a></li>
+        <li id="anun-peti"><a data-toggle="tab" href="#peticiones" ><strong>Peticiones</strong></a></li>
     </ul>
 
     <div class="tab-content">

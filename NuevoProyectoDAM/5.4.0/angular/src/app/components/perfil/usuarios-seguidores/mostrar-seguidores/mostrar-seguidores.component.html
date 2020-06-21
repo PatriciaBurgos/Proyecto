@@ -11,15 +11,15 @@
               ">            
                             <a [routerLink] = "['/app/perfil',user1.usuario.id]"><td>{{ user1.usuario.userName }}</td></a>
                             <td>
-                                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
+                                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu" matTooltip="Contactar">
                                     <mat-icon>menu</mat-icon>
                                 </button>
                                 <mat-menu #actionsMenu="matMenu">
-                                    <button mat-menu-item > <a [routerLink] = "['/app/chats',user1.usuario.id]">
+                                    <button mat-menu-item > <a [routerLink] = "['/app/chats',user1.usuario.id]" matTooltip="Abrir chat">
                                         <mat-icon>chat</mat-icon>
                                         <span>{{ "Mensaje" | localize }}</span></a>
                                     </button>
-                                    <button mat-menu-item ><a [routerLink] = "['/app/correo']"> 
+                                    <button mat-menu-item ><a [routerLink] = "['/app/correo']" matTooltip="Abrir correo"> 
                                         <mat-icon>email</mat-icon>
                                         <span>{{ "Correo" | localize }}</span></a>
                                     </button>

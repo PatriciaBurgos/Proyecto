@@ -28,6 +28,11 @@ namespace NuevoProyectoDAM.PublicacionesGustadas
 			_userManager = userManager;
 		}
 
+		/// <summary>
+		/// Crea el favorito entre el usuario logado y una publicación
+		/// </summary>
+		/// <param name="idPublicacion">Identificador de la publicación gustada</param>
+		/// <returns></returns>
 		public async Task UsuarioLogadoGustaPublicacion(int idPublicacion)
 		{			
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -41,6 +46,11 @@ namespace NuevoProyectoDAM.PublicacionesGustadas
 						
 		}
 
+		/// <summary>
+		/// Deshace el favorito de un usuario a una publicación
+		/// </summary>
+		/// <param name="idPublicacion">Identificador de la publicación no gustada</param>
+		/// <returns></returns>
 		public async Task UsuarioLogadoNOGustaPublicacion(int idPublicacion)
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -54,7 +64,5 @@ namespace NuevoProyectoDAM.PublicacionesGustadas
 
 			await _publicacionesGustadasRepository.DeleteAsync(publiGustada);
 		}
-
-
 	}
 }

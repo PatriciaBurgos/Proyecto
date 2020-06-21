@@ -41,12 +41,12 @@
                             <td>{{ anuncio.publicacionCiudad }}</td>
 
                             <td *ngIf="comprobacion==true">
-                                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
+                                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu" matTooltip="Menu borrar anuncio">
                                     <mat-icon>menu</mat-icon>
                                 </button>
                                 <mat-menu #actionsMenu="matMenu">
                                     
-                                    <button mat-menu-item (click)="delete(anuncio)">
+                                    <button mat-menu-item (click)="delete(anuncio)" matTooltip="Eliminar anuncio">
                                         <mat-icon>delete</mat-icon>
                                         <span>{{ "Borrar" | localize }}</span>
                                     </button>
@@ -59,7 +59,10 @@
                     <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
                     </abp-pagination-controls>
                 </div>
-                <button *ngIf="comprobacion==true" mat-mini-fab style="background-color: #EA80FC; color: white;" class="pull-right" (click)="createAnuncio()">
+                <button *ngIf="comprobacion==true" mat-mini-fab 
+                        style="background-color: #EA80FC; color: white;" 
+                        class="pull-right" (click)="createAnuncio()"
+                        matTooltip="Crear anuncio">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>

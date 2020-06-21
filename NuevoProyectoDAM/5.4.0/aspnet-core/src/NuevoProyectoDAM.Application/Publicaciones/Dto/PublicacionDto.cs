@@ -17,7 +17,5 @@ namespace DAM.Publicaciones.Dto
         public int UsuarioId { get; set; }
         public string NombreUsuario { get; set; }
 
-        
-        //public ICollection<PublicacionGustadaDto> PublicacionesGustadas { get; set; }
     }
 }

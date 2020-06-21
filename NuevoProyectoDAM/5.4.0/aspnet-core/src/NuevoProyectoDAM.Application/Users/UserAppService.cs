@@ -52,6 +52,11 @@ namespace NuevoProyectoDAM.Users
             _logInManager = logInManager;
         }
 
+        /// <summary>
+        /// Crea un usuario en la aplicación
+        /// </summary>
+        /// <param name="input">Nuevo usuario</param>
+        /// <returns>Usuario creado</returns>
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
         {
             CheckCreatePermission();
@@ -81,6 +86,11 @@ namespace NuevoProyectoDAM.Users
             return MapToEntityDto(user);
         }
 
+        /// <summary>
+        /// Actualiza un usuario
+        /// </summary>
+        /// <param name="input">Usuario que hay que actualizar</param>
+        /// <returns>Usuario cambiado</returns>
         public override async Task<UserDto> UpdateAsync(UserDto input)
         {
             CheckUpdatePermission();
@@ -99,6 +109,11 @@ namespace NuevoProyectoDAM.Users
             return await GetAsync(input);
         }
 
+        /// <summary>
+        /// Elimina un usuario
+        /// </summary>
+        /// <param name="input">Identificador del usuario</param>
+        /// <returns></returns>
         public override async Task DeleteAsync(EntityDto<long> input)
         {
             var user = await _userManager.GetUserByIdAsync(input.Id);
@@ -229,7 +244,6 @@ namespace NuevoProyectoDAM.Users
             return true;
         }
 
-        
     }
 }
 

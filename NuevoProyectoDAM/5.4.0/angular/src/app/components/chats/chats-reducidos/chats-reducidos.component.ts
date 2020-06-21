@@ -4,7 +4,6 @@ import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase,PagedRequestDto } from '@shared/paged-listing-component-base';
 import { MatDialog } from '@angular/material';
-import { CreateChatDialogComponent } from 'app/components/chats/create-chats/create-chat-dialog.component';
 import { ChatsUsuariosComponent } from '../chats-usuarios/chats-usuarios.component';
 
 class PagedChatRequestDto extends PagedRequestDto {
@@ -84,7 +83,7 @@ export class ChatsReducidosComponent extends PagedListingComponentBase<MostrarCh
 
   showCreateChatDialog(id?: number): void {
       let createChatDialog;
-      createChatDialog = this._dialog.open(CreateChatDialogComponent);
+      //createChatDialog = this._dialog.open(CreateChatDialogComponent);
        
       
       createChatDialog.afterClosed().subscribe(result => {

@@ -32,6 +32,11 @@ namespace DAM.Anuncios
 			_userManager = userManager;
 		}
 
+		/// <summary>
+		/// Creación de un anuncio
+		/// </summary>
+		/// <param name="input">Datos del nuevo anuncio</param>
+		/// <returns>Objeto anuncio creado</returns>
 		public override async Task<AnuncioDto> CreateAsync(AnuncioCreateDto input)
 		{
 			CheckUpdatePermission();
@@ -48,7 +53,10 @@ namespace DAM.Anuncios
 			return ObjectMapper.Map<AnuncioDto>(anuncio);
 		}
 
-
+		/// <summary>
+		/// Consulta de todos los anuncios
+		/// </summary>
+		/// <returns>Lista de todos los anuncios creados</returns>
 		public async Task<ListResultDto<AnuncioDto>> GetPublicacionesAnuncios()
 		{
 			CheckUpdatePermission();
@@ -80,7 +88,11 @@ namespace DAM.Anuncios
 			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anunciosDto));
 		}
 
-
+		/// <summary>
+		/// Consulta de un anuncio
+		/// </summary>
+		/// <param name="id">Id del anuncio a consultar</param>
+		/// <returns>Objeto anuncio encontrado</returns>
 		public async Task<AnuncioDto> GetUnAnuncio(int id)
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -106,6 +118,11 @@ namespace DAM.Anuncios
 			return ObjectMapper.Map<AnuncioDto>(anunDto);
 		}
 
+		/// <summary>
+		/// Consulta de los usuarios que les gusta un anuncio
+		/// </summary>
+		/// <param name="id">Id del anuncio a consultar</param>
+		/// <returns>Todos los usuarios a los que les gusta el anuncio</returns>
 		public async Task<ListResultDto<AnuncioGustaAUsuariosDto>> GetUsuariosGustaAnuncio(int id)
 		{ 
 			var usuarios = await _anuncioRepository.GetAll()
@@ -118,6 +135,11 @@ namespace DAM.Anuncios
 			return new ListResultDto<AnuncioGustaAUsuariosDto>(ObjectMapper.Map<List<AnuncioGustaAUsuariosDto>>(usuarios));
 		}
 
+		/// <summary>
+		/// Consulta de todos los anuncios publicados de un usuario
+		/// </summary>
+		/// <param name="id">Identificador del usuario</param>
+		/// <returns>Lista de todos los anuncios del usuario</returns>
 		public async Task<ListResultDto<AnuncioDto>> GetAnunciosUnUsuario(int id)
 		{
 			var anuncios = await _anuncioRepository.GetAll()
@@ -129,6 +151,10 @@ namespace DAM.Anuncios
 			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anuncios));
 		}
 
+		/// <summary>
+		/// Consulta de todos los anuncios publicados por el usuario logado
+		/// </summary>
+		/// <returns>Lista de todos los anuncios del usuario logado</returns>
 		public async Task<ListResultDto<AnuncioDto>> GetAnunciosUsuarioLogado()
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -142,6 +168,11 @@ namespace DAM.Anuncios
 			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anuncios));
 		}
 
+		/// <summary>
+		/// Busqueda de todos los anuncios que tengan el municipio del parametro
+		/// </summary>
+		/// <param name="municipio">Nombre del municipio</param>
+		/// <returns>Lista de los anuncios con ese municipio</returns>
 		public async Task<ListResultDto<AnuncioDto>> BusquedaAnunciosPorMunicipio(string municipio)
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -172,6 +203,11 @@ namespace DAM.Anuncios
 			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anunciosDto));
 		}
 
+		/// <summary>
+		/// Busqueda de todos los anuncios que tengan la ciudad del parámetro
+		/// </summary>
+		/// <param name="ciudad">Nombre de la ciudad</param>
+		/// <returns>Lista de los anuncios con esa ciudad</returns>
 		public async Task<ListResultDto<AnuncioDto>> BusquedaAnunciosPorCiudad(string ciudad)
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -202,6 +238,11 @@ namespace DAM.Anuncios
 			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anunciosDto));
 		}
 
+		/// <summary>
+		/// Busqueda de anuncios por una categoría concreta
+		/// </summary>
+		/// <param name="categoria">Nombre de la categoría</param>
+		/// <returns>Lista de los anuncios con esa categoría</returns>
 		public async Task<ListResultDto<AnuncioDto>> BusquedaAnunciosPorCategoria(string categoria)
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -232,6 +273,11 @@ namespace DAM.Anuncios
 			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anunciosDto));
 		}
 
+		/// <summary>
+		/// Busqueda de anuncios por el horario de inicio 
+		/// </summary>
+		/// <param name="horIni">Hora de inicio del anuncio</param>
+		/// <returns>Lista de los anuncios con ese horario de inicio</returns>
 		public async Task<ListResultDto<AnuncioDto>> BusquedaAnunciosPorHorarioInicio(double horIni)
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -262,6 +308,11 @@ namespace DAM.Anuncios
 			return new ListResultDto<AnuncioDto>(ObjectMapper.Map<List<AnuncioDto>>(anunciosDto));
 		}
 
+		/// <summary>
+		/// Busqueda de anuncios por el usuario que los ha creado
+		/// </summary>
+		/// <param name="userNam">Nombre de usuario del creador del anuncio</param>
+		/// <returns>Lista de los anuncios de ese usuario</returns>
 		public async Task<ListResultDto<AnuncioDto>> BusquedaAnunciosPorUsuario(string userNam)
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());

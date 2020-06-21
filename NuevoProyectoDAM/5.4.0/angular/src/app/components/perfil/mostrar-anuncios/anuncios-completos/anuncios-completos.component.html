@@ -6,13 +6,13 @@
                 <p class="card-body" id="p-user"><strong>{{ anuncio.publicacionNombreUsuario }}</strong></p>
                 
                 <ng-container *ngIf="anuncio.usuarioActualGustaPublicacion == true; else no">   
-                    <button class="mdc-icon-button material-icons" 
+                    <button class="mdc-icon-button material-icons" matTooltip="Te gusta el anuncio"
                         id="but-fav-red" (click)="noGustaPublicacion(anuncio.publicacionId)">favorite</button>     
                 </ng-container>
 
                 <ng-template #no>
                     
-                    <button class="mdc-icon-button material-icons" 
+                    <button class="mdc-icon-button material-icons" matTooltip="No te gusta el anuncio" 
                         id="but-fav-grey" (click)="gustaPublicacion(anuncio.publicacionId)">favorite</button>
                 </ng-template>                
                 

@@ -30,6 +30,11 @@ namespace NuevoProyectoDAM.Chats
 			_userManager = userManager;
 		}
 
+		/// <summary>
+		/// Creación de un chat
+		/// </summary>
+		/// <param name="input">Datos del nuevo chat</param>
+		/// <returns>Objeto chat creado</returns>
 		public override async Task<ChatDto> CreateAsync(ChatCreateDto input)
 		{
 			CheckUpdatePermission();
@@ -50,6 +55,10 @@ namespace NuevoProyectoDAM.Chats
 			return ObjectMapper.Map<ChatDto>(chat);
 		}
 
+		/// <summary>
+		/// Consulta de los usuarios con los habla el usuario logado
+		/// </summary>
+		/// <returns>Chats reducidos (nombre de usuario y ultimo mensaje) del usuario logado</returns>
 		public async Task<ListResultDto<MostrarChatReducidoDto>> GetUsuariosConLosQueHabla()
 		{
 			CheckUpdatePermission();
@@ -109,37 +118,17 @@ namespace NuevoProyectoDAM.Chats
 			return new ListResultDto<MostrarChatReducidoDto>(ObjectMapper.Map<List<MostrarChatReducidoDto>>(chatsDefinitivos));
 		}
 
-		/*public async Task<ListResultDto<ChatDto>> GetChatDosUsuarios (string userDestino)
-		{
-			CheckUpdatePermission();
-
-			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
-
-			var chat = await _chatRepository.GetAll()
-				.Include(c => c.UsuarioOrigen)
-				.Include(c => c.UsuarioDestino)
-				.Where(c => c.UsuarioOrigenId == usuarioActual.Id || c.UsuarioDestinoId == usuarioActual.Id)
-				.Where(c => c.UsuarioOrigen.UserName == userDestino || c.UsuarioDestino.UserName == userDestino)
-				.ToListAsync();
-
-			return new ListResultDto<ChatDto>(ObjectMapper.Map<List<ChatDto>>(chat));
-		}*/
-
+		/// <summary>
+		/// Consulta del chat entre el usuario logado un usuario de la aplicación
+		/// </summary>
+		/// <param name="idChat">Identificador del usuario</param>
+		/// <returns></returns>
 		public async Task<ListResultDto<ChatDto>> GetChatCompletoDosUsuarios(int idChat)
 		{
 			CheckUpdatePermission();
 
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
 			var userDest = await _userManager.GetUserByIdAsync(idChat);
-
-			//var chat = await _chatRepository.GetAll()
-			//	.Include(c => c.UsuarioOrigen)
-			//	.Include(c => c.UsuarioDestino)
-			//	.Where(c => c.Id == idChat)
-			//	.FirstOrDefaultAsync();
-
-			//long uOrigen = chat.UsuarioOrigenId;
-			//long uDestino = chat.UsuarioDestinoId;
 
 			var chats = await _chatRepository.GetAll()
 				.Include(c => c.UsuarioOrigen)

@@ -1,6 +1,6 @@
 
 <ng-container *ngIf="siSigue; else noSigue">
-    <button class="mat-raised-button" id="but1" (click)="dejarDeSeguirUser()">
+    <button class="mat-raised-button" id="but1" (click)="dejarDeSeguirUser()" matTooltip="Sigues al usuario">
         <span class="mdc-button__label" id="color">
             <i class="fa fa-heart" aria-hidden="true" id="red"></i>&nbsp; Seguir Usuario </span>
     
@@ -8,7 +8,7 @@
 </ng-container>
 
 <ng-template #noSigue>
-    <button class="mat-raised-button" id="but1" (click)="seguirUser()">
+    <button class="mat-raised-button" id="but1" (click)="seguirUser()" matTooltip="No sigues al usuario">
         <span class="mdc-button__label" id="color">
             <i class="fa fa-heart" aria-hidden="true" id="grey"></i>&nbsp; Seguir Usuario </span>
     

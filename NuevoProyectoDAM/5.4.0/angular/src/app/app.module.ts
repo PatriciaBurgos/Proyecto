@@ -16,7 +16,6 @@ import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module
 import { SharedModule } from '@shared/shared.module';
 
 import { HomeComponent } from '@app/components/home/home.component';
-import { AboutComponent } from '@app/about/about.component';
 import { TopBarComponent } from '@app/layout/topbar.component';
 import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch.component';
 import { SideBarUserAreaComponent } from '@app/layout/sidebar-user-area.component';
@@ -60,7 +59,6 @@ import { PeticionesFavComponent } from './components/perfil/mostrar-peticiones/p
 import { SeguirUsuarioComponent } from './components/perfil/seguir-usuario/seguir-usuario.component';
 // chats
 import { ChatsComponent } from './components/chats/chats.component';
-import { CreateChatDialogComponent } from './components/chats/create-chats/create-chat-dialog.component';
 import { ChatsReducidosComponent } from './components/chats/chats-reducidos/chats-reducidos.component';
 import { ChatsUsuariosComponent } from './components/chats/chats-usuarios/chats-usuarios.component';
 // usuarios
@@ -76,7 +74,6 @@ import { CorreoComponent } from './components/correo/correo.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent,
     TopBarComponent,
     TopBarLanguageSwitchComponent,
     SideBarUserAreaComponent,
@@ -118,7 +115,6 @@ import { CorreoComponent } from './components/correo/correo.component';
     SeguirUsuarioComponent,
     // chats
     ChatsComponent,
-    CreateChatDialogComponent,
     ChatsReducidosComponent,
     ChatsUsuariosComponent,
     //usuarios
@@ -163,7 +159,6 @@ import { CorreoComponent } from './components/correo/correo.component';
     // peticiones
     CreatePeticionDialogComponent,
     // chats
-    CreateChatDialogComponent,
     ChatsReducidosComponent,
     ChatsUsuariosComponent,
     //perfil

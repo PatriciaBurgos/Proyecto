@@ -106,10 +106,11 @@
         </mat-tab-group>
     </mat-dialog-content>
     <div mat-dialog-actions align="end">
-        <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+        <button mat-button type="button" [disabled]="saving" (click)="close(false)" matTooltip="Cancelar anuncio">
             {{ "Cancelar" | localize }}
         </button>
         <button mat-flat-button
+                matTooltip="Crear anuncio"
                 type="submit"
                 flex="15"
                 style="background-color: #EA80FC; color: white;"

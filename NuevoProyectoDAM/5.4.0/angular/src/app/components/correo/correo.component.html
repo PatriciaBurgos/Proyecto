@@ -77,10 +77,11 @@
             </mat-tab-group>
         
         <div mat-dialog-actions align="end">
-            <button mat-button type="reset" [disabled]="saving" >
+            <button mat-button type="reset" [disabled]="saving" matTooltip="Borrar correo">
                 {{ "Cancelar / Borrar información" | localize }}
             </button>
             <button mat-flat-button
+                    matTooltip="Enviar correo"
                     type="submit"
                     flex="15"
                     id="but-enviar"

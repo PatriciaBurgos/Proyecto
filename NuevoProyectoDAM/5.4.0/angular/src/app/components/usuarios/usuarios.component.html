@@ -34,8 +34,8 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-12 text-left p-r-25">
-                                <button mat-raised-button id="but" (click)="buscarLogin(keyword)">{{ 'Buscar' | localize }}</button>
-                                <button mat-raised-button id="but" (click)="buscarTodos()">{{ 'Todos' | localize }}</button>
+                                <button mat-raised-button id="but" (click)="buscarLogin(keyword)" matTooltip="Buscar por nombre de usuario">{{ 'Buscar' | localize }}</button>
+                                <button mat-raised-button id="but" (click)="buscarTodos()" matTooltip="Todos los usuarios">{{ 'Todos' | localize }}</button>
                             </div>
                         </div>
                     </form>
@@ -62,15 +62,15 @@
 
 
                             <td>
-                                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
+                                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu" matTooltip="Contactar">
                                     <mat-icon>menu</mat-icon>
                                 </button>
                                 <mat-menu #actionsMenu="matMenu">
-                                    <button mat-menu-item > <a [routerLink] = "['/app/chats',user.id]" >
+                                    <button mat-menu-item > <a [routerLink] = "['/app/chats',user.id]" matTooltip="Abrir chat">
                                         <mat-icon>chat</mat-icon>
                                         <span>{{ "Mensaje" | localize }}</span></a>
                                     </button>
-                                    <button mat-menu-item ><a [routerLink] = "['/app/correo']" > 
+                                    <button mat-menu-item ><a [routerLink] = "['/app/correo']" matTooltip="Abrir correo"> 
                                         <mat-icon>email</mat-icon>
                                         <span>{{ "Correo" | localize }}</span></a>
                                     </button>

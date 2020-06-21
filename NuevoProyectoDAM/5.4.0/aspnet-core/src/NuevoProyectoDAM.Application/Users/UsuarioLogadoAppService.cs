@@ -40,6 +40,10 @@ namespace NuevoProyectoDAM.Users
 			_abpSession = abpSession;
 		}
 
+		/// <summary>
+		/// Consulta de los datos personales del usuario logado
+		/// </summary>
+		/// <returns>Datos del usuario logado</returns>
 		public async Task<UserDto> GetUsuarioLogado()
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -51,8 +55,10 @@ namespace NuevoProyectoDAM.Users
 			return ObjectMapper.Map<UserDto>(usuario);
 		}
 
-		
-
+		/// <summary>
+		/// Consulta de los seguidores del usuario logado
+		/// </summary>
+		/// <returns>Lista de usuario seguidores del usuario logado</returns>
 		public async Task<UsuariosSeguidoresDto> GetMisSeguidores()
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -66,6 +72,11 @@ namespace NuevoProyectoDAM.Users
 			return ObjectMapper.Map<UsuariosSeguidoresDto>(usuarios);
 		}
 
+		/// <summary>
+		/// Consulta de los seguidores de un usuario
+		/// </summary>
+		/// <param name="id">Identificador del usuario</param>
+		/// <returns>Lista de usuario seguidores del usuario</returns>
 		public async Task<UsuariosSeguidoresDto> GetSeguidoresUsuario(int id)
 		{
 			var usuarios = await _userRepository.GetAll()
@@ -77,6 +88,10 @@ namespace NuevoProyectoDAM.Users
 			return ObjectMapper.Map<UsuariosSeguidoresDto>(usuarios);
 		}
 
+		/// <summary>
+		/// Consulta de los seguidos del usuario logado
+		/// </summary>
+		/// <returns>Lista de usuario seguidos del usuario logado</returns>
 		public async Task<UsuariosSeguidosDto> GetMisSeguidos()
 		{
 			var usuarioActual = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
@@ -90,6 +105,11 @@ namespace NuevoProyectoDAM.Users
 			return ObjectMapper.Map<UsuariosSeguidosDto>(usuarios);
 		}
 
+		/// <summary>
+		/// Consulta de los seguidos de un usuario
+		/// </summary>
+		/// <param name="id">Identificador del usuario</param>
+		/// <returns>Lista de usuario seguidos del usuario</returns>
 		public async Task<UsuariosSeguidosDto> GetSeguidosUsuario(int id)
 		{ 
 			var usuarios = await _userRepository.GetAll()
@@ -101,6 +121,11 @@ namespace NuevoProyectoDAM.Users
 			return ObjectMapper.Map<UsuariosSeguidosDto>(usuarios);
 		}
 
+		/// <summary>
+		/// Consulta de los datos de un usuario 
+		/// </summary>
+		/// <param name="id">Identificador del usuario</param>
+		/// <returns>Usuario con sus datos</returns>
 		public async Task<UserDto> GetUsuarioAplicacion(int id)
 		{			
 			var usuario = await _userRepository.GetAll()
@@ -110,6 +135,11 @@ namespace NuevoProyectoDAM.Users
 			return ObjectMapper.Map<UserDto>(usuario);
 		}
 
+		/// <summary>
+		/// Consulta si el usuario logado sigue a un usuario
+		/// </summary>
+		/// <param name="idUser">Identificador del usuario seguido</param>
+		/// <returns>True/False depende de si lo sigue o no</returns>
 		public async Task<bool> SaberSiUsuarioActualEsSeguidorAsync(int idUser)
 		{
 			bool usSeguido = false;
@@ -133,6 +163,10 @@ namespace NuevoProyectoDAM.Users
 			return usSeguido;
 		}
 
+		/// <summary>
+		/// Consulta de todos los usuarios de la aplicación
+		/// </summary>
+		/// <returns>Todos los usuarios</returns>
 		public async Task<ListResultDto<UserDto>> GetAllUsuarios()
 		{
 			var usuarios = await _userRepository.GetAllListAsync();
@@ -140,6 +174,11 @@ namespace NuevoProyectoDAM.Users
 			return new ListResultDto<UserDto>(ObjectMapper.Map<List<UserDto>>(usuarios));
 		}
 
+		/// <summary>
+		/// Actualiza la foto del usuario logado
+		/// </summary>
+		/// <param name="file">Foto elegida por el usuario</param>
+		/// <returns>Ruta de la foto</returns>
 		public async Task<string> UploadFoto(IFormFile file)
 		{
 			if (file == null || file.Length == 0)
@@ -171,6 +210,11 @@ namespace NuevoProyectoDAM.Users
 			return dbPath;
 		}
 
+		/// <summary>
+		/// Actualiza el usuario logado
+		/// </summary>
+		/// <param name="input">Usuario logado con los datos actualizados</param>
+		/// <returns>Datos del usuario logado</returns>
 		public async Task<UserDto> UpdateAsync(UserDto input)
 		{
 			//CheckUpdatePermission();
@@ -195,6 +239,15 @@ namespace NuevoProyectoDAM.Users
 			identityResult.CheckErrors(LocalizationManager);
 		}
 
+		/// <summary>
+		/// Envia un correo electrónico a un usuario
+		/// </summary>
+		/// <param name="emisor">Correo del usuario logado</param>
+		/// <param name="password">Contraseña del correo del usuario logado</param>
+		/// <param name="receptor">Correo del usuario al que se le va a mandar el mensaje</param>
+		/// <param name="asunto">Asunto del mensaje</param>
+		/// <param name="texto">Texto del mensaje a enviar</param>
+		/// <returns>Confimación de que se ha mandado el mensaje</returns>
 		public async Task<bool> EnviarCorreo(string emisor, string password, string receptor, string asunto, string texto)
 		{
 
@@ -210,6 +263,11 @@ namespace NuevoProyectoDAM.Users
 			return true;
 		}
 
+		/// <summary>
+		/// Busqueda por nombre de usuario de los usuarios
+		/// </summary>
+		/// <param name="login">Nombre de usuario del usuario buscado</param>
+		/// <returns>Usuario encontrado</returns>
 		public async Task<ListResultDto<UserDto>> BusquedaLogin(string login)
 		{
 			var usuarios = await _userRepository.GetAll()
